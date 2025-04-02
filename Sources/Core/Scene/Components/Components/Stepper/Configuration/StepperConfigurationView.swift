@@ -125,6 +125,12 @@ struct StepperConfigurationView: ConfigurationViewable, ConfigurationUIViewable 
     @ViewBuilder
     private func otherAccessibilityItemsView() -> some View {
         TextFieldConfigurationItemView(
+            name: "context accessibility label",
+            text: self.configuration.contextAccessibilityLabel,
+            orientation: .vertical
+        )
+
+        TextFieldConfigurationItemView(
             name: "decrement accessibility label",
             text: self.configuration.decrementAccessibilityLabel,
             orientation: .vertical

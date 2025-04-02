@@ -10,7 +10,9 @@ import Foundation
 
 // MARK: - Protocol
 
+/// The *protocol* which be used to set theme in components .
 public protocol DemoTheme: CaseIterable {
+    /// The Spark **Theme**.
     var value: Theme { get }
 
     /// The theme used to display all properties of a theme on the demo app (**Other** section in **Tabbar / Theme**)
@@ -31,6 +33,7 @@ public enum SparkDemoThemes: DemoTheme {
         Self.spark
     }
 
+    /// The Spark **Theme** from the current enum value.
     public var value: Theme {
         switch self {
         case .spark:

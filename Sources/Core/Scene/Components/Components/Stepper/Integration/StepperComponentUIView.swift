@@ -81,7 +81,7 @@ final class StepperComponentUIViewMaker: ComponentUIViewMaker {
         componentView.step = configuration.step().doubleValue
         componentView.demoValueNumberFormatter(configuration)
         componentView.demoDisabled(configuration)
-        componentView.demoAccessibilityLabel(configuration)
+        componentView.demoContextAccessibilityLabel(configuration)
         componentView.demoIncrementAccessibilityLabel(configuration)
         componentView.demoDecrementAccessibilityLabel(configuration)
 
@@ -141,6 +141,15 @@ private extension SparkUIStepper {
         }
 
         self.valueNumberFormatter = formatter
+    }
+
+    func demoContextAccessibilityLabel(_ configuration: StepperConfiguration) {
+        let context = configuration.contextAccessibilityLabel
+        if !context.isEmpty {
+            self.contextAccessibilityLabel = context
+        } else {
+            self.contextAccessibilityLabel = nil
+        }
     }
 
     func demoIncrementAccessibilityLabel(_ configuration: StepperConfiguration) {

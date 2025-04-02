@@ -23,6 +23,7 @@ class StepperConfiguration: ComponentConfiguration {
     var lowerBoundString: String = "0"
     var upperBoundString: String = "100"
 
+    var contextAccessibilityLabel: String = ""
     var decrementAccessibilityLabel: String = ""
     var incrementAccessibilityLabel: String = ""
 
