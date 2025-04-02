@@ -8,7 +8,27 @@
 
 import SwiftUI
 
- public struct MainView<OtherTab>: View where OtherTab: View {
+/// The **Main view** contains *TabBar* with **SwiftUI**, **UIKit** and **Other** entries..
+/// It's possible to have an another entry. In this case, use the ``MainView/init(otherTab:)
+///
+/// Implementation example with an **another entry** :
+/// ```swift
+/// @main
+/// struct MyView: View {
+///
+///     var body: some Scene {
+///         MainView {
+///             YourTabItemView()
+///                 .tabItem {
+///                     Image(systemName: "the system icon")
+///                     Text("The tab item name")
+///                 }
+///         }
+///     }
+/// }
+/// ```
+///
+public struct MainView<OtherTab>: View where OtherTab: View {
 
      // MARK: - Properties
 
@@ -16,6 +36,19 @@ import SwiftUI
 
      // MARK: - Initialization
 
+    /// Init the main view.
+    ///
+    /// Implementation example :
+    /// ```swift
+    /// @main
+    /// struct MyView: View {
+    ///
+    ///     var body: some Scene {
+    ///         MainView()
+    ///     }
+    /// }
+    /// ```
+    ///
      public init() where OtherTab == EmptyView {
          self.otherTab = nil
      }
@@ -29,7 +62,7 @@ import SwiftUI
      /// struct MyView: View {
      ///
      ///     var body: some Scene {
-     ///         MainView() {
+     ///         MainView {
      ///             YourTabItemView()
      ///                 .tabItem {
      ///                     Image(systemName: "the system icon")
@@ -40,9 +73,7 @@ import SwiftUI
      /// }
      /// ```
      ///
-     public init(
-         @ViewBuilder otherTab: @escaping () -> OtherTab
-     ) {
+     public init(@ViewBuilder otherTab: @escaping () -> OtherTab) {
          self.otherTab = otherTab
      }
 

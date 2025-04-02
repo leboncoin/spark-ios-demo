@@ -96,10 +96,20 @@ struct StepperImplementationView: ComponentImplementationViewable {
 private extension SparkStepper {
 
     func demoProperties(_ configuration: StepperConfiguration) -> some View {
-        self.demoIncrementAccessibilityLabel(configuration)
+        self.demoContextAccessibilityLabel(configuration)
+            .demoIncrementAccessibilityLabel(configuration)
             .demoDecrementAccessibilityLabel(configuration)
             .demoDisabled(configuration)
             .demoRightSpace(configuration)
+    }
+
+    func demoContextAccessibilityLabel(_ configuration: StepperConfiguration) -> Self {
+        let context = configuration.contextAccessibilityLabel
+        if !context.isEmpty {
+            return self.contextAccessibilityLabel(context)
+        } else {
+            return self
+        }
     }
 
     func demoIncrementAccessibilityLabel(_ configuration: StepperConfiguration) -> Self {

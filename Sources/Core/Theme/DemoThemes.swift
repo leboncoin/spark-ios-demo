@@ -7,7 +7,7 @@
 //
 
 /// Struct with singleton used to manage themes on demo App.
-/// By default themes are : *spark* and *sky*.
+/// By default themes are : *spark* and *sky* (check ``SparkDemoThemes``).
 /// To change the themes, you can reset the *shared* static variable with your themes like this on your App class
 ///
 /// Implementation example :
@@ -30,6 +30,9 @@ public struct DemoThemes {
 
     // MARK: - Properties
 
+    /// Singleton of the DemoThemes.
+    ///
+    /// Use the ``SparkDemoThemes`` themes by default.
     public static var shared = Self()
 
     internal let themes: [Theme]
@@ -37,6 +40,9 @@ public struct DemoThemes {
 
     // MARK: - Initialization
 
+    /// Init the demo themes with the implementation of ``DemoTheme``.
+    ///
+    /// Default is ``SparkDemoThemes``.
     public init<T: DemoTheme>(value: T.Type = SparkDemoThemes.self) {
         self.themes = value.allCases.map {
             .init(name: $0.name, theme: $0.value)
