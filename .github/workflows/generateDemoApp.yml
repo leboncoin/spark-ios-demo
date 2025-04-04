@@ -6,7 +6,7 @@ on:
     - cron: "0 0 * * 0-4" # At 00:00 on every day-of-week from Sunday through Thursday
 
 env:
-  app_name: SparkDemo
+  app_name: SparkDemoApp
   swift_version: "5.9"
   xcode_path: "/Applications/Xcode_16.2.app"
   xcodebuild_sdk: -sdk iphonesimulator

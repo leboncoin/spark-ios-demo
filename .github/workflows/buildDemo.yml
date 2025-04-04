@@ -2,7 +2,7 @@ name: build-demo
 on: workflow_call
 
 env:
-  app_name: SparkDemo
+  app_name: SparkDemoApp
   xcode_path: "/Applications/Xcode_16.2.app"
 
 jobs:
