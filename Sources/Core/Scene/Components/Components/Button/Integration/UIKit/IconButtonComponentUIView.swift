@@ -65,6 +65,7 @@ final class IconButtonComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoControlType(configuration, on: self.viewController)
         componentView.demoSetImage(configuration)
         componentView.isAnimated = configuration.uiKitIsAnimated
+        componentView.largeContentTitle = configuration.accessibilityLargeContentText
         componentView.demoSelected(configuration)
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)

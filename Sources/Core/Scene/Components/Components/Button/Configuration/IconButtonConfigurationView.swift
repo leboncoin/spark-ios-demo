@@ -59,6 +59,13 @@ struct IconButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewab
                     configuration: self.configuration,
                     isIconButton: true
                 )
+            },
+            otherAccessibilityItemsView: {
+                TextFieldConfigurationItemView(
+                    name: "large content text",
+                    text: self.configuration.accessibilityLargeContentText,
+                    orientation: .vertical
+                )
             }
         )
     }
