@@ -7,7 +7,7 @@ on:
 
 env:
   app_name: SparkDemoApp
-  swift_version: "5.9"
+  swift_version: "6.0"
   xcode_path: "/Applications/Xcode_16.2.app"
   xcodebuild_sdk: -sdk iphonesimulator
   xcodebuild_derivedData: ".derivedData/"
@@ -19,7 +19,7 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Set Swift Version
-        uses: swift-actions/setup-swift@v1
+        uses: swift-actions/setup-swift@v2.3.0
         with:
           swift-version: ${{ env.swift_version }}
 
