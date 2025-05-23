@@ -48,6 +48,12 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
         }
     }
 
+    func resetSelection(on items: inout [any CheckboxGroupItemProtocol]) {
+        for (index, _) in items.enumerated() {
+            items[index].selectionState = .unselected
+        }
+    }
+
     // MARK: - Getter
 
     func getInfoValue(from selections: [CheckboxSelectionState]) -> String {

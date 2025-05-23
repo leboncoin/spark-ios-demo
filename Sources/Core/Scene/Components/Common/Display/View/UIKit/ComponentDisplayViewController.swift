@@ -323,7 +323,7 @@ class ComponentDisplayViewController<
             ))
         }
         if self.styles.count > 1 {
-            let menu = UIMenu(title: "uhoh", children: self.styles.map { style in
+            let menu = UIMenu(children: self.styles.map { style in
                 UIAction(title: style.name, image: UIImage(systemName: style.systemImage), handler: { _ in
                     self.style = style
                 })
@@ -331,8 +331,8 @@ class ComponentDisplayViewController<
 
             rightBarButtonItems.append(.init(
                 image: UIImage(systemName: self.style.systemImage),
-                menu: menu)
-            )
+                menu: menu
+            ))
         }
 
         self.navigationController?.topViewController?.navigationItem.rightBarButtonItems = rightBarButtonItems

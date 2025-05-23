@@ -154,6 +154,7 @@ struct ComponentConfigurationView<
                 }
                 .listStyle(.automatic)
                 .scrollIndicators(.hidden)
+                .dynamicTypeSize(...DynamicTypeSize.large)
             }
             .padding(.top, .large)
             .frame(maxWidth: .infinity)

@@ -13,6 +13,7 @@ enum Iconography: String, CaseIterable {
     case arrowRight = "ArrowRight"
     case bellOutline = "BellOutline"
     case check = "Check"
+    case circleCross = "CircleCrossOutline"
     case cross = "Cross"
     case infoOutline = "InfoOutline"
     case minus = "Minus"

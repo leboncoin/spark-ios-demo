@@ -72,7 +72,7 @@ private extension TagUIView {
 
     convenience init(configuration: TagComponentUIViewMaker.Configuration) {
         let iconImage = UIImage(icon: configuration.icon)
-        let text = configuration.text.isEmpty ? nil : configuration.text
+        let text = configuration.text.nilIfEmpty
 
         switch (iconImage, text) {
         case (let image?, nil):

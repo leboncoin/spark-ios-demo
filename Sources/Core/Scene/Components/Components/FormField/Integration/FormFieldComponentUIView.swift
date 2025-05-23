@@ -20,7 +20,7 @@ extension FormFieldComponentUIViewController {
         let configurations: [FormFieldConfiguration] = FormFieldComponentType.allCases.map {
             .init(componentType: $0)
         }
-        self.init(configurations: configurations, style: .verticalList, styles: [.alone, .verticalList])
+        self.init(configurations: configurations, style: .alone, styles: [.alone, .verticalList])
     }
 }
 
@@ -113,6 +113,11 @@ final class FormFieldDynamicUIView: UIView {
             let view = maker.createComponentView(for: self.configuration.checkboxGroupConfiguration)
             let formFieldView = FormFieldUIView(self.configuration, component: view)
             formFieldView.demoUpdateCommonProperties(self.configuration)
+            formFieldView.clearButton.addAction(.init(handler: { _ in
+                for checkbox in view.checkboxes {
+                    checkbox.selectionState = .unselected
+                }
+            }), for: .touchUpInside)
             self.formFieldView = formFieldView
 
         case .radioButton:
@@ -120,6 +125,9 @@ final class FormFieldDynamicUIView: UIView {
             let view = maker.createComponentView(for: self.configuration.radioButtonConfiguration)
             let formFieldView = FormFieldUIView(self.configuration, component: view)
             formFieldView.demoUpdateCommonProperties(self.configuration)
+            formFieldView.clearButton.addAction(.init(handler: { _ in
+                view.selectedID = nil
+            }), for: .touchUpInside)
             self.formFieldView = formFieldView
 
         case .stepper:
@@ -127,6 +135,9 @@ final class FormFieldDynamicUIView: UIView {
             let view = maker.createComponentView(for: self.configuration.stepperConfiguration)
             let formFieldView = FormFieldUIView(self.configuration, component: view)
             formFieldView.demoUpdateCommonProperties(self.configuration)
+            formFieldView.clearButton.addAction(.init(handler: { _ in
+                view.value = Double(self.configuration.stepperConfiguration.lowerBoundString) ?? 0
+            }), for: .touchUpInside)
             self.formFieldView = formFieldView
 
         case .textEditor:
@@ -136,6 +147,9 @@ final class FormFieldDynamicUIView: UIView {
             self.text = view.text
             let formFieldView = FormFieldUIView(self.configuration, component: view)
             formFieldView.demoUpdateCommonProperties(self.configuration)
+            formFieldView.clearButton.addAction(.init(handler: { _ in
+                view.text = ""
+            }), for: .touchUpInside)
             self.formFieldView = formFieldView
 
         case .textField:
@@ -148,6 +162,9 @@ final class FormFieldDynamicUIView: UIView {
             self.text = view.text
             let formFieldView = FormFieldUIView(self.configuration, component: view)
             formFieldView.demoUpdateCommonProperties(self.configuration, text: view.text)
+            formFieldView.clearButton.addAction(.init(handler: { _ in
+                view.text = ""
+            }), for: .touchUpInside)
             self.formFieldView = formFieldView
         }
     }
@@ -188,6 +205,10 @@ final class FormFieldDynamicUIView: UIView {
         case let view as FormFieldUIView<TextFieldComponentUIViewMaker.ComponentView>:
             view.updateProperties(self.configuration, text: self.text)
 
+        case let view as FormFieldUIView<UILabel>:
+            view.updateProperties(self.configuration, text: self.text)
+            view.isAccessibilityElement = true
+
         default: break
         }
     }
@@ -208,51 +229,39 @@ private extension FormFieldUIView {
         _ configuration: FormFieldConfiguration,
         component: Component
     ) {
-        if configuration.isAttributedString {
-            self.init(
-                theme: configuration.theme.value,
-                component: component,
-                feedbackState: configuration.feedbackState,
-                attributedTitle: configuration.title.demoNSAttributedString,
-                attributedHelper: configuration.helper.demoNSAttributedString,
-                isTitleRequired: configuration.isTitleRequired
-            )
-        } else {
-            self.init(
-                theme: configuration.theme.value,
-                component: component,
-                feedbackState: configuration.feedbackState,
-                title: configuration.title,
-                helper: configuration.helper,
-                isTitleRequired: configuration.isTitleRequired
-            )
-        }
+        self.init(
+            theme: configuration.theme.value,
+            component: component,
+            feedbackState: configuration.feedbackState,
+            title: configuration.title.nilIfEmpty,
+            helper: configuration.helper.nilIfEmpty,
+            isRequired: configuration.isRequired
+        )
     }
 
     func updateProperties(_ configuration: FormFieldConfiguration, text: String?) {
         self.theme = configuration.theme.value
         self.feedbackState = configuration.feedbackState
-        self.isTitleRequired = configuration.isTitleRequired
+        self.isRequired = configuration.isRequired
         self.demoText(configuration)
         self.demoUpdateCommonProperties(configuration, text: text)
     }
 
     func demoUpdateCommonProperties(_ configuration: FormFieldConfiguration, text: String? = nil) {
-        self.titleLabel.accessibilityLabel = configuration.titleAccessibilityLabel
-        self.helperLabel.accessibilityLabel = configuration.helperAccessibilityLabel
-        self.helperLabel.accessibilityLabel = configuration.secondaryHelperAccessibilityLabel
-        self.secondaryHelperLabel.accessibilityLabel = configuration.secondaryHelperAccessibilityValue
+        self.titleLabel.accessibilityLabel = configuration.titleAccessibilityLabel.nilIfEmpty
+        self.clearButton.accessibilityLabel = configuration.clearButtonAccessibilityLabel.nilIfEmpty
+        self.helperLabel.accessibilityLabel = configuration.helperAccessibilityLabel.nilIfEmpty
+        self.helperLabel.accessibilityLabel = configuration.secondaryHelperAccessibilityLabel.nilIfEmpty
+        self.secondaryHelperLabel.accessibilityLabel = configuration.secondaryHelperAccessibilityValue.nilIfEmpty
+
+        self.clearButtonImage = .init(icon: configuration.clearButtonIcon)
+        self.helperImage = .init(icon: configuration.helperIcon)
         self.demoSetCounterIfPossible(on: text, for: configuration)
     }
 
     func demoText(_ configuration: FormFieldConfiguration) {
-        if configuration.isAttributedString {
-            self.attributedTitle = configuration.title.demoNSAttributedString
-            self.attributedHelper = configuration.helper.demoNSAttributedString
-        } else {
-            self.title = configuration.title
-            self.helperString = configuration.helper
-        }
+        self.title = configuration.title.nilIfEmpty
+        self.helper = configuration.helper.nilIfEmpty
     }
 
     func demoSetCounterIfPossible(on text: String?, for configuration: FormFieldConfiguration) {
