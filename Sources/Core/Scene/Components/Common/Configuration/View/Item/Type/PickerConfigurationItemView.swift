@@ -90,7 +90,11 @@ extension PickerContent {
     func pickerContent<Value>(from value: Value) -> some View where Value: Hashable {
         switch value {
         case let icon as Iconography:
-            Image(icon: icon).tag(value)
+            Label(title: {
+                Text(icon.name)
+            }, icon: {
+                Image(icon: icon)
+            }).tag(value)
         case let theme as DemoThemes.Theme:
             Text(theme.name).tag(value)
         case let enumeration as CustomStringConvertible:

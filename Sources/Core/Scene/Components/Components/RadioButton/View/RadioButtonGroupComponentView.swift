@@ -27,18 +27,22 @@ struct RadioButtonGroupImplementationView: ComponentImplementationViewable {
 
     var configuration: Binding<RadioButtonGroupConfiguration>
     var showInfo: Bool = true
+
     @State private var selectedID: Int? = Bool.random() ? 1 : nil
+    private var selectedIDForFormField: Binding<Int?>? // Only used by the FormField demo
 
     // MARK: - Initialization
 
     init(configuration: Binding<RadioButtonGroupConfiguration>) {
         self.configuration = configuration
+        self.selectedIDForFormField = nil
     }
 
     // Only used by the FormField demo
-    init(configuration: Binding<RadioButtonGroupConfiguration>, showInfo: Bool) {
+    init(configuration: Binding<RadioButtonGroupConfiguration>, selectedID: Binding<Int?>, showInfo: Bool) {
         self.configuration = configuration
         self.showInfo = showInfo
+        self.selectedIDForFormField = selectedID
     }
 
     // MARK: - View
@@ -48,7 +52,7 @@ struct RadioButtonGroupImplementationView: ComponentImplementationViewable {
             RadioButtonGroupView(
                 theme: self.configurationWrapped.theme.value,
                 intent: self.configurationWrapped.intent,
-                selectedID: self.$selectedID,
+                selectedID: self.selectedIDForFormField ?? self.$selectedID,
                 items: self.configurationWrapped.items.map {
                     RadioButtonItem(id: $0.id, label: $0.getText())
                 },

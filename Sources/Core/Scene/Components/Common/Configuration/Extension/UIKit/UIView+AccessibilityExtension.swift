@@ -13,12 +13,12 @@ extension UIView {
     func demoAccessibilityLabel<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) {
-        self.accessibilityLabel = configuration.accessibilityLabel.value
+        self.accessibilityLabel = configuration.accessibilityLabel.value.nilIfEmpty
     }
 
     func demoAccessibilityValue<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) {
-        self.accessibilityValue = configuration.accessibilityValue.value
+        self.accessibilityValue = configuration.accessibilityValue.value.nilIfEmpty
     }
 }

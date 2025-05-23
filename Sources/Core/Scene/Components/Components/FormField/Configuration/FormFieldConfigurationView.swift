@@ -70,8 +70,21 @@ struct FormFieldConfigurationView: ConfigurationViewable, ConfigurationUIViewabl
         )
 
         ToggleConfigurationItemView(
-            name: "is title required title",
-            isOn: self.configuration.isTitleRequired
+            name: "is required",
+            isOn: self.configuration.isRequired
+        )
+
+        if self.framework.isSwiftUI {
+            TextFieldConfigurationItemView(
+                name: "clear button title",
+                text: self.configuration.clearButtonTitle
+            )
+        }
+
+        OptionalEnumConfigurationItemView(
+            name: "clear button icon",
+            values: Iconography.allCases,
+            selectedValue: self.configuration.clearButtonIcon
         )
 
         TextFieldConfigurationItemView(
@@ -79,9 +92,10 @@ struct FormFieldConfigurationView: ConfigurationViewable, ConfigurationUIViewabl
             text: self.configuration.helper
         )
 
-        ToggleConfigurationItemView(
-            name: "is attributed string",
-            isOn: self.configuration.isAttributedString
+        OptionalEnumConfigurationItemView(
+            name: "helper icon",
+            values: Iconography.allCases,
+            selectedValue: self.configuration.helperIcon
         )
 
         if self.framework.isSwiftUI {
@@ -98,6 +112,12 @@ struct FormFieldConfigurationView: ConfigurationViewable, ConfigurationUIViewabl
         TextFieldConfigurationItemView(
             name: "title accessibility label",
             text: self.configuration.titleAccessibilityLabel,
+            orientation: .vertical
+        )
+
+        TextFieldConfigurationItemView(
+            name: "clear button accessibility label",
+            text: self.configuration.clearButtonAccessibilityLabel,
             orientation: .vertical
         )
 
