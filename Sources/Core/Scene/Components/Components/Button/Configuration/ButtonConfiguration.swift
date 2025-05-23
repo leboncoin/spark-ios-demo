@@ -61,7 +61,7 @@ extension ButtonConfiguration {
         let id: ControlState
         var title: String
         var icon: Iconography? = .optionalRandom
-        var isAttributedTitle: Bool = .random()
+        var isAttributedTitle: Bool = false
 
         // MARK: - Initialization
 

@@ -39,6 +39,7 @@ struct IconButtonImplementationView: ComponentImplementationViewable {
                 }
             })
         .selected(self.isSelected)
+        .accessibilityLargeContentText(self.configurationWrapped.accessibilityLargeContentText)
         .demoImage(self.configurationWrapped, for: .normal)
         .demoImage(self.configurationWrapped, for: .highlighted)
         .demoImage(self.configurationWrapped, for: .disabled)

@@ -9,4 +9,8 @@
 import Foundation
 
 class IconButtonConfiguration: ButtonConfiguration {
+
+    // MARK: - Properties
+
+    var accessibilityLargeContentText = ""
 }
