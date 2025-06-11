@@ -18,13 +18,24 @@ class TextFieldConfiguration: ComponentConfiguration {
     var isSecure: Bool = false
     var isReadOnly = false
     var leftViewContentType: TextFieldSideViewContentType = .random
-    var rightViewContentType: TextFieldSideViewContentType = .random
+    // TODO: remettre
+//    var rightViewContentType: TextFieldSideViewContentType = .random
+    var rightViewContentType: TextFieldSideViewContentType = .none
+
+    // MARK: - SwiftUI Properties Only
+
+    // TODO: remettre
+//    var swiftUIClearButtonMode: TextFieldClearMode = .random
+    var swiftUIClearButtonMode: TextFieldClearMode = .always
 
     // MARK: - UIKit Properties Only
 
     var uiKitLeftViewMode: UITextField.ViewMode = .random
-    var uiKitRightViewMode: UITextField.ViewMode = .random
-    var uiKitClearButtonMode: UITextField.ViewMode = .random
+    // TODO: remettre
+//    var uiKitRightViewMode: UITextField.ViewMode = .random
+//    var uiKitClearButtonMode: UITextField.ViewMode = .random
+    var uiKitRightViewMode: UITextField.ViewMode = .never
+    var uiKitClearButtonMode: UITextField.ViewMode = .always
 
     // MARK: - Initialization
 

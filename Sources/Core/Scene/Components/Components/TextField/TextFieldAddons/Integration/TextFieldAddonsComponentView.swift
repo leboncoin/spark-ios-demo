@@ -80,6 +80,7 @@ struct TextFieldAddonsImplementationView: ComponentImplementationViewable {
                 }
             }
         )
+        .textFieldClearMode(self.configurationWrapped.swiftUIClearButtonMode)
         .demoDisabled(self.configurationWrapped)
         .demoAccessibilityLabel(self.configurationWrapped)
     }
