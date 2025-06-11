@@ -47,6 +47,12 @@ struct TextFieldCommonConfigurationView<Configuration: TextFieldConfiguration>: 
                 values: UITextField.ViewMode.allCases,
                 selectedValue: self.configuration.uiKitClearButtonMode
             )
+        } else {
+            EnumConfigurationItemView(
+                name: "clear button mode",
+                values: TextFieldClearMode.allCases,
+                selectedValue: self.configuration.swiftUIClearButtonMode
+            )
         }
     }
 }
