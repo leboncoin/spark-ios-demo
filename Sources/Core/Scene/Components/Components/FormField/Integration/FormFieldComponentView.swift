@@ -15,7 +15,7 @@ typealias FormFieldComponentView = ComponentViewable<FormFieldConfiguration, For
 extension FormFieldComponentView {
 
     init() {
-        self.init(style: .verticalList, styles: [.alone, .verticalList])
+        self.init(style: .alone, styles: [.alone, .verticalList])
     }
 }
 
@@ -26,6 +26,9 @@ struct FormFieldImplementationView: ComponentImplementationViewable {
     // MARK: - Properties
 
     var configuration: Binding<FormFieldConfiguration>
+    @State private var checkboxResetSelection: UUID = .init()
+    @State private var radioButtonSelectedID: Int?
+    @State private var stepperValue: Int = 50
     @State private var text: String = ""
 
     // MARK: - View
@@ -36,26 +39,29 @@ struct FormFieldImplementationView: ComponentImplementationViewable {
             case .checkbox:
                 CheckboxGroupImplementationView(
                     configuration: self.configuration.checkboxGroupConfiguration,
+                    resetSelection: self.$checkboxResetSelection,
                     showInfo: false
                 )
             case .radioButton:
                 RadioButtonGroupImplementationView(
                     configuration: self.configuration.radioButtonConfiguration,
+                    selectedID: self.$radioButtonSelectedID,
                     showInfo: false
                 )
             case .stepper:
                 StepperImplementationView(
-                    configuration: self.configuration.stepperConfiguration
+                    configuration: self.configuration.stepperConfiguration,
+                    value: self.$stepperValue
                 )
             case .textEditor:
                 TextEditorImplementationView(
                     configuration: self.configuration.textEditorConfiguration,
-                    textForFormField: self.$text
+                    text: self.$text
                 )
             case .textField:
                 TextFieldImplementationView(
                     configuration: self.configuration.textFieldConfiguration,
-                    textForFormField: self.$text
+                    text: self.$text
                 )
             }
         })
@@ -63,7 +69,14 @@ struct FormFieldImplementationView: ComponentImplementationViewable {
             on: self.text,
             for: self.configurationWrapped
         )
+        .demoClearButton(self.configurationWrapped) {
+            self.checkboxResetSelection = .init()
+            self.radioButtonSelectedID = nil
+            self.stepperValue = Int(self.configurationWrapped.stepperConfiguration.lowerBoundString) ?? 0
+            self.text = ""
+        }
         .demoTitleAccessibilityLabel(self.configurationWrapped)
+        .demoClearButtonAccessibilityLabel(self.configurationWrapped)
         .demoHelperAccessibilityLabel(self.configurationWrapped)
         .demoSecondaryHelperAccessibilityLabel(self.configurationWrapped)
         .demoSecondaryHelperAccessibilityValue(self.configurationWrapped)
@@ -80,63 +93,72 @@ private extension FormFieldView {
         _ configuration: FormFieldConfiguration,
          @ViewBuilder component: @escaping () -> Component
     ) {
-        let titleIsEmpty = configuration.title.isEmpty
-        let helperIsEmpty = configuration.helper.isEmpty
+        self.init(
+            theme: configuration.theme.value,
+            feedbackState: configuration.feedbackState,
+            title: configuration.title.nilIfEmpty,
+            helper: configuration.helper.nilIfEmpty,
+            helperImage: .init(icon: configuration.helperIcon),
+            isRequired: configuration.isRequired,
+            component: component
+        )
+    }
 
-        if configuration.isAttributedString {
-            self.init(
-                theme: configuration.theme.value,
-                component: component,
-                feedbackState: configuration.feedbackState,
-                attributedTitle: titleIsEmpty ? nil : configuration.title.demoAttributedString,
-                attributedHelper: helperIsEmpty ? nil : configuration.helper.demoAttributedString,
-                isTitleRequired: configuration.isTitleRequired
+    func demoClearButton(_ configuration: FormFieldConfiguration, action: @escaping () -> Void) -> Self {
+        let icon = configuration.clearButtonIcon
+        return if let icon {
+            self.clearButton(
+                title: configuration.clearButtonTitle.nilIfEmpty,
+                icon: .init(icon: icon),
+                action: action
             )
         } else {
-            self.init(
-                theme: configuration.theme.value,
-                component: component,
-                feedbackState: configuration.feedbackState,
-                title: titleIsEmpty ? nil : configuration.title,
-                helper: helperIsEmpty ? nil : configuration.helper,
-                isTitleRequired: configuration.isTitleRequired
-            )
+            self
         }
     }
 
     func demoTitleAccessibilityLabel(_ configuration: FormFieldConfiguration) -> Self {
         let label = configuration.titleAccessibilityLabel
-        if !label.isEmpty {
-            return self.titleAccessibilityLabel(label)
+        return if !label.isEmpty {
+            self.titleAccessibilityLabel(label)
         } else {
-            return self
+            self
+        }
+    }
+
+    func demoClearButtonAccessibilityLabel(_ configuration: FormFieldConfiguration) -> Self {
+        let label = configuration.clearButtonAccessibilityLabel
+        return if !label.isEmpty {
+            self.clearButtonAccessibilityLabel(label)
+        } else {
+            self
         }
     }
 
     func demoHelperAccessibilityLabel(_ configuration: FormFieldConfiguration) -> Self {
         let label = configuration.helperAccessibilityLabel
-        if !label.isEmpty {
-            return self.helperAccessibilityLabel(label)
+        return if !label.isEmpty {
+            self.helperAccessibilityLabel(label)
         } else {
-            return self
+            self
         }
     }
 
     func demoSecondaryHelperAccessibilityLabel(_ configuration: FormFieldConfiguration) -> Self {
         let label = configuration.secondaryHelperAccessibilityLabel
-        if !label.isEmpty {
-            return self.secondaryHelperAccessibilityLabel(label)
+        return if !label.isEmpty {
+            self.secondaryHelperAccessibilityLabel(label)
         } else {
-            return self
+            self
         }
     }
 
     func demoSecondaryHelperAccessibilityValue(_ configuration: FormFieldConfiguration) -> Self {
         let label = configuration.secondaryHelperAccessibilityValue
-        if !label.isEmpty {
-            return self.secondaryHelperAccessibilityValue(label)
+        return if !label.isEmpty {
+            self.secondaryHelperAccessibilityValue(label)
         } else {
-            return self
+            self
         }
     }
 }
@@ -146,7 +168,7 @@ private extension FormFieldView {
 private extension FormFieldView {
 
     func counterIfPossible(on text: String, for configuration: FormFieldConfiguration) -> Self {
-        if configuration.componentType.isSecondaryHelper {
+        return if configuration.componentType.isSecondaryHelper {
             self.counter(on: text, limit: configuration.textInputCounterLimit)
         } else {
             self

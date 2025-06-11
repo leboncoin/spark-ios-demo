@@ -105,7 +105,7 @@ private extension TabUIView {
         } else if configuration.numberOfTabs >= self.numberOfSegments {
 
             for (index, item) in configuration.items.enumerated() {
-                let text = item.text.isEmpty ? nil : item.text
+                let text = item.text.nilIfEmpty
                 let icon: UIImage? = .init(icon: item.icon)
 
                 // New segment

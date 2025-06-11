@@ -28,12 +28,20 @@ struct StepperImplementationView: ComponentImplementationViewable {
     var configuration: Binding<StepperConfiguration>
     @State private var floatValue: Float = 0
     @State private var intValue: Int = 0
+    private var intValueForFormField: Binding<Int>? // Only used by the FormField demo
     @State private var isEditing: Bool = false
 
     // MARK: - Initialization
 
     init(configuration: Binding<StepperConfiguration>) {
         self.configuration = configuration
+        self.intValueForFormField = nil
+    }
+
+    // Only used by the FormField demo
+    init(configuration: Binding<StepperConfiguration>, value: Binding<Int>) {
+        self.configuration = configuration
+        self.intValueForFormField = value
     }
 
     // MARK: - View
@@ -80,7 +88,7 @@ struct StepperImplementationView: ComponentImplementationViewable {
         case .none:
             SparkStepper(
                 theme: self.configurationWrapped.theme.value,
-                value: self.$intValue,
+                value: self.intValueForFormField ?? self.$intValue,
                 in: self.configurationWrapped.bounds().intRange,
                 step: self.configurationWrapped.step().intValue,
                 decrementImage: .init(icon: self.configurationWrapped.decrementIcon),

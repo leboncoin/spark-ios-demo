@@ -14,7 +14,11 @@ class FormFieldConfiguration: ComponentConfiguration {
 
     var feedbackState: FormFieldFeedbackState = .default
     var title: String = Bool.random() ? "My Title" : ""
-    var helper: String = Bool.random() ? "My Helper" : ""
+    var clearButtonTitle: String = ""
+    var clearButtonIcon: Iconography? = Bool.random() ? .circleCross : nil
+    var helper: String = "My Helper"
+    var helperIcon: Iconography? = .optionalRandom
+    var isRequired: Bool = .random()
     var isAttributedString: Bool = .random()
     var isTitleRequired: Bool = .random()
     var componentType: FormFieldComponentType = .random
@@ -22,6 +26,7 @@ class FormFieldConfiguration: ComponentConfiguration {
     let textInputCounterLimit: Int = 100
 
     var titleAccessibilityLabel: String = ""
+    var clearButtonAccessibilityLabel: String = ""
     var helperAccessibilityLabel: String = ""
     var secondaryHelperAccessibilityLabel: String = ""
     var secondaryHelperAccessibilityValue: String = ""
@@ -66,6 +71,7 @@ class FormFieldConfiguration: ComponentConfiguration {
         }
 
         self.stepperConfiguration.isEnabled.value = true
+        self.stepperConfiguration.format = .none
 
         self.textEditorConfiguration.isEnabled.value = true
         self.textEditorConfiguration.uiKitIsEditable = true

@@ -90,7 +90,7 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
         componentView.variant = configuration.variant
         componentView.alignment = configuration.alignment
         componentView.icon = .init(icon: configuration.icon)
-        componentView.text = configuration.text.isEmpty ? nil : configuration.text
+        componentView.text = configuration.text.nilIfEmpty
 
         self.updateCommonProperties(componentView, for: configuration)
     }

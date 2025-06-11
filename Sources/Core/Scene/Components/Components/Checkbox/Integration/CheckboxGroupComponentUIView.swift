@@ -46,7 +46,7 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            title: configuration.title.isEmpty ? nil : configuration.title,
+            title: configuration.title.nilIfEmpty,
             checkedImage: .init(icon: configuration.checkedIcon),
             items: configuration.items.map { $0.toSpark(for: .uiKit) },
             layout: configuration.layout,

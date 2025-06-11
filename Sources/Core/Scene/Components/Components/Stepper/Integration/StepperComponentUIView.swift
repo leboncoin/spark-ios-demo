@@ -145,28 +145,16 @@ private extension SparkUIStepper {
 
     func demoContextAccessibilityLabel(_ configuration: StepperConfiguration) {
         let context = configuration.contextAccessibilityLabel
-        if !context.isEmpty {
-            self.contextAccessibilityLabel = context
-        } else {
-            self.contextAccessibilityLabel = nil
-        }
+        self.contextAccessibilityLabel = context.nilIfEmpty
     }
 
     func demoIncrementAccessibilityLabel(_ configuration: StepperConfiguration) {
         let label = configuration.incrementAccessibilityLabel
-        if !label.isEmpty {
-            self.customIncrementAccessibilityLabel = label
-        } else {
-            self.customIncrementAccessibilityLabel = nil
-        }
+        self.customIncrementAccessibilityLabel = label.nilIfEmpty
     }
 
     func demoDecrementAccessibilityLabel(_ configuration: StepperConfiguration) {
         let label = configuration.decrementAccessibilityLabel
-        if !label.isEmpty {
-            self.customDecrementAccessibilityLabel = label
-        } else {
-            self.customDecrementAccessibilityLabel = nil
-        }
+        self.customDecrementAccessibilityLabel = label.nilIfEmpty
     }
 }

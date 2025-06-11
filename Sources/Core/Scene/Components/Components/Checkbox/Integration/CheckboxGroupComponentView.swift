@@ -31,16 +31,23 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
     var configuration: Binding<CheckboxGroupConfiguration>
     var showInfo: Bool = true
     @State private var items = [any CheckboxGroupItemProtocol]()
+    private var resetSelectionForFormField: Binding<UUID>? // Only used by the FormField demo
 
     // MARK: - Initialization
 
     init(configuration: Binding<CheckboxGroupConfiguration>) {
         self.configuration = configuration
+        self.resetSelectionForFormField = nil
     }
 
     // Only used by the FormField demo
-    init(configuration: Binding<CheckboxGroupConfiguration>, showInfo: Bool) {
+    init(
+        configuration: Binding<CheckboxGroupConfiguration>,
+        resetSelection: Binding<UUID>,
+        showInfo: Bool
+    ) {
         self.configuration = configuration
+        self.resetSelectionForFormField = resetSelection
         self.showInfo = showInfo
     }
 
@@ -49,7 +56,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
     var body: some View {
         VStack {
             CheckboxGroupView(
-                title: self.configurationWrapped.title.isEmpty ? nil : self.configurationWrapped.title,
+                title: self.configurationWrapped.title.nilIfEmpty,
                 checkedImage: .init(icon: self.configurationWrapped.checkedIcon),
                 items: self.$items,
                 layout: self.configurationWrapped.layout,
@@ -61,6 +68,11 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
             .onAppear() {
                 self.items = self.configurationWrapped.items.map {
                     $0.toSpark(for: .swiftUI)
+                }
+            }
+            .onChange(of: self.resetSelectionForFormField?.wrappedValue) { test in
+                if test != nil {
+                    self.configurationWrapped.resetSelection(on: &self.items)
                 }
             }
             .onChange(of: self.configurationWrapped.items) { items in

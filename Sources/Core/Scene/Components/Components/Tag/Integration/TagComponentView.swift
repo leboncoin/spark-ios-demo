@@ -62,7 +62,7 @@ private extension TagView {
         let label = configuration.accessibilityLabel.value
         return self.accessibility(
             identifier: "Tag Identifier",
-            label: label.isEmpty ? nil : label
+            label: label.nilIfEmpty
         )
     }
 }

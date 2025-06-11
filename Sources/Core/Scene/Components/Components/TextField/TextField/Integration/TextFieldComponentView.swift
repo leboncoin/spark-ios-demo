@@ -38,9 +38,9 @@ struct TextFieldImplementationView: ComponentImplementationViewable {
     }
 
     // Only used by the FormField demo
-    init(configuration: Binding<TextFieldConfiguration>, textForFormField: Binding<String>) {
+    init(configuration: Binding<TextFieldConfiguration>, text: Binding<String>) {
         self.configuration = configuration
-        self.textForFormField = textForFormField
+        self.textForFormField = text
     }
 
     // MARK: - View
