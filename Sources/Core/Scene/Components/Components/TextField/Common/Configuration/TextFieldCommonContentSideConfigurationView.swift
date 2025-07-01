@@ -20,6 +20,7 @@ struct TextFieldCommonContentSideConfigurationView<Configuration: TextFieldConfi
     // MARK: - View
 
     var body: some View {
+        // Left & Right View
         ForEach(TextFieldContentSide.allCases, id: \.self) { contentSide in
             let contentType = switch contentSide {
             case .left: self.configuration.leftViewContentType
@@ -43,6 +44,44 @@ struct TextFieldCommonContentSideConfigurationView<Configuration: TextFieldConfi
                         name: "\(contentSide.name) view mode",
                         values: UITextField.ViewMode.allCases,
                         selectedValue: mode
+                    )
+                }
+            }
+        }
+
+        // Left & Right Addons
+        if self.framework.isSwiftUI {
+            ForEach(TextFieldContentSide.allCases, id: \.self) { contentSide in
+                let contentType = switch contentSide {
+                case .left: self.configuration.leftAddonContentType
+                case .right: self.configuration.rightAddonContentType
+                }
+
+                let isPadding = switch contentSide {
+                case .left: self.configuration.isLeftAddonPadding
+                case .right: self.configuration.isRightAddonPadding
+                }
+
+                let isSeparator = switch contentSide {
+                case .left: self.configuration.isLeftAddonSeparator
+                case .right: self.configuration.isRightAddonSeparator
+                }
+
+                Section("\(contentSide.name) Addon") {
+                    EnumConfigurationItemView(
+                        name: "\(contentSide.name) view",
+                        values: TextFieldSideViewContentType.allCases,
+                        selectedValue: contentType
+                    )
+
+                    ToggleConfigurationItemView(
+                        name: "is padding",
+                        isOn: isPadding
+                    )
+
+                    ToggleConfigurationItemView(
+                        name: "is separator",
+                        isOn: isSeparator
                     )
                 }
             }

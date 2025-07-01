@@ -79,7 +79,7 @@ final class TextFieldComponentUIViewMaker: ComponentUIViewMaker {
         componentView.clearButtonMode = configuration.uiKitClearButtonMode
         componentView.isReadOnly = configuration.isReadOnly
         componentView.demoDisabled(configuration)
-        componentView.demoAccessibilityLabel(configuration)
+        componentView.demoAccessibility(configuration)
         componentView.demoBackground(configuration)
     }
 

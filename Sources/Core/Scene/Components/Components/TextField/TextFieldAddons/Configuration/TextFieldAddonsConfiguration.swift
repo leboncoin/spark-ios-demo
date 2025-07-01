@@ -10,11 +10,4 @@ import Foundation
 import SwiftUI
 
 class TextFieldAddonsConfiguration: TextFieldConfiguration {
-
-    // MARK: - Properties
-
-    var leftAddonContentType: TextFieldSideViewContentType = .random
-    var isLeftAddonPadding: Bool = .random()
-    var rightAddonContentType: TextFieldSideViewContentType = .random
-    var isRightAddonPadding: Bool = .random()
 }

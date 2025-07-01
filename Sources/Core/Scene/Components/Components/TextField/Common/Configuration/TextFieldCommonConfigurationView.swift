@@ -26,6 +26,14 @@ struct TextFieldCommonConfigurationView<Configuration: TextFieldConfiguration>: 
             selectedValue: self.configuration.intent
         )
 
+        if self.framework.isSwiftUI {
+            EnumConfigurationItemView(
+                name: "content type",
+                values: TextFieldContentType.allCases,
+                selectedValue: self.configuration.swiftUIContentType
+            )
+        }
+
         TextFieldConfigurationItemView(
             name: "placeholder",
             text: self.configuration.placeholder

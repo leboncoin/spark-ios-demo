@@ -105,7 +105,7 @@ final class TextFieldAddonsComponentUIViewMaker: ComponentUIViewMaker {
         componentView.textField.clearButtonMode = configuration.uiKitClearButtonMode
         componentView.isReadOnly = configuration.isReadOnly
         componentView.demoDisabled(configuration)
-        componentView.demoAccessibilityLabel(configuration)
+        componentView.textField.demoAccessibility(configuration)
         componentView.demoBackground(configuration)
     }
 

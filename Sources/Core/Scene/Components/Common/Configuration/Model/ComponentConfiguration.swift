@@ -21,6 +21,7 @@ class ComponentConfiguration: Identifiable {
 
     var accessibilityLabel = ShowConfigurationString()
     var accessibilityValue = ShowConfigurationString()
+    var accessibilityHint = ShowConfigurationString()
 
     // MARK: - Size Properties
 

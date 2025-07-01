@@ -13,4 +13,10 @@ enum TextFieldSideViewContentType: String, CaseIterable {
     case button
     case image
     case text
+
+    // MARK: - Properties
+
+    var isEmptyView: Bool {
+        self == .none
+    }
 }

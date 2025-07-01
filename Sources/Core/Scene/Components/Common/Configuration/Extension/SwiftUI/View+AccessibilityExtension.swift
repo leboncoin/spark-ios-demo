@@ -10,15 +10,39 @@ import SwiftUI
 
 extension View {
 
+    @ViewBuilder
     func demoAccessibilityLabel<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) -> some View {
-        self.accessibilityLabel(configuration.accessibilityLabel.value)
+        let value = configuration.accessibilityLabel.value
+        if !value.isEmpty {
+            self.accessibilityLabel(configuration.accessibilityLabel.value)
+        } else {
+            self
+        }
     }
 
+    @ViewBuilder
     func demoAccessibilityValue<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) -> some View {
-        self.accessibilityValue(configuration.accessibilityValue.value)
+        let value = configuration.accessibilityValue.value
+        if !value.isEmpty {
+            self.accessibilityValue(configuration.accessibilityValue.value)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func demoAccessibilityHint<Configuration: ComponentConfiguration>(
+        _ configuration: Configuration
+    ) -> some View {
+        let value = configuration.accessibilityHint.value
+        if !value.isEmpty {
+            self.accessibilityHint(configuration.accessibilityHint.value)
+        } else {
+            self
+        }
     }
 }

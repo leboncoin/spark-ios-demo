@@ -67,7 +67,7 @@ final class TextEditorComponentUIViewMaker: ComponentUIViewMaker {
         componentView.isScrollEnabled = configuration.uiKitIsScrollEnabled
         componentView.isEnabled = configuration.isEnabled.value
 
-        componentView.demoAccessibilityLabel(configuration)
+        componentView.demoAccessibility(configuration)
         componentView.demoBackground(configuration)
     }
 

@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-// TODO: NOT WORKING ANYMORE on iOS 18.2
-
 // MARK: - View
 
 typealias TextEditorComponentView = ComponentViewable<TextEditorConfiguration, TextEditorImplementationView, TextEditorConfigurationView>
@@ -48,14 +46,17 @@ struct TextEditorImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        TextEditorView(
+        SparkTextEditor(
             self.configurationWrapped.placeholder,
             text: self.textForFormField ?? self.$text,
             theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent
         )
+        .sparkTextEditorIntent(self.configurationWrapped.intent)
+        .sparkTextEditorReadOnly(self.configurationWrapped.swiftUIIsReadOnly)
         .demoDisabled(self.configurationWrapped)
         .demoAccessibilityLabel(self.configurationWrapped)
+        .demoAccessibilityValue(self.configurationWrapped)
+        .demoAccessibilityHint(self.configurationWrapped)
         .demoFrame(self.configurationWrapped)
     }
 }
@@ -65,5 +66,37 @@ struct TextEditorImplementationView: ComponentImplementationViewable {
 struct TextEditorComponentView_Previews: PreviewProvider {
     static var previews: some View {
         TextEditorComponentView()
+    }
+}
+
+// MARK: - Extension
+
+private extension View {
+
+    @ViewBuilder
+    func demoAccessibilityLabel(_ configuration: TextEditorConfiguration) -> some View {
+        if let value = configuration.accessibilityLabel.value.nilIfEmpty {
+            self.sparkTextEditorAccessibilityLabel(value)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func demoAccessibilityValue(_ configuration: TextEditorConfiguration) -> some View {
+        if let value = configuration.accessibilityValue.value.nilIfEmpty {
+            self.sparkTextEditorAccessibilityValue(value)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func demoAccessibilityHint(_ configuration: TextEditorConfiguration) -> some View {
+        if let value = configuration.accessibilityHint.value.nilIfEmpty {
+            self.sparkTextEditorAccessibilityHint(value)
+        } else {
+            self
+        }
     }
 }
