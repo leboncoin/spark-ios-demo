@@ -49,7 +49,7 @@ struct TextEditorImplementationView: ComponentImplementationViewable {
         SparkTextEditor(
             self.configurationWrapped.placeholder,
             text: self.textForFormField ?? self.$text,
-            theme: self.configurationWrapped.theme.value,
+            theme: self.configurationWrapped.theme.value
         )
         .sparkTextEditorIntent(self.configurationWrapped.intent)
         .sparkTextEditorReadOnly(self.configurationWrapped.swiftUIIsReadOnly)

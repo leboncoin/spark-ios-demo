@@ -21,7 +21,7 @@ extension UIView {
     func demoAccessibilityLabel<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) {
-        if let value =  configuration.accessibilityLabel.value.nilIfEmpty {
+        if let value = configuration.accessibilityLabel.value.nilIfEmpty {
             self.accessibilityLabel = value
         }
     }

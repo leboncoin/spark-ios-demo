@@ -93,7 +93,6 @@ struct TextFieldImplementationView: ComponentImplementationViewable {
                     rightAddon: { self.rightAddon() }
                 )
 
-
             case .currency:
                 SparkTextField(
                     LocalizedStringKey(self.configurationWrapped.placeholder),
@@ -118,11 +117,11 @@ struct TextFieldImplementationView: ComponentImplementationViewable {
         .sparkTextFieldSecureEntry(self.configurationWrapped.isSecure)
         .sparkTextFieldLeftAddonConfiguration(
             hasPadding: self.configurationWrapped.isLeftAddonPadding,
-            hasSeparator: self.configurationWrapped.isLeftAddonSeparator,
+            hasSeparator: self.configurationWrapped.isLeftAddonSeparator
         )
         .sparkTextFieldRightAddonConfiguration(
             hasPadding: self.configurationWrapped.isRightAddonPadding,
-            hasSeparator: self.configurationWrapped.isRightAddonSeparator,
+            hasSeparator: self.configurationWrapped.isRightAddonSeparator
         )
         .demoDisabled(self.configurationWrapped)
         .demoAccessibilityLabel(self.configurationWrapped)

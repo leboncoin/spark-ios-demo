@@ -72,19 +72,19 @@ struct TextFieldAddonsConfigurationView: ConfigurationViewable, ConfigurationUIV
                 case .left: self.configuration.leftAddonContentType
                 case .right: self.configuration.rightAddonContentType
                 }
-                
+
                 let isPadding = switch contentSide {
                 case .left: self.configuration.isLeftAddonPadding
                 case .right: self.configuration.isRightAddonPadding
                 }
-                
+
                 Section("\(contentSide.name) Addon") {
                     EnumConfigurationItemView(
                         name: "\(contentSide.name) view",
                         values: TextFieldSideViewContentType.allCases,
                         selectedValue: contentType
                     )
-                    
+
                     ToggleConfigurationItemView(
                         name: "is padding on \(contentSide.name) addons",
                         isOn: isPadding
