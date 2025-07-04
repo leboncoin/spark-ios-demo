@@ -27,8 +27,18 @@ struct TextFieldImplementationView: ComponentImplementationViewable {
 
     var configuration: Binding<TextFieldConfiguration>
     @State private var text: String = ""
+    @State private var value: Double = 0
 
     private var textForFormField: Binding<String>? // Only used by the FormField demo
+
+    let numberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.generatesDecimalNumbers = true
+        numberFormatter.maximumFractionDigits = 0
+        numberFormatter.groupingSize = 3
+        return numberFormatter
+    }()
 
     // MARK: - Initialization
 
@@ -46,31 +56,149 @@ struct TextFieldImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        TextFieldView(
-            LocalizedStringKey(self.configurationWrapped.placeholder),
-            text: self.textForFormField ?? self.$text,
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            type: TextFieldViewTypeHelper.getType(from: self.configurationWrapped),
-            isReadOnly: self.configurationWrapped.isReadOnly,
-            leftView: {
-                TextFieldSideView(
-                    theme: self.configurationWrapped.theme,
-                    sideViewContent: self.configurationWrapped.leftViewContentType,
-                    side: .left
+        VStack {
+            switch self.configurationWrapped.swiftUIContentType {
+            case .text:
+                SparkTextField(
+                    LocalizedStringKey(self.configurationWrapped.placeholder),
+                    text: self.textForFormField ?? self.$text,
+                    theme: self.configurationWrapped.theme.value,
+                    leftView: { self.leftView() },
+                    rightView: { self.rightView() },
+                    leftAddon: { self.leftAddon() },
+                    rightAddon: { self.rightAddon() }
                 )
-            },
-            rightView: {
-                TextFieldSideView(
-                    theme: self.configurationWrapped.theme,
-                    sideViewContent: self.configurationWrapped.rightViewContentType,
-                    side: .right
+
+            case .number:
+                SparkTextField(
+                    LocalizedStringKey(self.configurationWrapped.placeholder),
+                    value: self.$value,
+                    format: .number,
+                    theme: self.configurationWrapped.theme.value,
+                    leftView: { self.leftView() },
+                    rightView: { self.rightView() },
+                    leftAddon: { self.leftAddon() },
+                    rightAddon: { self.rightAddon() }
+                )
+
+            case .formattedNumber:
+                SparkTextField(
+                    LocalizedStringKey(self.configurationWrapped.placeholder),
+                    value: self.$value,
+                    formatter: self.numberFormatter,
+                    theme: self.configurationWrapped.theme.value,
+                    leftView: { self.leftView() },
+                    rightView: { self.rightView() },
+                    leftAddon: { self.leftAddon() },
+                    rightAddon: { self.rightAddon() }
+                )
+
+            case .currency:
+                SparkTextField(
+                    LocalizedStringKey(self.configurationWrapped.placeholder),
+                    value: self.$value,
+                    format: .currency(code: "EUR"),
+                    theme: self.configurationWrapped.theme.value,
+                    leftView: { self.leftView() },
+                    rightView: { self.rightView() },
+                    leftAddon: { self.leftAddon() },
+                    rightAddon: { self.rightAddon() }
                 )
             }
+        }
+        .sparkTextFieldIntent(self.configurationWrapped.intent)
+        .sparkTextFieldReadOnly(self.configurationWrapped.isReadOnly)
+        .sparkTextFieldClearMode(
+            self.configurationWrapped.swiftUIClearButtonMode,
+            customAction: self.configurationWrapped.swiftUIContentType.isText ? nil : {
+                self.value = 0
+            }
         )
-        .textFieldClearMode(self.configurationWrapped.swiftUIClearButtonMode)
+        .sparkTextFieldSecureEntry(self.configurationWrapped.isSecure)
+        .sparkTextFieldLeftAddonConfiguration(
+            hasPadding: self.configurationWrapped.isLeftAddonPadding,
+            hasSeparator: self.configurationWrapped.isLeftAddonSeparator
+        )
+        .sparkTextFieldRightAddonConfiguration(
+            hasPadding: self.configurationWrapped.isRightAddonPadding,
+            hasSeparator: self.configurationWrapped.isRightAddonSeparator
+        )
         .demoDisabled(self.configurationWrapped)
         .demoAccessibilityLabel(self.configurationWrapped)
+        .demoAccessibilityValue(self.configurationWrapped)
+        .demoAccessibilityHint(self.configurationWrapped)
+    }
+
+    // MARK: - Subview
+
+    @ViewBuilder
+    func leftView() -> some View {
+        TextFieldSideView(
+            theme: self.configurationWrapped.theme,
+            sideViewContent: self.configurationWrapped.leftViewContentType,
+            side: .left
+        )
+    }
+
+    @ViewBuilder
+    func rightView() -> some View {
+        TextFieldSideView(
+            theme: self.configurationWrapped.theme,
+            sideViewContent: self.configurationWrapped.rightViewContentType,
+            side: .right
+        )
+    }
+
+    @ViewBuilder
+    func leftAddon() -> some View {
+        TextFieldSideView(
+            theme: self.configurationWrapped.theme,
+            sideViewContent: self.configurationWrapped.leftAddonContentType,
+            side: .left,
+            isAddon: true
+        )
+    }
+
+    @ViewBuilder
+    func rightAddon() -> some View {
+        TextFieldSideView(
+            theme: self.configurationWrapped.theme,
+            sideViewContent: self.configurationWrapped.rightAddonContentType,
+            side: .right,
+            isAddon: true
+        )
+    }
+}
+
+// MARK: - Extension
+
+private extension View {
+
+    @ViewBuilder
+    func demoAccessibilityLabel(_ configuration: TextFieldConfiguration) -> some View {
+        if let value = configuration.accessibilityLabel.value.nilIfEmpty {
+            self.sparkTextFieldAccessibilityLabel(value)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func demoAccessibilityValue(_ configuration: TextFieldConfiguration) -> some View {
+        if let value = configuration.accessibilityValue.value.nilIfEmpty {
+            self.sparkTextFieldAccessibilityValue(value)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func demoAccessibilityHint(_ configuration: TextFieldConfiguration) -> some View {
+        if let value = configuration.accessibilityHint.value.nilIfEmpty {
+            self.sparkTextFieldAccessibilityHint(value)
+        } else {
+            self
+        }
     }
 }
 

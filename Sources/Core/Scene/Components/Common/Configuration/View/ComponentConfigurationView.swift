@@ -169,9 +169,10 @@ struct ComponentConfigurationView<
     private func createAccessibilitySection() -> some View {
         let isAccessibilityLabel = self.configuration.accessibilityLabel.showConfiguration
         let isAccessibilityValue = self.configuration.accessibilityValue.showConfiguration
+        let isAccessibilityHint = self.configuration.accessibilityHint.showConfiguration
         let isOtherAccessibilityItemsView = self.otherAccessibilityItemsView != nil
 
-        if isAccessibilityLabel || isAccessibilityValue || isOtherAccessibilityItemsView {
+        if isAccessibilityLabel || isAccessibilityValue || isAccessibilityHint || isOtherAccessibilityItemsView {
             Section("Accessibility") {
                 if isAccessibilityLabel {
                     TextFieldConfigurationItemView(
@@ -184,6 +185,13 @@ struct ComponentConfigurationView<
                     TextFieldConfigurationItemView(
                         name: "Value",
                         text: self.$configuration.accessibilityValue.value
+                    )
+                }
+
+                if isAccessibilityHint {
+                    TextFieldConfigurationItemView(
+                        name: "Hint",
+                        text: self.$configuration.accessibilityHint.value
                     )
                 }
 

@@ -16,6 +16,10 @@ class TextEditorConfiguration: ComponentConfiguration {
     var intent: TextEditorIntent = .random
     var placeholder = "My placeholder"
 
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsReadOnly: Bool = .random()
+
     // MARK: - UIKit Properties Only
 
     var uiKitIsEditable: Bool = .random()
@@ -29,6 +33,9 @@ class TextEditorConfiguration: ComponentConfiguration {
         self.isEnabled.showConfiguration = true
         self.height.showConfiguration = true
         self.height.maxText = "80" // Default value
+
         self.accessibilityLabel.showConfiguration = true
+        self.accessibilityValue.showConfiguration = true
+        self.accessibilityHint.showConfiguration = true
     }
 }

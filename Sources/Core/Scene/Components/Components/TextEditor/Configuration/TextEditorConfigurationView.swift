@@ -69,6 +69,12 @@ struct TextEditorConfigurationView: ConfigurationViewable, ConfigurationUIViewab
                         name: "is scroll enabled",
                         isOn: self.configuration.uiKitIsScrollEnabled
                     )
+                } else {
+                    ToggleConfigurationItemView(
+                        name: "is read only",
+                        isOn: self.configuration.swiftUIIsReadOnly
+                    )
+
                 }
             }
         )

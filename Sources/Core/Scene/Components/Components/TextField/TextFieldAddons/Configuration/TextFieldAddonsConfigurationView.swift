@@ -43,8 +43,6 @@ struct TextFieldAddonsConfigurationView: ConfigurationViewable, ConfigurationUIV
             componentView: {
                 if let componentImplementationViewRepresentable {
                     componentImplementationViewRepresentable
-                } else {
-                    TextFieldAddonsImplementationView(configuration: self.configuration)
                 }
             },
             mainItemsView: {
@@ -68,28 +66,30 @@ struct TextFieldAddonsConfigurationView: ConfigurationViewable, ConfigurationUIV
         )
 
         // Left & Right Addons
-        ForEach(TextFieldContentSide.allCases, id: \.self) { contentSide in
-            let contentType = switch contentSide {
-            case .left: self.configuration.leftAddonContentType
-            case .right: self.configuration.rightAddonContentType
-            }
+        if self.framework.isUIKit {
+            ForEach(TextFieldContentSide.allCases, id: \.self) { contentSide in
+                let contentType = switch contentSide {
+                case .left: self.configuration.leftAddonContentType
+                case .right: self.configuration.rightAddonContentType
+                }
 
-            let isPadding = switch contentSide {
-            case .left: self.configuration.isLeftAddonPadding
-            case .right: self.configuration.isRightAddonPadding
-            }
+                let isPadding = switch contentSide {
+                case .left: self.configuration.isLeftAddonPadding
+                case .right: self.configuration.isRightAddonPadding
+                }
 
-            Section("\(contentSide.name) Addon") {
-                EnumConfigurationItemView(
-                    name: "\(contentSide.name) view",
-                    values: TextFieldSideViewContentType.allCases,
-                    selectedValue: contentType
-                )
+                Section("\(contentSide.name) Addon") {
+                    EnumConfigurationItemView(
+                        name: "\(contentSide.name) view",
+                        values: TextFieldSideViewContentType.allCases,
+                        selectedValue: contentType
+                    )
 
-                ToggleConfigurationItemView(
-                    name: "is padding on \(contentSide.name) addons",
-                    isOn: isPadding
-                )
+                    ToggleConfigurationItemView(
+                        name: "is padding on \(contentSide.name) addons",
+                        isOn: isPadding
+                    )
+                }
             }
         }
     }

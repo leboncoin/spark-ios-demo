@@ -117,8 +117,8 @@ struct ComponentsView: View {
         case .tag: TagComponentView()
         case .textEditor: TextEditorComponentView()
         case .textField: TextFieldComponentView()
-        case .textFieldAddons: TextFieldAddonsComponentView()
         case .textLink: TextLinkComponentView()
+        default: EmptyView()
         }
     }
 
@@ -258,7 +258,9 @@ extension ComponentsView {
             case .uiKit:
                 values = self.allCases
             case .swiftUI:
-                values = self.allCases
+                values = self.allCases.filter {
+                    $0 != .textFieldAddons
+                }
             }
 
             return values.filter {

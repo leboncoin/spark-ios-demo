@@ -18,24 +18,25 @@ class TextFieldConfiguration: ComponentConfiguration {
     var isSecure: Bool = false
     var isReadOnly = false
     var leftViewContentType: TextFieldSideViewContentType = .random
-    // TODO: remettre
-//    var rightViewContentType: TextFieldSideViewContentType = .random
-    var rightViewContentType: TextFieldSideViewContentType = .none
+    var rightViewContentType: TextFieldSideViewContentType = .random
+
+    var leftAddonContentType: TextFieldSideViewContentType = .random
+    var isLeftAddonPadding: Bool = .random()
+    var isLeftAddonSeparator: Bool = false
+    var rightAddonContentType: TextFieldSideViewContentType = .random
+    var isRightAddonPadding: Bool = .random()
+    var isRightAddonSeparator: Bool = false
 
     // MARK: - SwiftUI Properties Only
 
-    // TODO: remettre
-//    var swiftUIClearButtonMode: TextFieldClearMode = .random
-    var swiftUIClearButtonMode: TextFieldClearMode = .always
+    var swiftUIContentType: TextFieldContentType = .text
+    var swiftUIClearButtonMode: TextFieldClearMode = .random
 
     // MARK: - UIKit Properties Only
 
     var uiKitLeftViewMode: UITextField.ViewMode = .random
-    // TODO: remettre
-//    var uiKitRightViewMode: UITextField.ViewMode = .random
-//    var uiKitClearButtonMode: UITextField.ViewMode = .random
-    var uiKitRightViewMode: UITextField.ViewMode = .never
-    var uiKitClearButtonMode: UITextField.ViewMode = .always
+    var uiKitRightViewMode: UITextField.ViewMode = .random
+    var uiKitClearButtonMode: UITextField.ViewMode = .random
 
     // MARK: - Initialization
 
@@ -46,6 +47,8 @@ class TextFieldConfiguration: ComponentConfiguration {
 
         self.isEnabled.showConfiguration = true
         self.accessibilityLabel.showConfiguration = true
+        self.accessibilityValue.showConfiguration = true
+        self.accessibilityHint.showConfiguration = true
     }
 }
 
