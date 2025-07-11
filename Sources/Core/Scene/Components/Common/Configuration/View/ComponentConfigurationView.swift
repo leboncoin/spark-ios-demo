@@ -240,6 +240,12 @@ struct ComponentConfigurationView<
                                 )
                             }
                         }
+
+                        EnumConfigurationItemView(
+                            name: "alignment",
+                            values: StackAlignment.allCases,
+                            selectedValue: $item.alignment
+                        )
                     }
                 }
             }
