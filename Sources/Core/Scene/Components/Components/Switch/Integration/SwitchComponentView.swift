@@ -8,10 +8,6 @@
 
 import SwiftUI
 
-// TODO: To fix :
-// - the space when the aligment is equals to right : the max width infinit didn't work
-// - add/update the accessibility (read everything or add two func to set child accessibility properties)
-
 // MARK: - View
 
 typealias SwitchComponentView = ComponentViewable<SwitchConfiguration, SwitchImplementationView, SwitchConfigurationView>
@@ -19,7 +15,7 @@ typealias SwitchComponentView = ComponentViewable<SwitchConfiguration, SwitchImp
 extension SwitchComponentView {
 
     init() {
-        self.init(style: .verticalList, styles: [.alone, .verticalList])
+        self.init(style: .alone, styles: [.alone, .verticalList])
     }
 }
 
@@ -35,44 +31,46 @@ struct SwitchImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        SwitchView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            alignment: self.configurationWrapped.alignment,
-            isOn: self.$isOn
-        )
-        .demoImages(self.configurationWrapped)
-        .demoText(self.configurationWrapped)
-        .demoAccessibilityLabel(self.configurationWrapped)
-        .demoAccessibilityValue(self.configurationWrapped)
-        .demoDisabled(self.configurationWrapped)
-        .demoFrame(self.configurationWrapped)
-    }
-}
-
-// MARK: - Extension
-
-private extension SwitchView {
-
-    func demoImages(_ configuration: SwitchConfiguration) -> Self {
-        if configuration.hasImages {
-            return self.images(.init(
-                on: .init(icon: Iconography.check),
-                off: .init(icon: Iconography.cross)
-            ))
-        } else {
-            return self.images(nil)
-        }
+        self.component()
+            .demoAccessibilityLabel(self.configurationWrapped)
+            .demoDisabled(self.configurationWrapped)
+            .demoFrame(self.configurationWrapped)
     }
 
-    func demoText(_ configuration: SwitchConfiguration) -> Self {
-        let text = configuration.text
-        if text.isEmpty {
-            return self.text(nil)
-        } else if configuration.isAttributedText {
-            return self.attributedText(text.demoAttributedString)
+    @ViewBuilder
+    func component() -> some View {
+        if self.configurationWrapped.swiftUIIsCustomContent {
+            SparkToggle(
+                theme: self.configurationWrapped.theme.value,
+                isOn: self.$isOn,
+                onIcon: .init(icon: Iconography.check),
+                offIcon: .init(icon: Iconography.cross),
+                label: {
+                    VStack(alignment: .leading) {
+                        Text(self.configurationWrapped.text)
+                            .font(.body)
+                            .foregroundStyle(.orange)
+                        Text(self.configurationWrapped.swiftUISecondText)
+                            .font(.footnote)
+                            .foregroundStyle(.blue)
+                    }
+                }
+            )
+        } else if let text = configurationWrapped.text.nilIfEmpty {
+            SparkToggle(
+                text,
+                theme: self.configurationWrapped.theme.value,
+                isOn: self.$isOn,
+                onIcon: .init(icon: Iconography.check),
+                offIcon: .init(icon: Iconography.cross)
+            )
         } else {
-            return self.text(text)
+            SparkToggle(
+                theme: self.configurationWrapped.theme.value,
+                isOn: self.$isOn,
+                onIcon: .init(icon: Iconography.check),
+                offIcon: .init(icon: Iconography.cross)
+            )
         }
     }
 }

@@ -13,7 +13,7 @@ struct SwitchConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     // MARK: - Type Alias
 
     typealias Configuration = SwitchConfiguration
-    typealias ComponentUIView = SwitchUIView
+    typealias ComponentUIView = SparkUISwitch
 
     // MARK: - Properties
 
@@ -47,38 +47,37 @@ struct SwitchConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                     SwitchImplementationView(configuration: self.configuration)
                 }
             },
-            mainItemsView: { self.itemsView() }
+            mainItemsView: { self.itemsView() },
+            otherAccessibilityItemsView: { self.otherAccessibilityItemsView() }
         )
     }
 
     @ViewBuilder
     private func itemsView() -> some View {
-        EnumConfigurationItemView(
-            name: "intent",
-            values: SwitchIntent.allCases,
-            selectedValue: self.configuration.intent
-        )
-
-        EnumConfigurationItemView(
-            name: "alignment",
-            values: SwitchAlignment.allCases,
-            selectedValue: self.configuration.alignment
-        )
-
         TextFieldConfigurationItemView(
             name: "text",
             text: self.configuration.text
         )
 
-        ToggleConfigurationItemView(
-            name: "is attributed text",
-            isOn: self.configuration.isAttributedText
-        )
+        if self.framework.isSwiftUI {
+            ToggleConfigurationItemView(
+                name: "is custom content",
+                isOn: self.configuration.swiftUIIsCustomContent
+            )
 
-        ToggleConfigurationItemView(
-            name: "has images",
-            isOn: self.configuration.hasImages
-        )
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second text",
+                    text: self.configuration.swiftUISecondText
+                )
+            }
+
+        } else {
+            ToggleConfigurationItemView(
+                name: "is attributed text",
+                isOn: self.configuration.uiKitIsAttributedText
+            )
+        }
 
         if self.framework.isUIKit {
             ToggleConfigurationItemView(
@@ -90,10 +89,22 @@ struct SwitchConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                 name: "is animated",
                 isOn: self.configuration.uiKitIsAnimated
             )
+        }
+    }
 
-            ToggleConfigurationItemView(
-                name: "is enabled animated",
-                isOn: self.configuration.uiKitIsEnabledAnimated
+    @ViewBuilder
+    private func otherAccessibilityItemsView() -> some View {
+        if self.framework.isSwiftUI {
+            EnumConfigurationItemView(
+                name: "on icon",
+                values: Iconography.allCases,
+                selectedValue: self.configuration.onIcon
+            )
+
+            EnumConfigurationItemView(
+                name: "off icon",
+                values: Iconography.allCases,
+                selectedValue: self.configuration.offIcon
             )
         }
     }

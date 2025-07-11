@@ -82,6 +82,7 @@ class ShowConfigurationSize: Identifiable, ShowConfiguration {
     var minText = ""
     var maxText = ""
     var infinite = false
+    var alignment: StackAlignment = .center
 
     // MARK: - Initialization
 
