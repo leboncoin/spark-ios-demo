@@ -12,7 +12,7 @@ class CheckboxConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: CheckboxIntent = .random
+    var intent: SparkComponentCheckbox.CheckboxIntent = .random
     var alignment: CheckboxAlignment = .random
     var text = "My Checkbox"
     var checkedIcon: Iconography = .random
