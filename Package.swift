@@ -42,9 +42,9 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            url: "https://github.com/leboncoin/spark-ios-component-checkbox.git",
-            // path: "../spark-ios-component-checkbox"
-            /*version*/ "0.0.1"..."999.999.999"
+            // url: "https://github.com/leboncoin/spark-ios-component-checkbox.git",
+            path: "../spark-ios-component-checkbox"
+            // /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-chip.git",
@@ -82,9 +82,9 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            url: "https://github.com/leboncoin/spark-ios-component-radio-button.git",
-            // path: "../spark-ios-component-radio-button"
-            /*version*/ "0.0.1"..."999.999.999"
+            // url: "https://github.com/leboncoin/spark-ios-component-radio-button.git",
+            path: "../spark-ios-component-radio-button"
+            // /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-rating.git",
@@ -92,13 +92,18 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            url: "https://github.com/leboncoin/spark-ios-component-snackbar.git",
-            // path: "../spark-ios-component-snackbar"
-            /*version*/ "0.0.1"..."999.999.999"
+            // url: "https://github.com/leboncoin/spark-ios-component-selection-controls.git",
+            path: "../spark-ios-component-selection-controls"
+            // /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-slider.git",
             // path: "../spark-ios-component-slider"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
+            url: "https://github.com/leboncoin/spark-ios-component-snackbar.git",
+            // path: "../spark-ios-component-snackbar"
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
@@ -112,9 +117,9 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            url: "https://github.com/leboncoin/spark-ios-component-switch.git",
-            // path: "../spark-ios-component-switch"
-            /*version*/ "0.0.1"..."999.999.999"
+            // url: "https://github.com/leboncoin/spark-ios-component-switch.git",
+            path: "../spark-ios-component-switch"
+            // /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-tab.git",

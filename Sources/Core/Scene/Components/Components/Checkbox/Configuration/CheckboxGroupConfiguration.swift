@@ -12,7 +12,7 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: CheckboxIntent = .random
+    var intent: SparkComponentCheckbox.CheckboxIntent = .random
     var alignment: CheckboxAlignment = .random
     var layout: CheckboxGroupLayout = .horizontal
     var title = "My Title Group"

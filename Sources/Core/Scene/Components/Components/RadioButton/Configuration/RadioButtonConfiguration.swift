@@ -12,7 +12,7 @@ class RadioButtonConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: RadioButtonIntent = .random
+    var intent: SparkComponentRadioButton.RadioButtonIntent = .random
     var labelAlignment: RadioButtonLabelAlignment = .random
     var text = "My RadioButton"
 

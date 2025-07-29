@@ -23,6 +23,7 @@
 @_exported import SparkComponentStepper
 @_exported import SparkComponentSwitch
 @_exported import SparkComponentTab
+@_exported import SparkComponentSelectionControls
 @_exported import SparkComponentTag
 @_exported import SparkComponentTextInput
 @_exported import SparkComponentTextLink
