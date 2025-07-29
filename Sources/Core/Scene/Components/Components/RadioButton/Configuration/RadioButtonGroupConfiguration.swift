@@ -12,7 +12,7 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: RadioButtonIntent = .random
+    var intent: SparkComponentRadioButton.RadioButtonIntent = .random
     var labelAlignment: RadioButtonLabelAlignment = .random
     var groupLayout: RadioButtonGroupLayout = .random
     var numberOfItems: Int = Int.random(in: 2...3) {

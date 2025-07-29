@@ -7,7 +7,7 @@
 @_exported import SparkBadge
 @_exported import SparkBottomSheet
 @_exported import SparkButton
-@_exported import SparkCheckbox
+@_exported import SparkComponentCheckbox
 @_exported import SparkChip
 @_exported import SparkDivider
 @_exported import SparkFormField
@@ -15,13 +15,14 @@
 @_exported import SparkPopover
 @_exported import SparkProgressBar
 @_exported import SparkProgressTracker
-@_exported import SparkRadioButton
+@_exported import SparkComponentRadioButton
 @_exported import SparkRating
-@_exported import SparkSnackbar
+@_exported import SparkComponentSelectionControls
 @_exported import SparkSlider
+@_exported import SparkSnackbar
 @_exported import SparkSpinner
 @_exported import SparkStepper
-@_exported import SparkSwitch
+@_exported import SparkComponentSwitch
 @_exported import SparkTab
 @_exported import SparkComponentTag
 @_exported import SparkTextInput

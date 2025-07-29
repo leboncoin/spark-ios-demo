@@ -24,9 +24,9 @@ class SwitchConfiguration: ComponentConfiguration {
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsOn: Bool = .random()
+    var uiKitIsOn: Bool = true
     var uiKitIsAttributedText = false
-    var uiKitIsAnimated: Bool = .random()
+    var uiKitIsAnimated: Bool = true
 
     // MARK: - Initialization
 
