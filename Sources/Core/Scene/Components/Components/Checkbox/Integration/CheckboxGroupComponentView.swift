@@ -30,54 +30,38 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
 
     var configuration: Binding<CheckboxGroupConfiguration>
     var showInfo: Bool = true
-    @State private var items = [any CheckboxGroupItemProtocol]()
-    private var resetSelectionForFormField: Binding<UUID>? // Only used by the FormField demo
+    @State private var selectedIDs = [Int]()
+    private var selectedIDsForFormField: Binding<[Int]>? // Only used by the FormField demo
 
     // MARK: - Initialization
 
     init(configuration: Binding<CheckboxGroupConfiguration>) {
         self.configuration = configuration
-        self.resetSelectionForFormField = nil
+        self.selectedIDsForFormField = nil
     }
 
     // Only used by the FormField demo
     init(
         configuration: Binding<CheckboxGroupConfiguration>,
-        resetSelection: Binding<UUID>,
+        selectedIDs: Binding<[Int]>,
         showInfo: Bool
     ) {
         self.configuration = configuration
-        self.resetSelectionForFormField = resetSelection
+        self.selectedIDsForFormField = selectedIDs
         self.showInfo = showInfo
     }
 
     // MARK: - View
 
     var body: some View {
-        VStack {
-            CheckboxGroupView(
-                title: self.configurationWrapped.title.nilIfEmpty,
-                checkedImage: .init(icon: self.configurationWrapped.checkedIcon),
-                items: self.$items,
-                layout: self.configurationWrapped.layout,
-                alignment: self.configurationWrapped.alignment,
-                theme: self.configurationWrapped.theme.value,
-                intent: self.configurationWrapped.intent
-            )
-            .demoDisabled(self.configurationWrapped)
-            .onAppear() {
-                self.items = self.configurationWrapped.items.map {
-                    $0.toSpark(for: .swiftUI)
-                }
-            }
-            .onChange(of: self.resetSelectionForFormField?.wrappedValue) { test in
-                if test != nil {
-                    self.configurationWrapped.resetSelection(on: &self.items)
-                }
-            }
-            .onChange(of: self.configurationWrapped.items) { items in
-                self.items = items.map { $0.toSpark(for: .swiftUI) }
-            }
+        VStack(alignment: .leading, spacing: .medium) {
+
+            self.component()
+                .sparkCheckboxGroupAxis(self.configurationWrapped.axis)
+                .sparkCheckboxIntent(self.configurationWrapped.intent)
+                .demoDisabled(self.configurationWrapped)
+                .demoFrame(self.configurationWrapped)
+                .demoAccessibilityLabel(self.configurationWrapped)
 
             if self.showInfo {
                 Text(self.selectedItemsText())
@@ -86,10 +70,59 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
         }
     }
 
+    @ViewBuilder
+    func component() -> some View {
+        if self.configurationWrapped.swiftUIIsCustomContent {
+            SparkCheckboxGroup(
+                theme: self.configurationWrapped.theme.value,
+                selectedIDs: self.selectedIDsForFormField ?? self.$selectedIDs,
+                items: self.configurationWrapped.items.map { item in
+                    CheckboxGroupItem(
+                        id: item.id,
+                        isEnabled: item.isEnabled,
+                        label: {
+                            VStack(alignment: .leading) {
+                                Text(item.getText())
+                                    .foregroundStyle(.orange)
+                                Text(item.swiftUISecondText)
+                                    .font(.footnote)
+                                    .foregroundStyle(.blue)
+                            }
+                        }
+                    )
+                },
+                selectedIcon: .selected
+            )
+
+        } else {
+            SparkCheckboxGroup(
+                theme: self.configurationWrapped.theme.value,
+                selectedIDs: self.selectedIDsForFormField ?? self.$selectedIDs,
+                items: self.configurationWrapped.items.map { item in
+                    CheckboxGroupItem(
+                        id: item.id,
+                        title: item.getText(),
+                        isEnabled: item.isEnabled
+                    )
+                },
+                selectedIcon: .selected
+            )
+        }
+    }
+
     // MARK: - Getter
 
     func selectedItemsText() -> String {
-        return self.configurationWrapped.getInfoValue(from: self.items.map(\.selectionState))
+        return self.configurationWrapped.getInfoValue(from: self.selectedIDs)
+    }
+}
+
+// MARK: - Extension
+
+private extension Image {
+
+    static var selected: Image {
+        .init(icon: Iconography.check)
     }
 }
 

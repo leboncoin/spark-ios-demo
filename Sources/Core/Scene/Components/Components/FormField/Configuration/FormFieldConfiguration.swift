@@ -54,7 +54,6 @@ class FormFieldConfiguration: ComponentConfiguration {
 
     private func setup() {
         self.checkboxGroupConfiguration.isEnabled.value = true
-        self.checkboxGroupConfiguration.layout = .vertical
         self.checkboxGroupConfiguration.numberOfItems = 2
         for (index, _) in self.checkboxGroupConfiguration.items.enumerated() {
             self.checkboxGroupConfiguration.items[index].isLongText = false
@@ -63,7 +62,7 @@ class FormFieldConfiguration: ComponentConfiguration {
         }
 
         self.radioButtonConfiguration.isEnabled.value = true
-        self.radioButtonConfiguration.groupLayout = .vertical
+        self.radioButtonConfiguration.axis = .vertical
         self.radioButtonConfiguration.numberOfItems = 2
         for (index, _) in self.radioButtonConfiguration.items.enumerated() {
             self.radioButtonConfiguration.items[index].isLongText = false

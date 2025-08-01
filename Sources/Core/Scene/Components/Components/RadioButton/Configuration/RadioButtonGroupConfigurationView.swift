@@ -6,6 +6,8 @@
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
 
+// TODO: Rename to RadioGroup
+
 import SwiftUI
 
 struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
@@ -65,15 +67,9 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
         )
 
         EnumConfigurationItemView(
-            name: "label alignment",
-            values: RadioButtonLabelAlignment.allCases,
-            selectedValue: self.configuration.labelAlignment
-        )
-
-        EnumConfigurationItemView(
-            name: "group layout",
-            values: RadioButtonGroupLayout.allCases,
-            selectedValue: self.configuration.groupLayout
+            name: "axis",
+            values: RadioGroupAxis.allCases,
+            selectedValue: self.configuration.axis
         )
     }
 
@@ -92,6 +88,11 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
                     value: self.configuration.uiKitSelectedId,
                     bounds: -1...self.configuration.wrappedValue.numberOfItems
                 )
+            } else {
+                ToggleConfigurationItemView(
+                    name: "is custom content",
+                    isOn: self.configuration.swiftUIIsCustomContent
+                )
             }
         }
 
@@ -107,7 +108,17 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
                         name: "is attributed text",
                         isOn: item.isAttributedText
                     )
+                } else if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                    TextFieldConfigurationItemView(
+                        name: "second text",
+                        text: item.swiftUISecondText
+                    )
                 }
+
+                ToggleConfigurationItemView(
+                    name: "is enabled",
+                    isOn: item.isEnabled
+                )
             }
         }
     }

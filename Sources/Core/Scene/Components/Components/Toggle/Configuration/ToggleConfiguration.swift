@@ -1,5 +1,5 @@
 //
-//  SwitchConfiguration.swift
+//  ToggleConfiguration.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 27/01/2025.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-class SwitchConfiguration: ComponentConfiguration {
+class ToggleConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var text = "My Switch"
+    var text = "My Toggle"
 
     var offIcon: Iconography = .check
     var onIcon: Iconography = .cross

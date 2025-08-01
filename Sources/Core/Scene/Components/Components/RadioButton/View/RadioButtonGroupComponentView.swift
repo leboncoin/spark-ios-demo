@@ -6,6 +6,9 @@
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
 
+// TODO: Rename to RadioGroup
+// TODO: Crash on the configuration view when we decrease the number of items. If we comment the component on the configuration, no crash appen anymore.
+
 import SwiftUI
 
 // MARK: - View
@@ -38,8 +41,12 @@ struct RadioButtonGroupImplementationView: ComponentImplementationViewable {
         self.selectedIDForFormField = nil
     }
 
-    // Only used by the FormField demo
-    init(configuration: Binding<RadioButtonGroupConfiguration>, selectedID: Binding<Int?>, showInfo: Bool) {
+    // Used by the FormField demo
+    init(
+        configuration: Binding<RadioButtonGroupConfiguration>,
+        selectedID: Binding<Int?>,
+        showInfo: Bool = false
+    ) {
         self.configuration = configuration
         self.showInfo = showInfo
         self.selectedIDForFormField = selectedID
@@ -48,23 +55,57 @@ struct RadioButtonGroupImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        VStack {
-            RadioButtonGroupView(
-                theme: self.configurationWrapped.theme.value,
-                intent: self.configurationWrapped.intent,
-                selectedID: self.selectedIDForFormField ?? self.$selectedID,
-                items: self.configurationWrapped.items.map {
-                    RadioButtonItem(id: $0.id, label: $0.getText())
-                },
-                labelAlignment: self.configurationWrapped.labelAlignment,
-                groupLayout: self.configurationWrapped.groupLayout
-            )
-            .demoDisabled(self.configurationWrapped)
+        VStack(alignment: .leading, spacing: .medium) {
+
+            self.component()
+                .sparkRadioGroupAxis(self.configurationWrapped.axis)
+                .sparkRadioButtonIntent(self.configurationWrapped.intent)
+                .demoDisabled(self.configurationWrapped)
+                .demoFrame(self.configurationWrapped)
+                .demoAccessibilityLabel(self.configurationWrapped)
 
             if self.showInfo {
                 Text(self.configurationWrapped.getInfoValue(from: self.selectedID))
-                .demoComponentInfoBackground()
+                    .demoComponentInfoBackground()
             }
+        }
+    }
+
+    @ViewBuilder
+    func component() -> some View {
+        if self.configurationWrapped.swiftUIIsCustomContent {
+            SparkRadioGroup(
+                theme: self.configurationWrapped.theme.value,
+                selectedID: self.selectedIDForFormField ?? self.$selectedID,
+                items: self.configurationWrapped.items.map { item in
+                    RadioGroupItem(
+                        id: item.id,
+                        isEnabled: item.isEnabled,
+                        label: {
+                            VStack(alignment: .leading) {
+                                Text(item.getText())
+                                    .foregroundStyle(.orange)
+                                Text(item.swiftUISecondText)
+                                    .font(.footnote)
+                                    .foregroundStyle(.blue)
+                            }
+                        }
+                    )
+                }
+            )
+
+        } else {
+            SparkRadioGroup(
+                theme: self.configurationWrapped.theme.value,
+                selectedID: self.selectedIDForFormField ?? self.$selectedID,
+                items: self.configurationWrapped.items.map { item in
+                    RadioGroupItem(
+                        id: item.id,
+                        title: item.getText(),
+                        isEnabled: item.isEnabled
+                    )
+                }
+            )
         }
     }
 }
