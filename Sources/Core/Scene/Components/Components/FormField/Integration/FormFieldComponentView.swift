@@ -26,7 +26,7 @@ struct FormFieldImplementationView: ComponentImplementationViewable {
     // MARK: - Properties
 
     var configuration: Binding<FormFieldConfiguration>
-    @State private var checkboxResetSelection: UUID = .init()
+    @State private var checkboxSelectionIDs: [Int] = .init()
     @State private var radioButtonSelectedID: Int?
     @State private var stepperValue: Int = 50
     @State private var text: String = ""
@@ -39,7 +39,7 @@ struct FormFieldImplementationView: ComponentImplementationViewable {
             case .checkbox:
                 CheckboxGroupImplementationView(
                     configuration: self.configuration.checkboxGroupConfiguration,
-                    resetSelection: self.$checkboxResetSelection,
+                    selectedIDs: self.$checkboxSelectionIDs,
                     showInfo: false
                 )
             case .radioButton:
@@ -70,7 +70,7 @@ struct FormFieldImplementationView: ComponentImplementationViewable {
             for: self.configurationWrapped
         )
         .demoClearButton(self.configurationWrapped) {
-            self.checkboxResetSelection = .init()
+            self.checkboxSelectionIDs = []
             self.radioButtonSelectedID = nil
             self.stepperValue = Int(self.configurationWrapped.stepperConfiguration.lowerBoundString) ?? 0
             self.text = ""

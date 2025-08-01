@@ -42,25 +42,28 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         let componentView = if configuration.uiKitIsAttributedText {
             ComponentView(
                 theme: configuration.theme.value,
-                intent: configuration.intent,
+                intent: .info,
                 attributedText: configuration.text.demoNSAttributedString,
                 checkedImage: .init(icon: configuration.checkedIcon),
-                selectionState: configuration.uiKitSelectionState,
-                alignment: configuration.alignment
+//                selectionState: configuration.uiKitSelectionState,
+                selectionState: .indeterminate,
+                alignment: .left
             )
         } else {
             ComponentView(
                 theme: configuration.theme.value,
-                intent: configuration.intent,
+                intent: .info,
                 text: configuration.text,
                 checkedImage: .init(icon: configuration.checkedIcon),
-                selectionState: configuration.uiKitSelectionState,
-                alignment: configuration.alignment
+//                selectionState: configuration.uiKitSelectionState,
+                selectionState: .indeterminate,
+                alignment: .left
             )
         }
 
         componentView.publisher.sink { value in
-            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.selectionState)
+//            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.selectionState)
+            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: .indeterminate)
         }
         .store(in: &self.cancellables)
 
@@ -74,10 +77,11 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
+        componentView.intent = .info
         componentView.demoText(configuration)
         componentView.checkedImage = .init(icon: configuration.checkedIcon)
-        componentView.selectionState = configuration.uiKitSelectionState
+//        componentView.selectionState = configuration.uiKitSelectionState
+        componentView.selectionState = .indeterminate
         componentView.alignment = configuration.alignment
 
         self.updateCommonProperties(componentView, for: configuration)
@@ -90,7 +94,9 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
 
-        configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.selectionState)
+        //            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.selectionState)
+        configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: .indeterminate)
+
     }
 
     // MARK: - Getter

@@ -12,9 +12,13 @@ class RadioButtonConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SparkComponentRadioButton.RadioButtonIntent = .random
-    var labelAlignment: RadioButtonLabelAlignment = .random
+    var intent: SparkComponentSelectionControls.RadioButtonIntent = .random // TODO: Remove Module prefix
     var text = "My RadioButton"
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
 
     // MARK: - UIKit Properties Only
 
@@ -31,6 +35,8 @@ class RadioButtonConfiguration: ComponentConfiguration {
 
         self.uiKitIsSelected.showConfiguration = true
         self.uiKitIsSelected.value = false
+
+        self.swiftUIWidth.showConfiguration = true
     }
 
     // MARK: - Getter

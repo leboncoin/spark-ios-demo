@@ -72,13 +72,26 @@ struct CheckboxConfigurationView: ConfigurationViewable, ConfigurationUIViewable
             text: self.configuration.text
         )
 
-        if self.framework.isUIKit {
+        if self.framework.isSwiftUI {
+            ToggleConfigurationItemView(
+                name: "is custom content",
+                isOn: self.configuration.swiftUIIsCustomContent
+            )
+
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second text",
+                    text: self.configuration.swiftUISecondText
+                )
+            }
+
+        } else {
             ToggleConfigurationItemView(
                 name: "is attributed text",
                 isOn: self.configuration.uiKitIsAttributedText
             )
         }
-
+        
         EnumConfigurationItemView(
             name: "checked icon",
             values: Iconography.allCases,
