@@ -19,25 +19,55 @@ struct RadioButtonImplementationView: ComponentImplementationViewable {
     // MARK: - Properties
 
     var configuration: Binding<RadioButtonConfiguration>
-    @State private var selectedID: Int? = Bool.random() ? 1 : nil
+    @State private var isSelected: Bool = .random()
 
     // MARK: - View
 
     var body: some View {
-        VStack {
-            RadioButtonView(
-                theme: self.configurationWrapped.theme.value,
-                intent: self.configurationWrapped.intent,
-                id: 1,
-                label: self.configurationWrapped.text,
-                selectedID: self.$selectedID,
-                labelAlignment: self.configurationWrapped.labelAlignment
-            )
+        VStack(alignment: .leading, spacing: .medium) {
+            self.component()
+            .sparkRadioButtonIntent(self.configurationWrapped.intent)
             .demoDisabled(self.configurationWrapped)
+            .demoFrame(self.configurationWrapped)
             .demoAccessibilityLabel(self.configurationWrapped)
 
-            Text(self.configurationWrapped.getInfoValue(from: self.selectedID))
-                .demoComponentInfoBackground()
+            Divider()
+
+            Button("Reset", role: .destructive) {
+                self.isSelected = false
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+
+    @ViewBuilder
+    func component() -> some View {
+        if self.configurationWrapped.swiftUIIsCustomContent {
+            SparkRadioButton(
+                theme: self.configurationWrapped.theme.value,
+                isSelected: self.$isSelected,
+                label: {
+                    VStack(alignment: .leading) {
+                        Text(self.configurationWrapped.text)
+                            .foregroundStyle(.orange)
+                        Text(self.configurationWrapped.swiftUISecondText)
+                            .font(.footnote)
+                            .foregroundStyle(.blue)
+                    }
+                }
+            )
+
+        } else if let text = configurationWrapped.text.nilIfEmpty {
+            SparkRadioButton(
+                text,
+                theme: self.configurationWrapped.theme.value,
+                isSelected: self.$isSelected
+            )
+        } else {
+            SparkRadioButton(
+                theme: self.configurationWrapped.theme.value,
+                isSelected: self.$isSelected
+            )
         }
     }
 }

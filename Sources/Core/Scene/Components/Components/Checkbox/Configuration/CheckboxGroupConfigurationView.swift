@@ -65,17 +65,11 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
         )
 
         EnumConfigurationItemView(
-            name: "alignment",
-            values: CheckboxAlignment.allCases,
-            selectedValue: self.configuration.alignment
+            name: "axis",
+            values: RadioGroupAxis.allCases,
+            selectedValue: self.configuration.axis
         )
-
-        EnumConfigurationItemView(
-            name: "layout",
-            values: CheckboxGroupLayout.allCases,
-            selectedValue: self.configuration.layout
-        )
-
+        
         TextFieldConfigurationItemView(
             name: "title",
             text: self.configuration.title
@@ -96,6 +90,13 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
                 value: self.configuration.numberOfItems,
                 bounds: 2...4
             )
+
+            if self.framework.isSwiftUI {
+                ToggleConfigurationItemView(
+                    name: "is custom content",
+                    isOn: self.configuration.swiftUIIsCustomContent
+                )
+            }
         }
 
         ForEach(self.configuration.items, id: \.id) { item in
@@ -109,6 +110,11 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
                     ToggleConfigurationItemView(
                         name: "is attributed text",
                         isOn: item.isAttributedText
+                    )
+                } else if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                    TextFieldConfigurationItemView(
+                        name: "second text",
+                        text: item.swiftUISecondText
                     )
                 }
 

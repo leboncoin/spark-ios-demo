@@ -46,11 +46,11 @@ final class RadioButtonComponentUIViewMaker: ComponentUIViewMaker {
 
         let componentView = ComponentView(
             theme: configuration.theme.value,
-            intent: configuration.intent,
+            intent: .info,
             id: 1,
             label: configuration.uiKitIsAttributedText ? configuration.text.demoNSAttributedString : NSAttributedString(string: configuration.text),
             isSelected: configuration.uiKitIsSelected.value,
-            labelAlignment: configuration.labelAlignment
+            labelAlignment: .leading
         )
 
         componentView.publisher.sink { value in
@@ -68,10 +68,10 @@ final class RadioButtonComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
+        componentView.intent = .accent
         componentView.demoText(configuration)
         componentView.demoSelected(configuration)
-        componentView.labelAlignment = configuration.labelAlignment
+        componentView.labelAlignment = .leading
 
         self.updateCommonProperties(componentView, for: configuration)
     }

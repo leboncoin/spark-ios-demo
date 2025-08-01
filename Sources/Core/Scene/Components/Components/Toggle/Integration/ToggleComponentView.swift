@@ -1,5 +1,5 @@
 //
-//  SwitchComponentView.swift
+//  ToggleComponentView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 27/01/2025.
@@ -10,9 +10,9 @@ import SwiftUI
 
 // MARK: - View
 
-typealias SwitchComponentView = ComponentViewable<SwitchConfiguration, SwitchImplementationView, SwitchConfigurationView>
+typealias ToggleComponentView = ComponentViewable<ToggleConfiguration, ToggleImplementationView, ToggleConfigurationView>
 
-extension SwitchComponentView {
+extension ToggleComponentView {
 
     init() {
         self.init(style: .alone, styles: [.alone, .verticalList])
@@ -21,11 +21,11 @@ extension SwitchComponentView {
 
 // MARK: - Subview
 
-struct SwitchImplementationView: ComponentImplementationViewable {
+struct ToggleImplementationView: ComponentImplementationViewable {
 
     // MARK: - Properties
 
-    var configuration: Binding<SwitchConfiguration>
+    var configuration: Binding<ToggleConfiguration>
     @State private var isOn: Bool = true
 
     // MARK: - View
@@ -43,12 +43,11 @@ struct SwitchImplementationView: ComponentImplementationViewable {
             SparkToggle(
                 theme: self.configurationWrapped.theme.value,
                 isOn: self.$isOn,
-                onIcon: .init(icon: Iconography.check),
-                offIcon: .init(icon: Iconography.cross),
+                onIcon: .on,
+                offIcon: .off,
                 label: {
                     VStack(alignment: .leading) {
                         Text(self.configurationWrapped.text)
-                            .font(.body)
                             .foregroundStyle(.orange)
                         Text(self.configurationWrapped.swiftUISecondText)
                             .font(.footnote)
@@ -61,24 +60,37 @@ struct SwitchImplementationView: ComponentImplementationViewable {
                 text,
                 theme: self.configurationWrapped.theme.value,
                 isOn: self.$isOn,
-                onIcon: .init(icon: Iconography.check),
-                offIcon: .init(icon: Iconography.cross)
+                onIcon: .on,
+                offIcon: .off
             )
         } else {
             SparkToggle(
                 theme: self.configurationWrapped.theme.value,
                 isOn: self.$isOn,
-                onIcon: .init(icon: Iconography.check),
-                offIcon: .init(icon: Iconography.cross)
+                onIcon: .on,
+                offIcon: .off
             )
         }
     }
 }
 
+// MARK: - Extension
+
+private extension Image {
+
+    static var on: Image {
+        .init(icon: Iconography.check)
+    }
+
+    static var off: Image {
+        .init(icon: Iconography.cross)
+    }
+}
+
 // MARK: - Preview
 
-struct SwitchComponentView_Previews: PreviewProvider {
+struct ToggleComponentView_Previews: PreviewProvider {
     static var previews: some View {
-        SwitchComponentView()
+        ToggleComponentView()
     }
 }

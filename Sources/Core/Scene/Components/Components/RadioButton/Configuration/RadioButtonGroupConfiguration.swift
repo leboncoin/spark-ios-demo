@@ -6,15 +6,16 @@
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
 
+// TODO: Rename to RadioGroup
+
 import Foundation
 
 class RadioButtonGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SparkComponentRadioButton.RadioButtonIntent = .random
-    var labelAlignment: RadioButtonLabelAlignment = .random
-    var groupLayout: RadioButtonGroupLayout = .random
+    var intent: SparkComponentSelectionControls.RadioButtonIntent = .random // TODO: Remove Module prefix
+    var axis: RadioGroupAxis = .random
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
             self.updateItems()
@@ -25,6 +26,10 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
         }
     }
     var items = [Item]()
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
 
     // MARK: - UIKit Properties Only
 
@@ -38,6 +43,7 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
         self.updateItems()
 
         self.isEnabled.showConfiguration = true
+        self.swiftUIWidth.showConfiguration = true
     }
 
     // MARK: - Update
@@ -67,13 +73,18 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
 // MARK: - Sub Model
 
 extension RadioButtonGroupConfiguration {
-    struct Item: Identifiable {
+    struct Item: Identifiable, Equatable {
 
         // MARK: - Properties
 
         let id: Int
-        var isLongText: Bool = .random()
-        var isAttributedText: Bool = .random()
+        var isLongText: Bool = false
+        var isAttributedText: Bool = false
+        var isEnabled: Bool = true
+
+        // MARK: - SwiftUI Properties Only
+
+        var swiftUISecondText = "is amazing"
 
         // MARK: - Initialization
 
@@ -91,14 +102,4 @@ extension RadioButtonGroupConfiguration {
             }
         }
     }
-}
-
-// MARK: - Extension
-
-extension RadioButtonGroupLayout: @retroactive CaseIterable {
-
-    public static var allCases: [RadioButtonGroupLayout] = [
-        .horizontal,
-        .vertical
-    ]
 }

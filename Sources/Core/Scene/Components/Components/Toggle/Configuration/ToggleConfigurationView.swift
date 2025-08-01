@@ -1,5 +1,5 @@
 //
-//  SwitchConfigurationView.swift
+//  ToggleConfigurationView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 12/02/2025.
@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct SwitchConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
+struct ToggleConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
 
     // MARK: - Type Alias
 
-    typealias Configuration = SwitchConfiguration
+    typealias Configuration = ToggleConfiguration
     typealias ComponentUIView = SparkUISwitch
 
     // MARK: - Properties
@@ -44,7 +44,7 @@ struct SwitchConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                 if let componentImplementationViewRepresentable {
                     componentImplementationViewRepresentable
                 } else {
-                    SwitchImplementationView(configuration: self.configuration)
+                    ToggleImplementationView(configuration: self.configuration)
                 }
             },
             mainItemsView: { self.itemsView() },

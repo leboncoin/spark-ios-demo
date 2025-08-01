@@ -13,6 +13,8 @@ import Combine
 // TODO: To Fix
 // Remove delegate & publisher
 
+// TODO: Rename to RadioGroup
+
 // MARK: - Component
 
 typealias RadioButtonIntUIGroupView = RadioButtonUIGroupView<Int>
@@ -51,11 +53,11 @@ final class RadioButtonGroupComponentUIViewMaker: ComponentUIViewMaker {
     ) -> ComponentView {
         let componentView = ComponentView(
             theme: configuration.theme.value,
-            intent: configuration.intent,
+            intent: .info,
             selectedID: configuration.uiKitSelectedId >= 0 ? configuration.uiKitSelectedId : nil,
             items: configuration.items.map { .init($0) },
-            labelAlignment: configuration.labelAlignment,
-            groupLayout: configuration.groupLayout
+            labelAlignment: .leading,
+            groupLayout: .vertical
         )
         self.updateCommonProperties(componentView, for: configuration)
 
@@ -72,11 +74,11 @@ final class RadioButtonGroupComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
+        componentView.intent = .info
         componentView.selectedID = configuration.uiKitSelectedId >= 0 ? configuration.uiKitSelectedId : nil
         componentView.items = configuration.items.map { .init($0) }
-        componentView.groupLayout = configuration.groupLayout
-        componentView.labelAlignment = configuration.labelAlignment
+        componentView.groupLayout = .vertical
+        componentView.labelAlignment = .leading
 
         self.updateCommonProperties(componentView, for: configuration)
     }

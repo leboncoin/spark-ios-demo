@@ -1,5 +1,5 @@
 //
-//  SwitchComponentView.swift
+//  ToggleComponentUIView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 27/01/2025.
@@ -12,9 +12,9 @@ import SwiftUI
 
 // TODO: Test action & target on valueChanged
 
-typealias SwitchComponentUIViewController = ComponentDisplayViewControllerRepresentable<SwitchConfiguration, SparkUISwitch, SwitchConfigurationView, SwitchComponentUIViewMaker>
+typealias ToggleComponentUIViewController = ComponentDisplayViewControllerRepresentable<ToggleConfiguration, SparkUISwitch, ToggleConfigurationView, ToggleComponentUIViewMaker>
 
-extension SwitchComponentUIViewController {
+extension ToggleComponentUIViewController {
 
     init() {
         self.init(style: .verticalList, styles: [.alone, .verticalList])
@@ -23,14 +23,14 @@ extension SwitchComponentUIViewController {
 
 // MARK: - View Maker
 
-final class SwitchComponentUIViewMaker: ComponentUIViewMaker {
+final class ToggleComponentUIViewMaker: ComponentUIViewMaker {
 
     // MARK: - Type Alias
 
-    typealias Configuration = SwitchConfiguration
+    typealias Configuration = ToggleConfiguration
     typealias ComponentView = SparkUISwitch
-    typealias ConfigurationView = SwitchConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SwitchComponentUIViewMaker>
+    typealias ConfigurationView = ToggleConfigurationView
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ToggleComponentUIViewMaker>
 
     // MARK: - Properties
 
@@ -84,7 +84,7 @@ private extension SparkUISwitch {
 
     // MARK: - Methods
 
-    func demoText(_ configuration: SwitchComponentUIViewMaker.Configuration) {
+    func demoText(_ configuration: ToggleComponentUIViewMaker.Configuration) {
         let isText = !configuration.text.isEmpty
         let isAttributedText = configuration.uiKitIsAttributedText
 
@@ -101,18 +101,11 @@ private extension SparkUISwitch {
         }
     }
 
-    func demoIsOn(_ configuration: SwitchComponentUIViewMaker.Configuration) {
+    func demoIsOn(_ configuration: ToggleComponentUIViewMaker.Configuration) {
         if configuration.uiKitIsAnimated {
             self.setOn(configuration.uiKitIsOn, animated: true)
         } else {
             self.isOn = configuration.uiKitIsOn
         }
-    }
-}
-
-private extension SwitchUIImages {
-
-    init?(configuration: SwitchComponentUIViewMaker.Configuration) {
-        return nil
     }
 }

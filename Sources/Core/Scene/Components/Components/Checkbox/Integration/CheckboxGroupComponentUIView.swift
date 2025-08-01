@@ -49,15 +49,15 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
             title: configuration.title.nilIfEmpty,
             checkedImage: .init(icon: configuration.checkedIcon),
             items: configuration.items.map { $0.toSpark(for: .uiKit) },
-            layout: configuration.layout,
-            alignment: configuration.alignment,
+            layout: .horizontal,
+            alignment: .left,
             theme: configuration.theme.value,
-            intent: configuration.intent
+            intent: .info
         )
         self.updateCommonProperties(componentView, for: configuration)
 
         componentView.publisher.sink { value in
-            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.checkboxes.map(\.selectionState))
+//            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.checkboxes.map(\.selectionState))
         }
         .store(in: &self.cancellables)
 
@@ -71,10 +71,10 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoTitle(configuration)
         componentView.checkedImage = .init(icon: configuration.checkedIcon)
         componentView.updateItems(configuration.items.map { $0.toSpark(for: .uiKit)})
-        componentView.layout = configuration.layout
-        componentView.alignment = configuration.alignment
+        componentView.layout = .horizontal
+        componentView.alignment = .left
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
+        componentView.intent = .info
 
         self.updateCommonProperties(componentView, for: configuration)
     }
@@ -86,7 +86,7 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
 
-        configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.checkboxes.map(\.selectionState))
+//        configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.checkboxes.map(\.selectionState))
     }
 
     // MARK: - Getter
