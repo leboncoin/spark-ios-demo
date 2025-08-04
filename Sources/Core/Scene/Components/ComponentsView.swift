@@ -89,11 +89,14 @@ struct ComponentsView: View {
     private func swiftUIComponent(_ component: Component) -> some View {
         switch component {
         case .badge: BadgeComponentView()
+        case .border: BorderComponentView()
+        case .borderRadius: BorderRadiusComponentView()
         case .bottomSheet: BottomSheetComponentView()
         case .button: ButtonComponentView()
         case .checkbox: CheckboxComponentView()
         case .checkboxGroup: CheckboxGroupComponentView()
         case .chip: ChipComponentView()
+        case .cornerRadius: CornerRadiusComponentView()
         case .divider: DividerComponentView()
         case .formField: FormFieldComponentView()
         case .icon: IconComponentView()
@@ -128,11 +131,13 @@ struct ComponentsView: View {
     private func uiKitComponent(_ component: Component) -> some View {
         switch component {
         case .badge: BadgeComponentUIViewController()
+        case .borderRadius: BorderRadiusComponentUIViewController()
         case .button: ButtonComponentUIViewController()
         case .bottomSheet: BottomSheetComponentUIViewController()
         case .checkbox: CheckboxComponentUIViewController()
         case .checkboxGroup: CheckboxGroupComponentUIViewController()
         case .chip: ChipComponentUIViewController()
+        case .cornerRadius: CornerRadiusComponentUIViewController()
         case .divider: DividerComponentUIViewController()
         case .formField: FormFieldComponentUIViewController()
         case .icon: IconComponentUIViewController()
@@ -158,6 +163,7 @@ struct ComponentsView: View {
         case .textField: TextFieldComponentUIViewController()
         case .textFieldAddons: TextFieldAddonsComponentUIViewController()
         case .textLink: TextLinkComponentUIViewController()
+        default: EmptyView()
         }
     }
 }
@@ -174,6 +180,7 @@ extension ComponentsView {
         case navigation
         case other
         case overlays
+        case style
     }
 }
 
@@ -182,11 +189,14 @@ extension ComponentsView {
 extension ComponentsView {
     enum Component: String, CaseIterable, Hashable {
         case badge
+        case border
+        case borderRadius
         case bottomSheet
         case button
         case checkbox
         case checkboxGroup
         case chip
+        case cornerRadius
         case divider
         case formField
         case icon
@@ -218,11 +228,14 @@ extension ComponentsView {
         var familly: Familly {
             switch self {
             case .badge: .indicator
+            case .border: .style
+            case .borderRadius: .style
             case .bottomSheet: .overlays
             case .button: .action
             case .checkbox: .dataInput
             case .checkboxGroup: .dataInput
             case .chip: .dataInput
+            case .cornerRadius: .style
             case .divider: .dataDisplay
             case .formField: .dataInput
             case .icon: .dataDisplay
@@ -256,7 +269,9 @@ extension ComponentsView {
 
             switch framework {
             case .uiKit:
-                values = self.allCases
+                values = self.allCases.filter {
+                    $0 != .border
+                }
             case .swiftUI:
                 values = self.allCases.filter {
                     $0 != .textFieldAddons

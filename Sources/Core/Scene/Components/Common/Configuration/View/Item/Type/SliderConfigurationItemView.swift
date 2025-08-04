@@ -16,12 +16,19 @@ struct SliderConfigurationItemView<Value>: View where Value: BinaryFloatingPoint
     @Binding var selectedValue: Value
     let range: ClosedRange<Value>
     let step: Value.Stride
+    var showValue: Bool = false
 
     // MARK: - View
 
     var body: some View {
         ConfigurationItemView(name: self.name) {
-            Slider(value: self.$selectedValue, in: self.range, step: self.step)
+            HStack {
+                Slider(value: self.$selectedValue, in: self.range, step: self.step)
+
+                if self.showValue {
+                    Text("\(self.selectedValue)")
+                }
+            }
         }
     }
 }
