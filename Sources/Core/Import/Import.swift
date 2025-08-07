@@ -23,6 +23,6 @@
 @_exported import SparkStepper
 @_exported import SparkSwitch
 @_exported import SparkTab
-@_exported import SparkTag
+@_exported import SparkComponentTag
 @_exported import SparkTextInput
 @_exported import SparkTextLink

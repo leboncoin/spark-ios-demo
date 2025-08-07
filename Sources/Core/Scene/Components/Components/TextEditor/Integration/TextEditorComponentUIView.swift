@@ -68,7 +68,6 @@ final class TextEditorComponentUIViewMaker: ComponentUIViewMaker {
         componentView.isEnabled = configuration.isEnabled.value
 
         componentView.demoAccessibility(configuration)
-        componentView.demoBackground(configuration)
     }
 
     // MARK: - Getter

@@ -88,6 +88,7 @@ struct ComponentsView: View {
     @ViewBuilder
     private func swiftUIComponent(_ component: Component) -> some View {
         switch component {
+        case .adaptativeStack: AdaptativeStackComponentView()
         case .badge: BadgeComponentView()
         case .border: BorderComponentView()
         case .borderRadius: BorderRadiusComponentView()
@@ -130,6 +131,7 @@ struct ComponentsView: View {
     @ViewBuilder
     private func uiKitComponent(_ component: Component) -> some View {
         switch component {
+        case .adaptativeStack: AdaptativeStackComponentUIViewController()
         case .badge: BadgeComponentUIViewController()
         case .borderRadius: BorderRadiusComponentUIViewController()
         case .button: ButtonComponentUIViewController()
@@ -187,7 +189,9 @@ extension ComponentsView {
 // MARK: - Components
 
 extension ComponentsView {
+
     enum Component: String, CaseIterable, Hashable {
+        case adaptativeStack
         case badge
         case border
         case borderRadius
@@ -227,6 +231,7 @@ extension ComponentsView {
 
         var familly: Familly {
             switch self {
+            case .adaptativeStack: .style
             case .badge: .indicator
             case .border: .style
             case .borderRadius: .style

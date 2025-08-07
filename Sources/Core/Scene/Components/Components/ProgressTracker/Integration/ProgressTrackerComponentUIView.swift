@@ -102,7 +102,6 @@ final class ProgressTrackerComponentUIViewMaker: ComponentUIViewMaker {
 
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
     }
 
     // MARK: - Getter

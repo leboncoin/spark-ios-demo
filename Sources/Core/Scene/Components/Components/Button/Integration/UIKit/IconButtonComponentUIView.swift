@@ -69,6 +69,5 @@ final class IconButtonComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoSelected(configuration)
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
     }
 }

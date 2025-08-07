@@ -32,7 +32,7 @@ struct BorderRadiusImplementationView: ComponentImplementationViewable {
 
     var body: some View {
         Rectangle()
-            .fill(.background)
+            .fill(self.configurationWrapped.backgroundColor.color)
             .frame(height: self.configurationWrapped.contentSize.height)
             .fixedSize(horizontal: false, vertical: true)
             .sparkBorder(

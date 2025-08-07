@@ -1,5 +1,5 @@
 //
-//  BorderRadiusComponentView.swift
+//  BorderRadiusComponentUIView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 01/08/2025.
@@ -69,7 +69,7 @@ final class BorderRadiusUIView: UIView {
 
         super.init(frame: .zero)
 
-        self.backgroundColor = .systemBackground
+        self.backgroundColor = configuration.backgroundColor.uiColor
 
         self.translatesAutoresizingMaskIntoConstraints = false
 

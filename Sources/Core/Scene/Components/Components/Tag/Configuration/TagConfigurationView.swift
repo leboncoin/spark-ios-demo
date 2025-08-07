@@ -13,7 +13,7 @@ struct TagConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     // MARK: - Type Alias
 
     typealias Configuration = TagConfiguration
-    typealias ComponentUIView = TagUIView
+    typealias ComponentUIView = SparkUITag
 
     // MARK: - Properties
 
@@ -60,6 +60,17 @@ struct TagConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                     selectedValue: self.configuration.variant
                 )
 
+                EnumConfigurationItemView(
+                    name: "size",
+                    values: TagSize.allCases,
+                    selectedValue: self.configuration.size
+                )
+
+                ToggleConfigurationItemView(
+                    name: "is highlighted",
+                    isOn: self.configuration.isHighlighted
+                )
+
                 OptionalEnumConfigurationItemView(
                     name: "icon",
                     values: Iconography.allCases,
@@ -71,10 +82,24 @@ struct TagConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                     text: self.configuration.text
                 )
 
-                ToggleConfigurationItemView(
-                    name: "is attributed text",
-                    isOn: self.configuration.isAttributedText
-                )
+                if self.framework.isUIKit {
+                    ToggleConfigurationItemView(
+                        name: "is attributed text",
+                        isOn: self.configuration.uiKitIsAttributedText
+                    )
+                } else {
+                    ToggleConfigurationItemView(
+                        name: "is custom content",
+                        isOn: self.configuration.swiftUIIsCustomContent
+                    )
+
+                    if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                        TextFieldConfigurationItemView(
+                            name: "second text",
+                            text: self.configuration.swiftUISecondText
+                        )
+                    }
+                }
             }
         )
     }

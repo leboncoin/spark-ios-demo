@@ -22,6 +22,10 @@ class BorderRadiusConfiguration: ComponentConfiguration {
 
     // MARK: - Style Properties
 
+    lazy var backgroundColor: any ColorToken = {
+        self.theme.value.colors.support.supportVariant
+    }()
+
     lazy var borderColor: any ColorToken = {
         self.theme.value.colors.main.main
     }()
@@ -33,6 +37,6 @@ class BorderRadiusConfiguration: ComponentConfiguration {
     let maxRadius: CGFloat = 24
 
     lazy var contentSize: CGSize = {
-        .init(width: 200, height: self.maxRadius * 2)
+        .init(width: 200, height: 80)
     }()
 }

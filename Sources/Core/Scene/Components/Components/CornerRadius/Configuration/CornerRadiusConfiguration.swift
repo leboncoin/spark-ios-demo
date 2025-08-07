@@ -28,6 +28,6 @@ class CornerRadiusConfiguration: ComponentConfiguration {
     let maxRadius: CGFloat = 24
 
     lazy var contentSize: CGSize = {
-        .init(width: 200, height: self.maxRadius * 2)
+        .init(width: 200, height: 80)
     }()
 }

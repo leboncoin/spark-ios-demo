@@ -61,7 +61,6 @@ final class DividerComponentUIViewMaker: ComponentUIViewMaker {
         componentView.alignment = configuration.alignment
         componentView.demoLabel(configuration)
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
         componentView.demoHeight(configuration)
     }
 

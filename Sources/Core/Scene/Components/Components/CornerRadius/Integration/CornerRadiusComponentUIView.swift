@@ -1,5 +1,5 @@
 //
-//  CornerRadiusComponentView.swift
+//  CornerRadiusComponentUIView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 01/08/2025.
