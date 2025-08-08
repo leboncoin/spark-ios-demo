@@ -78,7 +78,6 @@ final class TabComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoDisable(for: configuration)
         componentView.demoBadge(for: configuration)
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
     }
 }
 

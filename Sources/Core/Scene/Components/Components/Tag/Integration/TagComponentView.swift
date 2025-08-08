@@ -23,47 +23,67 @@ struct TagImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        TagView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            variant: self.configurationWrapped.variant
-        )
-        .demoText(self.configurationWrapped)
-        .demoIcon(self.configurationWrapped)
-        .demoAccessibilityLabel(self.configurationWrapped)
-        .demoBackground(self.configurationWrapped)
+        self.component()
+            .sparkTagIntent(self.configurationWrapped.intent)
+            .sparkTagSize(self.configurationWrapped.size)
+            .sparkTagVariant(self.configurationWrapped.variant)
+            .sparkTagIsHighlighted(self.configurationWrapped.isHighlighted)
+            .demoAccessibilityLabel(self.configurationWrapped)
+            .demoBackground(self.configurationWrapped)
     }
-}
 
-// MARK: - Extension
+    @ViewBuilder
+    func component() -> some View {
+        if let icon = self.configurationWrapped.icon,
+           let text = self.configurationWrapped.text.nilIfEmpty,
+           self.configurationWrapped.swiftUIIsCustomContent {
+            SparkTag(
+                theme: self.configurationWrapped.theme.value,
+                icon: .init(icon: icon),
+                label: {
+                    Group {
+                        Text(text) +
+                        Text(self.configurationWrapped.swiftUISecondText)
+                            .foregroundColor(.blue)
+                            .italic()
+                    }
+                }
+            )
 
-private extension TagView {
+        } else if let text = self.configurationWrapped.text.nilIfEmpty,
+                  self.configurationWrapped.swiftUIIsCustomContent {
+            SparkTag(
+                theme: self.configurationWrapped.theme.value,
+                label: {
+                    Group {
+                        Text(text + " ") +
+                        Text(self.configurationWrapped.swiftUISecondText)
+                            .foregroundColor(.blue)
+                            .italic()
+                    }
+                }
+            )
 
-    func demoIcon(_ configuration: TagConfiguration) -> Self {
-        if let icon = configuration.icon {
-            return self.iconImage(Image(icon: icon))
+        } else if let icon = self.configurationWrapped.icon,
+                  let text = self.configurationWrapped.text.nilIfEmpty {
+            SparkTag(
+                text,
+                icon: .init(icon: icon),
+                theme: self.configurationWrapped.theme.value
+            )
+
+        } else if let icon = self.configurationWrapped.icon {
+            SparkTag(
+                theme: self.configurationWrapped.theme.value,
+                icon: .init(icon: icon)
+            )
+
         } else {
-            return self
+            SparkTag(
+                self.configurationWrapped.text.nilIfEmpty ?? "My Tag",
+                theme: self.configurationWrapped.theme.value
+            )
         }
-    }
-
-    func demoText(_ configuration: TagConfiguration) -> Self {
-        let text = configuration.text
-        if text.isEmpty {
-            return self.text(nil)
-        } else if configuration.isAttributedText {
-            return self.attributedText(text.demoAttributedString)
-        } else {
-            return self.text(text)
-        }
-    }
-
-    func demoAccessibilityLabel(_ configuration: TagConfiguration) -> some View {
-        let label = configuration.accessibilityLabel.value
-        return self.accessibility(
-            identifier: "Tag Identifier",
-            label: label.nilIfEmpty
-        )
     }
 }
 

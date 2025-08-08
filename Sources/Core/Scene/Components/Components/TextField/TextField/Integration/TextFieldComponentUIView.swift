@@ -80,7 +80,6 @@ final class TextFieldComponentUIViewMaker: ComponentUIViewMaker {
         componentView.isReadOnly = configuration.isReadOnly
         componentView.demoDisabled(configuration)
         componentView.demoAccessibility(configuration)
-        componentView.demoBackground(configuration)
     }
 
     // MARK: - Getter

@@ -14,9 +14,19 @@ class TagConfiguration: ComponentConfiguration {
 
     var intent: TagIntent = .random
     var variant: TagVariant = .random
+    var size: TagSize = .medium
+    var isHighlighted: Bool = false
     var icon: Iconography? = .optionalRandom
     var text = "My Tag"
-    var isAttributedText = false
+
+    // MARK: - UIKit Properties Only
+
+    var uiKitIsAttributedText: Bool = false
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
 
     // MARK: - Initialization
 

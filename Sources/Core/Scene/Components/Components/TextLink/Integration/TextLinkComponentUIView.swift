@@ -83,6 +83,5 @@ final class TextLinkComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoControlType(configuration, on: self.viewController)
         componentView.demoAccessibilityLabel(configuration)
         componentView.demoAccessibilityValue(configuration)
-        componentView.demoBackground(configuration)
     }
 }

@@ -402,18 +402,6 @@ class ComponentDisplayViewController<
 
     // MARK: - Actions
 
-    @objc func displayModeAction() {
-//        let menu = UIMenu(title: "", children: self.styles.map { style in
-//            UIAction(title: style.name, image: UIImage(systemName: style.systemImage), handler: { _ in
-//                self.style = style
-//            })
-//        })
-//
-//        return self.createTopBarButton(
-//            with: menu
-//        )
-    }
-
     @objc func addComponentAction() {
         let newConfiguration = Configuration()
         self.configurations.append(newConfiguration)

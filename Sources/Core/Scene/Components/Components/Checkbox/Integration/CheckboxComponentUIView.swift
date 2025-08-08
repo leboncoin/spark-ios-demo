@@ -89,7 +89,6 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
     ) {
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
 
         configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.selectionState)
     }

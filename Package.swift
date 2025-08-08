@@ -230,7 +230,7 @@ let package = Package(
                     package: "spark-ios-component-tab"
                 ),
                 .product(
-                    name: "SparkTag",
+                    name: "SparkComponentTag",
                     package: "spark-ios-component-tag"
                 ),
                 .product(

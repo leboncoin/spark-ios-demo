@@ -70,6 +70,5 @@ final class IconComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
     }
 }

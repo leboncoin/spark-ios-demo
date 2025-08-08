@@ -31,15 +31,29 @@ struct CornerRadiusImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        Rectangle()
-            .fill(self.configurationWrapped.backgroundColor.color)
-            .sparkCornerRadius(
-                self.configurationWrapped.radius.value(from: self.configurationWrapped),
-                isHighlighted: self.configurationWrapped.isHighlighted,
-                isScaled: self.configurationWrapped.swiftUIIsScaled
-            )
-            .frame(height: self.configurationWrapped.contentSize.height)
-            .fixedSize(horizontal: false, vertical: true)
+        VStack {
+            Rectangle()
+                .fill(self.configurationWrapped.backgroundColor.color)
+                .sparkCornerRadius(
+                    self.configurationWrapped.radius.value(from: self.configurationWrapped),
+                    isHighlighted: self.configurationWrapped.isHighlighted,
+                    isScaled: self.configurationWrapped.swiftUIIsScaled
+                )
+                .frame(height: 20)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Rectangle()
+                .fill(self.configurationWrapped.backgroundColor.color)
+                .sparkBorder(
+                    width: 2,
+                    radius: self.configurationWrapped.radius.value(from: self.configurationWrapped),
+                    isHighlighted: self.configurationWrapped.isHighlighted,
+                    colorToken: self.configurationWrapped.theme.value.colors.support.support,
+                    isScaled: self.configurationWrapped.swiftUIIsScaled
+                )
+                .frame(height: 20)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }
 

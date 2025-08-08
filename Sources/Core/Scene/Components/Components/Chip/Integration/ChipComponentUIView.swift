@@ -104,7 +104,6 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
         componentView.isSelected = configuration.isSelected
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
     }
 }
 

@@ -16,7 +16,8 @@ extension View {
     ) -> some View {
         let value = configuration.accessibilityLabel.value
         if !value.isEmpty {
-            self.accessibilityLabel(configuration.accessibilityLabel.value)
+            self.accessibilityLabel(value)
+                .sparkAccessibilityLargeContentText(value)
         } else {
             self
         }
@@ -28,7 +29,7 @@ extension View {
     ) -> some View {
         let value = configuration.accessibilityValue.value
         if !value.isEmpty {
-            self.accessibilityValue(configuration.accessibilityValue.value)
+            self.accessibilityValue(value)
         } else {
             self
         }
@@ -40,7 +41,7 @@ extension View {
     ) -> some View {
         let value = configuration.accessibilityHint.value
         if !value.isEmpty {
-            self.accessibilityHint(configuration.accessibilityHint.value)
+            self.accessibilityHint(value)
         } else {
             self
         }

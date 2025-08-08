@@ -54,7 +54,6 @@ final class SwitchComponentUIViewMaker: ComponentUIViewMaker {
         componentView.demoIsEnabled(configuration)
         componentView.demoText(configuration)
         componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
     }
 }
 

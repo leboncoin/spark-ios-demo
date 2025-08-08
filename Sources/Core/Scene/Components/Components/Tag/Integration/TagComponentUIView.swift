@@ -15,7 +15,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias TagComponentUIViewController = ComponentDisplayViewControllerRepresentable<TagConfiguration, TagUIView, TagConfigurationView, TagComponentUIViewMaker>
+typealias TagComponentUIViewController = ComponentDisplayViewControllerRepresentable<TagConfiguration, SparkUITag, TagConfigurationView, TagComponentUIViewMaker>
 
 // MARK: - View Maker
 
@@ -24,7 +24,7 @@ final class TagComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = TagConfiguration
-    typealias ComponentView = TagUIView
+    typealias ComponentView = SparkUITag
     typealias ConfigurationView = TagConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TagComponentUIViewMaker>
 
@@ -37,7 +37,7 @@ final class TagComponentUIViewMaker: ComponentUIViewMaker {
     func createComponentView(
         for configuration: Configuration
     ) -> ComponentView {
-        let componentView = ComponentView(configuration: configuration)
+        let componentView = SparkUITag(theme: configuration.theme.value)
         self.updateCommonProperties(componentView, for: configuration)
 
         return componentView
@@ -48,10 +48,6 @@ final class TagComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.variant = configuration.variant
-        componentView.demoIcon(configuration)
-        componentView.demoText(configuration)
         self.updateCommonProperties(componentView, for: configuration)
     }
 
@@ -59,91 +55,35 @@ final class TagComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        componentView.demoAccessibilityLabel(configuration)
-        componentView.demoBackground(configuration)
+        componentView.intent = configuration.intent
+        componentView.size = configuration.size
+        componentView.variant = configuration.variant
+        componentView.isHighlighted = configuration.isHighlighted
+        componentView.icon = .init(icon: configuration.icon)
+        componentView.demoText(configuration)
+        componentView.demoAccessibility(configuration)
     }
 }
 
 // MARK: - Extension
 
-private extension TagUIView {
-
-    // MARK: - Initialization
-
-    convenience init(configuration: TagComponentUIViewMaker.Configuration) {
-        let iconImage = UIImage(icon: configuration.icon)
-        let text = configuration.text.nilIfEmpty
-
-        switch (iconImage, text) {
-        case (let image?, nil):
-            self.init(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                variant: configuration.variant,
-                iconImage: image
-            )
-
-        case (let image?, let text?):
-            if configuration.isAttributedText {
-                self.init(
-                    theme: configuration.theme.value,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    iconImage: image,
-                    attributedText: text.demoNSAttributedString
-                )
-            } else {
-                self.init(
-                    theme: configuration.theme.value,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    iconImage: image,
-                    text: text
-                )
-            }
-
-        case (nil, let text?):
-            if configuration.isAttributedText {
-                self.init(
-                    theme: configuration.theme.value,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    attributedText: text.demoNSAttributedString
-                )
-            } else {
-                self.init(
-                    theme: configuration.theme.value,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    text: text
-                )
-            }
-
-        case (nil, nil):
-            self.init(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                variant: configuration.variant,
-                text: "Tag required at least icon or text"
-            )
-        }
-    }
+private extension SparkUITag {
 
     // MARK: - Setter
 
-    func demoIcon(_ configuration: TagComponentUIViewMaker.Configuration) {
-        self.iconImage = .init(icon: configuration.icon)
-    }
-
     func demoText(_ configuration: TagComponentUIViewMaker.Configuration) {
-        let text = configuration.text
-        if text.isEmpty {
-            self.text = nil
-        } else if configuration.isAttributedText {
-            self.attributedText = text.demoNSAttributedString
+        let text = configuration.text.nilIfEmpty
+        if configuration.uiKitIsAttributedText {
+            self.attributedText = text?.demoNSAttributedString
         } else {
             self.text = text
         }
     }
-}
 
+    func demoAccessibility(_ configuration: TagComponentUIViewMaker.Configuration) {
+        self.demoAccessibilityLabel(configuration)
+        if configuration.text.nilIfEmpty == nil {
+            self.largeContentTitle = configuration.accessibilityLabel.value.nilIfEmpty
+        }
+    }
+}

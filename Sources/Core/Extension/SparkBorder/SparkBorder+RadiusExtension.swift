@@ -18,6 +18,7 @@ extension SparkBorder {
         case medium
         case large
         case xLarge
+        case full
 
         // MARK: - Properties
 
@@ -34,6 +35,7 @@ extension SparkBorder {
             case .medium: radius.medium
             case .large: radius.large
             case .xLarge: radius.xLarge
+            case .full: radius.full
             }
         }
     }
