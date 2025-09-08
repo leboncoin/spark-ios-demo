@@ -64,7 +64,8 @@ final class ComponentImplementationUIView<
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             self.componentStackView,
-            self.infoLabelStackView
+            self.infoLabelStackView,
+            self.actionButton
         ].compactMap { $0 })
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -97,6 +98,7 @@ final class ComponentImplementationUIView<
 
     private(set) var componentView: ComponentView
     private(set) var infoLabel: UILabel?
+    private(set) var actionButton: UIButton?
 
     // MARK: - Properties
 
@@ -122,8 +124,11 @@ final class ComponentImplementationUIView<
     ) {
         self.configuration = configuration
         self.componentView = componentView
-        if contextType.mayHaveInfoLabel {
+        if contextType.mayHaveOtherView {
             self.infoLabel = configuration.uiKitInfoLabel
+        }
+        if contextType.mayHaveOtherView {
+            self.actionButton = configuration.uiKitActionButton
         }
         self.contextType = contextType
         self.displayStyle = displayStyle

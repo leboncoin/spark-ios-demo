@@ -15,7 +15,7 @@ enum ComponentContextType: CaseIterable {
 
     // MARK: - Properties
 
-    var mayHaveInfoLabel: Bool {
+    var mayHaveOtherView: Bool {
         switch self {
         case .display: true
         case .configuration: false

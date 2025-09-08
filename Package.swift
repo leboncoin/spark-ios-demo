@@ -117,11 +117,6 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            // url: "https://github.com/leboncoin/spark-ios-component-switch.git",
-            path: "../spark-ios-component-switch"
-            // /*version*/ "0.0.1"..."999.999.999"
-        ),
-        .package(
             url: "https://github.com/leboncoin/spark-ios-component-tab.git",
             // path: "../spark-ios-component-tab"
             /*version*/ "0.0.1"..."999.999.999"

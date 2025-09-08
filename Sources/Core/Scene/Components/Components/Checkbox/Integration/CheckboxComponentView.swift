@@ -19,12 +19,12 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
     // MARK: - Properties
 
     var configuration: Binding<CheckboxConfiguration>
-    @State private var selectionState: SparkComponentSelectionControls.CheckboxSelectionState = .unselected
+    @State private var selectionState: SparkComponentSelectionControls.CheckboxSelectionState = .indeterminate
 
     // MARK: - View
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: .medium) {
             self.component()
             .demoDisabled(self.configurationWrapped)
             .demoFrame(self.configurationWrapped)
@@ -32,6 +32,14 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
 
             Text(self.configurationWrapped.getInfoValue(from: self.selectionState))
                 .demoComponentInfoBackground()
+
+            Divider()
+
+            Button("Reset indeterminate", role: .destructive) {
+                self.selectionState = .indeterminate
+            }
+            .disabled(self.selectionState == .indeterminate)
+            .buttonStyle(.bordered)
         }
     }
 
@@ -41,8 +49,8 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
             SparkCheckbox(
                 theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
-                selectedIcon: .selected,
-                indeterminateIcon: .indeterminate,
+                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon),
+                indeterminateIcon: .init(icon: self.configurationWrapped.indeterminateIcon),
                 label: {
                     VStack(alignment: .leading) {
                         Text(self.configurationWrapped.text)
@@ -59,30 +67,17 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
                 text,
                 theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
-                selectedIcon: .selected,
-                indeterminateIcon: .indeterminate,
+                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon),
+                indeterminateIcon: .init(icon: self.configurationWrapped.indeterminateIcon),
             )
         } else {
             SparkCheckbox(
                 theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
-                selectedIcon: .selected,
-                indeterminateIcon: .indeterminate,
+                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon),
+                indeterminateIcon: .init(icon: self.configurationWrapped.indeterminateIcon),
             )
         }
-    }
-}
-
-// MARK: - Extension
-
-private extension Image {
-
-    static var selected: Image {
-        .init(icon: Iconography.check)
-    }
-
-    static var indeterminate: Image {
-        .init(icon: Iconography.minus)
     }
 }
 

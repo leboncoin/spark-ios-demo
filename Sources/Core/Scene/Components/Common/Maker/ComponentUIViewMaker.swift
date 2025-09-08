@@ -41,6 +41,7 @@ protocol ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView> {
 
     func isFullWidth() -> Bool
     func isInfoLabel() -> Bool
+    func isResetButton() -> Bool
 }
 
 extension ComponentUIViewMaker {
@@ -53,6 +54,10 @@ extension ComponentUIViewMaker {
         false
     }
 
+    func isResetButton() -> Bool {
+        false
+    }
+
     func createComponentImplementationView(
         for configuration: Configuration,
         context: ComponentContextType,
@@ -60,6 +65,11 @@ extension ComponentUIViewMaker {
     ) -> ComponentImplementationUIView<ComponentView, Configuration> {
         if self.isInfoLabel() {
             configuration.uiKitInfoLabel = UILabel()
+        }
+
+        if self.isResetButton() {
+            let button = UIButton(configuration: .filled())
+            configuration.uiKitActionButton = button
         }
 
         let componentView = self.createComponentView(

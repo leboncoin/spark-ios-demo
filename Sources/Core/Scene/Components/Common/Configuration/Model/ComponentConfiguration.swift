@@ -34,7 +34,8 @@ class ComponentConfiguration: Identifiable {
     var uiKitControlType = ShowUIKitControlType()
     var uiKitIsSelected = ShowConfigurationBool()
     var uiKitInfoLabel: UILabel?
-
+    var uiKitActionButton: UIButton?
+    
     // MARK: - Initialization
 
     required init() {

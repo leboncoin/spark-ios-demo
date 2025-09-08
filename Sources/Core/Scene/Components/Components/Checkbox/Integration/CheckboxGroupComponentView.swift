@@ -91,7 +91,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
                         }
                     )
                 },
-                selectedIcon: .selected
+                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon)
             )
 
         } else {
@@ -105,7 +105,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
                         isEnabled: item.isEnabled
                     )
                 },
-                selectedIcon: .selected
+                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon)
             )
         }
     }
@@ -114,15 +114,6 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
 
     func selectedItemsText() -> String {
         return self.configurationWrapped.getInfoValue(from: self.selectedIDs)
-    }
-}
-
-// MARK: - Extension
-
-private extension Image {
-
-    static var selected: Image {
-        .init(icon: Iconography.check)
     }
 }
 
