@@ -17,7 +17,7 @@ typealias ToggleComponentUIViewController = ComponentDisplayViewControllerRepres
 extension ToggleComponentUIViewController {
 
     init() {
-        self.init(style: .verticalList, styles: [.alone, .verticalList])
+        self.init(style: .alone, styles: [.alone])
     }
 }
 

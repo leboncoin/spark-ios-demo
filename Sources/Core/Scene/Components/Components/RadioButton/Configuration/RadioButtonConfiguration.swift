@@ -22,7 +22,8 @@ class RadioButtonConfiguration: ComponentConfiguration {
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsAttributedText: Bool = .random()
+    var uiKitIsAttributedText = false
+    var uiKitIsAnimated: Bool = true
 
     // MARK: - Initialization
 

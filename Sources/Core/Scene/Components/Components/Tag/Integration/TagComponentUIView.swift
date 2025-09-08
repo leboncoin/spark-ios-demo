@@ -59,7 +59,7 @@ final class TagComponentUIViewMaker: ComponentUIViewMaker {
         componentView.size = configuration.size
         componentView.variant = configuration.variant
         componentView.isHighlighted = configuration.isHighlighted
-        componentView.icon = .init(icon: configuration.icon)
+        componentView.demoIcon(configuration)
         componentView.demoText(configuration)
         componentView.demoAccessibility(configuration)
     }
@@ -71,12 +71,27 @@ private extension SparkUITag {
 
     // MARK: - Setter
 
+    // TODO: Use this logic (optional parameters) (set only if needed to check the default visual when the parameter is not setted) for all components
+    /// Used to set only if needed
+    func demoIcon(_ configuration: TagComponentUIViewMaker.Configuration) {
+        let newIcon = configuration.icon
+        if let newIcon {
+            self.icon = .init(icon: newIcon)
+        } else if self.icon != nil {
+            self.icon = nil
+        }
+    }
+
     func demoText(_ configuration: TagComponentUIViewMaker.Configuration) {
         let text = configuration.text.nilIfEmpty
         if configuration.uiKitIsAttributedText {
             self.attributedText = text?.demoNSAttributedString
-        } else {
+        } else if let text {
             self.text = text
+        } else if self.attributedText != nil {
+            self.attributedText = nil
+        } else if self.text != nil {
+            self.text = nil
         }
     }
 

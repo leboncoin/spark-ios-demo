@@ -93,9 +93,15 @@ struct CheckboxConfigurationView: ConfigurationViewable, ConfigurationUIViewable
         }
         
         EnumConfigurationItemView(
-            name: "checked icon",
+            name: "selected icon",
             values: Iconography.allCases,
-            selectedValue: self.configuration.checkedIcon
+            selectedValue: self.configuration.selectedIcon
+        )
+
+        EnumConfigurationItemView(
+            name: "indeterminate icon",
+            values: Iconography.allCases,
+            selectedValue: self.configuration.indeterminateIcon
         )
 
         if self.framework.isUIKit {

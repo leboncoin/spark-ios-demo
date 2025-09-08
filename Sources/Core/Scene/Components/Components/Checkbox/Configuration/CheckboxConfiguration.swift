@@ -15,7 +15,8 @@ class CheckboxConfiguration: ComponentConfiguration {
     var intent: SparkComponentSelectionControls.CheckboxIntent = .random // TODO: Remove Module prefix
     var alignment: CheckboxAlignment = .random
     var text = "My Checkbox"
-    var checkedIcon: Iconography = .random
+    var selectedIcon: Iconography = .check
+    var indeterminateIcon: Iconography = .minus
     var isIndeterminate: Bool = .random()
 
     // MARK: - SwiftUI Properties Only

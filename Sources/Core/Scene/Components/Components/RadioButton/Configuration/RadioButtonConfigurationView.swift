@@ -13,7 +13,7 @@ struct RadioButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewa
     // MARK: - Type Alias
 
     typealias Configuration = RadioButtonConfiguration
-    typealias ComponentUIView = RadioButtonIntUIView
+    typealias ComponentUIView = SparkUIRadioButton
 
     // MARK: - Properties
 
@@ -83,6 +83,13 @@ struct RadioButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewa
             ToggleConfigurationItemView(
                 name: "is attributed text",
                 isOn: self.configuration.uiKitIsAttributedText
+            )
+        }
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.uiKitIsAnimated
             )
         }
     }

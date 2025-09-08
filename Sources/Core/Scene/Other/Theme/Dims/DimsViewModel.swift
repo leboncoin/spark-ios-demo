@@ -16,11 +16,13 @@ struct DimsViewModel {
         let theme = DemoThemes.shared.mainTheme.value
 
         return [
+            .init(name: "none", value: theme.dims.none),
             .init(name: "dim1", value: theme.dims.dim1),
             .init(name: "dim2", value: theme.dims.dim2),
             .init(name: "dim3", value: theme.dims.dim3),
             .init(name: "dim4", value: theme.dims.dim4),
             .init(name: "dim5", value: theme.dims.dim5),
+            .init(name: "full", value: theme.dims.full),
         ]
     }
 }

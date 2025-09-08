@@ -15,7 +15,7 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
     var intent: SparkComponentSelectionControls.CheckboxIntent = .random // TODO: Remove Module prefix
     var axis: CheckboxGroupAxis = .random
     var title = "My Title Group"
-    var checkedIcon: Iconography = .random
+    var selectedIcon: Iconography = .check
 
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
@@ -79,7 +79,7 @@ extension CheckboxGroupConfiguration {
         let id: Int
         var isLongText: Bool = false
         var isAttributedText: Bool = false
-        var isEnabled: Bool = .random()
+        var isEnabled: Bool = true
 
         // MARK: - SwiftUI Properties Only
 

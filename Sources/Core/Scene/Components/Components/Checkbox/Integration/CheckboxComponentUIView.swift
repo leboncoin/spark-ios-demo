@@ -44,7 +44,7 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
                 theme: configuration.theme.value,
                 intent: .info,
                 attributedText: configuration.text.demoNSAttributedString,
-                checkedImage: .init(icon: configuration.checkedIcon),
+                checkedImage: .init(icon: configuration.selectedIcon),
 //                selectionState: configuration.uiKitSelectionState,
                 selectionState: .indeterminate,
                 alignment: .left
@@ -54,7 +54,7 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
                 theme: configuration.theme.value,
                 intent: .info,
                 text: configuration.text,
-                checkedImage: .init(icon: configuration.checkedIcon),
+                checkedImage: .init(icon: configuration.selectedIcon),
 //                selectionState: configuration.uiKitSelectionState,
                 selectionState: .indeterminate,
                 alignment: .left
@@ -79,7 +79,7 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         componentView.theme = configuration.theme.value
         componentView.intent = .info
         componentView.demoText(configuration)
-        componentView.checkedImage = .init(icon: configuration.checkedIcon)
+        componentView.checkedImage = .init(icon: configuration.selectedIcon)
 //        componentView.selectionState = configuration.uiKitSelectionState
         componentView.selectionState = .indeterminate
         componentView.alignment = configuration.alignment

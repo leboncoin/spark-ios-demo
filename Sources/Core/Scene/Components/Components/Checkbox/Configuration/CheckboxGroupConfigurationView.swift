@@ -76,9 +76,9 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
         )
 
         EnumConfigurationItemView(
-            name: "checked icon",
+            name: "selected icon",
             values: Iconography.allCases,
-            selectedValue: self.configuration.checkedIcon
+            selectedValue: self.configuration.selectedIcon
         )
     }
 
