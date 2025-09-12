@@ -1,21 +1,20 @@
 //
-//  RadioButtonGroupComponentView.swift
+//  RadioGroupComponentView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 29/01/2025.
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
 
-// TODO: Rename to RadioGroup
-// TODO: Crash on the configuration view when we decrease the number of items. If we comment the component on the configuration, no crash appen anymore.
+// TODO: Crash on the configuration view when we decrease the number of items. If we comment the component on the configuration, no crash appen anymore. (Not from component but maybe on demo)
 
 import SwiftUI
 
 // MARK: - View
 
-typealias RadioButtonGroupComponentView = ComponentViewable<RadioButtonGroupConfiguration, RadioButtonGroupImplementationView, RadioButtonGroupConfigurationView>
+typealias RadioGroupComponentView = ComponentViewable<RadioGroupConfiguration, RadioGroupImplementationView, RadioGroupConfigurationView>
 
-extension RadioButtonGroupComponentView {
+extension RadioGroupComponentView {
 
     init() {
         self.init(style: .verticalList, styles: [.alone, .verticalList])
@@ -24,11 +23,11 @@ extension RadioButtonGroupComponentView {
 
 // MARK: - Subview
 
-struct RadioButtonGroupImplementationView: ComponentImplementationViewable {
+struct RadioGroupImplementationView: ComponentImplementationViewable {
 
     // MARK: - Properties
 
-    var configuration: Binding<RadioButtonGroupConfiguration>
+    var configuration: Binding<RadioGroupConfiguration>
     var showInfo: Bool = true
 
     @State private var selectedID: Int? = Bool.random() ? 1 : nil
@@ -36,14 +35,14 @@ struct RadioButtonGroupImplementationView: ComponentImplementationViewable {
 
     // MARK: - Initialization
 
-    init(configuration: Binding<RadioButtonGroupConfiguration>) {
+    init(configuration: Binding<RadioGroupConfiguration>) {
         self.configuration = configuration
         self.selectedIDForFormField = nil
     }
 
     // Used by the FormField demo
     init(
-        configuration: Binding<RadioButtonGroupConfiguration>,
+        configuration: Binding<RadioGroupConfiguration>,
         selectedID: Binding<Int?>,
         showInfo: Bool = false
     ) {
@@ -112,8 +111,8 @@ struct RadioButtonGroupImplementationView: ComponentImplementationViewable {
 
 // MARK: - Preview
 
-struct RadioButtonGroupComponentView_Previews: PreviewProvider {
+struct RadioGroupComponentView_Previews: PreviewProvider {
     static var previews: some View {
-        RadioButtonGroupComponentView()
+        RadioGroupComponentView()
     }
 }

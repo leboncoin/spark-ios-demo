@@ -14,9 +14,6 @@ class ToggleConfiguration: ComponentConfiguration {
 
     var text = "My Toggle"
 
-    var offIcon: Iconography = .check
-    var onIcon: Iconography = .cross
-
     // MARK: - SwiftUI Properties Only
 
     var swiftUIIsCustomContent: Bool = false
@@ -35,6 +32,10 @@ class ToggleConfiguration: ComponentConfiguration {
 
         self.isEnabled.showConfiguration = true
         self.swiftUIWidth.showConfiguration = true
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
+
         self.accessibilityLabel.showConfiguration = true
     }
 }

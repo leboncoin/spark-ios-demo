@@ -13,12 +13,18 @@ extension UIControl {
     func demoDisabled<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) {
-        self.isEnabled = configuration.isEnabled.value
+        let value = configuration.isEnabled.value
+        if self.isEnabled != value {
+            self.isEnabled = value
+        }
     }
 
     func demoSelected<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) {
-        self.isSelected = configuration.uiKitIsSelected.value
+        let value = configuration.uiKitIsSelected.value
+        if self.isSelected != value {
+            self.isSelected = value
+        }
     }
 }

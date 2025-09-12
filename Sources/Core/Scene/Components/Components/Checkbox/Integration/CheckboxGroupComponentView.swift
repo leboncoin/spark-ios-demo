@@ -8,9 +8,6 @@
 
 import SwiftUI
 
-// TODO: Fix (or maybe a demo bug)
-// - when layout changed, sometime the view is clear completly ! (seems to work correctly when the default layous is horizontal)
-
 // MARK: - View
 
 typealias CheckboxGroupComponentView = ComponentViewable<CheckboxGroupConfiguration, CheckboxGroupImplementationView, CheckboxGroupConfigurationView>
@@ -54,7 +51,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        VStack(alignment: .leading, spacing: .medium) {
+        VStack(alignment: .center, spacing: .medium) {
 
             self.component()
                 .sparkCheckboxGroupAxis(self.configurationWrapped.axis)
@@ -91,7 +88,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
                         }
                     )
                 },
-                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon)
+                selectedIcon: .selected
             )
 
         } else {
@@ -105,7 +102,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
                         isEnabled: item.isEnabled
                     )
                 },
-                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon)
+                selectedIcon: .selected
             )
         }
     }
@@ -114,6 +111,15 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
 
     func selectedItemsText() -> String {
         return self.configurationWrapped.getInfoValue(from: self.selectedIDs)
+    }
+}
+
+// MARK: - Extension
+
+private extension Image {
+
+    static var selected: Image {
+        .init(icon: Iconography.check)
     }
 }
 

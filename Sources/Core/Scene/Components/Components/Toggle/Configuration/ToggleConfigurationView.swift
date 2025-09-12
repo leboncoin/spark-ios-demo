@@ -47,8 +47,7 @@ struct ToggleConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                     ToggleImplementationView(configuration: self.configuration)
                 }
             },
-            mainItemsView: { self.itemsView() },
-            otherAccessibilityItemsView: { self.otherAccessibilityItemsView() }
+            mainItemsView: { self.itemsView() }
         )
     }
 
@@ -88,23 +87,6 @@ struct ToggleConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             ToggleConfigurationItemView(
                 name: "is animated",
                 isOn: self.configuration.uiKitIsAnimated
-            )
-        }
-    }
-
-    @ViewBuilder
-    private func otherAccessibilityItemsView() -> some View {
-        if self.framework.isSwiftUI {
-            EnumConfigurationItemView(
-                name: "on icon",
-                values: Iconography.allCases,
-                selectedValue: self.configuration.onIcon
-            )
-
-            EnumConfigurationItemView(
-                name: "off icon",
-                values: Iconography.allCases,
-                selectedValue: self.configuration.offIcon
             )
         }
     }

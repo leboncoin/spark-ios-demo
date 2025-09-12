@@ -10,8 +10,6 @@ import SwiftUI
 
 // MARK: - View
 
-// TODO: Test action & target on valueChanged
-
 typealias ToggleComponentUIViewController = ComponentDisplayViewControllerRepresentable<ToggleConfiguration, SparkUISwitch, ToggleConfigurationView, ToggleComponentUIViewMaker>
 
 extension ToggleComponentUIViewController {
@@ -43,8 +41,8 @@ final class ToggleComponentUIViewMaker: ComponentUIViewMaker {
     ) -> ComponentView {
         let componentView = ComponentView(
             theme: configuration.theme.value,
-            onIcon: .init(icon: Iconography.check),
-            offIcon: .init(icon: Iconography.cross),
+            onIcon: .init(icon: .check),
+            offIcon: .init(icon: .cross)
         )
 
         self.updateCommonProperties(
@@ -71,6 +69,11 @@ final class ToggleComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.demoControlType(
+            configuration,
+            event: .valueChanged,
+            on: self.viewController
+        )
         componentView.demoIsOn(configuration)
         componentView.demoDisabled(configuration)
         componentView.demoText(configuration)

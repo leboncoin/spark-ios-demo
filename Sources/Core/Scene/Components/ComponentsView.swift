@@ -55,6 +55,20 @@ struct ComponentsView: View {
                 } footer: {
                     Text("\(self.searchResults.count) components")
                 }
+
+                Section {
+                    NavigationLink("Dev Mode") {
+                        switch self.framework {
+                        case .uiKit:
+                            DevModeUIViewRepresentable()
+                                .navigationBarTitle("Dev Mode")
+
+                        case .swiftUI:
+                            DevModeView()
+                                .navigationBarTitle("Dev Mode")
+                        }
+                    }
+                }
             }
             .navigationDestination(for: Component.self, destination: { component in
                 switch self.framework {
@@ -108,7 +122,7 @@ struct ComponentsView: View {
         case .progressBarIndeterminate: ProgressBarIndeterminateComponentView()
         case .progressTracker: ProgressTrackerComponentView()
         case .radioButton: RadioButtonComponentView()
-        case .radioGroup: RadioButtonGroupComponentView()
+        case .radioGroup: RadioGroupComponentView()
         case .ratingDisplay: RatingDisplayComponentView()
         case .ratingInput: RatingInputComponentView()
         case .slider: SliderComponentView()
@@ -150,7 +164,7 @@ struct ComponentsView: View {
         case .progressBarIndeterminate: ProgressBarIndeterminateComponentUIViewController()
         case .progressTracker: ProgressTrackerComponentUIViewController()
         case .radioButton: RadioButtonComponentUIViewController()
-        case .radioGroup: RadioButtonGroupComponentUIViewController()
+        case .radioGroup: RadioGroupComponentUIViewController()
         case .ratingDisplay: RatingDisplayComponentUIViewController()
         case .ratingInput: RatingInputComponentUIViewController()
         case .slider: SliderComponentUIViewController()

@@ -24,8 +24,9 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        VStack(alignment: .leading, spacing: .medium) {
+        VStack(alignment: .center, spacing: .medium) {
             self.component()
+            .sparkCheckboxIntent(self.configurationWrapped.intent)
             .demoDisabled(self.configurationWrapped)
             .demoFrame(self.configurationWrapped)
             .demoAccessibilityLabel(self.configurationWrapped)
@@ -49,8 +50,8 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
             SparkCheckbox(
                 theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
-                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon),
-                indeterminateIcon: .init(icon: self.configurationWrapped.indeterminateIcon),
+                selectedIcon: .selected,
+                indeterminateIcon: .indeterminate,
                 label: {
                     VStack(alignment: .leading) {
                         Text(self.configurationWrapped.text)
@@ -67,17 +68,30 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
                 text,
                 theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
-                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon),
-                indeterminateIcon: .init(icon: self.configurationWrapped.indeterminateIcon),
+                selectedIcon: .selected,
+                indeterminateIcon: .indeterminate
             )
         } else {
             SparkCheckbox(
                 theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
-                selectedIcon: .init(icon: self.configurationWrapped.selectedIcon),
-                indeterminateIcon: .init(icon: self.configurationWrapped.indeterminateIcon),
+                selectedIcon: .selected,
+                indeterminateIcon: .indeterminate
             )
         }
+    }
+}
+
+// MARK: - Extension
+
+private extension Image {
+
+    static var selected: Image {
+        .init(icon: Iconography.check)
+    }
+
+    static var indeterminate: Image {
+        .init(icon: Iconography.minus)
     }
 }
 
@@ -88,3 +102,4 @@ struct CheckboxComponentView_Previews: PreviewProvider {
         CheckboxComponentView()
     }
 }
+
