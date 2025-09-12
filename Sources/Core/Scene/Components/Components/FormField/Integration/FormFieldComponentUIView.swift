@@ -121,7 +121,7 @@ final class FormFieldDynamicUIView: UIView {
             self.formFieldView = formFieldView
 
         case .radioButton:
-            let maker = RadioButtonGroupComponentUIViewMaker()
+            let maker = RadioGroupComponentUIViewMaker()
             let view = maker.createComponentView(for: self.configuration.radioButtonConfiguration)
             let formFieldView = FormFieldUIView(self.configuration, component: view)
             formFieldView.demoUpdateCommonProperties(self.configuration)
@@ -193,7 +193,7 @@ final class FormFieldDynamicUIView: UIView {
         case let view as FormFieldUIView<CheckboxGroupComponentUIViewMaker.ComponentView>:
             view.updateProperties(self.configuration, text: self.text)
 
-        case let view as FormFieldUIView<RadioButtonGroupComponentUIViewMaker.ComponentView>:
+        case let view as FormFieldUIView<RadioGroupComponentUIViewMaker.ComponentView>:
             view.updateProperties(self.configuration, text: self.text)
 
         case let view as FormFieldUIView<StepperComponentUIViewMaker.ComponentView>:

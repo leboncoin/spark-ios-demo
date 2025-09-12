@@ -19,12 +19,7 @@ struct ColorSectionView: View {
         List(self.viewModel.itemViewModels, id: \.self) { itemViewModels in
             Section {
                 ForEach(itemViewModels, id: \.self) { itemViewModel in
-                    if #available(iOS 15.0, *) {
-                        ColorItemView(viewModel: itemViewModel)
-                            .listRowSeparator(.hidden)
-                    } else {
-                        ColorItemView(viewModel: itemViewModel)
-                    }
+                    ColorItemView(viewModel: itemViewModel)
                 }
             }
         }

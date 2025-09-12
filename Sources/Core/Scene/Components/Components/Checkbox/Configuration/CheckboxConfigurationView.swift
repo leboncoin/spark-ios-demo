@@ -13,7 +13,7 @@ struct CheckboxConfigurationView: ConfigurationViewable, ConfigurationUIViewable
     // MARK: - Type Alias
 
     typealias Configuration = CheckboxConfiguration
-    typealias ComponentUIView = CheckboxUIView
+    typealias ComponentUIView = SparkUICheckbox
 
     // MARK: - Properties
 
@@ -61,12 +61,6 @@ struct CheckboxConfigurationView: ConfigurationViewable, ConfigurationUIViewable
             selectedValue: self.configuration.intent
         )
 
-        EnumConfigurationItemView(
-            name: "alignment",
-            values: CheckboxAlignment.allCases,
-            selectedValue: self.configuration.alignment
-        )
-
         TextFieldConfigurationItemView(
             name: "text",
             text: self.configuration.text
@@ -91,30 +85,27 @@ struct CheckboxConfigurationView: ConfigurationViewable, ConfigurationUIViewable
                 isOn: self.configuration.uiKitIsAttributedText
             )
         }
-        
-        EnumConfigurationItemView(
-            name: "selected icon",
-            values: Iconography.allCases,
-            selectedValue: self.configuration.selectedIcon
-        )
-
-        EnumConfigurationItemView(
-            name: "indeterminate icon",
-            values: Iconography.allCases,
-            selectedValue: self.configuration.indeterminateIcon
-        )
 
         if self.framework.isUIKit {
-            EnumConfigurationItemView(
-                name: "selection state",
-                values: CheckboxSelectionState.allCases,
-                selectedValue: self.configuration.uiKitSelectionState
+            ToggleConfigurationItemView(
+                name: "use selection state",
+                isOn: self.configuration.uiKitUseSelectionState
             )
+
+            if self.configuration.wrappedValue.uiKitUseSelectionState {
+                EnumConfigurationItemView(
+                    name: "selection state",
+                    values: CheckboxSelectionState.allCases,
+                    selectedValue: self.configuration.uiKitSelectionState
+                )
+            }
         }
 
-        ToggleConfigurationItemView(
-            name: "is indeterminate",
-            isOn: self.configuration.isIndeterminate
-        )
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.uiKitIsAnimated
+            )
+        }
     }
 }

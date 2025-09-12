@@ -19,6 +19,7 @@ extension UIControl {
         ViewMaker: ComponentUIViewMaker
     >(
         _ configuration: Configuration,
+        event: UIControl.Event = .touchUpInside,
         on viewController: ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ViewMaker>?
     ) {
         guard let viewController else {
@@ -39,9 +40,9 @@ extension UIControl {
 
         // Action ?
         if controlType == .action {
-            self.addAction(viewController.componentAction, for: .touchUpInside)
+            self.addAction(viewController.componentAction, for: event)
         } else {
-            self.removeAction(viewController.componentAction, for: .touchUpInside)
+            self.removeAction(viewController.componentAction, for: event)
         }
 
         // Target ?
@@ -49,13 +50,13 @@ extension UIControl {
             self.addTarget(
                 viewController,
                 action: #selector(viewController.componentTouchUpInsideAction),
-                for: .touchUpInside
+                for: event
             )
         } else {
             self.removeTarget(
                 viewController,
                 action: #selector(viewController.componentTouchUpInsideAction),
-                for: .touchUpInside
+                for: event
             )
         }
 
@@ -66,9 +67,9 @@ extension UIControl {
                 self?.isSelected.toggle()
                 configuration.uiKitIsSelected.value.toggle()
             }
-            self.addAction(viewController.componentToggleAction, for: .touchUpInside)
+            self.addAction(viewController.componentToggleAction, for: event)
         } else {
-            self.removeAction(viewController.componentToggleAction, for: .touchUpInside)
+            self.removeAction(viewController.componentToggleAction, for: event)
         }
     }
 }

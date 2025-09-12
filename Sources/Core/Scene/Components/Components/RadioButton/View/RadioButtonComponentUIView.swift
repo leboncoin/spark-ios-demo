@@ -10,10 +10,6 @@ import UIKit
 import SwiftUI
 import Combine
 
-// TODO: To Fix
-// Remove isEnabled on init
-// Remove delegate
-
 // MARK: - View Controller
 
 typealias RadioButtonComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioButtonConfiguration, SparkUIRadioButton, RadioButtonConfigurationView, RadioButtonComponentUIViewMaker>
@@ -71,6 +67,11 @@ final class RadioButtonComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.demoControlType(
+            configuration,
+            event: .valueChanged,
+            on: self.viewController
+        )
         componentView.intent = configuration.intent
         componentView.demoIsSelected(configuration)
         componentView.demoDisabled(configuration)

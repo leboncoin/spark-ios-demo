@@ -13,7 +13,7 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
     // MARK: - Type Alias
 
     typealias Configuration = CheckboxGroupConfiguration
-    typealias ComponentUIView = CheckboxGroupUIView
+    typealias ComponentUIView = SparkUICheckboxGroupInt
 
     // MARK: - Properties
 
@@ -69,17 +69,20 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
             values: RadioGroupAxis.allCases,
             selectedValue: self.configuration.axis
         )
-        
-        TextFieldConfigurationItemView(
-            name: "title",
-            text: self.configuration.title
-        )
 
-        EnumConfigurationItemView(
-            name: "selected icon",
-            values: Iconography.allCases,
-            selectedValue: self.configuration.selectedIcon
-        )
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "can animated",
+                isOn: self.configuration.uiKitCanAnimated
+            )
+
+            if self.configuration.wrappedValue.uiKitCanAnimated {
+                ToggleConfigurationItemView(
+                    name: "is animated",
+                    isOn: self.configuration.uiKitIsAnimated
+                )
+            }
+        }
     }
 
     @ViewBuilder
@@ -122,6 +125,13 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
                     name: "is enabled",
                     isOn: item.isEnabled
                 )
+
+                if self.framework.isUIKit {
+                    ToggleConfigurationItemView(
+                        name: "is selected",
+                        isOn: item.uikitIsSelected
+                    )
+                }
             }
         }
     }

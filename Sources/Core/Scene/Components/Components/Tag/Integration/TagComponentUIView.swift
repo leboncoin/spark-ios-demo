@@ -9,10 +9,6 @@
 import UIKit
 import SwiftUI
 
-// TODO: Tox fix :
-// - Fix accessibilty : add accessibility for the component and remove the listener on UILabel,
-// TODO: constraints break when clear entire text
-
 // MARK: - View Controller
 
 typealias TagComponentUIViewController = ComponentDisplayViewControllerRepresentable<TagConfiguration, SparkUITag, TagConfigurationView, TagComponentUIViewMaker>

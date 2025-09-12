@@ -1,20 +1,18 @@
 //
-//  RadioButtonGroupConfiguration.swift
+//  RadioGroupConfiguration.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 29/01/2025.
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
 
-// TODO: Rename to RadioGroup
-
 import Foundation
 
-class RadioButtonGroupConfiguration: ComponentConfiguration {
+class RadioGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SparkComponentSelectionControls.RadioButtonIntent = .random // TODO: Remove Module prefix
+    var intent: RadioButtonIntent = .random
     var axis: RadioGroupAxis = .random
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
@@ -34,6 +32,8 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
     // MARK: - UIKit Properties Only
 
     var uiKitSelectedId: Int = Bool.random() ? 0 : -1
+    var uiKitCanAnimated: Bool = false
+    var uiKitIsAnimated: Bool = false
 
     // MARK: - Initialization
 
@@ -44,6 +44,9 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
 
         self.isEnabled.showConfiguration = true
         self.swiftUIWidth.showConfiguration = true
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
     }
 
     // MARK: - Update
@@ -72,7 +75,7 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
 
 // MARK: - Sub Model
 
-extension RadioButtonGroupConfiguration {
+extension RadioGroupConfiguration {
     struct Item: Identifiable, Equatable {
 
         // MARK: - Properties

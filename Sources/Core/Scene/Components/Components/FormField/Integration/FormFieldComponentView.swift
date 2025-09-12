@@ -43,7 +43,7 @@ struct FormFieldImplementationView: ComponentImplementationViewable {
                     showInfo: false
                 )
             case .radioButton:
-                RadioButtonGroupImplementationView(
+                RadioGroupImplementationView(
                     configuration: self.configuration.radioButtonConfiguration,
                     selectedID: self.$radioButtonSelectedID,
                     showInfo: false

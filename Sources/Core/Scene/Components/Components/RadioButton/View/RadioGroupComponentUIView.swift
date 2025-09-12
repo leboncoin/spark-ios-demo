@@ -1,5 +1,5 @@
 //
-//  CheckboxGroupComponentUIView.swift
+//  RadioGroupComponentUIView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 05/02/2025.
@@ -12,13 +12,13 @@ import Combine
 
 // MARK: - Component
 
-typealias SparkUICheckboxGroupInt = SparkUICheckboxGroup<Int>
+typealias SparkUIRadioGroupInt = SparkUIRadioGroup<Int>
 
 // MARK: - View Controller
 
-typealias CheckboxGroupComponentUIViewController = ComponentDisplayViewControllerRepresentable<CheckboxGroupConfiguration, SparkUICheckboxGroupInt, CheckboxGroupConfigurationView, CheckboxGroupComponentUIViewMaker>
+typealias RadioGroupComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioGroupConfiguration, SparkUIRadioGroupInt, RadioGroupConfigurationView, RadioGroupComponentUIViewMaker>
 
-extension CheckboxGroupComponentUIViewController {
+extension RadioGroupComponentUIViewController {
 
     init() {
         self.init(style: .alone, styles: [.alone])
@@ -27,14 +27,14 @@ extension CheckboxGroupComponentUIViewController {
 
 // MARK: - View Maker
 
-final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
+final class RadioGroupComponentUIViewMaker: ComponentUIViewMaker {
 
     // MARK: - Type Alias
 
-    typealias Configuration = CheckboxGroupConfiguration
-    typealias ComponentView = SparkUICheckboxGroupInt
-    typealias ConfigurationView = CheckboxGroupConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CheckboxGroupComponentUIViewMaker>
+    typealias Configuration = RadioGroupConfiguration
+    typealias ComponentView = SparkUIRadioGroupInt
+    typealias ConfigurationView = RadioGroupConfigurationView
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RadioGroupComponentUIViewMaker>
 
     // MARK: - Properties
 
@@ -47,12 +47,11 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            selectedIcon: .init(icon: .check)
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(componentView, for: configuration)
 
-        componentView.selectedIDsChangedPublisher.sink { value in
+        componentView.selectedIDChangedPublisher.sink { value in
             configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: value)
         }
         .store(in: &self.cancellables)
@@ -81,12 +80,12 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
         componentView.intent = configuration.intent
         componentView.axis = configuration.axis
         componentView.demoItems(configuration)
-        componentView.demoSelectedIDs(configuration)
+        componentView.demoSelectedID(configuration)
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
 
         configuration.uiKitInfoLabel?.text = configuration.getInfoValue(
-            from: configuration.items.filter(\.uikitIsSelected).map(\.id)
+            from: configuration.uiKitSelectedId
         )
     }
 
@@ -103,9 +102,9 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
 
 // MARK: - Extension
 
-private extension SparkUICheckboxGroup<Int> {
+private extension SparkUIRadioGroup<Int> {
 
-    func demoItems(_ configuration: CheckboxGroupConfiguration) {
+    func demoItems(_ configuration: RadioGroupConfiguration) {
         self.items = configuration.items.map {
             if $0.isAttributedText {
                 .init(
@@ -123,13 +122,13 @@ private extension SparkUICheckboxGroup<Int> {
         }
     }
 
-    func demoSelectedIDs(_ configuration: CheckboxGroupConfiguration) {
-        let selectedIDs = configuration.items.filter(\.uikitIsSelected).map(\.id)
+    func demoSelectedID(_ configuration: RadioGroupConfiguration) {
+        let selectedID = configuration.items.first { $0.id == configuration.uiKitSelectedId }.map(\.id)
 
         if configuration.uiKitCanAnimated {
-            self.selectedIDs = selectedIDs
+            self.selectedID = selectedID
         } else {
-            self.setSelectedIDs(selectedIDs, animated: configuration.uiKitIsAnimated)
+            self.setSelectedID(selectedID, animated: configuration.uiKitIsAnimated)
         }
     }
 }

@@ -42,11 +42,6 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            // url: "https://github.com/leboncoin/spark-ios-component-checkbox.git",
-            path: "../spark-ios-component-checkbox"
-            // /*version*/ "0.0.1"..."999.999.999"
-        ),
-        .package(
             url: "https://github.com/leboncoin/spark-ios-component-chip.git",
             // path: "../spark-ios-component-chip"
             /*version*/ "0.0.1"..."999.999.999"
@@ -82,19 +77,14 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            // url: "https://github.com/leboncoin/spark-ios-component-radio-button.git",
-            path: "../spark-ios-component-radio-button"
-            // /*version*/ "0.0.1"..."999.999.999"
-        ),
-        .package(
             url: "https://github.com/leboncoin/spark-ios-component-rating.git",
             // path: "../spark-ios-component-rating"
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            // url: "https://github.com/leboncoin/spark-ios-component-selection-controls.git",
-            path: "../spark-ios-component-selection-controls"
-            // /*version*/ "0.0.1"..."999.999.999"
+            url: "https://github.com/leboncoin/spark-ios-component-selection-controls.git",
+            // path: "../spark-ios-component-selection-controls"
+            /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-slider.git",
@@ -166,10 +156,6 @@ let package = Package(
                     package: "spark-ios-component-button"
                 ),
                 .product(
-                    name: "SparkComponentCheckbox",
-                    package: "spark-ios-component-checkbox"
-                ),
-                .product(
                     name: "SparkComponentChip",
                     package: "spark-ios-component-chip"
                 ),
@@ -198,12 +184,12 @@ let package = Package(
                     package: "spark-ios-component-progress-tracker"
                 ),
                 .product(
-                    name: "SparkComponentRadioButton",
-                    package: "spark-ios-component-radio-button"
-                ),
-                .product(
                     name: "SparkComponentRating",
                     package: "spark-ios-component-rating"
+                ),
+                .product(
+                    name: "SparkComponentSelectionControls",
+                    package: "spark-ios-component-selection-controls"
                 ),
                 .product(
                     name: "SparkComponentSnackbar",
@@ -220,10 +206,6 @@ let package = Package(
                 .product(
                     name: "SparkComponentStepper",
                     package: "spark-ios-component-stepper"
-                ),
-                .product(
-                    name: "SparkComponentSwitch",
-                    package: "spark-ios-component-switch"
                 ),
                 .product(
                     name: "SparkComponentTab",

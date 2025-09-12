@@ -12,10 +12,8 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SparkComponentSelectionControls.CheckboxIntent = .random // TODO: Remove Module prefix
+    var intent: CheckboxIntent = .random
     var axis: CheckboxGroupAxis = .random
-    var title = "My Title Group"
-    var selectedIcon: Iconography = .check
 
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
@@ -28,6 +26,11 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
 
     var swiftUIIsCustomContent: Bool = false
 
+    // MARK: - UIKit Properties Only
+
+    var uiKitCanAnimated: Bool = false
+    var uiKitIsAnimated: Bool = false
+
     // MARK: - Initialization
 
     required init() {
@@ -37,6 +40,9 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
 
         self.isEnabled.showConfiguration = true
         self.swiftUIWidth.showConfiguration = true
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
     }
 
     // MARK: - Update
@@ -49,12 +55,6 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
             } while self.numberOfItems > self.items.count
         } else if self.numberOfItems < lastNumberOfItems {
             self.items.removeLast()
-        }
-    }
-
-    func resetSelection(on items: inout [any CheckboxGroupItemProtocol]) {
-        for (index, _) in items.enumerated() {
-            items[index].selectionState = .unselected
         }
     }
 
@@ -85,6 +85,10 @@ extension CheckboxGroupConfiguration {
 
         var swiftUISecondText = "is amazing"
 
+        // MARK: - UIKit Properties Only
+
+        var uikitIsSelected = false
+
         // MARK: - Conversion
 
         func getText() -> String {
@@ -94,35 +98,5 @@ extension CheckboxGroupConfiguration {
                 "My item \(self.id)"
             }
         }
-
-        // TODO: Remove after checkbox refactoring
-        func toSpark(for framework: Framework) -> CheckboxGroupItemDefault {
-            let isAttributedTitleCondition = (framework.isUIKit && self.isAttributedText)
-
-            let text = if self.isLongText {
-                "Quisque viverra tincidunt diam sed eleifend. Phasellus malesuada vitae dui a pharetra. Aliquam sagittis tincidunt dolor, non aliquam quam vestibulum nec."
-            } else {
-                "My item \(self.id)"
-            }
-
-            return CheckboxGroupItemDefault(
-                title: isAttributedTitleCondition ? nil : text,
-                attributedTitle: isAttributedTitleCondition ? text.demoNSAttributedString : nil,
-                id: String(self.id),
-//                selectionState: self.selectionState,
-                selectionState: .indeterminate,
-                isEnabled: self.isEnabled
-            )
-        }
     }
-}
-
-// MARK: - Extension
-
-extension CheckboxGroupLayout: @retroactive CaseIterable {
-
-    public static var allCases: [CheckboxGroupLayout] = [
-        .vertical,
-        .horizontal
-    ]
 }

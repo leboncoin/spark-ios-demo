@@ -1,21 +1,19 @@
 //
-//  RadioButtonGroupConfigurationView.swift
+//  RadioGroupConfigurationView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 12/02/2025.
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
 
-// TODO: Rename to RadioGroup
-
 import SwiftUI
 
-struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
+struct RadioGroupConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
 
     // MARK: - Type Alias
 
-    typealias Configuration = RadioButtonGroupConfiguration
-    typealias ComponentUIView = RadioButtonIntUIGroupView
+    typealias Configuration = RadioGroupConfiguration
+    typealias ComponentUIView = SparkUIRadioGroupInt
 
     // MARK: - Properties
 
@@ -46,7 +44,7 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
                 if let componentImplementationViewRepresentable {
                     componentImplementationViewRepresentable
                 } else {
-                    RadioButtonGroupImplementationView(configuration: self.configuration)
+                    RadioGroupImplementationView(configuration: self.configuration)
                 }
             },
             mainItemsView: {
@@ -71,6 +69,20 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
             values: RadioGroupAxis.allCases,
             selectedValue: self.configuration.axis
         )
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "can animated",
+                isOn: self.configuration.uiKitCanAnimated
+            )
+
+            if self.configuration.wrappedValue.uiKitCanAnimated {
+                ToggleConfigurationItemView(
+                    name: "is animated",
+                    isOn: self.configuration.uiKitIsAnimated
+                )
+            }
+        }
     }
 
     @ViewBuilder
