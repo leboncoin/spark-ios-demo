@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SparkBadge
 
 enum BadgeFormat: String, CaseIterable {
     case `default`
@@ -16,7 +15,7 @@ enum BadgeFormat: String, CaseIterable {
 
     // MARK: - Methodsz
 
-    func sparkValue(customText: String, overflowValue: Int) -> SparkBadge.BadgeFormat {
+    func sparkValue(customText: String, overflowValue: Int) -> SparkComponentBadge.BadgeFormat {
         switch self {
         case .default: .default
         case .custom: .custom(formatter: BadgePreviewFormatter(text: " " + customText))

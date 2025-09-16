@@ -53,7 +53,7 @@ struct TabImplementationView: ComponentImplementationViewable {
 
 // MARK: - Extension
 
-private extension SparkTab.TabView {
+private extension SparkComponentTab.TabView {
 
     func demoBadgeItems(_ configuration: TabConfiguration) -> Self {
         var copy = self

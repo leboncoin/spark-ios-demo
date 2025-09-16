@@ -154,15 +154,15 @@ let package = Package(
                     package: "spark-ios-theming"
                 ),
                 .product(
-                    name: "SparkBadge",
+                    name: "SparkComponentBadge",
                     package: "spark-ios-component-badge"
                 ),
                 .product(
-                    name: "SparkBottomSheet",
+                    name: "SparkComponentBottomSheet",
                     package: "spark-ios-component-bottom-sheet"
                 ),
                 .product(
-                    name: "SparkButton",
+                    name: "SparkComponentButton",
                     package: "spark-ios-component-button"
                 ),
                 .product(
@@ -170,7 +170,7 @@ let package = Package(
                     package: "spark-ios-component-checkbox"
                 ),
                 .product(
-                    name: "SparkChip",
+                    name: "SparkComponentChip",
                     package: "spark-ios-component-chip"
                 ),
                 .product(
@@ -178,23 +178,23 @@ let package = Package(
                     package: "spark-ios-component-divider"
                 ),
                 .product(
-                    name: "SparkFormField",
+                    name: "SparkComponentFormField",
                     package: "spark-ios-component-form-field"
                 ),
                 .product(
-                    name: "SparkIcon",
+                    name: "SparkComponentIcon",
                     package: "spark-ios-component-icon"
                 ),
                 .product(
-                    name: "SparkPopover",
+                    name: "SparkComponentPopover",
                     package: "spark-ios-component-popover"
                 ),
                 .product(
-                    name: "SparkProgressBar",
+                    name: "SparkComponentProgressBar",
                     package: "spark-ios-component-progress-bar"
                 ),
                 .product(
-                    name: "SparkProgressTracker",
+                    name: "SparkComponentProgressTracker",
                     package: "spark-ios-component-progress-tracker"
                 ),
                 .product(
@@ -202,23 +202,23 @@ let package = Package(
                     package: "spark-ios-component-radio-button"
                 ),
                 .product(
-                    name: "SparkRating",
+                    name: "SparkComponentRating",
                     package: "spark-ios-component-rating"
                 ),
                 .product(
-                    name: "SparkSnackbar",
+                    name: "SparkComponentSnackbar",
                     package: "spark-ios-component-snackbar"
                 ),
                 .product(
-                    name: "SparkSlider",
+                    name: "SparkComponentSlider",
                     package: "spark-ios-component-slider"
                 ),
                 .product(
-                    name: "SparkSpinner",
+                    name: "SparkComponentSpinner",
                     package: "spark-ios-component-spinner"
                 ),
                 .product(
-                    name: "SparkStepper",
+                    name: "SparkComponentStepper",
                     package: "spark-ios-component-stepper"
                 ),
                 .product(
@@ -226,7 +226,7 @@ let package = Package(
                     package: "spark-ios-component-switch"
                 ),
                 .product(
-                    name: "SparkTab",
+                    name: "SparkComponentTab",
                     package: "spark-ios-component-tab"
                 ),
                 .product(
@@ -234,11 +234,11 @@ let package = Package(
                     package: "spark-ios-component-tag"
                 ),
                 .product(
-                    name: "SparkTextInput",
+                    name: "SparkComponentTextInput",
                     package: "spark-ios-component-text-input"
                 ),
                 .product(
-                    name: "SparkTextLink",
+                    name: "SparkComponentTextLink",
                     package: "spark-ios-component-text-link"
                 )
             ],

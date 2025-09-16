@@ -32,7 +32,7 @@ struct BorderItemView: View {
                     width: self.viewModel.width,
                     radius: self.viewModel.radius,
                     isHighlighted: self.viewModel.isHighlighted,
-                    colorToken: self.theme.colors.base.surfaceInverse,
+                    colorToken: self.theme.colors.base.surfaceInverse
                 )
         }
     }
