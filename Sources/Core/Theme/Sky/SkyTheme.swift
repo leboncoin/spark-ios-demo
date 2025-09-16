@@ -16,10 +16,10 @@ public struct SkyTheme: Theme {
 
     public static let shared = Self()
 
-    public let border: Border = SkyBorder()
-    public let colors: Colors = SkyColors()
-    public let elevation: Elevation = SkyElevation()
-    public let layout: Layout = SkyLayout()
-    public let typography: Typography = SparkTypography()
-    public let dims: Dims = SkyDims()
+    public let border: any Border = SkyBorder()
+    public let colors: any Colors = SkyColors()
+    public let elevation: any Elevation = SkyElevation()
+    public let layout: any Layout = SkyLayout()
+    public let typography: any Typography = SparkTypography()
+    public let dims: any Dims = SkyDims()
 }

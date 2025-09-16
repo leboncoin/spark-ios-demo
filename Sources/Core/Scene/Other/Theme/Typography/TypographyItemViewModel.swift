@@ -19,7 +19,7 @@ struct TypographyItemViewModel: Hashable {
     // MARK: - Initialization
 
     init(name: String,
-         token: TypographyFontToken) {
+         token: any TypographyFontToken) {
         self.name = name
         self.description = token.uiFont.fontName + "\(Int(token.uiFont.pointSize))"
         self.font = token.font

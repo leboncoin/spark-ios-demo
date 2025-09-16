@@ -65,11 +65,11 @@ extension DemoThemes {
 
         let id: String
         let name: String
-        let value: SparkTheming.Theme
+        let value: any SparkTheming.Theme
 
         // MARK: - Initialization
 
-        init(name: String, theme: SparkTheming.Theme) {
+        init(name: String, theme: any SparkTheming.Theme) {
             self.id = name
             self.name = name
             self.value = theme

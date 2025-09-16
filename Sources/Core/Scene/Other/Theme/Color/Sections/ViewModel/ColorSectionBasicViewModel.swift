@@ -15,7 +15,7 @@ struct ColorSectionBasicViewModel: ColorSectionViewModelable {
 
     // MARK: - Initialization
 
-    init(color: ColorsBasic) {
+    init(color: any ColorsBasic) {
         self.name = "Basic"
         self.itemViewModels = [
             [

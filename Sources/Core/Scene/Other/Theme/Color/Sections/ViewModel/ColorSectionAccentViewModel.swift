@@ -15,7 +15,7 @@ struct ColorSectionAccentViewModel: ColorSectionViewModelable {
 
     // MARK: - Initialization
 
-    init(color: ColorsAccent) {
+    init(color: any ColorsAccent) {
         self.name = "Accent"
         self.itemViewModels = [
             [

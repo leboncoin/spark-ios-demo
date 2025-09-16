@@ -14,7 +14,7 @@ struct ColorSectionSupportViewModel: ColorSectionViewModelable {
 
     // MARK: - Initialization
 
-    init(color: ColorsSupport) {
+    init(color: any ColorsSupport) {
         self.name = "Support"
         self.itemViewModels = [
             [
