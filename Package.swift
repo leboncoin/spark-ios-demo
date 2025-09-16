@@ -166,7 +166,7 @@ let package = Package(
                     package: "spark-ios-component-button"
                 ),
                 .product(
-                    name: "SparkCheckbox",
+                    name: "SparkComponentCheckbox",
                     package: "spark-ios-component-checkbox"
                 ),
                 .product(
@@ -174,7 +174,7 @@ let package = Package(
                     package: "spark-ios-component-chip"
                 ),
                 .product(
-                    name: "SparkDivider",
+                    name: "SparkComponentDivider",
                     package: "spark-ios-component-divider"
                 ),
                 .product(
@@ -198,7 +198,7 @@ let package = Package(
                     package: "spark-ios-component-progress-tracker"
                 ),
                 .product(
-                    name: "SparkRadioButton",
+                    name: "SparkComponentRadioButton",
                     package: "spark-ios-component-radio-button"
                 ),
                 .product(
@@ -222,7 +222,7 @@ let package = Package(
                     package: "spark-ios-component-stepper"
                 ),
                 .product(
-                    name: "SparkSwitch",
+                    name: "SparkComponentSwitch",
                     package: "spark-ios-component-switch"
                 ),
                 .product(
