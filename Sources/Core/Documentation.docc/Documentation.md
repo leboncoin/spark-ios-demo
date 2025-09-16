@@ -52,7 +52,7 @@ enum MyThemes: DemoTheme {
         Self.lbc
     }
 
-    var value: Theme {
+    var value: any Theme {
         switch self {
         case .lbc:
             LBCTheme()

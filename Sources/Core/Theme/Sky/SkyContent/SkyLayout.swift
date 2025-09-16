@@ -10,7 +10,7 @@ struct SkyLayout: Layout {
 
     // MARK: - Properties
 
-    let spacing: LayoutSpacing = LayoutSpacingDefault(
+    let spacing: any LayoutSpacing = LayoutSpacingDefault(
         small: 2,
         medium: 5,
         large: 14,

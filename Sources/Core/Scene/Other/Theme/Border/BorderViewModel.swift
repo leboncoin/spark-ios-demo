@@ -41,6 +41,13 @@ struct BorderViewModel {
                         .init(name: "large", width: border.width.medium, radius: border.radius.large),
                         .init(name: "xLarge", width: border.width.medium, radius: border.radius.xLarge),
                         .init(name: "full", width: border.width.medium, radius: border.radius.full)
+                      ]),
+
+                .init(name: "isHighlighted",
+                      itemViewModels: [
+                        .init(name: "none width", width: border.width.none, radius: border.radius.large, isHighlighted: true),
+                        .init(name: "small width", width: border.width.small, radius: border.radius.large, isHighlighted: true),
+                        .init(name: "medium width", width: border.width.medium, radius: border.radius.large, isHighlighted: true),
                       ])
         ]
     }

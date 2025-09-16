@@ -13,7 +13,7 @@ struct SkyColors: Colors {
 
     private class ClassForBundle {}
 
-    var main: ColorsMain = ColorsMainDefault(
+    var main: any ColorsMain = ColorsMainDefault(
         main: ColorTokenDefault(named: "main", in: .module),
         onMain: ColorTokenDefault(named: "on-main", in: .module),
         mainVariant: ColorTokenDefault(named: "main-variant", in: .module),
@@ -21,7 +21,7 @@ struct SkyColors: Colors {
         mainContainer: ColorTokenDefault(named: "main-container", in: .module),
         onMainContainer: ColorTokenDefault(named: "on-main-container", in: .module))
 
-    let support: ColorsSupport = ColorsSupportDefault(
+    let support: any ColorsSupport = ColorsSupportDefault(
         support: ColorTokenDefault(named: "support", in: .module),
         onSupport: ColorTokenDefault(named: "on-support", in: .module),
         supportVariant: ColorTokenDefault(named: "support-variant", in: .module),
@@ -29,7 +29,7 @@ struct SkyColors: Colors {
         supportContainer: ColorTokenDefault(named: "support-container", in: .module),
         onSupportContainer: ColorTokenDefault(named: "on-support-container", in: .module))
 
-    let accent: ColorsAccent = ColorsAccentDefault(
+    let accent: any ColorsAccent = ColorsAccentDefault(
         accent: ColorTokenDefault(named: "accent", in: .module),
         onAccent: ColorTokenDefault(named: "on-accent", in: .module),
         accentVariant: ColorTokenDefault(named: "accent-variant", in: .module),
@@ -37,13 +37,13 @@ struct SkyColors: Colors {
         accentContainer: ColorTokenDefault(named: "accent-container", in: .module),
         onAccentContainer: ColorTokenDefault(named: "on-accent-container", in: .module))
 
-    let basic: ColorsBasic = ColorsBasicDefault(
+    let basic: any ColorsBasic = ColorsBasicDefault(
         basic: ColorTokenDefault(named: "basic", in: .module),
         onBasic: ColorTokenDefault(named: "on-basic", in: .module),
         basicContainer: ColorTokenDefault(named: "basic-container", in: .module),
         onBasicContainer: ColorTokenDefault(named: "on-basic-container", in: .module))
 
-    let base: ColorsBase = ColorsBaseDefault(
+    let base: any ColorsBase = ColorsBaseDefault(
         background: ColorTokenDefault(named: "background", in: .module),
         onBackground: ColorTokenDefault(named: "on-background", in: .module),
         backgroundVariant: ColorTokenDefault(named: "background-variant", in: .module),
@@ -57,7 +57,7 @@ struct SkyColors: Colors {
         overlay: ColorTokenDefault(named: "overlay", in: .module),
         onOverlay: ColorTokenDefault(named: "on-overlay", in: .module))
 
-    let feedback: ColorsFeedback = ColorsFeedbackDefault(
+    let feedback: any ColorsFeedback = ColorsFeedbackDefault(
         success: ColorTokenDefault(named: "success", in: .module),
         onSuccess: ColorTokenDefault(named: "on-success", in: .module),
         successContainer: ColorTokenDefault(named: "success-container", in: .module),
@@ -80,7 +80,7 @@ struct SkyColors: Colors {
         onNeutralContainer: ColorTokenDefault(named: "on-neutral-container", in: .module)
     )
 
-    let states: ColorsStates = ColorsStatesDefault(
+    let states: any ColorsStates = ColorsStatesDefault(
         mainPressed: ColorTokenDefault(named: "main-pressed", in: .module),
         mainVariantPressed: ColorTokenDefault(named: "main-variant-pressed", in: .module),
         mainContainerPressed: ColorTokenDefault(named: "main-container-pressed", in: .module),

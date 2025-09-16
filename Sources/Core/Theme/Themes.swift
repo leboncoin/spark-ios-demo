@@ -14,7 +14,7 @@ enum Themes: String, CaseIterable {
 
     // MARK: - Properties
 
-    var value: Theme {
+    var value: any Theme {
         switch self {
         case .spark:
             SparkTheme.shared

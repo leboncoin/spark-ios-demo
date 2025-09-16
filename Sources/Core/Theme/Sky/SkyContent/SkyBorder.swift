@@ -10,11 +10,11 @@ struct SkyBorder: Border {
 
     // MARK: - Properties
 
-    let width: BorderWidth = BorderWidthDefault(
+    let width: any BorderWidth = BorderWidthDefault(
         small: 2,
         medium: 3
     )
-    let radius: BorderRadius = BorderRadiusDefault(
+    let radius: any BorderRadius = BorderRadiusDefault(
         small: 5,
         medium: 9,
         large: 20,

@@ -16,7 +16,7 @@ struct BorderItemView: View {
 
     // MARK: - View
 
-    var theme: Theme = DemoThemes.shared.mainTheme.value
+    var theme: any Theme = DemoThemes.shared.mainTheme.value
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,10 +28,11 @@ struct BorderItemView: View {
 
             Color.gray
                 .frame(height: self.viewModel.contentHeight)
-                .border(
+                .sparkBorder(
                     width: self.viewModel.width,
                     radius: self.viewModel.radius,
-                    colorToken: self.theme.colors.base.surfaceInverse
+                    isHighlighted: self.viewModel.isHighlighted,
+                    colorToken: self.theme.colors.base.surfaceInverse,
                 )
         }
     }

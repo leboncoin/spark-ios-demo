@@ -13,7 +13,7 @@ struct TextFieldSideView: View {
     // MARK: - Properties
 
     let sideViewContent: TextFieldSideViewContentType
-    let theme: Theme
+    let theme: any Theme
     let side: TextFieldContentSide
     let isAddon: Bool
 

@@ -14,10 +14,10 @@ struct DropShadowItemViewModel: Identifiable {
 
     let name: String
     let description: String
-    let shadow: ElevationShadow
+    let shadow: any ElevationShadow
 
     init(name: String,
-         shadow: ElevationShadow) {
+         shadow: any ElevationShadow) {
         self.name = name
         self.description =
         """

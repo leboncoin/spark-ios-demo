@@ -8,7 +8,7 @@
 
 struct DropShadowViewModel {
 
-    func itemViewModels(for theme: Theme) -> [DropShadowItemViewModel] {
+    func itemViewModels(for theme: any Theme) -> [DropShadowItemViewModel] {
         let dropShadow = theme.elevation.dropShadow
         return [
             .init(name: "none", shadow: dropShadow.none),

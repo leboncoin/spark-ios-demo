@@ -75,16 +75,11 @@ final class BottomSheetComponentUIViewMaker: ComponentUIViewMaker {
         }
 
         let controller = BottomSheetContentViewController(configuration: configuration)
-        let detents: [UISheetPresentationController.Detent]
-        if #available(iOS 16.0, *) {
-            detents = [
-                .medium(),
-                .maxHeight(),
-                configuration.contentType.isScrollView ? .expandedHeight(of: controller.view) : .compressedHeight(of: controller.view)
-            ]
-        } else {
-            detents = [.medium(), .large()]
-        }
+        let detents: [UISheetPresentationController.Detent] = [
+            .medium(),
+            .maxHeight(),
+            configuration.contentType.isScrollView ? .expandedHeight(of: controller.view) : .compressedHeight(of: controller.view)
+        ]
         if let sheet = controller.sheetPresentationController {
             sheet.detents = detents
             sheet.prefersScrollingExpandsWhenScrolledToEdge = true
