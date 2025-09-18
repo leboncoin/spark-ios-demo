@@ -65,12 +65,6 @@ struct ProgressTrackerConfigurationView: ConfigurationViewable, ConfigurationUIV
         )
 
         EnumConfigurationItemView(
-            name: "variant",
-            values: ProgressTrackerVariant.allCases,
-            selectedValue: self.configuration.variant
-        )
-
-        EnumConfigurationItemView(
             name: "size",
             values: ProgressTrackerSize.allCases,
             selectedValue: self.configuration.size
