@@ -13,7 +13,7 @@ class ProgressTrackerConfiguration: ComponentConfiguration {
     // MARK: - Properties
 
     var intent: ProgressTrackerIntent = .random
-    var variant: ProgressTrackerVariant = .random
+    var variant: ProgressTrackerVariant = .tinted
     var size: ProgressTrackerSize = .random
     var orientation: ProgressTrackerOrientation = .random
     var interaction: ProgressTrackerInteractionState = .random
