@@ -13,7 +13,7 @@ struct CheckboxConfigurationView: ConfigurationViewable, ConfigurationUIViewable
     // MARK: - Type Alias
 
     typealias Configuration = CheckboxConfiguration
-    typealias ComponentUIView = CheckboxUIView
+    typealias ComponentUIView = SparkUICheckbox
 
     // MARK: - Properties
 
@@ -61,41 +61,51 @@ struct CheckboxConfigurationView: ConfigurationViewable, ConfigurationUIViewable
             selectedValue: self.configuration.intent
         )
 
-        EnumConfigurationItemView(
-            name: "alignment",
-            values: CheckboxAlignment.allCases,
-            selectedValue: self.configuration.alignment
-        )
-
         TextFieldConfigurationItemView(
             name: "text",
             text: self.configuration.text
         )
 
-        if self.framework.isUIKit {
+        if self.framework.isSwiftUI {
+            ToggleConfigurationItemView(
+                name: "is custom content",
+                isOn: self.configuration.swiftUIIsCustomContent
+            )
+
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second text",
+                    text: self.configuration.swiftUISecondText
+                )
+            }
+
+        } else {
             ToggleConfigurationItemView(
                 name: "is attributed text",
                 isOn: self.configuration.uiKitIsAttributedText
             )
         }
 
-        EnumConfigurationItemView(
-            name: "checked icon",
-            values: Iconography.allCases,
-            selectedValue: self.configuration.checkedIcon
-        )
-
         if self.framework.isUIKit {
-            EnumConfigurationItemView(
-                name: "selection state",
-                values: CheckboxSelectionState.allCases,
-                selectedValue: self.configuration.uiKitSelectionState
+            ToggleConfigurationItemView(
+                name: "use selection state",
+                isOn: self.configuration.uiKitUseSelectionState
             )
+
+            if self.configuration.wrappedValue.uiKitUseSelectionState {
+                EnumConfigurationItemView(
+                    name: "selection state",
+                    values: CheckboxSelectionState.allCases,
+                    selectedValue: self.configuration.uiKitSelectionState
+                )
+            }
         }
 
-        ToggleConfigurationItemView(
-            name: "is indeterminate",
-            isOn: self.configuration.isIndeterminate
-        )
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.uiKitIsAnimated
+            )
+        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SwitchConfiguration.swift
+//  ToggleConfiguration.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 27/01/2025.
@@ -8,21 +8,22 @@
 
 import Foundation
 
-class SwitchConfiguration: ComponentConfiguration {
+class ToggleConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SwitchIntent = .random
-    var alignment: SwitchAlignment = .random
-    var text = "My Switch"
-    var isAttributedText = false
-    var hasImages: Bool = .random()
+    var text = "My Toggle"
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsOn: Bool = .random()
-    var uiKitIsAnimated: Bool = .random()
-    var uiKitIsEnabledAnimated: Bool = .random()
+    var uiKitIsOn: Bool = true
+    var uiKitIsAttributedText = false
+    var uiKitIsAnimated: Bool = true
 
     // MARK: - Initialization
 
@@ -31,6 +32,10 @@ class SwitchConfiguration: ComponentConfiguration {
 
         self.isEnabled.showConfiguration = true
         self.swiftUIWidth.showConfiguration = true
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
+
         self.accessibilityLabel.showConfiguration = true
     }
 }

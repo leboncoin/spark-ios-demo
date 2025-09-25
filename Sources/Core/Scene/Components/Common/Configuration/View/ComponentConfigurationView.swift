@@ -96,6 +96,7 @@ struct ComponentConfigurationView<
                 // Component
                 self.componentView()
                     .dynamicTypeSize(self.dynamicTypeSize)
+                    .frame(maxHeight: 300)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, .xLarge)
 
@@ -240,6 +241,12 @@ struct ComponentConfigurationView<
                                 )
                             }
                         }
+
+                        EnumConfigurationItemView(
+                            name: "alignment",
+                            values: StackAlignment.allCases,
+                            selectedValue: $item.alignment
+                        )
                     }
                 }
             }

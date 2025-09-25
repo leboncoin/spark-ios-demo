@@ -13,12 +13,17 @@ class RadioButtonConfiguration: ComponentConfiguration {
     // MARK: - Properties
 
     var intent: RadioButtonIntent = .random
-    var labelAlignment: RadioButtonLabelAlignment = .random
     var text = "My RadioButton"
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsAttributedText: Bool = .random()
+    var uiKitIsAttributedText = false
+    var uiKitIsAnimated: Bool = true
 
     // MARK: - Initialization
 
@@ -31,6 +36,11 @@ class RadioButtonConfiguration: ComponentConfiguration {
 
         self.uiKitIsSelected.showConfiguration = true
         self.uiKitIsSelected.value = false
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
+
+        self.swiftUIWidth.showConfiguration = true
     }
 
     // MARK: - Getter

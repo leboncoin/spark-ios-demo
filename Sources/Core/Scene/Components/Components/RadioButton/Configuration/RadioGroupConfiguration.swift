@@ -1,5 +1,5 @@
 //
-//  RadioButtonGroupConfiguration.swift
+//  RadioGroupConfiguration.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 29/01/2025.
@@ -8,13 +8,12 @@
 
 import Foundation
 
-class RadioButtonGroupConfiguration: ComponentConfiguration {
+class RadioGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
     var intent: RadioButtonIntent = .random
-    var labelAlignment: RadioButtonLabelAlignment = .random
-    var groupLayout: RadioButtonGroupLayout = .random
+    var axis: RadioGroupAxis = .random
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
             self.updateItems()
@@ -26,9 +25,15 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
     }
     var items = [Item]()
 
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+
     // MARK: - UIKit Properties Only
 
     var uiKitSelectedId: Int = Bool.random() ? 0 : -1
+    var uiKitCanAnimated: Bool = false
+    var uiKitIsAnimated: Bool = false
 
     // MARK: - Initialization
 
@@ -38,6 +43,10 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
         self.updateItems()
 
         self.isEnabled.showConfiguration = true
+        self.swiftUIWidth.showConfiguration = true
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
     }
 
     // MARK: - Update
@@ -66,14 +75,19 @@ class RadioButtonGroupConfiguration: ComponentConfiguration {
 
 // MARK: - Sub Model
 
-extension RadioButtonGroupConfiguration {
-    struct Item: Identifiable {
+extension RadioGroupConfiguration {
+    struct Item: Identifiable, Equatable {
 
         // MARK: - Properties
 
         let id: Int
-        var isLongText: Bool = .random()
-        var isAttributedText: Bool = .random()
+        var isLongText: Bool = false
+        var isAttributedText: Bool = false
+        var isEnabled: Bool = true
+
+        // MARK: - SwiftUI Properties Only
+
+        var swiftUISecondText = "is amazing"
 
         // MARK: - Initialization
 
@@ -91,14 +105,4 @@ extension RadioButtonGroupConfiguration {
             }
         }
     }
-}
-
-// MARK: - Extension
-
-extension RadioButtonGroupLayout: @retroactive CaseIterable {
-
-    public static var allCases: [RadioButtonGroupLayout] = [
-        .horizontal,
-        .vertical
-    ]
 }

@@ -10,13 +10,16 @@ import UIKit
 import SwiftUI
 import Combine
 
-// TODO: To Fix
-// Remove isEnabled on init
-// Remove delegate
-
 // MARK: - View Controller
 
-typealias CheckboxComponentUIViewController = ComponentDisplayViewControllerRepresentable<CheckboxConfiguration, CheckboxUIView, CheckboxConfigurationView, CheckboxComponentUIViewMaker>
+typealias CheckboxComponentUIViewController = ComponentDisplayViewControllerRepresentable<CheckboxConfiguration, SparkUICheckbox, CheckboxConfigurationView, CheckboxComponentUIViewMaker>
+
+extension CheckboxComponentUIViewController {
+
+    init() {
+        self.init(style: .alone, styles: [.alone])
+    }
+}
 
 // MARK: - View Maker
 
@@ -25,7 +28,7 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = CheckboxConfiguration
-    typealias ComponentView = CheckboxUIView
+    typealias ComponentView = SparkUICheckbox
     typealias ConfigurationView = CheckboxConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CheckboxComponentUIViewMaker>
 
@@ -39,32 +42,29 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
     func createComponentView(
         for configuration: Configuration
     ) -> ComponentView {
-        let componentView = if configuration.uiKitIsAttributedText {
-            ComponentView(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                attributedText: configuration.text.demoNSAttributedString,
-                checkedImage: .init(icon: configuration.checkedIcon),
-                selectionState: configuration.uiKitSelectionState,
-                alignment: configuration.alignment
-            )
-        } else {
-            ComponentView(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                text: configuration.text,
-                checkedImage: .init(icon: configuration.checkedIcon),
-                selectionState: configuration.uiKitSelectionState,
-                alignment: configuration.alignment
-            )
-        }
+        let componentView = ComponentView(
+            theme: configuration.theme.value,
+            selectedIcon: .init(icon: .check),
+            indeterminateIcon: .init(icon: .minus)
+        )
+        self.updateCommonProperties(componentView, for: configuration)
 
-        componentView.publisher.sink { value in
-            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.selectionState)
+        configuration.uiKitActionButton?.setTitle("Reset indeterminate", for: .normal)
+        configuration.uiKitActionButton?.addAction(.init(handler: { _ in
+            configuration.uiKitSelectionState = .indeterminate
+            configuration.uiKitIsSelected.value = false
+            componentView.demoIsSelected(configuration)
+
+            configuration.uiKitInfoLabel?.text = configuration.getUIKitInfoValue(
+                from: configuration.uiKitSelectionState
+            )
+
+        }), for: .touchUpInside)
+
+        componentView.selectionStatePublisher.sink { value in
+            configuration.uiKitInfoLabel?.text = configuration.getUIKitInfoValue(from: value)
         }
         .store(in: &self.cancellables)
-
-        self.updateCommonProperties(componentView, for: configuration)
 
         return componentView
     }
@@ -74,11 +74,7 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
         componentView.demoText(configuration)
-        componentView.checkedImage = .init(icon: configuration.checkedIcon)
-        componentView.selectionState = configuration.uiKitSelectionState
-        componentView.alignment = configuration.alignment
 
         self.updateCommonProperties(componentView, for: configuration)
     }
@@ -87,26 +83,34 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.demoControlType(
+            configuration,
+            event: .valueChanged,
+            on: self.viewController
+        )
+        componentView.intent = configuration.intent
+        componentView.demoIsSelected(configuration)
         componentView.demoDisabled(configuration)
+        componentView.demoText(configuration)
         componentView.demoAccessibilityLabel(configuration)
 
-        configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.selectionState)
-    }
-
-    // MARK: - Getter
-
-    func isFullWidth() -> Bool {
-        true
+        configuration.uiKitInfoLabel?.text = configuration.getUIKitInfoValue(
+            from: configuration.uiKitSelectionState
+        )
     }
 
     func isInfoLabel() -> Bool {
+        true
+    }
+
+    func isResetButton() -> Bool {
         true
     }
 }
 
 // MARK: - Extension
 
-private extension CheckboxUIView {
+private extension SparkUICheckbox {
 
     func demoText(_ configuration: CheckboxConfiguration) {
         if configuration.uiKitIsAttributedText {
@@ -115,5 +119,20 @@ private extension CheckboxUIView {
             self.text = configuration.text
         }
     }
-}
 
+    func demoIsSelected(_ configuration: CheckboxConfiguration) {
+        switch (configuration.uiKitIsAnimated, configuration.uiKitUseSelectionState) {
+        case (true, true):
+            self.setSelectionState(configuration.uiKitSelectionState, animated: true)
+
+        case (true, false):
+            self.setIsSelected(configuration.uiKitIsSelected.value, animated: true)
+
+        case (false, true):
+            self.selectionState = configuration.uiKitSelectionState
+
+        case (false, false):
+            self.isSelected = configuration.uiKitIsSelected.value
+        }
+    }
+}

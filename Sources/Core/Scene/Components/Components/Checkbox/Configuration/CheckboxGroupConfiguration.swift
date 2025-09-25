@@ -13,10 +13,7 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
     // MARK: - Properties
 
     var intent: CheckboxIntent = .random
-    var alignment: CheckboxAlignment = .random
-    var layout: CheckboxGroupLayout = .horizontal
-    var title = "My Title Group"
-    var checkedIcon: Iconography = .random
+    var axis: CheckboxGroupAxis = .random
 
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
@@ -24,6 +21,15 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
         }
     }
     var items = [Item]()
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+
+    // MARK: - UIKit Properties Only
+
+    var uiKitCanAnimated: Bool = false
+    var uiKitIsAnimated: Bool = false
 
     // MARK: - Initialization
 
@@ -33,6 +39,10 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
         self.updateItems()
 
         self.isEnabled.showConfiguration = true
+        self.swiftUIWidth.showConfiguration = true
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
     }
 
     // MARK: - Update
@@ -48,19 +58,14 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
         }
     }
 
-    func resetSelection(on items: inout [any CheckboxGroupItemProtocol]) {
-        for (index, _) in items.enumerated() {
-            items[index].selectionState = .unselected
-        }
-    }
-
     // MARK: - Getter
 
-    func getInfoValue(from selections: [CheckboxSelectionState]) -> String {
-        let texts: [String] = selections.enumerated().map { index, selection in
-            return "\(index + 1) \(selection)"
-            }
-        return texts.joined(separator: " | ")
+    func getInfoValue(from selectedIDs: [Int]) -> String {
+        if !selectedIDs.isEmpty {
+            "SelectedIDs :" + selectedIDs.sorted().map { "\($0)" }.joined(separator: ", ")
+        } else {
+            "No selection"
+        }
     }
 }
 
@@ -72,39 +77,26 @@ extension CheckboxGroupConfiguration {
         // MARK: - Properties
 
         let id: Int
-        var isLongText: Bool = .random()
-        var isAttributedText: Bool = .random()
-        var isEnabled: Bool = .random()
-        var selectionState: CheckboxSelectionState = .random
+        var isLongText: Bool = false
+        var isAttributedText: Bool = false
+        var isEnabled: Bool = true
+
+        // MARK: - SwiftUI Properties Only
+
+        var swiftUISecondText = "is amazing"
+
+        // MARK: - UIKit Properties Only
+
+        var uikitIsSelected = false
 
         // MARK: - Conversion
 
-        func toSpark(for framework: Framework) -> CheckboxGroupItemDefault {
-            let isAttributedTitleCondition = (framework.isUIKit && self.isAttributedText)
-
-            let text = if self.isLongText {
+        func getText() -> String {
+            return if self.isLongText {
                 "Quisque viverra tincidunt diam sed eleifend. Phasellus malesuada vitae dui a pharetra. Aliquam sagittis tincidunt dolor, non aliquam quam vestibulum nec."
             } else {
                 "My item \(self.id)"
             }
-
-            return CheckboxGroupItemDefault(
-                title: isAttributedTitleCondition ? nil : text,
-                attributedTitle: isAttributedTitleCondition ? text.demoNSAttributedString : nil,
-                id: String(self.id),
-                selectionState: self.selectionState,
-                isEnabled: self.isEnabled
-            )
         }
     }
-}
-
-// MARK: - Extension
-
-extension CheckboxGroupLayout: @retroactive CaseIterable {
-
-    public static var allCases: [CheckboxGroupLayout] = [
-        .vertical,
-        .horizontal
-    ]
 }

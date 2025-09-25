@@ -42,7 +42,7 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
     // MARK: - View
 
     var body: some View {
-        VStack(spacing: .medium) {
+        VStack(alignment: .leading, spacing: .medium) {
             switch self.style {
             case .alone:
                 self.aloneContent()

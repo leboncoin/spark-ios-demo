@@ -55,6 +55,20 @@ struct ComponentsView: View {
                 } footer: {
                     Text("\(self.searchResults.count) components")
                 }
+
+                Section {
+                    NavigationLink("Dev Mode") {
+                        switch self.framework {
+                        case .uiKit:
+                            DevModeUIViewRepresentable()
+                                .navigationBarTitle("Dev Mode")
+
+                        case .swiftUI:
+                            DevModeView()
+                                .navigationBarTitle("Dev Mode")
+                        }
+                    }
+                }
             }
             .navigationDestination(for: Component.self, destination: { component in
                 switch self.framework {
@@ -108,7 +122,7 @@ struct ComponentsView: View {
         case .progressBarIndeterminate: ProgressBarIndeterminateComponentView()
         case .progressTracker: ProgressTrackerComponentView()
         case .radioButton: RadioButtonComponentView()
-        case .radioButtonGroup: RadioButtonGroupComponentView()
+        case .radioGroup: RadioGroupComponentView()
         case .ratingDisplay: RatingDisplayComponentView()
         case .ratingInput: RatingInputComponentView()
         case .slider: SliderComponentView()
@@ -116,12 +130,12 @@ struct ComponentsView: View {
         case .snackbarPresentation: SnackbarPresentationComponentView()
         case .spinner: SpinnerComponentView()
         case .stepper: StepperComponentView()
-        case .switch: SwitchComponentView()
         case .tab: TabComponentView()
         case .tag: TagComponentView()
         case .textEditor: TextEditorComponentView()
         case .textField: TextFieldComponentView()
         case .textLink: TextLinkComponentView()
+        case .toggle: ToggleComponentView()
         default: EmptyView()
         }
     }
@@ -150,7 +164,7 @@ struct ComponentsView: View {
         case .progressBarIndeterminate: ProgressBarIndeterminateComponentUIViewController()
         case .progressTracker: ProgressTrackerComponentUIViewController()
         case .radioButton: RadioButtonComponentUIViewController()
-        case .radioButtonGroup: RadioButtonGroupComponentUIViewController()
+        case .radioGroup: RadioGroupComponentUIViewController()
         case .ratingDisplay: RatingDisplayComponentUIViewController()
         case .ratingInput: RatingInputComponentUIViewController()
         case .slider: SliderComponentUIViewController()
@@ -158,13 +172,13 @@ struct ComponentsView: View {
         case .snackbarPresentation: SnackbarPresentationComponentUIViewController()
         case .spinner: SpinnerComponentUIViewController()
         case .stepper: StepperComponentUIViewController()
-        case .switch: SwitchComponentUIViewController()
         case .tab: TabComponentUIViewController()
         case .tag: TagComponentUIViewController()
         case .textEditor: TextEditorComponentUIViewController()
         case .textField: TextFieldComponentUIViewController()
         case .textFieldAddons: TextFieldAddonsComponentUIViewController()
         case .textLink: TextLinkComponentUIViewController()
+        case .toggle: ToggleComponentUIViewController()
         default: EmptyView()
         }
     }
@@ -211,7 +225,7 @@ extension ComponentsView {
         case progressBarIndeterminate
         case progressTracker
         case radioButton
-        case radioButtonGroup
+        case radioGroup
         case ratingDisplay
         case ratingInput
         case slider
@@ -219,13 +233,13 @@ extension ComponentsView {
         case snackbarPresentation
         case spinner
         case stepper
-        case `switch`
         case tab
         case tag
         case textEditor
         case textField
         case textFieldAddons
         case textLink
+        case toggle
 
         // MARK: - Properties
 
@@ -251,7 +265,7 @@ extension ComponentsView {
             case .progressBarIndeterminate: .indicator
             case .progressTracker: .indicator
             case .radioButton: .dataInput
-            case .radioButtonGroup: .dataInput
+            case .radioGroup: .dataInput
             case .ratingDisplay: .dataDisplay
             case .ratingInput: .dataInput
             case .slider: .dataInput
@@ -259,13 +273,13 @@ extension ComponentsView {
             case .snackbarPresentation: .overlays
             case .spinner: .indicator
             case .stepper: .dataInput
-            case .switch: .dataInput
             case .tab: .navigation
             case .tag: .dataDisplay
             case .textEditor: .dataInput
             case .textField: .dataInput
             case .textFieldAddons: .dataInput
             case .textLink: .action
+            case .toggle: .dataInput
             }
         }
 

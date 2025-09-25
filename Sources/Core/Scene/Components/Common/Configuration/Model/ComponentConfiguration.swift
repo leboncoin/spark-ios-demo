@@ -34,6 +34,7 @@ class ComponentConfiguration: Identifiable {
     var uiKitControlType = ShowUIKitControlType()
     var uiKitIsSelected = ShowConfigurationBool()
     var uiKitInfoLabel: UILabel?
+    var uiKitActionButton: UIButton?
 
     // MARK: - Initialization
 
@@ -82,6 +83,7 @@ class ShowConfigurationSize: Identifiable, ShowConfiguration {
     var minText = ""
     var maxText = ""
     var infinite = false
+    var alignment: StackAlignment = .center
 
     // MARK: - Initialization
 

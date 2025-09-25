@@ -13,7 +13,7 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
     // MARK: - Type Alias
 
     typealias Configuration = CheckboxGroupConfiguration
-    typealias ComponentUIView = CheckboxGroupUIView
+    typealias ComponentUIView = SparkUICheckboxGroupInt
 
     // MARK: - Properties
 
@@ -65,27 +65,24 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
         )
 
         EnumConfigurationItemView(
-            name: "alignment",
-            values: CheckboxAlignment.allCases,
-            selectedValue: self.configuration.alignment
+            name: "axis",
+            values: RadioGroupAxis.allCases,
+            selectedValue: self.configuration.axis
         )
 
-        EnumConfigurationItemView(
-            name: "layout",
-            values: CheckboxGroupLayout.allCases,
-            selectedValue: self.configuration.layout
-        )
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "can animated",
+                isOn: self.configuration.uiKitCanAnimated
+            )
 
-        TextFieldConfigurationItemView(
-            name: "title",
-            text: self.configuration.title
-        )
-
-        EnumConfigurationItemView(
-            name: "checked icon",
-            values: Iconography.allCases,
-            selectedValue: self.configuration.checkedIcon
-        )
+            if self.configuration.wrappedValue.uiKitCanAnimated {
+                ToggleConfigurationItemView(
+                    name: "is animated",
+                    isOn: self.configuration.uiKitIsAnimated
+                )
+            }
+        }
     }
 
     @ViewBuilder
@@ -96,6 +93,13 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
                 value: self.configuration.numberOfItems,
                 bounds: 2...4
             )
+
+            if self.framework.isSwiftUI {
+                ToggleConfigurationItemView(
+                    name: "is custom content",
+                    isOn: self.configuration.swiftUIIsCustomContent
+                )
+            }
         }
 
         ForEach(self.configuration.items, id: \.id) { item in
@@ -110,12 +114,24 @@ struct CheckboxGroupConfigurationView: ConfigurationViewable, ConfigurationUIVie
                         name: "is attributed text",
                         isOn: item.isAttributedText
                     )
+                } else if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                    TextFieldConfigurationItemView(
+                        name: "second text",
+                        text: item.swiftUISecondText
+                    )
                 }
 
                 ToggleConfigurationItemView(
                     name: "is enabled",
                     isOn: item.isEnabled
                 )
+
+                if self.framework.isUIKit {
+                    ToggleConfigurationItemView(
+                        name: "is selected",
+                        isOn: item.uikitIsSelected
+                    )
+                }
             }
         }
     }

@@ -13,15 +13,19 @@ class CheckboxConfiguration: ComponentConfiguration {
     // MARK: - Properties
 
     var intent: CheckboxIntent = .random
-    var alignment: CheckboxAlignment = .random
     var text = "My Checkbox"
-    var checkedIcon: Iconography = .random
-    var isIndeterminate: Bool = .random()
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
 
     // MARK: - UIKit Properties Only
 
-    var uiKitSelectionState: CheckboxSelectionState = .unselected
-    var uiKitIsAttributedText: Bool = .random()
+    var uiKitUseSelectionState: Bool = true
+    var uiKitSelectionState: SparkComponentSelectionControls.CheckboxSelectionState = .unselected
+    var uiKitIsAttributedText: Bool = false
+    var uiKitIsAnimated: Bool = true
 
     // MARK: - Initialization
 
@@ -30,11 +34,23 @@ class CheckboxConfiguration: ComponentConfiguration {
 
         self.accessibilityLabel.showConfiguration = true
         self.isEnabled.showConfiguration = true
+
+        self.uiKitIsSelected.showConfiguration = true
+        self.uiKitIsSelected.value = false
+
+        self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.value = nil
+
+        self.swiftUIWidth.showConfiguration = true
     }
 
     // MARK: - Getter
 
-    func getInfoValue(from selectionState: CheckboxSelectionState) -> String {
+    func getInfoValue(from selectionState: SparkComponentSelectionControls.CheckboxSelectionState) -> String {
         return "Selection state : \(selectionState)"
+    }
+
+    func getUIKitInfoValue(from selectionState: SparkComponentSelectionControls.CheckboxSelectionState) -> String {
+        return self.getInfoValue(from: selectionState) + " - \(self.uiKitIsSelected.value)"
     }
 }

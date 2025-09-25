@@ -10,17 +10,16 @@ import UIKit
 import SwiftUI
 import Combine
 
-// TODO: To Fix
-// Remove isEnabled on init
-// Remove delegate
-
-// MARK: - Component
-
-typealias RadioButtonIntUIView = RadioButtonUIView<Int>
-
 // MARK: - View Controller
 
-typealias RadioButtonComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioButtonConfiguration, RadioButtonIntUIView, RadioButtonConfigurationView, RadioButtonComponentUIViewMaker>
+typealias RadioButtonComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioButtonConfiguration, SparkUIRadioButton, RadioButtonConfigurationView, RadioButtonComponentUIViewMaker>
+
+extension RadioButtonComponentUIViewController {
+
+    init() {
+        self.init(style: .alone, styles: [.alone])
+    }
+}
 
 // MARK: - View Maker
 
@@ -29,36 +28,27 @@ final class RadioButtonComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = RadioButtonConfiguration
-    typealias ComponentView = RadioButtonIntUIView
+    typealias ComponentView = SparkUIRadioButton
     typealias ConfigurationView = RadioButtonConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RadioButtonComponentUIViewMaker>
 
     // MARK: - Properties
 
     weak var viewController: DisplayViewController?
-    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Methods
 
     func createComponentView(
         for configuration: Configuration
     ) -> ComponentView {
-
-        let componentView = ComponentView(
-            theme: configuration.theme.value,
-            intent: configuration.intent,
-            id: 1,
-            label: configuration.uiKitIsAttributedText ? configuration.text.demoNSAttributedString : NSAttributedString(string: configuration.text),
-            isSelected: configuration.uiKitIsSelected.value,
-            labelAlignment: configuration.labelAlignment
-        )
-
-        componentView.publisher.sink { value in
-            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: value ? componentView.id : nil)
-        }
-        .store(in: &self.cancellables)
-
+        let componentView = ComponentView(theme: configuration.theme.value)
         self.updateCommonProperties(componentView, for: configuration)
+
+        configuration.uiKitActionButton?.setTitle("Reset", for: .normal)
+        configuration.uiKitActionButton?.addAction(.init(handler: { _ in
+            configuration.uiKitIsSelected.value = false
+            componentView.demoIsSelected(configuration)
+        }), for: .touchUpInside)
 
         return componentView
     }
@@ -68,10 +58,7 @@ final class RadioButtonComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
         componentView.demoText(configuration)
-        componentView.demoSelected(configuration)
-        componentView.labelAlignment = configuration.labelAlignment
 
         self.updateCommonProperties(componentView, for: configuration)
     }
@@ -80,26 +67,26 @@ final class RadioButtonComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.demoControlType(
+            configuration,
+            event: .valueChanged,
+            on: self.viewController
+        )
+        componentView.intent = configuration.intent
+        componentView.demoIsSelected(configuration)
         componentView.demoDisabled(configuration)
+        componentView.demoText(configuration)
         componentView.demoAccessibilityLabel(configuration)
-
-        configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.isSelected ? componentView.id : nil)
     }
 
-    // MARK: - Getter
-
-    func isFullWidth() -> Bool {
-        true
-    }
-
-    func isInfoLabel() -> Bool {
+    func isResetButton() -> Bool {
         true
     }
 }
 
 // MARK: - Extension
 
-private extension RadioButtonUIView {
+private extension SparkUIRadioButton {
 
     func demoText(_ configuration: RadioButtonConfiguration) {
         if configuration.uiKitIsAttributedText {
@@ -108,5 +95,12 @@ private extension RadioButtonUIView {
             self.text = configuration.text
         }
     }
-}
 
+    func demoIsSelected(_ configuration: RadioButtonConfiguration) {
+        if configuration.uiKitIsAnimated {
+            self.setIsSelected(configuration.uiKitIsSelected.value, animated: true)
+        } else {
+            self.isSelected = configuration.uiKitIsSelected.value
+        }
+    }
+}

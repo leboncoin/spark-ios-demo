@@ -1,5 +1,5 @@
 //
-//  RadioButtonGroupConfigurationView.swift
+//  RadioGroupConfigurationView.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 12/02/2025.
@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
+struct RadioGroupConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
 
     // MARK: - Type Alias
 
-    typealias Configuration = RadioButtonGroupConfiguration
-    typealias ComponentUIView = RadioButtonIntUIGroupView
+    typealias Configuration = RadioGroupConfiguration
+    typealias ComponentUIView = SparkUIRadioGroupInt
 
     // MARK: - Properties
 
@@ -44,7 +44,7 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
                 if let componentImplementationViewRepresentable {
                     componentImplementationViewRepresentable
                 } else {
-                    RadioButtonGroupImplementationView(configuration: self.configuration)
+                    RadioGroupImplementationView(configuration: self.configuration)
                 }
             },
             mainItemsView: {
@@ -65,16 +65,24 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
         )
 
         EnumConfigurationItemView(
-            name: "label alignment",
-            values: RadioButtonLabelAlignment.allCases,
-            selectedValue: self.configuration.labelAlignment
+            name: "axis",
+            values: RadioGroupAxis.allCases,
+            selectedValue: self.configuration.axis
         )
 
-        EnumConfigurationItemView(
-            name: "group layout",
-            values: RadioButtonGroupLayout.allCases,
-            selectedValue: self.configuration.groupLayout
-        )
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "can animated",
+                isOn: self.configuration.uiKitCanAnimated
+            )
+
+            if self.configuration.wrappedValue.uiKitCanAnimated {
+                ToggleConfigurationItemView(
+                    name: "is animated",
+                    isOn: self.configuration.uiKitIsAnimated
+                )
+            }
+        }
     }
 
     @ViewBuilder
@@ -92,6 +100,11 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
                     value: self.configuration.uiKitSelectedId,
                     bounds: -1...self.configuration.wrappedValue.numberOfItems
                 )
+            } else {
+                ToggleConfigurationItemView(
+                    name: "is custom content",
+                    isOn: self.configuration.swiftUIIsCustomContent
+                )
             }
         }
 
@@ -107,7 +120,17 @@ struct RadioButtonGroupConfigurationView: ConfigurationViewable, ConfigurationUI
                         name: "is attributed text",
                         isOn: item.isAttributedText
                     )
+                } else if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                    TextFieldConfigurationItemView(
+                        name: "second text",
+                        text: item.swiftUISecondText
+                    )
                 }
+
+                ToggleConfigurationItemView(
+                    name: "is enabled",
+                    isOn: item.isEnabled
+                )
             }
         }
     }

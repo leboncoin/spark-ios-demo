@@ -13,7 +13,7 @@ struct RadioButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewa
     // MARK: - Type Alias
 
     typealias Configuration = RadioButtonConfiguration
-    typealias ComponentUIView = RadioButtonIntUIView
+    typealias ComponentUIView = SparkUIRadioButton
 
     // MARK: - Properties
 
@@ -61,21 +61,35 @@ struct RadioButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewa
             selectedValue: self.configuration.intent
         )
 
-        EnumConfigurationItemView(
-            name: "label alignment",
-            values: RadioButtonLabelAlignment.allCases,
-            selectedValue: self.configuration.labelAlignment
-        )
-
         TextFieldConfigurationItemView(
             name: "text",
             text: self.configuration.text
         )
 
-        if self.framework.isUIKit {
+        if self.framework.isSwiftUI {
+            ToggleConfigurationItemView(
+                name: "is custom content",
+                isOn: self.configuration.swiftUIIsCustomContent
+            )
+
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second text",
+                    text: self.configuration.swiftUISecondText
+                )
+            }
+
+        } else {
             ToggleConfigurationItemView(
                 name: "is attributed text",
                 isOn: self.configuration.uiKitIsAttributedText
+            )
+        }
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.uiKitIsAnimated
             )
         }
     }

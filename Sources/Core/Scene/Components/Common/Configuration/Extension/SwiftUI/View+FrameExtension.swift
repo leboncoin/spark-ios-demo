@@ -21,7 +21,8 @@ extension View {
             minWidth: configuration.swiftUIWidth.minValue(),
             maxWidth: configuration.swiftUIWidth.maxValue(),
             minHeight: configuration.height.minValue(),
-            maxHeight: configuration.height.maxValue()
+            maxHeight: configuration.height.maxValue(),
+            alignment: .init(configuration.swiftUIWidth.alignment)
         )
     }
 }

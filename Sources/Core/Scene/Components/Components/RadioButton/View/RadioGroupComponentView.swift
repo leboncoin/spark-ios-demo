@@ -1,67 +1,70 @@
 //
-//  CheckboxGroupComponentView.swift
+//  RadioGroupComponentView.swift
 //  SparkDemo
 //
-//  Created by robin.lemaire on 30/01/2025.
+//  Created by robin.lemaire on 29/01/2025.
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
+
+// TODO: Crash on the configuration view when we decrease the number of items. If we comment the component on the configuration, no crash appen anymore. (Not from component but maybe on demo)
 
 import SwiftUI
 
 // MARK: - View
 
-typealias CheckboxGroupComponentView = ComponentViewable<CheckboxGroupConfiguration, CheckboxGroupImplementationView, CheckboxGroupConfigurationView>
+typealias RadioGroupComponentView = ComponentViewable<RadioGroupConfiguration, RadioGroupImplementationView, RadioGroupConfigurationView>
 
-extension CheckboxGroupComponentView {
+extension RadioGroupComponentView {
 
     init() {
-        self.init(style: .alone, styles: [.alone])
+        self.init(style: .verticalList, styles: [.alone, .verticalList])
     }
 }
 
 // MARK: - Subview
 
-struct CheckboxGroupImplementationView: ComponentImplementationViewable {
+struct RadioGroupImplementationView: ComponentImplementationViewable {
 
     // MARK: - Properties
 
-    var configuration: Binding<CheckboxGroupConfiguration>
+    var configuration: Binding<RadioGroupConfiguration>
     var showInfo: Bool = true
-    @State private var selectedIDs = [Int]()
-    private var selectedIDsForFormField: Binding<[Int]>? // Only used by the FormField demo
+
+    @State private var selectedID: Int? = Bool.random() ? 1 : nil
+    private var selectedIDForFormField: Binding<Int?>? // Only used by the FormField demo
 
     // MARK: - Initialization
 
-    init(configuration: Binding<CheckboxGroupConfiguration>) {
+    init(configuration: Binding<RadioGroupConfiguration>) {
         self.configuration = configuration
-        self.selectedIDsForFormField = nil
+        self.selectedIDForFormField = nil
     }
 
-    // Only used by the FormField demo
+    // Used by the FormField demo
     init(
-        configuration: Binding<CheckboxGroupConfiguration>,
-        selectedIDs: Binding<[Int]>,
-        showInfo: Bool
+        configuration: Binding<RadioGroupConfiguration>,
+        selectedID: Binding<Int?>,
+        showInfo: Bool = false
     ) {
         self.configuration = configuration
-        self.selectedIDsForFormField = selectedIDs
         self.showInfo = showInfo
+        self.selectedIDForFormField = selectedID
     }
 
     // MARK: - View
 
     var body: some View {
-        VStack(alignment: .center, spacing: .medium) {
+        VStack(alignment: .leading, spacing: .medium) {
 
             self.component()
-                .sparkCheckboxGroupAxis(self.configurationWrapped.axis)
-                .sparkCheckboxIntent(self.configurationWrapped.intent)
+                .sparkRadioGroupAxis(self.configurationWrapped.axis)
+                .sparkRadioButtonIntent(self.configurationWrapped.intent)
                 .demoDisabled(self.configurationWrapped)
                 .demoFrame(self.configurationWrapped)
                 .demoAccessibilityLabel(self.configurationWrapped)
 
             if self.showInfo {
-                Text(self.selectedItemsText())
+                Text(self.configurationWrapped.getInfoValue(from: self.selectedID))
                     .demoComponentInfoBackground()
             }
         }
@@ -70,11 +73,11 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
     @ViewBuilder
     func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
-            SparkCheckboxGroup(
+            SparkRadioGroup(
                 theme: self.configurationWrapped.theme.value,
-                selectedIDs: self.selectedIDsForFormField ?? self.$selectedIDs,
+                selectedID: self.selectedIDForFormField ?? self.$selectedID,
                 items: self.configurationWrapped.items.map { item in
-                    CheckboxGroupItem(
+                    RadioGroupItem(
                         id: item.id,
                         isEnabled: item.isEnabled,
                         label: {
@@ -87,46 +90,29 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
                             }
                         }
                     )
-                },
-                selectedIcon: .selected
+                }
             )
 
         } else {
-            SparkCheckboxGroup(
+            SparkRadioGroup(
                 theme: self.configurationWrapped.theme.value,
-                selectedIDs: self.selectedIDsForFormField ?? self.$selectedIDs,
+                selectedID: self.selectedIDForFormField ?? self.$selectedID,
                 items: self.configurationWrapped.items.map { item in
-                    CheckboxGroupItem(
+                    RadioGroupItem(
                         id: item.id,
                         title: item.getText(),
                         isEnabled: item.isEnabled
                     )
-                },
-                selectedIcon: .selected
+                }
             )
         }
-    }
-
-    // MARK: - Getter
-
-    func selectedItemsText() -> String {
-        return self.configurationWrapped.getInfoValue(from: self.selectedIDs)
-    }
-}
-
-// MARK: - Extension
-
-private extension Image {
-
-    static var selected: Image {
-        .init(icon: Iconography.check)
     }
 }
 
 // MARK: - Preview
 
-struct CheckboxGroupComponentView_Previews: PreviewProvider {
+struct RadioGroupComponentView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckboxGroupComponentView()
+        RadioGroupComponentView()
     }
 }
