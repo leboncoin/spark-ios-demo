@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+// TODO: Add reversible stack for SiwftUI
+
 struct ComponentsView: View {
 
     // MARK: - Properties
@@ -455,6 +457,8 @@ extension ComponentsView {
 
             return values.filter {
                 familly == .all || $0.familly == familly
+            }.filter {
+                accessibilityStatus == .all || $0.accessibilityStatus == accessibilityStatus
             }
             .filter {
                 accessibilityStatus == .all || $0.accessibilityStatus == accessibilityStatus

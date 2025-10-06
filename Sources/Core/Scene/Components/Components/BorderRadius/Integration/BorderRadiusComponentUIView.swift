@@ -92,11 +92,20 @@ final class BorderRadiusUIView: UIView {
     // MARK: - Update
 
     private func updateStyle() {
-        self.sparkBorderRadius(
-            width: self.configuration.width.value(from: self.configuration),
-            radius: self.configuration.radius.value(from: self.configuration),
-            isHighlighted: self.configuration.isHighlighted,
-            colorToken: self.configuration.borderColor
-        )
+        if self.configuration.dash > 0 {
+            self.sparkBorderRadius(
+                width: self.configuration.width.value(from: self.configuration),
+                radius: self.configuration.radius.value(from: self.configuration),
+                dash: self.configuration.dash,
+                colorToken: self.configuration.borderColor
+            )
+        } else {
+            self.sparkBorderRadius(
+                width: self.configuration.width.value(from: self.configuration),
+                radius: self.configuration.radius.value(from: self.configuration),
+                isHighlighted: self.configuration.isHighlighted,
+                colorToken: self.configuration.borderColor
+            )
+        }
     }
 }

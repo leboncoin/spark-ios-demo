@@ -13,6 +13,7 @@ class BorderConfiguration: ComponentConfiguration {
     // MARK: - Properties
 
     var width: SparkBorder.Width = .random
+    var dash: CGFloat = 0
 
     // MARK: - SwiftUI Properties Only
 

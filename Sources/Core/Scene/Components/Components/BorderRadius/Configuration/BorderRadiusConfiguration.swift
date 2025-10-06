@@ -14,6 +14,7 @@ class BorderRadiusConfiguration: ComponentConfiguration {
 
     var width: SparkBorder.Width = .random
     var radius: SparkBorder.Radius = .random
+    var dash: CGFloat = 0
     var isHighlighted: Bool = .random()
 
     // MARK: - SwiftUI Properties Only

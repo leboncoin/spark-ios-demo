@@ -13,7 +13,7 @@ struct ChipConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     // MARK: - Type Alias
 
     typealias Configuration = ChipConfiguration
-    typealias ComponentUIView = ChipUIView
+    typealias ComponentUIView = SparkUIChip
 
     // MARK: - Properties
 
@@ -49,6 +49,9 @@ struct ChipConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             },
             mainItemsView: {
                 self.itemsView()
+            },
+            otherSectionItemsView: {
+                self.extraComponentItemsView()
             }
         )
     }
@@ -78,6 +81,26 @@ struct ChipConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             text: self.configuration.text
         )
 
+        if self.framework.isSwiftUI {
+            ToggleConfigurationItemView(
+                name: "is custom content",
+                isOn: self.configuration.swiftUIIsCustomContent
+            )
+
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second text",
+                    text: self.configuration.swiftUISecondText
+                )
+            }
+
+        } else {
+            ToggleConfigurationItemView(
+                name: "is attributed text",
+                isOn: self.configuration.uiKitIsAttributedText
+            )
+        }
+
         OptionalEnumConfigurationItemView(
             name: "icon",
             values: Iconography.allCases,
@@ -92,13 +115,30 @@ struct ChipConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
         }
 
         ToggleConfigurationItemView(
+            name: "is selected",
+            isOn: self.configuration.isSelected
+        )
+    }
+
+    @ViewBuilder
+    private func extraComponentItemsView() -> some View {
+        ToggleConfigurationItemView(
             name: "with extra component (badge)",
             isOn: self.configuration.withExtraComponent
         )
 
-        ToggleConfigurationItemView(
-            name: "is selected",
-            isOn: self.configuration.isSelected
-        )
+        if self.configuration.wrappedValue.withExtraComponent {
+            StepperConfigurationItemView(
+                name: "value",
+                value: self.configuration.badgeConfiguration.value,
+                bounds: 1...100,
+                step: 10
+            )
+
+            TextFieldConfigurationItemView(
+                name: "accessibility label",
+                text: self.configuration.badgeConfiguration.accessibilityLabel.value
+            )
+        }
     }
 }

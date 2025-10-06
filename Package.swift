@@ -42,9 +42,9 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
-            url: "https://github.com/leboncoin/spark-ios-component-chip.git",
-            // path: "../spark-ios-component-chip"
-            /*version*/ "0.0.1"..."999.999.999"
+            // url: "https://github.com/leboncoin/spark-ios-component-chip.git",
+            path: "../spark-ios-component-chip"
+            // /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-divider.git",

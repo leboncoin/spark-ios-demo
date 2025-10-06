@@ -59,6 +59,13 @@ struct BorderConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             selectedValue: self.configuration.width
         )
 
+        StepperConfigurationItemView(
+            name: "dash",
+            value: self.configuration.dash,
+            bounds: 0...20,
+            step: 1
+        )
+
         if self.framework.isSwiftUI {
             ToggleConfigurationItemView(
                 name: "is scaled",

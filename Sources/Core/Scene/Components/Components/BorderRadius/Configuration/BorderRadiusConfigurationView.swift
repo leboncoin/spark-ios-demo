@@ -65,6 +65,13 @@ struct BorderRadiusConfigurationView: ConfigurationViewable, ConfigurationUIView
             selectedValue: self.configuration.radius
         )
 
+        StepperConfigurationItemView(
+            name: "dash",
+            value: self.configuration.dash,
+            bounds: 0...20,
+            step: 1
+        )
+
         ToggleConfigurationItemView(
             name: "is highlighted",
             isOn: self.configuration.isHighlighted

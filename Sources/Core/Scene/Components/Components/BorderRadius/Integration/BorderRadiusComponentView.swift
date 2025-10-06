@@ -38,6 +38,7 @@ struct BorderRadiusImplementationView: ComponentImplementationViewable {
             .sparkBorder(
                 width: self.configurationWrapped.width.value(from: self.configurationWrapped),
                 radius: self.configurationWrapped.radius.value(from: self.configurationWrapped),
+                dash: self.configurationWrapped.dash,
                 isHighlighted: self.configurationWrapped.isHighlighted,
                 colorToken: self.configurationWrapped.borderColor,
                 isScaled: self.configurationWrapped.swiftUIIsScaled
