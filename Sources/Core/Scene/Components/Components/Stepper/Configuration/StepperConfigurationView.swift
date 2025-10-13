@@ -54,20 +54,6 @@ struct StepperConfigurationView: ConfigurationViewable, ConfigurationUIViewable 
 
     @ViewBuilder
     private func itemsView() -> some View {
-        if self.framework.isSwiftUI {
-            EnumConfigurationItemView(
-                name: "decrement icon",
-                values: Iconography.allCases,
-                selectedValue: self.configuration.decrementIcon
-            )
-
-            EnumConfigurationItemView(
-                name: "increment icon",
-                values: Iconography.allCases,
-                selectedValue: self.configuration.incrementIcon
-            )
-        }
-
         OptionalEnumConfigurationItemView(
             name: "format",
             values: StepperFormat.allCases,

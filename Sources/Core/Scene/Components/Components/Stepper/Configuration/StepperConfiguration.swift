@@ -12,8 +12,6 @@ class StepperConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var decrementIcon: Iconography = .minus
-    var incrementIcon: Iconography = .plus
     var format: StepperFormat? = .optionalRandom
 
     var valueString: String = String(Int.random(in: 0..<100))

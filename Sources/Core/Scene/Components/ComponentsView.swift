@@ -13,13 +13,15 @@ struct ComponentsView: View {
     // MARK: - Properties
 
     let framework: Framework
+    @State private var accessibilityStatus: AccessibilityStatus = .all
     @State private var familly: Familly = .all
     @State private var searchText = ""
 
     var searchResults: [Component] {
         let allCases = Component.allCases(
             for: self.framework,
-            familly: self.familly
+            familly: self.familly,
+            accessibilityStatus: self.accessibilityStatus
         )
 
         let filteredResults = if self.searchText.isEmpty {
@@ -42,14 +44,52 @@ struct ComponentsView: View {
                 Section {
                     ForEach(self.searchResults, id: \.self) { component in
                         NavigationLink(value: component) {
-                            VStack(alignment: .leading) {
-                                Text(component.name)
-                                    .font(.body)
-                                Text(component.familly.name)
-                                    .font(.footnote)
-                                    .foregroundStyle(.gray)
-                                    .italic()
+                            HStack(alignment: .bottom) {
+
+                                ZStack {
+                                    if let image = component.image {
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                    } else {
+                                        Image(.placeholder)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+
+                                        Text(component.name.acronym)
+                                            .font(.system(size: 50))
+                                            .foregroundStyle(Color.level1)
+                                            .bold()
+                                    }
+                                }
+                                .frame(width: 100, height: 100)
+
+                                VStack(alignment: .leading, spacing: .small) {
+
+                                    Text(component.name)
+                                        .font(.title2)
+                                        .bold()
+                                        .foregroundStyle(Color.level1)
+
+                                    HStack {
+                                        Text(component.familly.name)
+                                            .font(.footnote)
+                                            .italic()
+                                            .padding(.vertical, 2)
+                                            .padding(.horizontal, 4)
+                                            .background {
+                                                RoundedRectangle(cornerRadius: 4)
+                                                    .fill(Color.level1)
+                                            }
+
+                                        if component.accessibilityStatus.isAccessibility {
+                                            Image(systemName: "accessibility")
+                                                .foregroundColor(component.accessibilityStatus.color)
+                                        }
+                                    }
+                                }
                             }
+                            .foregroundStyle(.background)
                         }
                     }
                 } footer: {
@@ -90,6 +130,18 @@ struct ComponentsView: View {
                         ForEach(Familly.allCases, id: \.rawValue) { familly in
                             Text(familly.name)
                                 .tag(familly)
+                        }
+                    }
+
+                    ControlGroup {
+                        ForEach(AccessibilityStatus.allCases.filter { $0 != .none }, id: \.rawValue) { status in
+                            Button(
+                                status.name,
+                                systemImage: status == self.accessibilityStatus ? "accessibility.fill" : "accessibility"
+                            ) {
+                                self.accessibilityStatus = status
+                            }
+                            .tint(status.color)
                         }
                     }
                 }
@@ -200,6 +252,30 @@ extension ComponentsView {
     }
 }
 
+// MARK: - Familly
+
+extension ComponentsView {
+    enum AccessibilityStatus: String, CaseIterable, Hashable {
+        case all
+        case none
+        case available
+        case unavailable
+
+        var isAccessibility: Bool {
+            self != .none
+        }
+
+        var color: Color {
+            switch self {
+            case .all: .primary
+            case .none: .gray
+            case .available: .green
+            case .unavailable: .red
+            }
+        }
+    }
+}
+
 // MARK: - Components
 
 extension ComponentsView {
@@ -283,8 +359,88 @@ extension ComponentsView {
             }
         }
 
-        static func allCases(for framework: Framework, familly: Familly) -> [Self] {
-            let values: [Self]
+        var accessibilityStatus: AccessibilityStatus {
+            switch self {
+            case .adaptativeStack: .available
+            case .badge: .unavailable
+            case .border: .available
+            case .borderRadius: .available
+            case .bottomSheet: .none
+            case .button: .available
+            case .checkbox: .available
+            case .checkboxGroup: .available
+            case .chip: .unavailable
+            case .cornerRadius: .available
+            case .divider: .unavailable
+            case .formField: .available
+            case .icon: .unavailable
+            case .iconButton: .available
+            case .microAnimation: .none
+            case .popover: .unavailable
+            case .progressBar: .unavailable
+            case .progressBarIndeterminate: .unavailable
+            case .progressTracker: .unavailable
+            case .radioButton: .available
+            case .radioGroup: .available
+            case .ratingDisplay: .unavailable
+            case .ratingInput: .unavailable
+            case .slider: .unavailable
+            case .snackbar: .unavailable
+            case .snackbarPresentation: .none
+            case .spinner: .unavailable
+            case .stepper: .available
+            case .tab: .unavailable
+            case .tag: .available
+            case .textEditor: .available
+            case .textField: .available
+            case .textFieldAddons: .available
+            case .textLink: .unavailable
+            case .toggle: .available
+            }
+        }
+
+        var image: Image? {
+            switch self {
+            case .badge: .init(.badge)
+            case .button: .init(.button)
+            case .bottomSheet: .init(.bottomSheet)
+            case .checkbox: .init(.checkbox)
+            case .checkboxGroup: .init(.checkbox)
+            case .chip: .init(.chip)
+            case .divider: .init(.divider)
+            case .formField: .init(.textField)
+            case .icon: .init(.icon)
+            case .iconButton: .init(.iconButton)
+            case .popover: .init(.popover)
+            case .progressBar: .init(.progressBar)
+            case .progressBarIndeterminate: .init(.progressBar)
+            case .progressTracker: .init(.progressTracker)
+            case .radioButton: .init(.radioButton)
+            case .radioGroup: .init(.radioButton)
+            case .ratingDisplay: .init(.rating)
+            case .ratingInput: .init(.rating)
+            case .slider: .init(.slider)
+            case .snackbar: .init(.snackbar)
+            case .snackbarPresentation: .init(.snackbar)
+            case .spinner: .init(.spinner)
+            case .stepper: .init(.stepper)
+            case .tab: .init(.tab)
+            case .tag: .init(.tag)
+            case .textEditor: .init(.textEditor)
+            case .textField: .init(.textField)
+            case .textFieldAddons: .init(.textField)
+            case .textLink: .init(.textLink)
+            case .toggle: .init(.toggle)
+            default: nil
+            }
+        }
+
+        static func allCases(
+            for framework: Framework,
+            familly: Familly,
+            accessibilityStatus: AccessibilityStatus?
+        ) -> [Self] {
+            var values: [Self]
 
             switch framework {
             case .uiKit:
@@ -299,6 +455,9 @@ extension ComponentsView {
 
             return values.filter {
                 familly == .all || $0.familly == familly
+            }
+            .filter {
+                accessibilityStatus == .all || $0.accessibilityStatus == accessibilityStatus
             }
         }
     }

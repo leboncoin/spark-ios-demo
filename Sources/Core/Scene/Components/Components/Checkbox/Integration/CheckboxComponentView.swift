@@ -50,8 +50,6 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
             SparkCheckbox(
                 theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
-                selectedIcon: .selected,
-                indeterminateIcon: .indeterminate,
                 label: {
                     VStack(alignment: .leading) {
                         Text(self.configurationWrapped.text)
@@ -67,16 +65,12 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
             SparkCheckbox(
                 text,
                 theme: self.configurationWrapped.theme.value,
-                selectionState: self.$selectionState,
-                selectedIcon: .selected,
-                indeterminateIcon: .indeterminate
+                selectionState: self.$selectionState
             )
         } else {
             SparkCheckbox(
                 theme: self.configurationWrapped.theme.value,
-                selectionState: self.$selectionState,
-                selectedIcon: .selected,
-                indeterminateIcon: .indeterminate
+                selectionState: self.$selectionState
             )
         }
     }

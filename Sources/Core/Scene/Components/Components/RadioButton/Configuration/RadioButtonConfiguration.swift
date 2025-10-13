@@ -38,6 +38,7 @@ class RadioButtonConfiguration: ComponentConfiguration {
         self.uiKitIsSelected.value = false
 
         self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.cases = ComponentControlType.classic
         self.uiKitControlType.value = nil
 
         self.swiftUIWidth.showConfiguration = true

@@ -129,7 +129,7 @@ struct ComponentConfigurationView<
                         if self.framework.isUIKit && self.configuration.uiKitControlType.showConfiguration {
                             OptionalEnumConfigurationItemView(
                                 name: "control type",
-                                values: ComponentControlType.allCases,
+                                values: self.configuration.uiKitControlType.cases,
                                 selectedValue: self.$configuration.uiKitControlType.value
                             )
                         }
@@ -171,9 +171,10 @@ struct ComponentConfigurationView<
         let isAccessibilityLabel = self.configuration.accessibilityLabel.showConfiguration
         let isAccessibilityValue = self.configuration.accessibilityValue.showConfiguration
         let isAccessibilityHint = self.configuration.accessibilityHint.showConfiguration
+        let isAccessibilityLargeContentTitle = self.configuration.accessibilityLargeContentTitle.showConfiguration
         let isOtherAccessibilityItemsView = self.otherAccessibilityItemsView != nil
 
-        if isAccessibilityLabel || isAccessibilityValue || isAccessibilityHint || isOtherAccessibilityItemsView {
+        if isAccessibilityLabel || isAccessibilityValue || isAccessibilityHint || isAccessibilityLargeContentTitle || isOtherAccessibilityItemsView {
             Section("Accessibility") {
                 if isAccessibilityLabel {
                     TextFieldConfigurationItemView(
@@ -193,6 +194,14 @@ struct ComponentConfigurationView<
                     TextFieldConfigurationItemView(
                         name: "Hint",
                         text: self.$configuration.accessibilityHint.value
+                    )
+                }
+
+                if isAccessibilityLargeContentTitle {
+                    TextFieldConfigurationItemView(
+                        name: "Large Content Title",
+                        text: self.$configuration.accessibilityLargeContentTitle.value,
+                        orientation: .vertical
                     )
                 }
 

@@ -14,4 +14,19 @@ enum ComponentControlType: String, CaseIterable {
     case action
     case target
     case toggle // Only for the button
+
+    // MARK: - Properties
+
+    /// Only action and target
+    static var classic: [Self] {
+        [.action, .target]
+    }
+
+    static var withoutToggle: [Self] {
+        self.allCases.filter { $0 != toggle }
+    }
+
+    static var withoutPublisher: [Self] {
+        self.allCases.filter { $0 != toggle }
+    }
 }

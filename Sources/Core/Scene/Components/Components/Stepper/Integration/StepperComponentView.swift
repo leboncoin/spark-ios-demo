@@ -67,9 +67,7 @@ struct StepperImplementationView: ComponentImplementationViewable {
                 value: self.$floatValue,
                 in: self.configurationWrapped.bounds(),
                 step: self.configurationWrapped.step(),
-                format: .currency(code: "EUR").locale(.init(identifier: "fr_FR")),
-                decrementImage: .init(icon: self.configurationWrapped.decrementIcon),
-                incrementImage: .init(icon: self.configurationWrapped.incrementIcon)
+                format: .currency(code: "EUR").locale(.init(identifier: "fr_FR"))
             )
             .demoProperties(self.configurationWrapped)
 
@@ -79,9 +77,7 @@ struct StepperImplementationView: ComponentImplementationViewable {
                 value: self.$intValue,
                 in: self.configurationWrapped.bounds().intRange,
                 step: self.configurationWrapped.step().intValue,
-                format: .percent,
-                decrementImage: .init(icon: self.configurationWrapped.decrementIcon),
-                incrementImage: .init(icon: self.configurationWrapped.incrementIcon)
+                format: .percent
             )
             .demoProperties(self.configurationWrapped)
 
@@ -90,9 +86,7 @@ struct StepperImplementationView: ComponentImplementationViewable {
                 theme: self.configurationWrapped.theme.value,
                 value: self.intValueForFormField ?? self.$intValue,
                 in: self.configurationWrapped.bounds().intRange,
-                step: self.configurationWrapped.step().intValue,
-                decrementImage: .init(icon: self.configurationWrapped.decrementIcon),
-                incrementImage: .init(icon: self.configurationWrapped.incrementIcon)
+                step: self.configurationWrapped.step().intValue
             )
             .demoProperties(self.configurationWrapped)
         }

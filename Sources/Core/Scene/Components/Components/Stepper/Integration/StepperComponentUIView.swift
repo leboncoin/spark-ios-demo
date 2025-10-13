@@ -44,9 +44,7 @@ final class StepperComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            decrementImage: .init(icon: configuration.decrementIcon),
-            incrementImage: .init(icon: configuration.incrementIcon)
+            theme: configuration.theme.value
         )
 
         self.updateCommonProperties(

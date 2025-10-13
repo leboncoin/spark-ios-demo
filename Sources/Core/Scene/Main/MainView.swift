@@ -100,6 +100,7 @@ public struct MainView<OtherTab>: View where OtherTab: View {
                     Text("Other")
                 }
         }
+        .tint(Color.level1)
     }
 }
 
