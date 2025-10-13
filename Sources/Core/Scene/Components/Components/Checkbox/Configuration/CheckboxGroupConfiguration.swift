@@ -42,6 +42,7 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
         self.swiftUIWidth.showConfiguration = true
 
         self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.cases = ComponentControlType.classic
         self.uiKitControlType.value = nil
     }
 

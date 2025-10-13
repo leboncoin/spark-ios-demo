@@ -43,9 +43,7 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            selectedIcon: .init(icon: .check),
-            indeterminateIcon: .init(icon: .minus)
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(componentView, for: configuration)
 
@@ -74,7 +72,6 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.demoText(configuration)
 
         self.updateCommonProperties(componentView, for: configuration)
     }

@@ -40,9 +40,7 @@ final class ToggleComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            onIcon: .init(icon: .check),
-            offIcon: .init(icon: .cross)
+            theme: configuration.theme.value
         )
 
         self.updateCommonProperties(

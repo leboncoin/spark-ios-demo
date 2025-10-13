@@ -15,7 +15,7 @@ extension View {
         _ configuration: Configuration
     ) -> some View {
         let value = configuration.accessibilityLabel.value
-        if !value.isEmpty {
+        if let value = value.nilIfEmpty {
             self.accessibilityLabel(value)
                 .sparkAccessibilityLargeContentText(value)
         } else {
@@ -28,7 +28,7 @@ extension View {
         _ configuration: Configuration
     ) -> some View {
         let value = configuration.accessibilityValue.value
-        if !value.isEmpty {
+        if let value = value.nilIfEmpty {
             self.accessibilityValue(value)
         } else {
             self
@@ -40,8 +40,24 @@ extension View {
         _ configuration: Configuration
     ) -> some View {
         let value = configuration.accessibilityHint.value
-        if !value.isEmpty {
+        if let value = value.nilIfEmpty {
             self.accessibilityHint(value)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func demoAccessibilityShowsLargeContentViewer<Configuration: ComponentConfiguration>(
+        _ configuration: Configuration,
+        icon: Iconography?
+    ) -> some View {
+        let value = configuration.accessibilityLargeContentTitle.value
+        if let value = value.nilIfEmpty {
+            self.accessibilityShowsLargeContentViewer {
+                Image(icon: icon)
+                Text(value)
+            }
         } else {
             self
         }

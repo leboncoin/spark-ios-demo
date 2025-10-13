@@ -47,8 +47,7 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            selectedIcon: .init(icon: .check)
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(componentView, for: configuration)
 

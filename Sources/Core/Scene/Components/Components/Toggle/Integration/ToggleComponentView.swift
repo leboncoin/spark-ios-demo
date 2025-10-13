@@ -43,8 +43,6 @@ struct ToggleImplementationView: ComponentImplementationViewable {
             SparkToggle(
                 theme: self.configurationWrapped.theme.value,
                 isOn: self.$isOn,
-                onIcon: .on,
-                offIcon: .off,
                 label: {
                     VStack(alignment: .leading) {
                         Text(self.configurationWrapped.text)
@@ -59,31 +57,14 @@ struct ToggleImplementationView: ComponentImplementationViewable {
             SparkToggle(
                 text,
                 theme: self.configurationWrapped.theme.value,
-                isOn: self.$isOn,
-                onIcon: .on,
-                offIcon: .off
+                isOn: self.$isOn
             )
         } else {
             SparkToggle(
                 theme: self.configurationWrapped.theme.value,
-                isOn: self.$isOn,
-                onIcon: .on,
-                offIcon: .off
+                isOn: self.$isOn
             )
         }
-    }
-}
-
-// MARK: - Extension
-
-private extension Image {
-
-    static var on: Image {
-        .init(icon: Iconography.check)
-    }
-
-    static var off: Image {
-        .init(icon: Iconography.cross)
     }
 }
 

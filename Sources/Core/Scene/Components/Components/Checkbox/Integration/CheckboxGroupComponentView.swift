@@ -87,8 +87,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
                             }
                         }
                     )
-                },
-                selectedIcon: .selected
+                }
             )
 
         } else {
@@ -101,8 +100,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
                         title: item.getText(),
                         isEnabled: item.isEnabled
                     )
-                },
-                selectedIcon: .selected
+                }
             )
         }
     }

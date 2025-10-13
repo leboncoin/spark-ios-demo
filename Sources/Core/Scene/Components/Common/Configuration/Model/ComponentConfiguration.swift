@@ -22,6 +22,7 @@ class ComponentConfiguration: Identifiable {
     var accessibilityLabel = ShowConfigurationString()
     var accessibilityValue = ShowConfigurationString()
     var accessibilityHint = ShowConfigurationString()
+    var accessibilityLargeContentTitle = ShowConfigurationString()
 
     // MARK: - Size Properties
 
@@ -116,5 +117,6 @@ struct ShowUIKitControlType: ShowConfiguration {
     // MARK: - Properties
 
     var showConfiguration = false
-    var value: ComponentControlType? = .optionalRandom
+    var cases = ComponentControlType.allCases
+    var value: ComponentControlType?
 }

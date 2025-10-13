@@ -16,6 +16,7 @@ extension UIView {
         self.demoAccessibilityLabel(configuration)
         self.demoAccessibilityValue(configuration)
         self.demoAccessibilityHint(configuration)
+        self.demoAccessibilityLargeContentTitle(configuration)
     }
 
     func demoAccessibilityLabel<Configuration: ComponentConfiguration>(
@@ -39,6 +40,14 @@ extension UIView {
     ) {
         if let value = configuration.accessibilityHint.value.nilIfEmpty {
             self.accessibilityHint = value
+        }
+    }
+
+    func demoAccessibilityLargeContentTitle<Configuration: ComponentConfiguration>(
+        _ configuration: Configuration
+    ) {
+        if let value = configuration.accessibilityLargeContentTitle.value.nilIfEmpty {
+            self.largeContentTitle = value
         }
     }
 }

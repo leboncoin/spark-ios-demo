@@ -46,6 +46,7 @@ class TextLinkConfiguration: ComponentConfiguration {
         super.init()
 
         self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.cases = ComponentControlType.classic
 
         self.accessibilityLabel.showConfiguration = true
         self.accessibilityValue.showConfiguration = true
