@@ -20,6 +20,6 @@ public struct SkyTheme: Theme {
     public let colors: any Colors = SkyColors()
     public let elevation: any Elevation = SkyElevation()
     public let layout: any Layout = SkyLayout()
-    public let typography: any Typography = SparkTypography()
+    public let typography: any Typography = SkyTypography()
     public let dims: any Dims = SkyDims()
 }

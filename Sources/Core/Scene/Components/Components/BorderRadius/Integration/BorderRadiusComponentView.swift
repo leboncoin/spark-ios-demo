@@ -41,6 +41,7 @@ struct BorderRadiusImplementationView: ComponentImplementationViewable {
                 dash: self.configurationWrapped.dash,
                 isHighlighted: self.configurationWrapped.isHighlighted,
                 colorToken: self.configurationWrapped.borderColor,
+                position: self.configurationWrapped.position,
                 isScaled: self.configurationWrapped.swiftUIIsScaled
             )
     }

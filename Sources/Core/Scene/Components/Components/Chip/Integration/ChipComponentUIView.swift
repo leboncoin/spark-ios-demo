@@ -73,10 +73,19 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
 
 private extension SparkUIChip {
 
+    func demoIcon(_ configuration: TagComponentUIViewMaker.Configuration) {
+        let newIcon = configuration.icon
+        if let newIcon {
+            self.icon = .init(icon: newIcon)
+        } else if self.icon != nil {
+            self.icon = nil
+        }
+    }
+
     func demoText(_ configuration: ChipConfiguration) {
         guard let text = configuration.text.nilIfEmpty else {
             self.text = nil
-            return 
+            return
         }
 
         if configuration.uiKitIsAttributedText {

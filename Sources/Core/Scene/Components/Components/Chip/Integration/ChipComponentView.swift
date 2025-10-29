@@ -51,7 +51,6 @@ struct ChipImplementationView: ComponentImplementationViewable {
             if self.configurationWrapped.swiftUIIsCustomContent {
                 SparkChip(
                     icon: .init(icon: self.configurationWrapped.icon),
-                    theme: self.configurationWrapped.theme.value,
                     action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil,
                     label: {
                         HStack {
@@ -70,7 +69,6 @@ struct ChipImplementationView: ComponentImplementationViewable {
                 SparkChip(
                     text,
                     icon: .init(icon: self.configurationWrapped.icon),
-                    theme: self.configurationWrapped.theme.value,
                     action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil,
                     extraContent: {
                         self.extraComponent()
@@ -79,7 +77,6 @@ struct ChipImplementationView: ComponentImplementationViewable {
             } else if let icon = self.configurationWrapped.icon {
                 SparkChip(
                     icon: .init(icon: icon),
-                    theme: self.configurationWrapped.theme.value,
                     action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil,
                     extraContent: {
                         self.extraComponent()
@@ -92,7 +89,6 @@ struct ChipImplementationView: ComponentImplementationViewable {
             if self.configurationWrapped.swiftUIIsCustomContent {
                 SparkChip(
                     icon: .init(icon: self.configurationWrapped.icon),
-                    theme: self.configurationWrapped.theme.value,
                     action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil,
                     label: {
                         HStack {
@@ -108,13 +104,11 @@ struct ChipImplementationView: ComponentImplementationViewable {
                 SparkChip(
                     text,
                     icon: .init(icon: self.configurationWrapped.icon),
-                    theme: self.configurationWrapped.theme.value,
                     action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil
                 )
             } else if let icon = self.configurationWrapped.icon {
                 SparkChip(
                     icon: .init(icon: icon),
-                    theme: self.configurationWrapped.theme.value,
                     action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil
                 )
             }

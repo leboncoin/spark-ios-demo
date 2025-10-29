@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-// TODO: Add reversible stack for SiwftUI
-
 struct ComponentsView: View {
 
     // MARK: - Properties
@@ -48,23 +46,8 @@ struct ComponentsView: View {
                         NavigationLink(value: component) {
                             HStack(alignment: .bottom) {
 
-                                ZStack {
-                                    if let image = component.image {
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                    } else {
-                                        Image(.placeholder)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-
-                                        Text(component.name.acronym)
-                                            .font(.system(size: 50))
-                                            .foregroundStyle(Color.level1)
-                                            .bold()
-                                    }
-                                }
-                                .frame(width: 100, height: 100)
+                                component.illustrationView
+                                    .frame(width: 100, height: 100)
 
                                 VStack(alignment: .leading, spacing: .small) {
 
@@ -364,14 +347,14 @@ extension ComponentsView {
         var accessibilityStatus: AccessibilityStatus {
             switch self {
             case .adaptativeStack: .available
-            case .badge: .unavailable
+            case .badge: .available
             case .border: .available
             case .borderRadius: .available
             case .bottomSheet: .none
             case .button: .available
             case .checkbox: .available
             case .checkboxGroup: .available
-            case .chip: .unavailable
+            case .chip: .available
             case .cornerRadius: .available
             case .divider: .unavailable
             case .formField: .available
@@ -401,7 +384,7 @@ extension ComponentsView {
             }
         }
 
-        var image: Image? {
+        private var image: Image? {
             switch self {
             case .badge: .init(.badge)
             case .button: .init(.button)
@@ -434,6 +417,34 @@ extension ComponentsView {
             case .textLink: .init(.textLink)
             case .toggle: .init(.toggle)
             default: nil
+            }
+        }
+
+        @ViewBuilder
+        var illustrationView: some View {
+            switch self {
+            case .adaptativeStack: AdaptativeStackIllustrationView()
+            case .border: BorderIllustrationView()
+            case .borderRadius: BorderRadiusIllustrationView()
+            case .cornerRadius: CornerRadiusIllustrationView()
+            case .microAnimation: MicroAnimationllustrationView()
+            default:
+                ZStack {
+                    if let image {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } else {
+                        Image(.placeholder)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+
+                        Text(self.name.acronym)
+                            .font(.system(size: 50))
+                            .foregroundStyle(Color.level1)
+                            .bold()
+                    }
+                }
             }
         }
 

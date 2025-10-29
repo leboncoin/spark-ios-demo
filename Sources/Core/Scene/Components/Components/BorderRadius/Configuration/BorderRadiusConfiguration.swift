@@ -12,8 +12,9 @@ class BorderRadiusConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var width: SparkBorder.Width = .random
-    var radius: SparkBorder.Radius = .random
+    var width: BorderDefault.Width = .random
+    var radius: BorderDefault.Radius = .random
+    var position: BorderPosition = .default
     var dash: CGFloat = 0
     var isHighlighted: Bool = .random()
 

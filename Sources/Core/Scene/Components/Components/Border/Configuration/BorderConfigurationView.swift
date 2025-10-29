@@ -55,8 +55,14 @@ struct BorderConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     private func itemsView() -> some View {
         EnumConfigurationItemView(
             name: "width",
-            values: SparkBorder.Width.allCases,
+            values: BorderDefault.Width.allCases,
             selectedValue: self.configuration.width
+        )
+
+        EnumConfigurationItemView(
+            name: "position",
+            values: BorderPosition.allCases,
+            selectedValue: self.configuration.position
         )
 
         StepperConfigurationItemView(

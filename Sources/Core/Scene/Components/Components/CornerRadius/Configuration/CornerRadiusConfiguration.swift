@@ -12,7 +12,7 @@ class CornerRadiusConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var radius: SparkBorder.Radius = .random
+    var radius: BorderDefault.Radius = .random
     var isHighlighted: Bool = .random()
 
     // MARK: - SwiftUI Properties Only

@@ -56,7 +56,7 @@ struct CornerRadiusConfigurationView: ConfigurationViewable, ConfigurationUIView
 
         EnumConfigurationItemView(
             name: "radius",
-            values: SparkBorder.Radius.allCases,
+            values: BorderDefault.Radius.allCases,
             selectedValue: self.configuration.radius
         )
 

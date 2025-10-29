@@ -39,6 +39,7 @@ struct BorderImplementationView: ComponentImplementationViewable {
                 width: self.configurationWrapped.width.value(from: self.configurationWrapped),
                 dash: self.configurationWrapped.dash,
                 colorToken: self.configurationWrapped.borderColor,
+                position: self.configurationWrapped.position,
                 isScaled: self.configurationWrapped.swiftUIIsScaled
             )
     }

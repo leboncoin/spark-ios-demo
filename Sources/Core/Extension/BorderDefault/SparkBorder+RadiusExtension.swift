@@ -1,5 +1,5 @@
 //
-//  SparkBorder+RadiusExtension.swift
+//  BorderDefault+RadiusExtension.swift
 //  SparkDemo
 //
 //  Created by robin.lemaire on 04/08/2025.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension SparkBorder {
+extension BorderDefault {
 
     // MARK: - Radius
 

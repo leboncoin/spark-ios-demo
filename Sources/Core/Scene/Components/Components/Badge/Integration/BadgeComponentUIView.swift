@@ -14,7 +14,14 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias BadgeComponentUIViewController = ComponentDisplayViewControllerRepresentable<BadgeConfiguration, BadgeUIView, BadgeConfigurationView, BadgeComponentUIViewMaker>
+typealias BadgeComponentUIViewController = ComponentDisplayViewControllerRepresentable<BadgeConfiguration, UIView, BadgeConfigurationView, BadgeComponentUIViewMaker>
+
+extension BadgeComponentUIViewController {
+
+    init() {
+        self.init(style: .alone)
+    }
+}
 
 // MARK: - View Maker
 
@@ -23,7 +30,7 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = BadgeConfiguration
-    typealias ComponentView = BadgeUIView
+    typealias ComponentView = UIView
     typealias ConfigurationView = BadgeConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BadgeComponentUIViewMaker>
 
@@ -31,40 +38,53 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
 
     weak var viewController: DisplayViewController?
 
+    var rectangleView: UIView?
+    var badgeView: SparkUIBadge?
+
+    private var leadingConstraint: NSLayoutConstraint?
+    private var topConstraint: NSLayoutConstraint?
+    private var trailingConstraint: NSLayoutConstraint?
+    private var bottomConstraint: NSLayoutConstraint?
+
     // MARK: - Methods
 
     func createComponentView(
         for configuration: Configuration
     ) -> ComponentView {
-        let componentView = ComponentView(
-            theme: configuration.theme.value,
-            intent: configuration.intent,
-            size: configuration.size,
-            value: configuration.value,
-            format: configuration.format.sparkValue(
-                customText: configuration.customText,
-                overflowValue: configuration.overflowValue
-            ),
-            isBorderVisible: configuration.isBorderVisible
-        )
-        self.updateCommonProperties(componentView, for: configuration)
 
-        return componentView
+        // View for attach
+        let rectangleView = UIView()
+        rectangleView.backgroundColor = .blue
+        rectangleView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rectangleView.widthAnchor.constraint(equalToConstant: 40),
+            rectangleView.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        self.rectangleView = rectangleView
+
+        // Badge
+        let badgeView = SparkUIBadge(
+            theme: configuration.theme.value
+        )
+        self.badgeView = badgeView
+
+        // Background
+        let backgroundView = UIView()
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(rectangleView)
+        backgroundView.addSubview(badgeView)
+
+        self.updateCommonProperties(backgroundView, for: configuration)
+
+        return backgroundView
     }
 
     func updateComponentView(
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.size = configuration.size
-        componentView.value = configuration.value
-        componentView.format = configuration.format.sparkValue(
-            customText: configuration.customText,
-            overflowValue: configuration.overflowValue
-        )
-        componentView.isBorderVisible = configuration.isBorderVisible
+        self.badgeView?.theme = configuration.theme.value
+
         self.updateCommonProperties(componentView, for: configuration)
     }
 
@@ -72,6 +92,50 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        componentView.demoAccessibilityLabel(configuration)
+        guard let badgeView, let rectangleView else {
+            return
+        }
+
+        badgeView.intent = configuration.intent
+        badgeView.size = configuration.size
+        badgeView.value = configuration.isValue ? configuration.value.nilIfZero : nil
+        badgeView.unit = configuration.unit.nilIfEmpty
+        badgeView.isBorder = configuration.isBorder
+        badgeView.demoAccessibilityLabel(configuration)
+
+        rectangleView.isHidden = !configuration.isAttached
+
+        // Clear constraints
+        self.leadingConstraint?.isActive = false
+        self.topConstraint?.isActive = false
+        self.trailingConstraint?.isActive = false
+        self.bottomConstraint?.isActive = false
+
+        componentView.removeConstraints([
+            self.leadingConstraint,
+            self.topConstraint,
+            self.trailingConstraint,
+            self.bottomConstraint
+        ].compactMap { $0 })
+
+        if configuration.isAttached {
+            badgeView.attach(to: rectangleView, position: configuration.position)
+        } else {
+            badgeView.detach()
+        }
+
+        let referenceView = configuration.isAttached ? rectangleView : badgeView
+
+        self.leadingConstraint = referenceView.leadingAnchor.constraint(equalTo: componentView.leadingAnchor)
+        self.leadingConstraint?.isActive = true
+
+        self.topConstraint = referenceView.topAnchor.constraint(equalTo: componentView.topAnchor)
+        self.topConstraint?.isActive = true
+
+        self.trailingConstraint = referenceView.trailingAnchor.constraint(equalTo: componentView.trailingAnchor)
+        self.trailingConstraint?.isActive = true
+
+        self.bottomConstraint = referenceView.bottomAnchor.constraint(equalTo: componentView.bottomAnchor)
+        self.bottomConstraint?.isActive = true
     }
 }

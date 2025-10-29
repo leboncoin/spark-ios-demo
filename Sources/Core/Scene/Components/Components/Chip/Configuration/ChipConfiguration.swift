@@ -48,7 +48,6 @@ class ChipConfiguration: ComponentConfiguration {
         self.uiKitControlType.showConfiguration = true
         self.uiKitControlType.cases = ComponentControlType.classic
 
-        self.badgeConfiguration.customText = ""
         self.badgeConfiguration.size = .medium
     }
 
@@ -63,7 +62,7 @@ private extension ChipIntent {
 
     // MARK: - Properties
 
-    var badge: BadgeIntentType {
+    var badge: BadgeIntent {
         switch self {
         case .accent: .accent
         case .alert: .alert
