@@ -34,7 +34,7 @@ struct BadgeImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         if self.configurationWrapped.isValue {
             SparkBadge(
                 value: self.configurationWrapped.value,

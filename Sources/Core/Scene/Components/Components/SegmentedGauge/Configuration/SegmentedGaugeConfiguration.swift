@@ -17,7 +17,7 @@ class SegmentedGaugeConfiguration: ComponentConfiguration {
     var typeCustomColorToken: ColorTokens = .random
     var segments: SegmentedGaugeSegments = .random
     var size: SegmentedGaugeSize = .random
-    var alignement: SegmentedGaugeAlignment = .random
+    var alignment: SegmentedGaugeAlignment = .random
     var isMarker: Bool = Bool.random()
     var title: String = "My Segmented Gauge"
     var description: String = "description"

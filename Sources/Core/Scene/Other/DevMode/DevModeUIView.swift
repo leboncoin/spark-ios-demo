@@ -27,10 +27,12 @@ final class DevModeUIViewController: UIViewController {
 
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            self.label
+            self.label,
+            self.component,
+            UIView()
         ])
         stackView.axis = .vertical
-        stackView.alignment = .center
+        stackView.alignment = .leading
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -41,6 +43,39 @@ final class DevModeUIViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
+    }()
+
+    private lazy var component: SparkUIChip = {
+        let extraContent = SparkUIBadge(theme: self.theme.value)
+        extraContent.intent = .danger
+        extraContent.value = 43
+        extraContent.size = .small
+
+        let componentView = SparkUIChip(theme: self.theme.value)
+        componentView.intent = .main
+        componentView.variant = .tinted
+        componentView.alignment = .leadingIcon
+        componentView.icon = .init(icon: .bellOutline)
+        componentView.addAction(.init(handler: { _ in
+        }), for: .touchUpInside)
+        componentView.extraContent = extraContent
+        componentView.text = "My Text"
+        componentView.isSelected = false
+        return componentView
+    }()
+
+    private lazy var component2: SparkUISegmentedGauge = {
+        let segmentedGauge = SparkUISegmentedGauge(
+            theme: self.theme.value
+        )
+        segmentedGauge.alignment = .horizontal
+        segmentedGauge.isMarker = true
+        segmentedGauge.segments = .five
+        segmentedGauge.size = .small
+        segmentedGauge.type = .medium
+        segmentedGauge.title = "Hello"
+        segmentedGauge.descriptionString = "Description"
+        return segmentedGauge
     }()
 
     // MARK: - Properties
@@ -58,7 +93,8 @@ final class DevModeUIViewController: UIViewController {
         // Constraints
         NSLayoutConstraint.stickEdges(
             from: self.contentStackView,
-            to: self.view
+            to: self.view,
+            insets: .init(all: .large)
         )
     }
 

@@ -9,12 +9,9 @@
 import UIKit
 import SwiftUI
 
-// TODO: Tox fix :
-// - Constraints crash on TableView demo
-
 // MARK: - View Controller
 
-typealias SegmentedGaugeComponentUIViewController = ComponentDisplayViewControllerRepresentable<SegmentedGaugeConfiguration, UIView, SegmentedGaugeConfigurationView, SegmentedGaugeComponentUIViewMaker>
+typealias SegmentedGaugeComponentUIViewController = ComponentDisplayViewControllerRepresentable<SegmentedGaugeConfiguration, SparkUISegmentedGauge, SegmentedGaugeConfigurationView, SegmentedGaugeComponentUIViewMaker>
 
 extension SegmentedGaugeComponentUIViewController {
 
@@ -30,7 +27,7 @@ final class SegmentedGaugeComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = SegmentedGaugeConfiguration
-    typealias ComponentView = UIView
+    typealias ComponentView = SparkUISegmentedGauge
     typealias ConfigurationView = SegmentedGaugeConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SegmentedGaugeComponentUIViewMaker>
 
@@ -43,91 +40,64 @@ final class SegmentedGaugeComponentUIViewMaker: ComponentUIViewMaker {
     func createComponentView(
         for configuration: Configuration
     ) -> ComponentView {
+        let segmentedGauge = SparkUISegmentedGauge(
+            theme: configuration.theme.value
+        )
+        self.updateCommonProperties(segmentedGauge, for: configuration)
 
-//        // View for attach
-//        let rectangleView = UIView()
-//        rectangleView.backgroundColor = .blue
-//        rectangleView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            rectangleView.widthAnchor.constraint(equalToConstant: 40),
-//            rectangleView.heightAnchor.constraint(equalToConstant: 40)
-//        ])
-//        self.rectangleView = rectangleView
-//
-//        // SegmentedGauge
-//        let badgeView = SparkUISegmentedGauge(
-//            theme: configuration.theme.value
-//        )
-//        self.badgeView = badgeView
-
-        // Background
-        let backgroundView = UIView()
-//        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-//        backgroundView.addSubview(rectangleView)
-//        backgroundView.addSubview(badgeView)
-//
-//        self.updateCommonProperties(backgroundView, for: configuration)
-
-        return backgroundView
+        return segmentedGauge
     }
 
     func updateComponentView(
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-//        self.badgeView?.theme = configuration.theme.value
-//
-//        self.updateCommonProperties(componentView, for: configuration)
+        componentView.theme = configuration.theme.value
+
+        self.updateCommonProperties(componentView, for: configuration)
     }
 
     private func updateCommonProperties(
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-//        guard let badgeView, let rectangleView else {
-//            return
-//        }
-//
-//        badgeView.intent = configuration.intent
-//        badgeView.size = configuration.size
-//        badgeView.value = configuration.isValue ? configuration.value.nilIfZero : nil
-//        badgeView.unit = configuration.unit.nilIfEmpty
-//        badgeView.isBorder = configuration.isBorder
-//        badgeView.demoAccessibilityLabel(configuration)
-//
-//        rectangleView.isHidden = !configuration.isAttached
-//
-//        // Clear constraints
-//        self.leadingConstraint?.isActive = false
-//        self.topConstraint?.isActive = false
-//        self.trailingConstraint?.isActive = false
-//        self.bottomConstraint?.isActive = false
-//
-//        componentView.removeConstraints([
-//            self.leadingConstraint,
-//            self.topConstraint,
-//            self.trailingConstraint,
-//            self.bottomConstraint
-//        ].compactMap { $0 })
-//
-//        if configuration.isAttached {
-//            badgeView.attach(to: rectangleView, position: configuration.position)
-//        } else {
-//            badgeView.detach()
-//        }
-//
-//        let referenceView = configuration.isAttached ? rectangleView : badgeView
-//
-//        self.leadingConstraint = referenceView.leadingAnchor.constraint(equalTo: componentView.leadingAnchor)
-//        self.leadingConstraint?.isActive = true
-//
-//        self.topConstraint = referenceView.topAnchor.constraint(equalTo: componentView.topAnchor)
-//        self.topConstraint?.isActive = true
-//
-//        self.trailingConstraint = referenceView.trailingAnchor.constraint(equalTo: componentView.trailingAnchor)
-//        self.trailingConstraint?.isActive = true
-//
-//        self.bottomConstraint = referenceView.bottomAnchor.constraint(equalTo: componentView.bottomAnchor)
-//        self.bottomConstraint?.isActive = true
+        componentView.alignment = configuration.alignment
+        componentView.isMarker = configuration.isMarker
+        componentView.segments = configuration.segments
+        componentView.size = configuration.size
+        componentView.type = configuration.type.toRealType(configuration)
+        componentView.demoTitle(configuration)
+        componentView.demoDescription(configuration)
+        componentView.demoAccessibilityLabel(configuration)
+    }
+}
+// MARK: - Extension
+
+private extension SparkUISegmentedGauge {
+
+    func demoTitle(_ configuration: SegmentedGaugeConfiguration) {
+        guard let title = configuration.title.nilIfEmpty else {
+            self.title = nil
+            return
+        }
+
+        if configuration.uiKitIsAttributedTitle {
+            self.attributedTitle = title.demoNSAttributedString
+        } else {
+            self.title = title
+        }
+    }
+
+    func demoDescription(_ configuration: SegmentedGaugeConfiguration) {
+        guard let description = configuration.description.nilIfEmpty else {
+            self.descriptionString = nil
+            return
+        }
+
+        if configuration.uiKitIsAttributedDescription {
+            self.attributedDescription = description.demoNSAttributedString
+        } else {
+            self.descriptionString = description
+        }
     }
 }

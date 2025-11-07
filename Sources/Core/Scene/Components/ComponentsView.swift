@@ -362,7 +362,7 @@ extension ComponentsView {
             case .cornerRadius: .available
             case .divider: .unavailable
             case .formField: .available
-            case .icon: .unavailable
+            case .icon: .available
             case .iconButton: .available
             case .microAnimation: .none
             case .popover: .unavailable
@@ -389,7 +389,7 @@ extension ComponentsView {
             }
         }
 
-        private var image: Image? {
+        private var illustration: Image? {
             switch self {
             case .badge: .init(.badge)
             case .button: .init(.button)
@@ -409,6 +409,7 @@ extension ComponentsView {
             case .radioGroup: .init(.radioButton)
             case .ratingDisplay: .init(.rating)
             case .ratingInput: .init(.rating)
+            case .segmentedGauge: .init(.segmentedGauge)
             case .slider: .init(.slider)
             case .snackbar: .init(.snackbar)
             case .snackbarPresentation: .init(.snackbar)
@@ -435,8 +436,8 @@ extension ComponentsView {
             case .microAnimation: MicroAnimationllustrationView()
             default:
                 ZStack {
-                    if let image {
-                        image
+                    if let illustration {
+                        illustration
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                     } else {

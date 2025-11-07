@@ -48,7 +48,9 @@ class ChipConfiguration: ComponentConfiguration {
         self.uiKitControlType.showConfiguration = true
         self.uiKitControlType.cases = ComponentControlType.classic
 
-        self.badgeConfiguration.size = .medium
+        self.badgeConfiguration.isValue = true
+        self.badgeConfiguration.isAttached = false
+        self.badgeConfiguration.size = .small
     }
 
     // MARK: - Getter

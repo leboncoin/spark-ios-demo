@@ -33,7 +33,7 @@ struct TagImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         if let icon = self.configurationWrapped.icon,
            let text = self.configurationWrapped.text.nilIfEmpty,
            self.configurationWrapped.swiftUIIsCustomContent {

@@ -25,7 +25,7 @@ struct SegmentedGaugeImplementationView: ComponentImplementationViewable {
     var body: some View {
         self.component()
             .sparkTheme(self.configurationWrapped.theme.value)
-            .sparkSegmentedGaugeAlignment(self.configurationWrapped.alignement)
+            .sparkSegmentedGaugeAlignment(self.configurationWrapped.alignment)
             .sparkSegmentedGaugeSegments(self.configurationWrapped.segments)
             .sparkSegmentedGaugeSize(self.configurationWrapped.size)
             .sparkSegmentedGaugeIsMarker(self.configurationWrapped.isMarker)
@@ -34,10 +34,7 @@ struct SegmentedGaugeImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
-
-        // TODO: Gerer quand un des deux label est custom et l'autre en string
-
+    private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomTitle,
            self.configurationWrapped.swiftUIIsCustomDescription {
             SparkSegmentedGauge(
@@ -49,34 +46,50 @@ struct SegmentedGaugeImplementationView: ComponentImplementationViewable {
                 }
             )
 
-        } else if self.configurationWrapped.swiftUIIsCustomDescription {
+        } else if let description = self.configurationWrapped.description.nilIfEmpty,
+                  self.configurationWrapped.swiftUIIsCustomTitle {
+            SparkSegmentedGauge(
+                description,
+                titleLabel: {
+                    self.customContent(forTitle: true)
+                }
+            )
+        } else if let title = self.configurationWrapped.title.nilIfEmpty,
+                  self.configurationWrapped.swiftUIIsCustomDescription {
+            SparkSegmentedGauge(
+                title,
+                descriptionLabel: {
+                    self.customContent(forTitle: false)
+                }
+            )
+        } else if self.configurationWrapped.title.nilIfEmpty == nil,
+                  self.configurationWrapped.swiftUIIsCustomDescription {
             SparkSegmentedGauge(
                 descriptionLabel: {
                     self.customContent(forTitle: false)
                 }
             )
-
         } else if let title = self.configurationWrapped.title.nilIfEmpty,
                   let description = self.configurationWrapped.description.nilIfEmpty {
             SparkSegmentedGauge(
-                title: title,
+                title,
                 description: description
             )
 
         } else if let description = self.configurationWrapped.description.nilIfEmpty {
             SparkSegmentedGauge(
-                description: description
+                description
             )
         } else {
             SparkSegmentedGauge(
-                description: "Description"
+                "Bad parameters"
             )
         }
     }
 
     // MARK: - Custom Content
 
-    func customContent(forTitle: Bool) -> some View {
+    private func customContent(forTitle: Bool) -> some View {
         HStack {
             Text(forTitle ? self.configurationWrapped.title : self.configurationWrapped.description)
 

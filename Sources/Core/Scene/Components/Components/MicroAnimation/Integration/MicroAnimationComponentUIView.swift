@@ -97,7 +97,7 @@ final class MicroAnimationContentUIView: UIView {
         return parentStackView
     }()
 
-    private lazy var iconView: IconUIView = {
+    private lazy var iconView: SparkUIIcon = {
         let maker = IconComponentUIViewMaker()
 
         return maker.createComponentView(

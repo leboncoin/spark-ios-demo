@@ -13,7 +13,7 @@ struct SegmentedGaugeConfigurationView: ConfigurationViewable, ConfigurationUIVi
     // MARK: - Type Alias
 
     typealias Configuration = SegmentedGaugeConfiguration
-    typealias ComponentUIView = UIView
+    typealias ComponentUIView = SparkUISegmentedGauge
 
     // MARK: - Properties
 
@@ -72,9 +72,9 @@ struct SegmentedGaugeConfigurationView: ConfigurationViewable, ConfigurationUIVi
         )
 
         EnumConfigurationItemView(
-            name: "alignement",
+            name: "alignment",
             values: SegmentedGaugeAlignment.allCases,
-            selectedValue: self.configuration.alignement
+            selectedValue: self.configuration.alignment
         )
 
         ToggleConfigurationItemView(

@@ -44,7 +44,7 @@ struct ChipImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         // With extra component
         if self.configurationWrapped.withExtraComponent {
 
