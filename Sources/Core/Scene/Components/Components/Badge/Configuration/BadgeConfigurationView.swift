@@ -13,7 +13,7 @@ struct BadgeConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     // MARK: - Type Alias
 
     typealias Configuration = BadgeConfiguration
-    typealias ComponentUIView = BadgeUIView
+    typealias ComponentUIView = UIView
 
     // MARK: - Properties
 
@@ -49,6 +49,9 @@ struct BadgeConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             },
             mainItemsView: {
                 self.itemsView()
+            },
+            otherSectionItemsView: {
+                self.otherSectionItemsView()
             }
         )
     }
@@ -57,7 +60,7 @@ struct BadgeConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     private func itemsView() -> some View {
         EnumConfigurationItemView(
             name: "intent",
-            values: BadgeIntentType.allCases,
+            values: BadgeIntent.allCases,
             selectedValue: self.configuration.intent
         )
 
@@ -67,41 +70,44 @@ struct BadgeConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             selectedValue: self.configuration.size
         )
 
-        EnumConfigurationItemView(
-            name: "format",
-            values: BadgeFormat.allCases,
-            selectedValue: self.configuration.format
+        ToggleConfigurationItemView(
+            name: "is value",
+            isOn: self.configuration.isValue
         )
 
-        switch self.configuration.wrappedValue.format {
-        case .custom:
-            TextFieldConfigurationItemView(
-                name: "custom text",
-                text: self.configuration.customText
-            )
-
-        case .overflowCounter:
+        if self.configuration.wrappedValue.isValue {
             StepperConfigurationItemView(
-                name: "overflow value",
-                value: self.configuration.overflowValue,
-                bounds: 1...200,
+                name: "value",
+                value: self.configuration.value,
+                bounds: 1...110,
                 step: 5
             )
 
-        default:
-            EmptyView()
+            TextFieldConfigurationItemView(
+                name: "unit",
+                text: self.configuration.unit
+            )
         }
 
-        StepperConfigurationItemView(
-            name: "value",
-            value: self.configuration.value,
-            bounds: 1...200,
-            step: 5
+        ToggleConfigurationItemView(
+            name: "is border",
+            isOn: self.configuration.isBorder
+        )
+    }
+
+    @ViewBuilder
+    private func otherSectionItemsView() -> some View {
+        ToggleConfigurationItemView(
+            name: "is attached",
+            isOn: self.configuration.isAttached
         )
 
-        ToggleConfigurationItemView(
-            name: "is border visible",
-            isOn: self.configuration.isBorderVisible
-        )
+        if self.configuration.wrappedValue.isAttached {
+            EnumConfigurationItemView(
+                name: "position",
+                values: BadgePosition.allCases,
+                selectedValue: self.configuration.position
+            )
+        }
     }
 }

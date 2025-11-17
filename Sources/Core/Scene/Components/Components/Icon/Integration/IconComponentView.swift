@@ -23,12 +23,10 @@ struct IconImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        IconView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            size: self.configurationWrapped.size,
-            iconImage: .init(icon: self.configurationWrapped.icon)
-        )
+        SparkIcon(.init(icon: self.configurationWrapped.icon))
+            .sparkTheme(self.configurationWrapped.theme.value)
+            .sparkIconIntent(self.configurationWrapped.intent.toRealType(self.configurationWrapped))
+            .sparkIconSize(self.configurationWrapped.size.toRealType(self.configurationWrapped))
         .demoAccessibilityLabel(self.configurationWrapped)
     }
 }

@@ -41,7 +41,7 @@ struct RadioButtonImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkRadioButton(
                 theme: self.configurationWrapped.theme.value,

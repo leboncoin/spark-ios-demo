@@ -71,7 +71,7 @@ struct RadioGroupImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkRadioGroup(
                 theme: self.configurationWrapped.theme.value,

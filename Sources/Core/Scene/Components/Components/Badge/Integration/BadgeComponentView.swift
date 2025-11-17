@@ -23,18 +23,42 @@ struct BadgeImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        BadgeView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            value: Int(self.configurationWrapped.value)
-        )
-        .size(self.configurationWrapped.size)
-        .format(self.configurationWrapped.format.sparkValue(
-            customText: self.configurationWrapped.customText,
-            overflowValue: self.configurationWrapped.overflowValue
-        ))
-        .borderVisible(self.configurationWrapped.isBorderVisible)
-        .demoAccessibilityLabel(self.configurationWrapped)
+        self.content {
+            self.component()
+                .sparkBadgeIntent(self.configurationWrapped.intent)
+                .sparkBadgeSize(self.configurationWrapped.size)
+                .sparkBadgeIsBorder(self.configurationWrapped.isBorder)
+                .demoAccessibilityLabel(self.configurationWrapped)
+        }
+        .sparkTheme(self.configurationWrapped.theme.value)
+    }
+
+    @ViewBuilder
+    private func component() -> some View {
+        if self.configurationWrapped.isValue {
+            SparkBadge(
+                value: self.configurationWrapped.value,
+                unit: self.configurationWrapped.unit
+            )
+        } else {
+            SparkBadge()
+        }
+    }
+
+    @ViewBuilder
+    private func content<Badge>(
+        @ViewBuilder badge: @escaping () -> Badge
+    ) -> some View where Badge: View {
+        if self.configurationWrapped.isAttached {
+            Rectangle()
+                .fill(.blue)
+                .frame(size: 40)
+                .attachSparkBadge(position: self.configurationWrapped.position) {
+                    badge()
+                }
+        } else {
+            badge()
+        }
     }
 }
 

@@ -12,13 +12,14 @@ class BadgeConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: BadgeIntentType = .random
+    var intent: BadgeIntent = .random
     var size: BadgeSize = .random
+    var isValue: Bool = Bool.random()
     var value: Int = Int.random(in: 1...100)
-    var format: BadgeFormat = .default
-    var overflowValue = 99
-    var customText = "My custom text"
-    var isBorderVisible: Bool = .random()
+    var unit: String = ""
+    var isBorder: Bool = true
+    var isAttached: Bool = false
+    var position: BadgePosition = .random
 
     // MARK: - Initialization
 

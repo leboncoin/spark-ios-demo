@@ -45,7 +45,7 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkCheckbox(
                 theme: self.configurationWrapped.theme.value,

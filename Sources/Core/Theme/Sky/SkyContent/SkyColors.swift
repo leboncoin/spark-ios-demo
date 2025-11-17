@@ -2,7 +2,7 @@
 //  SkyColors.swift
 //  Spark
 //
-//  Created by alex.vecherov on 05.06.23.
+//  Created by robin.lemaire on 22/08/2023.
 //  Copyright © 2023 Leboncoin. All rights reserved.
 //
 

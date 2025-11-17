@@ -37,7 +37,9 @@ struct BorderImplementationView: ComponentImplementationViewable {
             .fixedSize(horizontal: false, vertical: true)
             .sparkBorder(
                 width: self.configurationWrapped.width.value(from: self.configurationWrapped),
+                dash: self.configurationWrapped.dash,
                 colorToken: self.configurationWrapped.borderColor,
+                position: self.configurationWrapped.position,
                 isScaled: self.configurationWrapped.swiftUIIsScaled
             )
     }
