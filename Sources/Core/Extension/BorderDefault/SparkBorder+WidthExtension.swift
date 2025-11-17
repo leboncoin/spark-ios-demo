@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension SparkBorder {
+extension BorderDefault {
 
     enum Width: String, CaseIterable {
         case small

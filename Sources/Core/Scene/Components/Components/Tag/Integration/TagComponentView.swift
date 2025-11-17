@@ -33,7 +33,7 @@ struct TagImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         if let icon = self.configurationWrapped.icon,
            let text = self.configurationWrapped.text.nilIfEmpty,
            self.configurationWrapped.swiftUIIsCustomContent {
@@ -42,7 +42,7 @@ struct TagImplementationView: ComponentImplementationViewable {
                 icon: .init(icon: icon),
                 label: {
                     Group {
-                        Text(text) +
+                        Text(text + " ") +
                         Text(self.configurationWrapped.swiftUISecondText)
                             .foregroundColor(.blue)
                             .italic()

@@ -13,7 +13,7 @@ struct IconConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     // MARK: - Type Alias
 
     typealias Configuration = IconConfiguration
-    typealias ComponentUIView = IconUIView
+    typealias ComponentUIView = SparkUIIcon
 
     // MARK: - Properties
 
@@ -56,15 +56,30 @@ struct IconConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
 
                 EnumConfigurationItemView(
                     name: "intent",
-                    values: IconIntent.allCases,
+                    values: IconDemoIntent.allCases,
                     selectedValue: self.configuration.intent
                 )
 
+                if self.configuration.wrappedValue.intent == .custom {
+                    ColorTokensConfigurationItemView(
+                        selectedValue: self.configuration.intentCustomColorToken
+                    )
+                }
+
                 EnumConfigurationItemView(
                     name: "size",
-                    values: IconSize.allCases,
+                    values: IconDemoSize.allCases,
                     selectedValue: self.configuration.size
                 )
+
+                if self.configuration.wrappedValue.size == .custom {
+                    StepperConfigurationItemView(
+                        name: "Custom size",
+                        value: self.configuration.sizeCustomValue,
+                        bounds: 0...100,
+                        step: 10
+                    )
+                }
             }
         )
     }

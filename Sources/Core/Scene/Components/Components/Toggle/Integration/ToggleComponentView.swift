@@ -38,7 +38,7 @@ struct ToggleImplementationView: ComponentImplementationViewable {
     }
 
     @ViewBuilder
-    func component() -> some View {
+    private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkToggle(
                 theme: self.configurationWrapped.theme.value,

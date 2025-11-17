@@ -116,9 +116,9 @@ vendor/
 *.lock
 
 
-# SwiftLint Remote Config Cache
-.swiftlint/RemoteConfigCache
-
 #Xcodebuild
 *.xcresult
 .derivedData
+
+# SwiftLint Remote Config Cache
+.swiftlint/RemoteConfigCache

@@ -12,7 +12,11 @@ class ChipConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: ChipIntent = .random
+    var intent: ChipIntent = .random {
+        didSet {
+            self.badgeConfiguration.intent = self.intent.badge
+        }
+    }
     var variant: ChipVariant = .random
     var alignment: ChipAlignment = .random
     var text = "My Chip"
@@ -24,7 +28,13 @@ class ChipConfiguration: ComponentConfiguration {
 
     // MARK: - SwiftUI Properties Only
 
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
     var swiftUIWithAction: Bool = .random()
+
+    // MARK: - UIKit Properties Only
+
+    var uiKitIsAttributedText = false
 
     // MARK: - Initialization
 
@@ -34,14 +44,38 @@ class ChipConfiguration: ComponentConfiguration {
         self.isEnabled.showConfiguration = true
 
         self.accessibilityLabel.showConfiguration = true
+        self.accessibilityLargeContentTitle.showConfiguration = true
         self.uiKitControlType.showConfiguration = true
+        self.uiKitControlType.cases = ComponentControlType.classic
 
-        self.badgeConfiguration.customText = ""
+        self.badgeConfiguration.isValue = true
+        self.badgeConfiguration.isAttached = false
+        self.badgeConfiguration.size = .small
     }
 
     // MARK: - Getter
 
     override func isInvertedBackground() -> Bool {
         self.intent == .surface
+    }
+}
+
+private extension ChipIntent {
+
+    // MARK: - Properties
+
+    var badge: BadgeIntent {
+        switch self {
+        case .accent: .accent
+        case .alert: .alert
+        case .basic: .basic
+        case .danger: .danger
+        case .info: .info
+        case .main: .main
+        case .neutral: .neutral
+        case .success: .success
+        case .support: .support
+        case .surface: .main
+        }
     }
 }

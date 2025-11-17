@@ -12,8 +12,10 @@ class IconConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: IconIntent = .random
-    var size: IconSize = .random
+    var intent: IconDemoIntent = .random
+    var intentCustomColorToken: ColorTokens = .random
+    var size: IconDemoSize = .random
+    var sizeCustomValue = 10
     var icon: Iconography = .random
 
     // MARK: - Initialization

@@ -15,7 +15,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias ChipComponentUIViewController = ComponentDisplayViewControllerRepresentable<ChipConfiguration, ChipUIView, ChipConfigurationView, ChipComponentUIViewMaker>
+typealias ChipComponentUIViewController = ComponentDisplayViewControllerRepresentable<ChipConfiguration, SparkUIChip, ChipConfigurationView, ChipComponentUIViewMaker>
 
 // MARK: - View Maker
 
@@ -24,7 +24,7 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = ChipConfiguration
-    typealias ComponentView = ChipUIView
+    typealias ComponentView = SparkUIChip
     typealias ConfigurationView = ChipConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ChipComponentUIViewMaker>
 
@@ -37,45 +37,7 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
     func createComponentView(
         for configuration: Configuration
     ) -> ComponentView {
-        let isLabel = !configuration.text.isEmpty
-        let componentView = switch (isLabel, configuration.icon) {
-        case (true, let icon?):
-            ComponentView(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                variant: configuration.variant,
-                alignment: configuration.alignment,
-                label: configuration.text,
-                iconImage: .init(icon: icon)
-            )
-
-        case (false, let icon?):
-            ComponentView(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                variant: configuration.variant,
-                alignment: configuration.alignment,
-                iconImage: .init(icon: icon)
-            )
-
-        case (true, nil):
-            ComponentView(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                variant: configuration.variant,
-                alignment: configuration.alignment,
-                label: configuration.text
-            )
-
-        case (false, .none):
-            ComponentView(
-                theme: configuration.theme.value,
-                intent: configuration.intent,
-                variant: configuration.variant,
-                alignment: configuration.alignment,
-                label: "Title is required"
-            )
-        }
+        let componentView = ComponentView(theme: configuration.theme.value)
         self.updateCommonProperties(componentView, for: configuration)
 
         return componentView
@@ -86,11 +48,6 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.variant = configuration.variant
-        componentView.alignment = configuration.alignment
-        componentView.icon = .init(icon: configuration.icon)
-        componentView.text = configuration.text.nilIfEmpty
 
         self.updateCommonProperties(componentView, for: configuration)
     }
@@ -99,28 +56,54 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.intent = configuration.intent
+        componentView.variant = configuration.variant
+        componentView.alignment = configuration.alignment
+        componentView.icon = .init(icon: configuration.icon)
         componentView.demoControlType(configuration, on: self.viewController)
         componentView.demoBadgeComponent(configuration)
+        componentView.demoText(configuration)
         componentView.isSelected = configuration.isSelected
         componentView.demoDisabled(configuration)
-        componentView.demoAccessibilityLabel(configuration)
+        componentView.demoAccessibility(configuration)
     }
 }
 
 // MARK: - Extension
 
-private extension ChipUIView {
+private extension SparkUIChip {
+
+    func demoIcon(_ configuration: TagComponentUIViewMaker.Configuration) {
+        let newIcon = configuration.icon
+        if let newIcon {
+            self.icon = .init(icon: newIcon)
+        } else if self.icon != nil {
+            self.icon = nil
+        }
+    }
+
+    func demoText(_ configuration: ChipConfiguration) {
+        guard let text = configuration.text.nilIfEmpty else {
+            self.text = nil
+            return
+        }
+
+        if configuration.uiKitIsAttributedText {
+            self.attributedText = text.demoNSAttributedString
+        } else {
+            self.text = text
+        }
+    }
 
     func demoBadgeComponent(_ configuration: ChipConfiguration) {
         if configuration.withExtraComponent {
             let maker = BadgeComponentUIViewMaker()
 
-            self.component = maker.createComponentView(
+            self.extraContent = maker.createComponentView(
                 for: configuration.badgeConfiguration
             )
         } else {
-            self.component = nil
+            self.extraContent = nil
         }
     }
 }
-

@@ -14,7 +14,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias IconComponentUIViewController = ComponentDisplayViewControllerRepresentable<IconConfiguration, IconUIView, IconConfigurationView, IconComponentUIViewMaker>
+typealias IconComponentUIViewController = ComponentDisplayViewControllerRepresentable<IconConfiguration, SparkUIIcon, IconConfigurationView, IconComponentUIViewMaker>
 
 extension IconComponentUIViewController {
 
@@ -30,7 +30,7 @@ final class IconComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = IconConfiguration
-    typealias ComponentView = IconUIView
+    typealias ComponentView = SparkUIIcon
     typealias ConfigurationView = IconConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, IconComponentUIViewMaker>
 
@@ -44,10 +44,8 @@ final class IconComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            iconImage: .init(icon: configuration.icon),
             theme: configuration.theme.value,
-            intent: configuration.intent,
-            size: configuration.size
+            image: .init(icon: configuration.icon)
         )
         self.updateCommonProperties(componentView, for: configuration)
 
@@ -58,10 +56,8 @@ final class IconComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        componentView.icon = .init(icon: configuration.icon)
+        componentView.image = .init(icon: configuration.icon)
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.size = configuration.size
         self.updateCommonProperties(componentView, for: configuration)
     }
 
@@ -69,6 +65,8 @@ final class IconComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.intent = configuration.intent.toRealType(configuration)
+        componentView.size = configuration.size.toRealType(configuration)
         componentView.demoAccessibilityLabel(configuration)
     }
 }

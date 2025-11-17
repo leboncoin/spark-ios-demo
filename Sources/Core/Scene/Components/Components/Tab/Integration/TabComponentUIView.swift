@@ -160,16 +160,15 @@ private extension TabUIView {
     private func demoCreateBadge(
         at item: TabComponentUIViewMaker.Configuration.Item,
         for configuration: TabComponentUIViewMaker.Configuration
-    ) -> BadgeUIView? {
+    ) -> SparkUIBadge? {
         guard item.isBadge else { return nil }
 
-        let badge = BadgeUIView(
-            theme: self.theme,
-            intent: .danger,
-            value: item.badgeValue
+        let badge = SparkUIBadge(
+            theme: self.theme
         )
-        badge.translatesAutoresizingMaskIntoConstraints = false
-        badge.isBorderVisible = false
+        badge.intent = .danger
+        badge.value = item.badgeValue
+        badge.isBorder = false
         badge.size = configuration.tabSize.demoBadgeSize
         return badge
     }
