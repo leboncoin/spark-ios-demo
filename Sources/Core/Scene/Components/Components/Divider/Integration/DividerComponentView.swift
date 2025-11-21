@@ -30,28 +30,36 @@ struct DividerImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        self.component()
-            .demoAccessibilityLabel(self.configurationWrapped)
+        VStack {
+            self.component()
+                .sparkTheme(self.configurationWrapped.theme.value)
+                .sparkDividerAlignment(self.configurationWrapped.alignment)
+                .sparkDividerAxis(self.configurationWrapped.axis)
+                .sparkDividerIntent(self.configurationWrapped.intent)
+                .demoAccessibilityLabel(self.configurationWrapped)
+                .frame(minHeight: self.configurationWrapped.axis.height)
+
+        }
     }
 
-    private func component() -> DividerView {
-        if !self.configurationWrapped.text.isEmpty {
-            return DividerView(
-                theme: self.configurationWrapped.theme.value,
-                intent: self.configurationWrapped.intent,
-                axis: self.configurationWrapped.axis,
-                alignment: self.configurationWrapped.alignment,
-                text: {
-                    Text(self.configurationWrapped.text)
+    @ViewBuilder
+    private func component() -> some View {
+        if let text = self.configurationWrapped.text.nilIfEmpty,
+           self.configurationWrapped.swiftUIIsCustomContent {
+            SparkDivider {
+                Group {
+                    Text(text + " ") +
+                    Text(self.configurationWrapped.swiftUISecondText)
+                        .foregroundColor(.blue)
+                        .italic()
                 }
-            )
+            }
+
+        } else if let text = self.configurationWrapped.text.nilIfEmpty {
+            SparkDivider(text)
+
         } else {
-            return DividerView(
-                theme: self.configurationWrapped.theme.value,
-                intent: self.configurationWrapped.intent,
-                axis: self.configurationWrapped.axis,
-                alignment: self.configurationWrapped.alignment
-            )
+            SparkDivider()
         }
     }
 }

@@ -25,6 +25,15 @@ class AdaptativeStackConfiguration: ComponentConfiguration {
 
     var alignment: AdaptiveStackAlignment = .random
     var accessibilityAlignment: AdaptiveStackAlignment = .random
+
+    // MARK: - Methods
+
+    override func random() {
+        self.axis = .random
+        self.accessibilityAxis = .random
+        self.alignment = .random
+        self.accessibilityAlignment = .random
+    }
 }
 
 // MARK: - Enum

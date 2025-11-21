@@ -12,8 +12,8 @@ class RadioGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: RadioButtonIntent = .random
-    var axis: RadioGroupAxis = .random
+    var intent: RadioButtonIntent = .default
+    var axis: RadioGroupAxis = .default
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
             self.updateItems()
@@ -71,6 +71,13 @@ class RadioGroupConfiguration: ComponentConfiguration {
         } else {
             "No selection"
         }
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.axis = .random
     }
 }
 

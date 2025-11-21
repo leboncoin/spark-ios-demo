@@ -13,4 +13,10 @@ class BottomSheetConfiguration: ComponentConfiguration {
     // MARK: - Properties
 
     var contentType: BottomSheetContentType = .random
+
+    // MARK: - Methods
+
+    override func random() {
+        self.contentType = .random
+    }
 }

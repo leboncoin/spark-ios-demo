@@ -61,4 +61,17 @@ class TextLinkConfiguration: ComponentConfiguration {
     func getTextHighlightRange() -> NSRange? {
         self.isLongText ? Constants.Long.textHighlightRange : nil
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.variant = .random
+        self.typography = .body1
+        self.alignment = .random
+        self.icon = .optionalRandom
+        self.swiftUITextAlignment = .random
+        self.uiKitTextAlignment = .random
+        self.uiKitLineBreakMode = .random
+    }
 }

@@ -22,4 +22,11 @@ class SpinnerConfiguration: ComponentConfiguration {
 
         self.accessibilityLabel.showConfiguration = true
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.spinnerSize = .random
+    }
 }

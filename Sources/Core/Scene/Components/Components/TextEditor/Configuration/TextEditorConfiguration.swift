@@ -13,17 +13,17 @@ class TextEditorConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: TextEditorIntent = .random
+    var intent: TextEditorIntent = .default
     var placeholder = "My placeholder"
 
     // MARK: - SwiftUI Properties Only
 
-    var swiftUIIsReadOnly: Bool = .random()
+    var swiftUIIsReadOnly: Bool = false
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsEditable: Bool = .random()
-    var uiKitIsScrollEnabled: Bool = .random()
+    var uiKitIsEditable: Bool = false
+    var uiKitIsScrollEnabled: Bool = true
 
     // MARK: - Initialization
 
@@ -37,5 +37,14 @@ class TextEditorConfiguration: ComponentConfiguration {
         self.accessibilityLabel.showConfiguration = true
         self.accessibilityValue.showConfiguration = true
         self.accessibilityHint.showConfiguration = true
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.swiftUIIsReadOnly = .random()
+        self.uiKitIsEditable = .random()
+        self.uiKitIsScrollEnabled = .random()
     }
 }

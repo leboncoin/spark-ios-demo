@@ -13,7 +13,7 @@ class TextFieldConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: TextFieldIntent = .random
+    var intent: TextFieldIntent = .default
     var placeholder: String = "My placeholder"
     var isSecure: Bool = false
     var isReadOnly = false
@@ -49,6 +49,22 @@ class TextFieldConfiguration: ComponentConfiguration {
         self.accessibilityLabel.showConfiguration = true
         self.accessibilityValue.showConfiguration = true
         self.accessibilityHint.showConfiguration = true
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.leftViewContentType = .random
+        self.rightViewContentType = .random
+        self.leftAddonContentType = .random
+        self.isLeftAddonPadding = .random()
+        self.rightAddonContentType = .random
+        self.isRightAddonPadding = .random()
+        self.swiftUIClearButtonMode = .random
+        self.uiKitLeftViewMode = .random
+        self.uiKitRightViewMode = .random
+        self.uiKitClearButtonMode = .random
     }
 }
 

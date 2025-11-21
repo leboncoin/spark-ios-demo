@@ -67,7 +67,6 @@ private extension SparkUITag {
 
     // MARK: - Setter
 
-    // TODO: Use this logic (optional parameters) (set only if needed to check the default visual when the parameter is not setted) for all components
     /// Used to set only if needed
     func demoIcon(_ configuration: TagComponentUIViewMaker.Configuration) {
         let newIcon = configuration.icon

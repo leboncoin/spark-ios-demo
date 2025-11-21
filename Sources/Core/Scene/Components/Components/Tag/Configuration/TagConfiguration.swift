@@ -12,9 +12,9 @@ class TagConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: TagIntent = .random
-    var variant: TagVariant = .random
-    var size: TagSize = .medium
+    var intent: TagIntent = .default
+    var variant: TagVariant = .default
+    var size: TagSize = .default
     var isHighlighted: Bool = false
     var icon: Iconography? = .optionalRandom
     var text = "My Tag"
@@ -40,5 +40,15 @@ class TagConfiguration: ComponentConfiguration {
 
     override func isInvertedBackground() -> Bool {
         self.intent == .surface
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.variant = .random
+        self.size = .random
+        self.isHighlighted = .random()
+        self.icon = .random
     }
 }

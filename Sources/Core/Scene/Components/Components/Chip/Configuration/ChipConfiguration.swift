@@ -12,17 +12,17 @@ class ChipConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: ChipIntent = .random {
+    var intent: ChipIntent = .default {
         didSet {
             self.badgeConfiguration.intent = self.intent.badge
         }
     }
-    var variant: ChipVariant = .random
-    var alignment: ChipAlignment = .random
+    var variant: ChipVariant = .default
+    var alignment: ChipAlignment = .default
     var text = "My Chip"
     var icon: Iconography? = .optionalRandom
     var withExtraComponent: Bool = .random()
-    var isSelected: Bool = .random()
+    var isSelected: Bool = false
 
     var badgeConfiguration = BadgeConfiguration()
 
@@ -57,6 +57,17 @@ class ChipConfiguration: ComponentConfiguration {
 
     override func isInvertedBackground() -> Bool {
         self.intent == .surface
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.variant = .random
+        self.alignment = .random
+        self.icon = .random
+        self.withExtraComponent = .random()
+        self.isSelected = .random()
     }
 }
 

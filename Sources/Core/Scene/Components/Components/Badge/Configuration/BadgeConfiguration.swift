@@ -12,8 +12,8 @@ class BadgeConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: BadgeIntent = .random
-    var size: BadgeSize = .random
+    var intent: BadgeIntent = .default
+    var size: BadgeSize = .default
     var isValue: Bool = Bool.random()
     var value: Int = Int.random(in: 1...100)
     var unit: String = ""
@@ -27,5 +27,14 @@ class BadgeConfiguration: ComponentConfiguration {
         super.init()
 
         self.accessibilityLabel.showConfiguration = true
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.size = .random
+        self.isValue = .random()
+        self.isBorder = .random()
     }
 }

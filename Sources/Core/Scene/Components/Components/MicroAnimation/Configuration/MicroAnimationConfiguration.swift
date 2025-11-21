@@ -42,6 +42,12 @@ class MicroAnimationConfiguration: ComponentConfiguration {
             .none
         }
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.type = .random
+    }
 }
 
 // MARK: - Sub Configuration

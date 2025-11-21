@@ -12,9 +12,9 @@ class IconConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: IconDemoIntent = .random
+    var intent: IconDemoIntent = .default
     var intentCustomColorToken: ColorTokens = .random
-    var size: IconDemoSize = .random
+    var size: IconDemoSize = .default
     var sizeCustomValue = 10
     var icon: Iconography = .random
 
@@ -24,5 +24,14 @@ class IconConfiguration: ComponentConfiguration {
         super.init()
 
         self.accessibilityLabel.showConfiguration = true
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.intentCustomColorToken = .random
+        self.size = .random
+        self.icon = .random
     }
 }

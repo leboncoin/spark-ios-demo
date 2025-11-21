@@ -17,6 +17,19 @@ enum IconDemoSize: CaseIterable {
 
     // MARK: - Properties
 
+    /// The default case. Equals to **.basic**.
+    static let `default`: Self = {
+        switch IconSize.default {
+        case .small: .small
+        case .medium: .medium
+        case .large: .large
+        case .extraLarge: .extraLarge
+        case .custom: .custom
+        }
+    }()
+
+    // MARK: - Methods
+
     func toRealType(_ configuration: IconConfiguration) -> IconSize {
         switch self {
         case .small: .small
