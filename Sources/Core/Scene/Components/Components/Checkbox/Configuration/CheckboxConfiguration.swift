@@ -12,7 +12,7 @@ class CheckboxConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: CheckboxIntent = .random
+    var intent: CheckboxIntent = .default
     var text = "My Checkbox"
 
     // MARK: - SwiftUI Properties Only
@@ -53,5 +53,11 @@ class CheckboxConfiguration: ComponentConfiguration {
 
     func getUIKitInfoValue(from selectionState: SparkComponentSelectionControls.CheckboxSelectionState) -> String {
         return self.getInfoValue(from: selectionState) + " - \(self.uiKitIsSelected.value)"
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
     }
 }

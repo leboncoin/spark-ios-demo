@@ -15,6 +15,7 @@
 @_exported import SparkComponentProgressBar
 @_exported import SparkComponentProgressTracker
 @_exported import SparkComponentRating
+@_exported import SparkComponentSegmentedGauge
 @_exported import SparkComponentSelectionControls
 @_exported import SparkComponentSlider
 @_exported import SparkComponentSnackbar

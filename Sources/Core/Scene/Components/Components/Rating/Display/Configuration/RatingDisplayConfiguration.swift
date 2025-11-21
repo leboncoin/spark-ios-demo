@@ -24,4 +24,12 @@ class RatingDisplayConfiguration: ComponentConfiguration {
 
         self.accessibilityLabel.showConfiguration = true
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.size = .random
+        self.numberOfStars = .random
+    }
 }

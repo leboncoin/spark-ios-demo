@@ -3,17 +3,17 @@ on: workflow_call
 
 env:
   app_name: SparkDemoApp
-  xcode_path: "/Applications/Xcode_16.2.app"
+  xcode_path: "/Applications/Xcode_26.1.app"
 
 jobs:
   build:
     name: Build
-    runs-on: macos-14
+    runs-on: macos-26
     steps:
       - name: Select Xcode
         run: sudo xcode-select -s ${{ env.xcode_path }}
       - name: Checkout Action
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Run xcodegen
         uses: xavierLowmiller/xcodegen-action@1.2.2
         with:

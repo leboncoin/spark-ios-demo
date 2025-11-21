@@ -45,6 +45,14 @@ class TabConfiguration: ComponentConfiguration {
             self.items.removeLast()
         }
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.isEqualSize = .random()
+        self.tabSize = .random
+    }
 }
 
 // MARK: - Sub Model

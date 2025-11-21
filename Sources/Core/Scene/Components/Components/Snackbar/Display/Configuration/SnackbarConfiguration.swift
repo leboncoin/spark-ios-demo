@@ -30,4 +30,13 @@ class SnackbarConfiguration: ComponentConfiguration {
 
         self.accessibilityLabel.showConfiguration = true
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.type = .random
+        self.variant = .random
+        self.icon = .optionalRandom
+    }
 }

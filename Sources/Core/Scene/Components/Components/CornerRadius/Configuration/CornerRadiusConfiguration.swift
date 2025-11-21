@@ -30,4 +30,11 @@ class CornerRadiusConfiguration: ComponentConfiguration {
     lazy var contentSize: CGSize = {
         .init(width: 200, height: 80)
     }()
+
+    // MARK: - Methods
+
+    override func random() {
+        self.radius = .random
+        self.isHighlighted = .random()
+    }
 }
