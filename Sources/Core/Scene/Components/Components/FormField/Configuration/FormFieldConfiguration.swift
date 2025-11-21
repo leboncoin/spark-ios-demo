@@ -78,4 +78,16 @@ class FormFieldConfiguration: ComponentConfiguration {
         self.textFieldConfiguration.isEnabled.value = true
         self.textFieldConfiguration.isReadOnly = false
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.feedbackState = .random
+        self.clearButtonIcon = .random
+        self.helperIcon = .random
+        self.isRequired = .random()
+        self.isAttributedString = .random()
+        self.isTitleRequired = .random()
+        self.componentType = .random
+    }
 }

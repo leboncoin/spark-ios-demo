@@ -12,8 +12,8 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: CheckboxIntent = .random
-    var axis: CheckboxGroupAxis = .random
+    var intent: CheckboxIntent = .default
+    var axis: CheckboxGroupAxis = .default
 
     var numberOfItems: Int = Int.random(in: 2...3) {
         didSet {
@@ -67,6 +67,13 @@ class CheckboxGroupConfiguration: ComponentConfiguration {
         } else {
             "No selection"
         }
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.axis = .random
     }
 }
 

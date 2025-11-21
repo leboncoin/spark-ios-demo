@@ -18,4 +18,11 @@ class PopoverConfiguration: ComponentConfiguration {
     // MARK: - UIKit Properties Only
 
     var uiKitShowArrow: Bool = .random()
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.uiKitShowArrow = .random()
+    }
 }

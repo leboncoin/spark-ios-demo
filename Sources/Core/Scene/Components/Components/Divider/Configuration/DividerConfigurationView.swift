@@ -13,7 +13,7 @@ struct DividerConfigurationView: ConfigurationViewable, ConfigurationUIViewable 
     // MARK: - Type Alias
 
     typealias Configuration = DividerConfiguration
-    typealias ComponentUIView = DividerUIView
+    typealias ComponentUIView = SparkUIDivider
 
     // MARK: - Properties
 
@@ -75,5 +75,24 @@ struct DividerConfigurationView: ConfigurationViewable, ConfigurationUIViewable 
             name: "text",
             text: self.configuration.text
         )
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is attributed text",
+                isOn: self.configuration.uiKitIsAttributedText
+            )
+        } else {
+            ToggleConfigurationItemView(
+                name: "is custom content",
+                isOn: self.configuration.swiftUIIsCustomContent
+            )
+
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second text",
+                    text: self.configuration.swiftUISecondText
+                )
+            }
+        }
     }
 }

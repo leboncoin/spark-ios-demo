@@ -63,4 +63,13 @@ class StepperConfiguration: ComponentConfiguration {
 
         return lowerBound...upperBound
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.format = .optionalRandom
+        self.uiKitIsAutoRepeat = .random()
+        self.uiKitIsContinuous = .random()
+        self.uiKitValueChangedType = .random
+    }
 }

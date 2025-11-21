@@ -20,6 +20,24 @@ enum IconDemoIntent: CaseIterable {
 
     // MARK: - Properties
 
+    /// The default case. Equals to **.basic**.
+    static let `default`: Self = {
+        switch IconIntent.default {
+        case .accent: .accent
+        case .alert: .alert
+        case .basic: .basic
+        case .error: .error
+        case .info: .info
+        case .main: .main
+        case .neutral: .neutral
+        case .success: .success
+        case .support: .support
+        case .custom: .custom
+        }
+    }()
+
+    // MARK: - Methods
+
     func toRealType(_ configuration: IconConfiguration) -> IconIntent {
         switch self {
         case .accent: .accent

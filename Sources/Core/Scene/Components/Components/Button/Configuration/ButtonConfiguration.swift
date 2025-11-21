@@ -29,7 +29,7 @@ class ButtonConfiguration: ComponentConfiguration {
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsAnimated: Bool = .random()
+    var uiKitIsAnimated: Bool = false
 
     // MARK: - Initialization
 
@@ -48,6 +48,18 @@ class ButtonConfiguration: ComponentConfiguration {
 
     override func isInvertedBackground() -> Bool {
         self.intent == .surface
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.variant = .random
+        self.size = .random
+        self.shape = .random
+        self.alignment = .random
+        self.swiftUIIsFullWidth = .random()
+        self.swiftUIIsToggle = .random()
     }
 }
 

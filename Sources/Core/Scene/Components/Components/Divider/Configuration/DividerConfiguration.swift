@@ -12,10 +12,19 @@ class DividerConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: DividerIntent = .random
-    var axis: DividerAxis = .random
-    var alignment: DividerAlignment = .random
+    var intent: DividerIntent = .default
+    var axis: DividerAxis = .default
+    var alignment: DividerAlignment = .default
     var text: String = "Divider"
+
+    // MARK: - UIKit Properties Only
+
+    var uiKitIsAttributedText: Bool = false
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
 
     // MARK: - Initialization
 
@@ -23,5 +32,11 @@ class DividerConfiguration: ComponentConfiguration {
         super.init()
 
         self.accessibilityLabel.showConfiguration = true
+    }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.alignment = .random
     }
 }

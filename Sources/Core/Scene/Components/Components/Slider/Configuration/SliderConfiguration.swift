@@ -62,4 +62,12 @@ class SliderConfiguration: ComponentConfiguration {
     func getInfoValue(from value: Float) -> String {
         "Value: " + String(format: "%.2f", value)
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.shape = .random
+        self.uiKitIsContinuous = .random()
+    }
 }

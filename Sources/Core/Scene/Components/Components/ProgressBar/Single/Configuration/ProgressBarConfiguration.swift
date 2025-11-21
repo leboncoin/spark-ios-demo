@@ -30,4 +30,11 @@ class ProgressBarConfiguration: ComponentConfiguration {
     func cgFloatValue() -> CGFloat {
         CGFloat(self.value) / 100
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.shape = .random
+    }
 }

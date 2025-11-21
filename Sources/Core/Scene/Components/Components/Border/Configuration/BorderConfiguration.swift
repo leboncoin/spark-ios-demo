@@ -33,4 +33,11 @@ class BorderConfiguration: ComponentConfiguration {
     lazy var contentSize: CGSize = {
         .init(width: 200, height: 48)
     }()
+
+    // MARK: - Methods
+
+    override func random() {
+        self.width = .random
+        self.position = .random
+    }
 }

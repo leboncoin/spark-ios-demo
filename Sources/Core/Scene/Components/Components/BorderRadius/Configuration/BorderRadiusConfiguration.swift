@@ -41,4 +41,13 @@ class BorderRadiusConfiguration: ComponentConfiguration {
     lazy var contentSize: CGSize = {
         .init(width: 200, height: 80)
     }()
+
+    // MARK: - Methods
+
+    override func random() {
+        self.width = .random
+        self.radius = .random
+        self.position = .random
+        self.isHighlighted = .random()
+    }
 }

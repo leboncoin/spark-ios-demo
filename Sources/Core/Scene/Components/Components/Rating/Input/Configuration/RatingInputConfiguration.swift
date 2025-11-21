@@ -32,4 +32,10 @@ class RatingInputConfiguration: ComponentConfiguration {
     func getInfoValue(from value: CGFloat) -> String {
         "Current Rating: \(String(format: "%1.f", value))"
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+    }
 }
