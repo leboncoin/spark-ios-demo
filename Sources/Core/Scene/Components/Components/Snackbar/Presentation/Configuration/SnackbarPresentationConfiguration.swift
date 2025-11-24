@@ -19,4 +19,11 @@ class SnackbarPresentationConfiguration: ComponentConfiguration {
     var leftInsetString: String = ""
     var rightInsetString: String = ""
     var bottomInsetString: String = ""
+
+    // MARK: - Methods
+
+    override func random() {
+        self.direction = .random
+        self.autoDismissDelay = .optionalRandom
+    }
 }

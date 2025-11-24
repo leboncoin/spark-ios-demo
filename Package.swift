@@ -82,6 +82,11 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
+            url: "https://github.com/leboncoin/spark-ios-component-segmented-gauge.git",
+            // path: "../spark-ios-component-segmented-gauge"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
             url: "https://github.com/leboncoin/spark-ios-component-selection-controls.git",
             // path: "../spark-ios-component-selection-controls"
             /*version*/ "0.0.1"..."999.999.999"
@@ -186,6 +191,10 @@ let package = Package(
                 .product(
                     name: "SparkComponentRating",
                     package: "spark-ios-component-rating"
+                ),
+                .product(
+                    name: "SparkComponentSegmentedGauge",
+                    package: "spark-ios-component-segmented-gauge"
                 ),
                 .product(
                     name: "SparkComponentSelectionControls",

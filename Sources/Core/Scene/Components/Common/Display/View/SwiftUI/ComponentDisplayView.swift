@@ -18,6 +18,9 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
 
     @State private var colorScheme: ColorScheme = .light
 
+    @State private var listID = [String: UUID]()
+    @State private var aloneID = UUID()
+
     private let styles: [ComponentDisplayStyle]
 
     var componentView: (_ configuration: Binding<Configuration>) -> ComponentView
@@ -70,6 +73,11 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
             } else if let configuration = self.configurations.first,
                       let bindingConfiguration = self.$configurations.first {
 
+                Button("Random configuration", systemImage: "shuffle") {
+                    configuration.random()
+                    self.aloneID = .init()
+                }
+
                 Button("Update configuration", systemImage: "pencil") {
                     self.presentConfigurationID = configuration.id
                 }
@@ -114,6 +122,7 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
     private func aloneContent() -> some View {
         if let configuration = self.$configurations.first {
             self.componentView(configuration)
+                .id(self.aloneID)
                 .padding(.horizontal, .medium)
                 .padding(.bottom, .medium)
                 .fixedSize(horizontal: false, vertical: true)
@@ -159,16 +168,29 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
 
     private func verticalListContent() -> some View {
         List(self.$configurations) { $configuration in
-            HStack {
-                self.componentView($configuration)
+            ViewThatFits {
+                HStack {
+                    self.componentView($configuration)
+                        .id(self.listID[configuration.id])
+                        .layoutPriority(1)
 
-                Spacer()
+                    Spacer()
+                }
             }
             .swipeActions(edge: .leading, content: {
-                Button("Configure the component", systemImage: "pencil") {
+                Button("Configure", systemImage: "pencil") {
                     self.presentConfigurationID = configuration.id
                 }
                 .tint(.blue)
+            })
+            .swipeActions(edge: .leading, content: {
+                Button("Random", systemImage: "shuffle") {
+                    configuration.random()
+                    withAnimation(.smooth) {
+                        self.listID[configuration.id] = .init()
+                    }
+                }
+                .tint(.yellow)
             })
             .swipeActions {
                 Button("Remove the component", systemImage: "trash") {

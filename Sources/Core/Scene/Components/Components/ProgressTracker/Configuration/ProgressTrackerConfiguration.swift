@@ -57,6 +57,20 @@ class ProgressTrackerConfiguration: ComponentConfiguration {
             self.pages.removeLast()
         }
     }
+
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
+        self.variant = .tinted
+        self.size = .random
+        self.orientation = .random
+        self.interaction = .random
+        self.contentType = .random
+        self.completedPageIndicatorIcon = .optionalRandom
+        self.currentPageIndicatorIcon = .optionalRandom
+        self.swiftUIUseFullWidth = .random()
+    }
 }
 
 // MARK: - Sub Model

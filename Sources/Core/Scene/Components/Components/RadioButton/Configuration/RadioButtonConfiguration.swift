@@ -12,7 +12,7 @@ class RadioButtonConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: RadioButtonIntent = .random
+    var intent: RadioButtonIntent = .default
     var text = "My RadioButton"
 
     // MARK: - SwiftUI Properties Only
@@ -52,6 +52,11 @@ class RadioButtonConfiguration: ComponentConfiguration {
         } else {
             return "No selection"
         }
+    }
 
+    // MARK: - Methods
+
+    override func random() {
+        self.intent = .random
     }
 }

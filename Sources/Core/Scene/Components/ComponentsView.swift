@@ -162,6 +162,7 @@ struct ComponentsView: View {
         case .radioGroup: RadioGroupComponentView()
         case .ratingDisplay: RatingDisplayComponentView()
         case .ratingInput: RatingInputComponentView()
+        case .segmentedGauge: SegmentedGaugeComponentView()
         case .slider: SliderComponentView()
         case .snackbar: SnackbarComponentView()
         case .snackbarPresentation: SnackbarPresentationComponentView()
@@ -204,6 +205,7 @@ struct ComponentsView: View {
         case .radioGroup: RadioGroupComponentUIViewController()
         case .ratingDisplay: RatingDisplayComponentUIViewController()
         case .ratingInput: RatingInputComponentUIViewController()
+        case .segmentedGauge: SegmentedGaugeComponentUIViewController()
         case .slider: SliderComponentUIViewController()
         case .snackbar: SnackbarComponentUIViewController()
         case .snackbarPresentation: SnackbarPresentationComponentUIViewController()
@@ -289,6 +291,7 @@ extension ComponentsView {
         case radioGroup
         case ratingDisplay
         case ratingInput
+        case segmentedGauge
         case slider
         case snackbar
         case snackbarPresentation
@@ -329,6 +332,7 @@ extension ComponentsView {
             case .radioGroup: .dataInput
             case .ratingDisplay: .dataDisplay
             case .ratingInput: .dataInput
+            case .segmentedGauge: .indicator
             case .slider: .dataInput
             case .snackbar: .overlays
             case .snackbarPresentation: .overlays
@@ -356,7 +360,7 @@ extension ComponentsView {
             case .checkboxGroup: .available
             case .chip: .available
             case .cornerRadius: .available
-            case .divider: .unavailable
+            case .divider: .available
             case .formField: .available
             case .icon: .available
             case .iconButton: .available
@@ -369,6 +373,7 @@ extension ComponentsView {
             case .radioGroup: .available
             case .ratingDisplay: .unavailable
             case .ratingInput: .unavailable
+            case .segmentedGauge: .available
             case .slider: .unavailable
             case .snackbar: .unavailable
             case .snackbarPresentation: .none
@@ -404,6 +409,7 @@ extension ComponentsView {
             case .radioGroup: .init(.radioButton)
             case .ratingDisplay: .init(.rating)
             case .ratingInput: .init(.rating)
+            case .segmentedGauge: .init(.segmentedGauge)
             case .slider: .init(.slider)
             case .snackbar: .init(.snackbar)
             case .snackbarPresentation: .init(.snackbar)

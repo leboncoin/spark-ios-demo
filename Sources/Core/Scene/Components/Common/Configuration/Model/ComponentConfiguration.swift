@@ -47,6 +47,12 @@ class ComponentConfiguration: Identifiable {
     func isInvertedBackground() -> Bool {
         return false
     }
+
+    // MARK: - Methods
+
+    func random() {
+        // To override by configuration
+    }
 }
 
 // MARK: - Sub
