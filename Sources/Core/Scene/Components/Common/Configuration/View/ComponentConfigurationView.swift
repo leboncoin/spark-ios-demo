@@ -20,7 +20,8 @@ struct ComponentConfigurationView<
 
     @Environment(\.dismiss) var dismiss
     @Binding private var configuration: Configuration
-    @State private var dynamicTypeSize = DynamicTypeSize.large
+    @State private var customDynamicTypeSize = DynamicTypeSize.large
+    @Environment(\.dynamicTypeSize) var realDynamicTypeSize
     @State var colorScheme: ColorScheme = .light
 
     private let componentView: () -> ComponentView
@@ -95,7 +96,7 @@ struct ComponentConfigurationView<
             VStack(alignment: .leading, spacing: .medium) {
                 // Component
                 self.componentView()
-                    .dynamicTypeSize(self.dynamicTypeSize)
+                    .dynamicTypeSize(self.customDynamicTypeSize)
                     .frame(maxHeight: 300)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, .xLarge)
@@ -161,6 +162,12 @@ struct ComponentConfigurationView<
             .frame(maxWidth: .infinity)
             .background(Color(.systemGroupedBackground))
             .environment(\.colorScheme, self.colorScheme)
+        }
+        .onAppear() {
+            self.customDynamicTypeSize = self.realDynamicTypeSize
+        }
+        .onChange(of: self.realDynamicTypeSize) { realDynamicTypeSize in
+            self.customDynamicTypeSize = realDynamicTypeSize
         }
     }
 
@@ -274,7 +281,7 @@ struct ComponentConfigurationView<
     @ViewBuilder
     private func createGlobalSettingsSection() -> some View {
         Section("Global Settings") {
-            DynamicTypeConfigurationItemView(selectedValue: self.$dynamicTypeSize)
+            DynamicTypeConfigurationItemView(selectedValue: self.$customDynamicTypeSize)
             ColorSchemeConfigurationItemView(selectedValue: self.$colorScheme)
         }
     }

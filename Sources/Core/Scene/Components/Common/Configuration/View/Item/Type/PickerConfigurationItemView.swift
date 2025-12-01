@@ -95,6 +95,10 @@ extension PickerContent {
             }, icon: {
                 Image(icon: icon)
             }).tag(value)
+        case let token as ColorTokens:
+            Label(token.name, systemImage: "circle.fill")
+                .tint(token.value)
+            .tag(value)
         case let theme as DemoThemes.Theme:
             Text(theme.name).tag(value)
         case let enumeration as CustomStringConvertible:

@@ -13,7 +13,7 @@ struct TextLinkConfigurationView: ConfigurationViewable, ConfigurationUIViewable
     // MARK: - Type Alias
 
     typealias Configuration = TextLinkConfiguration
-    typealias ComponentUIView = TextLinkUIView
+    typealias ComponentUIView = SparkUITextLink
 
     // MARK: - Properties
 
@@ -57,9 +57,15 @@ struct TextLinkConfigurationView: ConfigurationViewable, ConfigurationUIViewable
     private func itemsView() -> some View {
         EnumConfigurationItemView(
             name: "intent",
-            values: TextLinkIntent.allCases,
+            values: TextLinkDemoIntent.allCases,
             selectedValue: self.configuration.intent
         )
+
+        if self.configuration.wrappedValue.intent == .custom {
+            ColorTokensConfigurationItemView(
+                selectedValue: self.configuration.intentCustomColorToken
+            )
+        }
 
         EnumConfigurationItemView(
             name: "variant",
