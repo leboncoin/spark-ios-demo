@@ -22,10 +22,11 @@ class TextLinkConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: TextLinkIntent = .random
-    var variant: TextLinkVariant = .random
-    var typography: TextLinkTypography = .body1
-    var alignment: TextLinkAlignment = .random
+    var intent: TextLinkDemoIntent = .default
+    var intentCustomColorToken: ColorTokens = .random
+    var variant: TextLinkVariant = .default
+    var typography: TextLinkTypography = .default
+    var alignment: TextLinkAlignment = .default
     var numberOfLine = 0
     var text = "My TextLink"
     var isLongText = false
@@ -49,7 +50,6 @@ class TextLinkConfiguration: ComponentConfiguration {
         self.uiKitControlType.cases = ComponentControlType.classic
 
         self.accessibilityLabel.showConfiguration = true
-        self.accessibilityValue.showConfiguration = true
     }
 
     // MARK: - Getter

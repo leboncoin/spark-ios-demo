@@ -15,7 +15,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias TextLinkComponentUIViewController = ComponentDisplayViewControllerRepresentable<TextLinkConfiguration, TextLinkUIView, TextLinkConfigurationView, TextLinkComponentUIViewMaker>
+typealias TextLinkComponentUIViewController = ComponentDisplayViewControllerRepresentable<TextLinkConfiguration, SparkUITextLink, TextLinkConfigurationView, TextLinkComponentUIViewMaker>
 
 // MARK: - View Maker
 
@@ -24,7 +24,7 @@ final class TextLinkComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = TextLinkConfiguration
-    typealias ComponentView = TextLinkUIView
+    typealias ComponentView = SparkUITextLink
     typealias ConfigurationView = TextLinkConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TextLinkComponentUIViewMaker>
 
@@ -38,12 +38,7 @@ final class TextLinkComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            text: configuration.getText(),
-            intent: configuration.intent,
-            typography: configuration.typography,
-            variant: configuration.variant,
-            image: .init(icon: configuration.icon)
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(
             componentView,
@@ -58,11 +53,7 @@ final class TextLinkComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.variant = configuration.variant
-        componentView.typography = configuration.typography
-        componentView.text = configuration.getText()
-        componentView.image = .init(icon: configuration.icon)
+
         self.updateCommonProperties(
             componentView,
             for: configuration
@@ -74,9 +65,14 @@ final class TextLinkComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.alignment = configuration.alignment
-        componentView.textAlignment = configuration.uiKitTextAlignment
-        componentView.lineBreakMode = configuration.uiKitLineBreakMode
-        componentView.numberOfLines = configuration.numberOfLine
+        componentView.intent = configuration.intent.toRealType(configuration)
+        componentView.variant = configuration.variant
+        componentView.typography = configuration.typography
+        componentView.text = configuration.getText()
+        componentView.image = .init(icon: configuration.icon)
+        componentView.textLabel.textAlignment = configuration.uiKitTextAlignment
+        componentView.textLabel.lineBreakMode = configuration.uiKitLineBreakMode
+        componentView.textLabel.numberOfLines = configuration.numberOfLine
         if configuration.isLongText {
             componentView.textHighlightRange = configuration.getTextHighlightRange()
         }

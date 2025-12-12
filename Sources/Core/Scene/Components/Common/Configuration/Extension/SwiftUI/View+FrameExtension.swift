@@ -24,5 +24,10 @@ extension View {
             maxHeight: configuration.height.maxValue(),
             alignment: .init(configuration.swiftUIWidth.alignment)
         )
+        .frame(
+            maxWidth: .infinity,
+            alignment: .leading
+        )
+
     }
 }

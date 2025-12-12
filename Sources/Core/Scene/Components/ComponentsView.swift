@@ -384,7 +384,7 @@ extension ComponentsView {
             case .textEditor: .available
             case .textField: .available
             case .textFieldAddons: .available
-            case .textLink: .unavailable
+            case .textLink: .available
             case .toggle: .available
             }
         }

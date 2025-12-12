@@ -27,19 +27,19 @@ struct TextLinkImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        TextLinkView(
-            theme: self.configuration.wrappedValue.theme.value,
-            text: self.configuration.wrappedValue.getText(),
-            textHighlightRange: self.configuration.wrappedValue.getTextHighlightRange(),
-            intent: self.configuration.wrappedValue.intent,
-            typography: self.configuration.wrappedValue.typography,
-            variant: self.configuration.wrappedValue.variant,
+        SparkTextLink(
+            self.configuration.wrappedValue.getText(),
             image: .init(icon: self.configuration.wrappedValue.icon),
-            alignment: self.configuration.wrappedValue.alignment,
             action: {
                 self.showAlertAction = true
             }
         )
+        .sparkTheme(self.configuration.wrappedValue.theme.value)
+        .sparkTextLinkAlignment(self.configuration.wrappedValue.alignment)
+        .sparkTextLinkHighlightRange(self.configuration.wrappedValue.getTextHighlightRange())
+        .sparkTextLinkIntent(self.configuration.wrappedValue.intent.toRealType(self.configurationWrapped))
+        .sparkTextLinkTypography(self.configuration.wrappedValue.typography)
+        .sparkTextLinkVariant(self.configuration.wrappedValue.variant)
         .multilineTextAlignment(self.configuration.wrappedValue.swiftUITextAlignment)
         .lineLimit(self.configuration.wrappedValue.numberOfLine > 0 ? self.configuration.wrappedValue.numberOfLine : nil)
         .demoAccessibilityLabel(self.configuration.wrappedValue)

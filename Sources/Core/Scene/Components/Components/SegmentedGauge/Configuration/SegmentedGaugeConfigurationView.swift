@@ -78,7 +78,7 @@ struct SegmentedGaugeConfigurationView: ConfigurationViewable, ConfigurationUIVi
         )
 
         ToggleConfigurationItemView(
-            name: "is marker",
+            name: "with marker",
             isOn: self.configuration.withMarker
         )
 

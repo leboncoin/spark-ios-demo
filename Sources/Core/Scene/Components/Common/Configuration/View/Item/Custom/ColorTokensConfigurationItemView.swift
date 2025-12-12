@@ -22,5 +22,6 @@ struct ColorTokensConfigurationItemView: View {
             values: ColorTokens.allCases,
             selectedValue: self.$selectedValue
         )
+        .tint(self.selectedValue.value)
     }
 }
