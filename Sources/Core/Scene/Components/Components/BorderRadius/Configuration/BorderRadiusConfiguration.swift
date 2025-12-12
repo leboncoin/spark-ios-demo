@@ -13,7 +13,13 @@ class BorderRadiusConfiguration: ComponentConfiguration {
     // MARK: - Properties
 
     var width: BorderDefault.Width = .random
+
     var radius: BorderDefault.Radius = .random
+    var topLeadingRadius: CGFloat = 0
+    var topTrailingRadius: CGFloat = 0
+    var bottomTrailingRadius: CGFloat = 0
+    var bottomLeadingRadius: CGFloat = 0
+
     var position: BorderPosition = .default
     var dash: CGFloat = 0
     var isHighlighted: Bool = .random()

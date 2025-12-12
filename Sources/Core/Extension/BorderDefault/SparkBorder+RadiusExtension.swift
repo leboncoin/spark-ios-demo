@@ -19,6 +19,7 @@ extension BorderDefault {
         case large
         case xLarge
         case full
+        case custom
 
         // MARK: - Properties
 
@@ -36,6 +37,7 @@ extension BorderDefault {
             case .large: radius.large
             case .xLarge: radius.xLarge
             case .full: radius.full
+            case .custom: 0
             }
         }
     }

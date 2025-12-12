@@ -23,12 +23,22 @@ struct SpinnerImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        SpinnerView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            spinnerSize: self.configurationWrapped.spinnerSize
-        )
+        HStack {
+            SparkSpinner()
+                .sparkTheme(self.configurationWrapped.theme.value)
+                .sparkSpinnerIntent(self.configurationWrapped.intent.toRealType(self.configurationWrapped))
+                .sparkSpinnerSize(self.configurationWrapped.size)
+            .demoAccessibilityLabel(self.configurationWrapped)
+            .demoAccessibilityHidden(self.configurationWrapped)
+
+            SpinnerView(
+                theme: self.configurationWrapped.theme.value,
+                intent: self.configurationWrapped.intent.toRealType(self.configurationWrapped),
+                spinnerSize: self.configurationWrapped.size
+            )
+        }
         .demoAccessibilityLabel(self.configurationWrapped)
+        .demoAccessibilityHidden(self.configurationWrapped)
     }
 }
 

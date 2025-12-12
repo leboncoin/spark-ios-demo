@@ -14,7 +14,7 @@ extension UIView {
         _ configuration: ComponentConfiguration
     ) {
         if configuration.isInvertedBackground() {
-            self.backgroundColor = .gray
+            self.backgroundColor = .gray.withAlphaComponent(0.25)
         } else {
             self.backgroundColor = .clear
         }

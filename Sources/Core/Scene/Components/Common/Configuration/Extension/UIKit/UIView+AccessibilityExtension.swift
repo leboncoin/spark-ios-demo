@@ -50,4 +50,10 @@ extension UIView {
             self.largeContentTitle = value
         }
     }
+
+    func demoIsAccessibilityElement<Configuration: ComponentConfiguration>(
+        _ configuration: Configuration
+    ) {
+        self.isAccessibilityElement = !configuration.accessibilityLabel.value.isEmpty
+    }
 }

@@ -31,28 +31,36 @@ struct CornerRadiusImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        VStack {
-            Rectangle()
-                .fill(self.configurationWrapped.backgroundColor.color)
-                .sparkCornerRadius(
-                    self.configurationWrapped.radius.value(from: self.configurationWrapped),
-                    isHighlighted: self.configurationWrapped.isHighlighted,
-                    isScaled: self.configurationWrapped.swiftUIIsScaled
-                )
-                .frame(height: 20)
-                .fixedSize(horizontal: false, vertical: true)
+        Rectangle()
+            .fill(self.configurationWrapped.backgroundColor.color)
+            .cornerRadius(self.configurationWrapped)
+            .frame(height: self.configurationWrapped.contentSize.height)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+}
 
-            Rectangle()
-                .fill(self.configurationWrapped.backgroundColor.color)
-                .sparkBorder(
-                    width: 2,
-                    radius: self.configurationWrapped.radius.value(from: self.configurationWrapped),
-                    isHighlighted: self.configurationWrapped.isHighlighted,
-                    colorToken: self.configurationWrapped.theme.value.colors.support.support,
-                    isScaled: self.configurationWrapped.swiftUIIsScaled
-                )
-                .frame(height: 20)
-                .fixedSize(horizontal: false, vertical: true)
+// MARK: - Extension
+
+private extension View {
+
+    @ViewBuilder
+    func cornerRadius(_ configuration: CornerRadiusConfiguration) -> some View {
+        switch configuration.radius {
+        case .custom:
+            self.sparkCornerRadius(
+                topLeading: configuration.topLeadingRadius,
+                topTrailing: configuration.topTrailingRadius,
+                bottomTrailing: configuration.bottomTrailingRadius,
+                bottomLeading: configuration.bottomLeadingRadius,
+                isHighlighted: configuration.isHighlighted,
+                isScaled: configuration.swiftUIIsScaled
+            )
+        default:
+            self.sparkCornerRadius(
+                configuration.radius.value(from: configuration),
+                isHighlighted: configuration.isHighlighted,
+                isScaled: configuration.swiftUIIsScaled
+            )
         }
     }
 }

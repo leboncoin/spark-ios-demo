@@ -425,6 +425,12 @@ class ComponentDisplayViewController<
         self.showTapAlert(for: .target)
     }
 
+    func componentContentAction(name: String) -> UIAction {
+        .init { _ in
+            self.showTapAlert(for: .action, name: name)
+        }
+    }
+
     // MARK: - Present
 
     private func presentConfigurationView() {

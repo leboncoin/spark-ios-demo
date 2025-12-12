@@ -60,6 +60,28 @@ struct CornerRadiusConfigurationView: ConfigurationViewable, ConfigurationUIView
             selectedValue: self.configuration.radius
         )
 
+        if self.framework.isSwiftUI && self.configuration.wrappedValue.radius == .custom {
+            SliderConfigurationItemView(
+                name: "Top leading radius",
+                selectedValue: self.configuration.topLeadingRadius
+            )
+
+            SliderConfigurationItemView(
+                name: "Top trailing radius",
+                selectedValue: self.configuration.topTrailingRadius
+            )
+
+            SliderConfigurationItemView(
+                name: "Bottom leading radius",
+                selectedValue: self.configuration.bottomLeadingRadius
+            )
+
+            SliderConfigurationItemView(
+                name: "Bottom trailing radius",
+                selectedValue: self.configuration.bottomTrailingRadius
+            )
+        }
+
         ToggleConfigurationItemView(
             name: "is highlighted",
             isOn: self.configuration.isHighlighted
@@ -73,3 +95,19 @@ struct CornerRadiusConfigurationView: ConfigurationViewable, ConfigurationUIView
         }
     }
 }
+
+// MARK: - Extension
+
+private extension SliderConfigurationItemView {
+
+    init(name: String, selectedValue: Binding<Value>) {
+        self.init(
+            name: name,
+            selectedValue: selectedValue,
+            range: 0...36,
+            step: 2,
+            showValue: true
+        )
+    }
+}
+

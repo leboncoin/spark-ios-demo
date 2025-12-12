@@ -7,6 +7,7 @@
 @_exported import SparkComponentBadge
 @_exported import SparkComponentBottomSheet
 @_exported import SparkComponentButton
+@_exported import SparkComponentCard
 @_exported import SparkComponentChip
 @_exported import SparkComponentDivider
 @_exported import SparkComponentFormField
