@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias ProgressBarIndeterminateComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarIndeterminateConfiguration, ProgressBarIndeterminateUIView, ProgressBarIndeterminateConfigurationView, ProgressBarIndeterminateComponentUIViewMaker>
+typealias ProgressBarIndeterminateComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarIndeterminateConfiguration, SparkUIProgressBarIndeterminate, ProgressBarIndeterminateConfigurationView, ProgressBarIndeterminateComponentUIViewMaker>
 
 extension ProgressBarIndeterminateComponentUIViewController {
 
@@ -28,7 +28,7 @@ final class ProgressBarIndeterminateComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = ProgressBarIndeterminateConfiguration
-    typealias ComponentView = ProgressBarIndeterminateUIView
+    typealias ComponentView = SparkUIProgressBarIndeterminate
     typealias ConfigurationView = ProgressBarIndeterminateConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressBarIndeterminateComponentUIViewMaker>
 
@@ -42,9 +42,7 @@ final class ProgressBarIndeterminateComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            intent: configuration.intent,
-            shape: configuration.shape
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(
             componentView,
@@ -58,8 +56,6 @@ final class ProgressBarIndeterminateComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.shape = configuration.shape
 
         self.updateCommonProperties(
             componentView,
@@ -77,7 +73,10 @@ final class ProgressBarIndeterminateComponentUIViewMaker: ComponentUIViewMaker {
             componentView.stopAnimating()
         }
 
+        componentView.intent = configuration.intent
+        componentView.shape = configuration.shape
         componentView.demoAccessibilityLabel(configuration)
+        componentView.demoIsAccessibilityElement(configuration)
     }
 
     // MARK: - Getter

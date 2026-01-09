@@ -14,8 +14,8 @@ extension View {
     func demoAccessibilityHidden<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) -> some View {
-        if configuration.accessibilityLargeContentTitle.showConfiguration {
-            self.accessibilityHidden(configuration.accessibilityLargeContentTitle.value.isEmpty)
+        if configuration.accessibilityLabel.showConfiguration {
+            self.accessibilityHidden(configuration.accessibilityLabel.value.isEmpty)
         } else {
             self
         }

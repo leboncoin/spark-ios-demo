@@ -17,7 +17,7 @@ class CornerRadiusConfiguration: ComponentConfiguration {
     var topTrailingRadius: CGFloat = 0
     var bottomTrailingRadius: CGFloat = 0
     var bottomLeadingRadius: CGFloat = 0
-    
+
     var isHighlighted: Bool = .random()
 
     // MARK: - SwiftUI Properties Only

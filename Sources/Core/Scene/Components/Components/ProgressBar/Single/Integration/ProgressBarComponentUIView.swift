@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias ProgressBarComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarConfiguration, ProgressBarUIView, ProgressBarConfigurationView, ProgressBarComponentUIViewMaker>
+typealias ProgressBarComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarConfiguration, SparkUIProgressBar, ProgressBarConfigurationView, ProgressBarComponentUIViewMaker>
 
 extension ProgressBarComponentUIViewController {
 
@@ -28,7 +28,7 @@ final class ProgressBarComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = ProgressBarConfiguration
-    typealias ComponentView = ProgressBarUIView
+    typealias ComponentView = SparkUIProgressBar
     typealias ConfigurationView = ProgressBarConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressBarComponentUIViewMaker>
 
@@ -42,9 +42,7 @@ final class ProgressBarComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            intent: configuration.intent,
-            shape: configuration.shape
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(
             componentView,
@@ -58,8 +56,6 @@ final class ProgressBarComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.shape = configuration.shape
 
         self.updateCommonProperties(
             componentView,
@@ -71,8 +67,11 @@ final class ProgressBarComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.intent = configuration.intent
+        componentView.shape = configuration.shape
         componentView.value = configuration.cgFloatValue()
         componentView.demoAccessibilityLabel(configuration)
+        componentView.demoAccessibilityValue(configuration)
     }
 
     // MARK: - Getter

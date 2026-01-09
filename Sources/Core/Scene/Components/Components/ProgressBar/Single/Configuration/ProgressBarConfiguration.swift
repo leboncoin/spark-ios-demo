@@ -12,8 +12,8 @@ class ProgressBarConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: ProgressBarIntent = .random
-    var shape: ProgressBarShape = .random
+    var intent: ProgressBarIntent = .default
+    var shape: ProgressBarShape = .default
     var value: Int = Int.random(in: 0...10) * 10
     var step: Int = 10
 
@@ -23,6 +23,7 @@ class ProgressBarConfiguration: ComponentConfiguration {
         super.init()
 
         self.accessibilityLabel.showConfiguration = true
+        self.accessibilityValue.showConfiguration = true
     }
 
     // MARK: - Getter

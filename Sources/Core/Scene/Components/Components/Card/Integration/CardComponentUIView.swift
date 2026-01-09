@@ -97,6 +97,12 @@ private final class ContentView: UIView {
         stackView.distribution = .fill
         stackView.alignment = .leading
         stackView.spacing = Spacing.medium.rawValue
+        stackView.accessibilityElements = [
+            self.tagView,
+            self.titleLabel,
+            self.descriptionLabel,
+            self.button
+        ]
         return stackView
     }()
 
@@ -143,7 +149,7 @@ private final class ContentView: UIView {
 
     // MARK: - Initialization
 
-    public init(configuration: CardConfiguration) {
+    init(configuration: CardConfiguration) {
         self.configuration = configuration
 
         super.init(frame: .zero)

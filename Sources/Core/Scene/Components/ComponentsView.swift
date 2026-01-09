@@ -373,8 +373,8 @@ extension ComponentsView {
             case .iconButton: .available
             case .microAnimation: .none
             case .popover: .unavailable
-            case .progressBar: .unavailable
-            case .progressBarIndeterminate: .unavailable
+            case .progressBar: .available
+            case .progressBarIndeterminate: .available
             case .progressTracker: .unavailable
             case .radioButton: .available
             case .radioGroup: .available

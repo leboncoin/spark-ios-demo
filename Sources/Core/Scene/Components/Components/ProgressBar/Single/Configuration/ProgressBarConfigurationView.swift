@@ -13,7 +13,7 @@ struct ProgressBarConfigurationView: ConfigurationViewable, ConfigurationUIViewa
     // MARK: - Type Alias
 
     typealias Configuration = ProgressBarConfiguration
-    typealias ComponentUIView = ProgressBarUIView
+    typealias ComponentUIView = SparkUIProgressBar
 
     // MARK: - Properties
 

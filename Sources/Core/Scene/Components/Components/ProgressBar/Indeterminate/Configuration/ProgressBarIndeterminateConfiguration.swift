@@ -12,8 +12,8 @@ class ProgressBarIndeterminateConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: ProgressBarIntent = .random
-    var shape: ProgressBarShape = .random
+    var intent: ProgressBarIntent = .default
+    var shape: ProgressBarShape = .default
     var isAnimating: Bool = false
 
     // MARK: - Initialization

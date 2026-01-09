@@ -13,7 +13,7 @@ struct ProgressBarIndeterminateConfigurationView: ConfigurationViewable, Configu
     // MARK: - Type Alias
 
     typealias Configuration = ProgressBarIndeterminateConfiguration
-    typealias ComponentUIView = ProgressBarIndeterminateUIView
+    typealias ComponentUIView = SparkUIProgressBarIndeterminate
 
     // MARK: - Properties
 
