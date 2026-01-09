@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+@_spi(SI_SPI) import SparkCommon
+
 
 struct DevModeView: View {
 
@@ -18,6 +20,24 @@ struct DevModeView: View {
 
     var body: some View {
         Text("Replace me with your UI content")
+
+        ZStack {
+            Image.sparkStarOutline
+                .resizable()
+                .foregroundStyle(.gray)
+
+            Image.sparkStarFill
+                .resizable()
+                .foregroundStyle(.orange)
+                .mask(
+                    GeometryReader { geo in
+                        Rectangle()
+                            .frame(width: geo.size.width * min(max(0.5, 0), 1))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                )
+        }
+        .frame(size: 50)
     }
 }
 

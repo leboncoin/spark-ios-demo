@@ -21,6 +21,9 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
     @State private var listID = [String: UUID]()
     @State private var aloneID = UUID()
 
+    @State private var showCopiedToast = false
+    @State private var showCodeSyntax = false
+
     private let styles: [ComponentDisplayStyle]
 
     var componentView: (_ configuration: Binding<Configuration>) -> ComponentView
@@ -113,6 +116,31 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
                 }
             }
         }
+        .toolbar {
+            Button("Code", systemImage: "apple.terminal") {
+                self.showCodeSyntax = true
+            }
+        }
+        .toolbar {
+            Menu("Link", systemImage: "network") {
+                Button("Documentation", systemImage: "append.page.fill") {
+                    // TODO:
+                    UIPasteboard.general.string = "Hello"
+                    self.showCopiedToast = true
+                }
+
+                Button("Figma", systemImage: "f.square") {
+                    // TODO:
+                    UIPasteboard.general.string = "Hello"
+                    self.showCopiedToast = true
+                }
+            }
+        }
+        .toast("Copié !", isPresented: self.$showCopiedToast)
+        .sheet(isPresented: self.$showCodeSyntax, content: {
+            // TODO:
+            Text("Hello")
+        })
         .preferredColorScheme(self.colorScheme)
     }
 
