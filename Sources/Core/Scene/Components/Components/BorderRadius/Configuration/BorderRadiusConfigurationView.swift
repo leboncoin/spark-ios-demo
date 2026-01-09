@@ -65,6 +65,28 @@ struct BorderRadiusConfigurationView: ConfigurationViewable, ConfigurationUIView
             selectedValue: self.configuration.radius
         )
 
+        if self.framework.isSwiftUI && self.configuration.wrappedValue.radius == .custom {
+            SliderConfigurationItemView(
+                name: "Top leading radius",
+                selectedValue: self.configuration.topLeadingRadius
+            )
+
+            SliderConfigurationItemView(
+                name: "Top trailing radius",
+                selectedValue: self.configuration.topTrailingRadius
+            )
+
+            SliderConfigurationItemView(
+                name: "Bottom leading radius",
+                selectedValue: self.configuration.bottomLeadingRadius
+            )
+
+            SliderConfigurationItemView(
+                name: "Bottom trailing radius",
+                selectedValue: self.configuration.bottomTrailingRadius
+            )
+        }
+
         EnumConfigurationItemView(
             name: "position",
             values: BorderPosition.allCases,
@@ -89,5 +111,20 @@ struct BorderRadiusConfigurationView: ConfigurationViewable, ConfigurationUIView
                 isOn: self.configuration.swiftUIIsScaled
             )
         }
+    }
+}
+
+// MARK: - Extension
+
+private extension SliderConfigurationItemView {
+
+    init(name: String, selectedValue: Binding<Value>) {
+        self.init(
+            name: name,
+            selectedValue: selectedValue,
+            range: 0...36,
+            step: 2,
+            showValue: true
+        )
     }
 }

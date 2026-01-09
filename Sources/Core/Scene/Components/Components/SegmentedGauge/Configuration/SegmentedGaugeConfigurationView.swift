@@ -146,7 +146,7 @@ struct SegmentedGaugeConfigurationView: ConfigurationViewable, ConfigurationUIVi
             StepperConfigurationItemView(
                 name: "Current level",
                 value: self.configuration.typeCustomLevel,
-                bounds: 0...5,
+                bounds: 0...5
             )
 
             ColorTokensConfigurationItemView(

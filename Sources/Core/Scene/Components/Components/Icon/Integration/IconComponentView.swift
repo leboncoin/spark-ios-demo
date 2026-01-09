@@ -28,6 +28,7 @@ struct IconImplementationView: ComponentImplementationViewable {
             .sparkIconIntent(self.configurationWrapped.intent.toRealType(self.configurationWrapped))
             .sparkIconSize(self.configurationWrapped.size.toRealType(self.configurationWrapped))
         .demoAccessibilityLabel(self.configurationWrapped)
+        .demoAccessibilityHidden(self.configurationWrapped)
     }
 }
 

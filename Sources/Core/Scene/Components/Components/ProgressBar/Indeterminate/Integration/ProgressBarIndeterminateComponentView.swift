@@ -30,13 +30,14 @@ struct ProgressBarIndeterminateImplementationView: ComponentImplementationViewab
     // MARK: - View
 
     var body: some View {
-        ProgressBarIndeterminateView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            shape: self.configurationWrapped.shape,
-            isAnimating: self.configurationWrapped.isAnimating
+        SparkProgressBarIndeterminate(
+            isAnimated: self.configurationWrapped.isAnimating
         )
+        .sparkTheme(self.configurationWrapped.theme.value)
+        .sparkProgressBarIntent(self.configurationWrapped.intent)
+        .sparkProgressBarShape(self.configurationWrapped.shape)
         .demoAccessibilityLabel(self.configurationWrapped)
+        .demoAccessibilityHidden(self.configurationWrapped)
     }
 }
 

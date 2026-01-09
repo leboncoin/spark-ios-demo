@@ -30,13 +30,14 @@ struct ProgressBarImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        ProgressBarView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            shape: self.configurationWrapped.shape,
+        SparkProgressBar(
             value: self.configurationWrapped.cgFloatValue()
         )
+        .sparkTheme(self.configurationWrapped.theme.value)
+        .sparkProgressBarIntent(self.configurationWrapped.intent)
+        .sparkProgressBarShape(self.configurationWrapped.shape)
         .demoAccessibilityLabel(self.configurationWrapped)
+        .demoAccessibilityValue(self.configurationWrapped)
     }
 }
 

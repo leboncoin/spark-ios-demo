@@ -12,10 +12,10 @@ class ButtonConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: ButtonIntent = .random
-    var variant: ButtonVariant = .random
-    var size: ButtonSize = .random
-    var shape: ButtonShape = .random
+    var intent: ButtonIntent = .main
+    var variant: ButtonVariant = .filled
+    var size: ButtonSize = .medium
+    var shape: ButtonShape = .rounded
     var alignment: ButtonAlignment = .random
     var contentNormal = Content(state: .normal)
     var contentHighlighted = Content(state: .highlighted)
@@ -24,8 +24,8 @@ class ButtonConfiguration: ComponentConfiguration {
 
     // MARK: - SwiftUI Properties Only
 
-    var swiftUIIsFullWidth: Bool = .random()
-    var swiftUIIsToggle: Bool = .random()
+    var swiftUIIsFullWidth: Bool = false
+    var swiftUIIsToggle: Bool = false
 
     // MARK: - UIKit Properties Only
 

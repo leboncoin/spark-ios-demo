@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+// TODO: Add the codeblock to copy past an example integration
+
 struct ComponentsView: View {
 
     // MARK: - Properties
@@ -145,6 +147,7 @@ struct ComponentsView: View {
         case .borderRadius: BorderRadiusComponentView()
         case .bottomSheet: BottomSheetComponentView()
         case .button: ButtonComponentView()
+        case .card: CardComponentView()
         case .checkbox: CheckboxComponentView()
         case .checkboxGroup: CheckboxGroupComponentView()
         case .chip: ChipComponentView()
@@ -188,6 +191,7 @@ struct ComponentsView: View {
         case .borderRadius: BorderRadiusComponentUIViewController()
         case .button: ButtonComponentUIViewController()
         case .bottomSheet: BottomSheetComponentUIViewController()
+        case .card: CardComponentUIViewController()
         case .checkbox: CheckboxComponentUIViewController()
         case .checkboxGroup: CheckboxGroupComponentUIViewController()
         case .chip: ChipComponentUIViewController()
@@ -274,6 +278,7 @@ extension ComponentsView {
         case borderRadius
         case bottomSheet
         case button
+        case card
         case checkbox
         case checkboxGroup
         case chip
@@ -315,6 +320,7 @@ extension ComponentsView {
             case .borderRadius: .style
             case .bottomSheet: .overlays
             case .button: .action
+            case .card: .dataDisplay
             case .checkbox: .dataInput
             case .checkboxGroup: .dataInput
             case .chip: .dataInput
@@ -356,6 +362,7 @@ extension ComponentsView {
             case .borderRadius: .available
             case .bottomSheet: .none
             case .button: .available
+            case .card: .available
             case .checkbox: .available
             case .checkboxGroup: .available
             case .chip: .available
@@ -366,8 +373,8 @@ extension ComponentsView {
             case .iconButton: .available
             case .microAnimation: .none
             case .popover: .unavailable
-            case .progressBar: .unavailable
-            case .progressBarIndeterminate: .unavailable
+            case .progressBar: .available
+            case .progressBarIndeterminate: .available
             case .progressTracker: .unavailable
             case .radioButton: .available
             case .radioGroup: .available
@@ -377,7 +384,7 @@ extension ComponentsView {
             case .slider: .unavailable
             case .snackbar: .unavailable
             case .snackbarPresentation: .none
-            case .spinner: .unavailable
+            case .spinner: .available
             case .stepper: .available
             case .tab: .unavailable
             case .tag: .available
@@ -394,6 +401,7 @@ extension ComponentsView {
             case .badge: .init(.badge)
             case .button: .init(.button)
             case .bottomSheet: .init(.bottomSheet)
+            case .card: .init(.card)
             case .checkbox: .init(.checkbox)
             case .checkboxGroup: .init(.checkbox)
             case .chip: .init(.chip)

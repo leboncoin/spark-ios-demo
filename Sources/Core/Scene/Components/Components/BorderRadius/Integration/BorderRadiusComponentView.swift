@@ -35,15 +35,41 @@ struct BorderRadiusImplementationView: ComponentImplementationViewable {
             .fill(self.configurationWrapped.backgroundColor.color)
             .frame(height: self.configurationWrapped.contentSize.height)
             .fixedSize(horizontal: false, vertical: true)
-            .sparkBorder(
-                width: self.configurationWrapped.width.value(from: self.configurationWrapped),
-                radius: self.configurationWrapped.radius.value(from: self.configurationWrapped),
-                dash: self.configurationWrapped.dash,
-                isHighlighted: self.configurationWrapped.isHighlighted,
-                colorToken: self.configurationWrapped.borderColor,
-                position: self.configurationWrapped.position,
-                isScaled: self.configurationWrapped.swiftUIIsScaled
+            .border(self.configurationWrapped)
+    }
+}
+
+// MARK: - Extension
+
+private extension View {
+
+    @ViewBuilder
+    func border(_ configuration: BorderRadiusConfiguration) -> some View {
+        switch configuration.radius {
+        case .custom:
+            self.sparkBorder(
+                width: configuration.width.value(from: configuration),
+                topLeadingRadius: configuration.topLeadingRadius,
+                topTrailingRadius: configuration.topTrailingRadius,
+                bottomTrailingRadius: configuration.bottomTrailingRadius,
+                bottomLeadingRadius: configuration.bottomLeadingRadius,
+                dash: configuration.dash,
+                isHighlighted: configuration.isHighlighted,
+                colorToken: configuration.borderColor,
+                position: configuration.position,
+                isScaled: configuration.swiftUIIsScaled
             )
+        default:
+            self.sparkBorder(
+                    width: configuration.width.value(from: configuration),
+                    radius: configuration.radius.value(from: configuration),
+                    dash: configuration.dash,
+                    isHighlighted: configuration.isHighlighted,
+                    colorToken: configuration.borderColor,
+                    position: configuration.position,
+                    isScaled: configuration.swiftUIIsScaled
+                )
+        }
     }
 }
 

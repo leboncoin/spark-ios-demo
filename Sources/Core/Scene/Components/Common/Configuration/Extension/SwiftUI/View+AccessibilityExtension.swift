@@ -11,6 +11,17 @@ import SwiftUI
 extension View {
 
     @ViewBuilder
+    func demoAccessibilityHidden<Configuration: ComponentConfiguration>(
+        _ configuration: Configuration
+    ) -> some View {
+        if configuration.accessibilityLabel.showConfiguration {
+            self.accessibilityHidden(configuration.accessibilityLabel.value.isEmpty)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
     func demoAccessibilityLabel<Configuration: ComponentConfiguration>(
         _ configuration: Configuration
     ) -> some View {

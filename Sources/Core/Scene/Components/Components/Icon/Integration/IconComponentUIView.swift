@@ -68,5 +68,6 @@ final class IconComponentUIViewMaker: ComponentUIViewMaker {
         componentView.intent = configuration.intent.toRealType(configuration)
         componentView.size = configuration.size.toRealType(configuration)
         componentView.demoAccessibilityLabel(configuration)
+        componentView.demoIsAccessibilityElement(configuration)
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias SpinnerComponentUIViewController = ComponentDisplayViewControllerRepresentable<SpinnerConfiguration, SpinnerUIView, SpinnerConfigurationView, SpinnerComponentUIViewMaker>
+typealias SpinnerComponentUIViewController = ComponentDisplayViewControllerRepresentable<SpinnerConfiguration, SparkUISpinner, SpinnerConfigurationView, SpinnerComponentUIViewMaker>
 
 extension SpinnerComponentUIViewController {
 
@@ -26,7 +26,7 @@ final class SpinnerComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = SpinnerConfiguration
-    typealias ComponentView = SpinnerUIView
+    typealias ComponentView = SparkUISpinner
     typealias ConfigurationView = SpinnerConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SpinnerComponentUIViewMaker>
 
@@ -39,11 +39,12 @@ final class SpinnerComponentUIViewMaker: ComponentUIViewMaker {
     func createComponentView(
         for configuration: Configuration
     ) -> ComponentView {
-        return .init(
-            theme: configuration.theme.value,
-            intent: configuration.intent,
-            spinnerSize: configuration.spinnerSize
+        let componentView = ComponentView(
+            theme: configuration.theme.value
         )
+        self.updateCommonProperties(componentView, for: configuration)
+
+        return componentView
     }
 
     func updateComponentView(
@@ -51,8 +52,16 @@ final class SpinnerComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.spinnerSize = configuration.spinnerSize
+        self.updateCommonProperties(componentView, for: configuration)
+    }
+
+    private func updateCommonProperties(
+        _ componentView: ComponentView,
+        for configuration: Configuration
+    ) {
+        componentView.intent = configuration.intent.toRealType(configuration)
+        componentView.size = configuration.size
         componentView.demoAccessibilityLabel(configuration)
+        componentView.demoIsAccessibilityElement(configuration)
     }
 }

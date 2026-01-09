@@ -12,8 +12,9 @@ class SpinnerConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SpinnerIntent = .random
-    var spinnerSize: SpinnerSize = .random
+    var intent: SpinnerDemoIntent = .default
+    var intentCustomColorToken: ColorTokens = .random
+    var size: SpinnerSize = .default
 
     // MARK: - Initialization
 
@@ -27,6 +28,6 @@ class SpinnerConfiguration: ComponentConfiguration {
 
     override func random() {
         self.intent = .random
-        self.spinnerSize = .random
+        self.size = .random
     }
 }

@@ -13,7 +13,7 @@ struct SpinnerConfigurationView: ConfigurationViewable, ConfigurationUIViewable 
     // MARK: - Type Alias
 
     typealias Configuration = SpinnerConfiguration
-    typealias ComponentUIView = SpinnerUIView
+    typealias ComponentUIView = SparkUISpinner
 
     // MARK: - Properties
 
@@ -50,14 +50,20 @@ struct SpinnerConfigurationView: ConfigurationViewable, ConfigurationUIViewable 
             mainItemsView: {
                 EnumConfigurationItemView(
                     name: "intent",
-                    values: SpinnerIntent.allCases,
+                    values: SpinnerDemoIntent.allCases,
                     selectedValue: self.configuration.intent
                 )
+
+                if self.configuration.wrappedValue.intent == .custom {
+                    ColorTokensConfigurationItemView(
+                        selectedValue: self.configuration.intentCustomColorToken
+                    )
+                }
 
                 EnumConfigurationItemView(
                     name: "size",
                     values: SpinnerSize.allCases,
-                    selectedValue: self.configuration.spinnerSize
+                    selectedValue: self.configuration.size
                 )
             }
         )
