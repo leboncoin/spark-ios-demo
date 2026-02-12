@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias ProgressBarIndeterminateComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarIndeterminateConfiguration, SparkUIProgressBarIndeterminate, ProgressBarIndeterminateConfigurationView, ProgressBarIndeterminateComponentUIViewMaker>
+typealias ProgressBarIndeterminateComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarIndeterminateConfiguration, SparkUIProgressBarIndeterminate, ProgressBarIndeterminateConfigurationView, ProgressBarIndeterminateComponentUIViewMaker, ProgressBarExtraTools>
 
 extension ProgressBarIndeterminateComponentUIViewController {
 
@@ -30,7 +30,8 @@ final class ProgressBarIndeterminateComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = ProgressBarIndeterminateConfiguration
     typealias ComponentView = SparkUIProgressBarIndeterminate
     typealias ConfigurationView = ProgressBarIndeterminateConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressBarIndeterminateComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressBarIndeterminateComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = ProgressBarExtraTools
 
     // MARK: - Properties
 

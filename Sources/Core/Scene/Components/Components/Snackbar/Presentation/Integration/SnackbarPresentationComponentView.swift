@@ -13,7 +13,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias SnackbarPresentationComponentView = ComponentViewable<SnackbarPresentationConfiguration, SnackbarPresentationImplementationView, SnackbarPresentationConfigurationView>
+typealias SnackbarPresentationComponentView = ComponentViewable<SnackbarPresentationConfiguration, SnackbarPresentationImplementationView, SnackbarPresentationConfigurationView, SnackbarExtraTools>
 
 extension SnackbarPresentationComponentView {
 

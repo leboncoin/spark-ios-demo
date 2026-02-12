@@ -14,7 +14,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias IconComponentUIViewController = ComponentDisplayViewControllerRepresentable<IconConfiguration, SparkUIIcon, IconConfigurationView, IconComponentUIViewMaker>
+typealias IconComponentUIViewController = ComponentDisplayViewControllerRepresentable<IconConfiguration, SparkUIIcon, IconConfigurationView, IconComponentUIViewMaker, IconExtraTools>
 
 extension IconComponentUIViewController {
 
@@ -32,7 +32,8 @@ final class IconComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = IconConfiguration
     typealias ComponentView = SparkUIIcon
     typealias ConfigurationView = IconConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, IconComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, IconComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = IconExtraTools
 
     // MARK: - Properties
 

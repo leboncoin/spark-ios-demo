@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias RadioButtonComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioButtonConfiguration, SparkUIRadioButton, RadioButtonConfigurationView, RadioButtonComponentUIViewMaker>
+typealias RadioButtonComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioButtonConfiguration, SparkUIRadioButton, RadioButtonConfigurationView, RadioButtonComponentUIViewMaker, RadioButtonExtraTools>
 
 extension RadioButtonComponentUIViewController {
 
@@ -30,7 +30,8 @@ final class RadioButtonComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = RadioButtonConfiguration
     typealias ComponentView = SparkUIRadioButton
     typealias ConfigurationView = RadioButtonConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RadioButtonComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RadioButtonComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = RadioButtonExtraTools
 
     // MARK: - Properties
 
@@ -97,7 +98,7 @@ private extension SparkUIRadioButton {
     }
 
     func demoIsSelected(_ configuration: RadioButtonConfiguration) {
-        if configuration.uiKitIsAnimated {
+        if configuration.isAnimated {
             self.setIsSelected(configuration.uiKitIsSelected.value, animated: true)
         } else {
             self.isSelected = configuration.uiKitIsSelected.value

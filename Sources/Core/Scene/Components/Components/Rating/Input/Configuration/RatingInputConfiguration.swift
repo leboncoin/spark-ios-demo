@@ -10,13 +10,9 @@ import Foundation
 
 class RatingInputConfiguration: ComponentConfiguration {
 
-    // MARK: - Properties
-
-    var intent: RatingIntent = .random
-
     // MARK: - UIKit Properties Only
 
-    var uiKitRating: CGFloat = CGFloat.random(in: 1...5)
+    var uiKitRating: Double = 0
 
     // MARK: - Initialization
 
@@ -25,17 +21,24 @@ class RatingInputConfiguration: ComponentConfiguration {
 
         self.isEnabled.showConfiguration = true
         self.accessibilityLabel.showConfiguration = true
+        self.accessibilityValue.showConfiguration = true
     }
 
     // MARK: - Getter
 
-    func getInfoValue(from value: CGFloat) -> String {
-        "Current Rating: \(String(format: "%1.f", value))"
+    func getInfoValue(from value: Double) -> String {
+        "Current Rating: " + (NumberFormatter.shared.string(for: value) ?? "")
     }
+}
 
-    // MARK: - Methods
+// MARK: - Extension
 
-    override func random() {
-        self.intent = .random
-    }
+private extension NumberFormatter {
+
+    static let shared: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
 }

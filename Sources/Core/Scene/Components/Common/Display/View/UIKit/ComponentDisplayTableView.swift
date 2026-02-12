@@ -27,7 +27,8 @@ final class ComponentDisplayTableView<
     Configuration: ComponentConfiguration,
     ComponentView: UIView,
     ConfigurationView: ConfigurationUIViewable<Configuration, ComponentView>,
-    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView>
+    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView, ExtraTools>,
+    ExtraTools: ComponentExtraTools
 >: UIView, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - Component
@@ -80,7 +81,7 @@ final class ComponentDisplayTableView<
 
         // Registration
         self.tableView.register(
-            ComponentDisplayTableViewCell<Configuration, ComponentView, ConfigurationView, ViewMaker>.self,
+            ComponentDisplayTableViewCell<Configuration, ComponentView, ConfigurationView, ViewMaker, ExtraTools>.self,
             forCellReuseIdentifier: Constants.cellIdentifier
         )
 
@@ -109,7 +110,7 @@ final class ComponentDisplayTableView<
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.cellIdentifier,
             for: indexPath
-        ) as? ComponentDisplayTableViewCell<Configuration, ComponentView, ConfigurationView, ViewMaker> else {
+        ) as? ComponentDisplayTableViewCell<Configuration, ComponentView, ConfigurationView, ViewMaker, ExtraTools> else {
             return .init()
         }
 

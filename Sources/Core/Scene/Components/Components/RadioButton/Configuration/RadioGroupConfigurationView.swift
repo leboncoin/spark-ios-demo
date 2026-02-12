@@ -79,9 +79,14 @@ struct RadioGroupConfigurationView: ConfigurationViewable, ConfigurationUIViewab
             if self.configuration.wrappedValue.uiKitCanAnimated {
                 ToggleConfigurationItemView(
                     name: "is animated",
-                    isOn: self.configuration.uiKitIsAnimated
+                    isOn: self.configuration.isAnimated
                 )
             }
+        } else {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.isAnimated
+            )
         }
     }
 

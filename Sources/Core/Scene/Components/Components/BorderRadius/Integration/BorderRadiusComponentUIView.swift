@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias BorderRadiusComponentUIViewController = ComponentDisplayViewControllerRepresentable<BorderRadiusConfiguration, BorderRadiusUIView, BorderRadiusConfigurationView, BorderRadiusComponentUIViewMaker>
+typealias BorderRadiusComponentUIViewController = ComponentDisplayViewControllerRepresentable<BorderRadiusConfiguration, BorderRadiusUIView, BorderRadiusConfigurationView, BorderRadiusComponentUIViewMaker, BorderRadiusExtraTools>
 
 extension BorderRadiusComponentUIViewController {
 
@@ -28,7 +28,8 @@ final class BorderRadiusComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = BorderRadiusConfiguration
     typealias ComponentView = BorderRadiusUIView
     typealias ConfigurationView = BorderRadiusConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BorderRadiusComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BorderRadiusComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = BorderRadiusExtraTools
 
     // MARK: - Properties
 

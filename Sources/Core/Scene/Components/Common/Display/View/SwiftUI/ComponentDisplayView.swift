@@ -8,7 +8,12 @@
 
 import SwiftUI
 
-struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Configuration: ComponentConfiguration>: View {
+struct ComponentDisplayView<
+    ComponentView: View,
+    ConfigurationView: View,
+    Configuration: ComponentConfiguration,
+    ExtraTools: ComponentExtraTools
+>: View {
 
     // MARK: - Properties
 
@@ -25,6 +30,7 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
     @State private var showCodeSyntax = false
 
     private let styles: [ComponentDisplayStyle]
+    private let extraTools: ExtraTools
 
     var componentView: (_ configuration: Binding<Configuration>) -> ComponentView
     var configurationView: (_ configuration: Binding<Configuration>) -> ConfigurationView
@@ -35,12 +41,14 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
         configurations: [Configuration],
         style: ComponentDisplayStyle = .default,
         styles: [ComponentDisplayStyle] = ComponentDisplayStyle.allCases,
+        extraTools: ExtraTools,
         @ViewBuilder componentView: @escaping (_ configuration: Binding<Configuration>) -> ComponentView,
         @ViewBuilder configurationView: @escaping (_ configuration: Binding<Configuration>) -> ConfigurationView
     ) {
         self.configurations = configurations
         self.style = style
         self.styles = styles
+        self.extraTools = extraTools
         self.componentView = componentView
         self.configurationView = configurationView
     }
@@ -117,29 +125,36 @@ struct ComponentDisplayView<ComponentView: View, ConfigurationView: View, Config
             }
         }
         .toolbar {
-            Button("Code", systemImage: "apple.terminal") {
-                self.showCodeSyntax = true
+            if !self.extraTools.swiftUICodeSyntaxes.isEmpty {
+                Button("Code", systemImage: "curlybraces") {
+                    self.showCodeSyntax = true
+                }
             }
         }
         .toolbar {
-            Menu("Link", systemImage: "network") {
-                Button("Documentation", systemImage: "append.page.fill") {
-                    // TODO:
-                    UIPasteboard.general.string = "Hello"
-                    self.showCopiedToast = true
-                }
+            if self.extraTools.showLinks() {
+                Menu("Link", systemImage: "network") {
+                    if let documentationLink = self.extraTools.documentationLink {
+                        Button("Documentation", systemImage: "append.page.fill") {
+                            // TODO:
+                            UIPasteboard.general.string = documentationLink
+                            self.showCopiedToast = true
+                        }
+                    }
 
-                Button("Figma", systemImage: "f.square") {
-                    // TODO:
-                    UIPasteboard.general.string = "Hello"
-                    self.showCopiedToast = true
+                    if let figmaLink = self.extraTools.figmaLink {
+                        Button("Figma", systemImage: "f.square") {
+                            // TODO:
+                            UIPasteboard.general.string = figmaLink
+                            self.showCopiedToast = true
+                        }
+                    }
                 }
             }
         }
-        .toast("Copié !", isPresented: self.$showCopiedToast)
+        .toast("Copied !", isPresented: self.$showCopiedToast)
         .sheet(isPresented: self.$showCodeSyntax, content: {
-            // TODO:
-            Text("Hello")
+            CodeSyntaxView(content: self.extraTools.swiftUICodeSyntaxes)
         })
         .preferredColorScheme(self.colorScheme)
     }

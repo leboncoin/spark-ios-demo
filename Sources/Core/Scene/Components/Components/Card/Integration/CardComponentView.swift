@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias CardComponentView = ComponentViewable<CardConfiguration, CardImplementationView, CardConfigurationView>
+typealias CardComponentView = ComponentViewable<CardConfiguration, CardImplementationView, CardConfigurationView, CardExtraTools>
 
 // MARK: - Subview
 
@@ -63,6 +63,7 @@ struct CardImplementationView: ComponentImplementationViewable {
 
             ButtonImplementationView(configuration: self.configuration.button)
         }
+        .padding(30)
     }
 }
 

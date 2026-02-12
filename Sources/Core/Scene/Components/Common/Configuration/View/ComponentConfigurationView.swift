@@ -25,7 +25,7 @@ struct ComponentConfigurationView<
     @State var colorScheme: ColorScheme = .light
 
     private let componentView: () -> ComponentView
-    private var mainItemsView: () -> ConfigurationItemsView
+    private var mainItemsView: (() -> ConfigurationItemsView)?
     private var otherSectionItemsView: (() -> OtherConfigurationItemsView)?
     private var otherAccessibilityItemsView: (() -> OtherAccessibilityItemsView)?
 
@@ -43,6 +43,16 @@ struct ComponentConfigurationView<
         self.framework = framework
         self.componentView = componentView
         self.mainItemsView = mainItemsView
+    }
+
+    init(
+        configuration: Binding<Configuration>,
+        framework: Framework,
+        @ViewBuilder componentView: @escaping () -> ComponentView
+    ) where ConfigurationItemsView == EmptyView, OtherConfigurationItemsView == EmptyView, OtherAccessibilityItemsView == EmptyView {
+        self._configuration = configuration
+        self.framework = framework
+        self.componentView = componentView
     }
 
     init(
@@ -111,7 +121,7 @@ struct ComponentConfigurationView<
                             selectedValue: self.$configuration.theme
                         )
 
-                        self.mainItemsView()
+                        self.mainItemsView?()
 
                         if self.configuration.isEnabled.showConfiguration {
                             ToggleConfigurationItemView(

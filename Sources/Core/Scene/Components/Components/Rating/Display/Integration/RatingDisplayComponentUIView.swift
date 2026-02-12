@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias RatingDisplayComponentUIViewController = ComponentDisplayViewControllerRepresentable<RatingDisplayConfiguration, RatingDisplayUIView, RatingDisplayConfigurationView, RatingDisplayComponentUIViewMaker>
+typealias RatingDisplayComponentUIViewController = ComponentDisplayViewControllerRepresentable<RatingDisplayConfiguration, SparkUIRatingDisplay, RatingDisplayConfigurationView, RatingDisplayComponentUIViewMaker, RatingExtraTools>
 
 extension RatingDisplayComponentUIViewController {
 
@@ -28,9 +28,10 @@ final class RatingDisplayComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = RatingDisplayConfiguration
-    typealias ComponentView = RatingDisplayUIView
+    typealias ComponentView = SparkUIRatingDisplay
     typealias ConfigurationView = RatingDisplayConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RatingDisplayComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RatingDisplayComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = RatingExtraTools
 
     // MARK: - Properties
 
@@ -42,11 +43,7 @@ final class RatingDisplayComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            intent: configuration.intent,
-            count: configuration.numberOfStars,
-            size: configuration.size,
-            rating: configuration.rating
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(componentView, for: configuration)
 
@@ -58,10 +55,6 @@ final class RatingDisplayComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.count = configuration.numberOfStars
-        componentView.size = configuration.size
-        componentView.rating = configuration.rating
         self.updateCommonProperties(componentView, for: configuration)
     }
 
@@ -69,6 +62,59 @@ final class RatingDisplayComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.value = configuration.rating
+        componentView.size = configuration.size
+        componentView.stars = configuration.stars
+        componentView.demoText(configuration)
+        componentView.demoCountText(configuration)
+        componentView.demoAdditionalText(configuration)
         componentView.demoAccessibilityLabel(configuration)
+        componentView.demoAccessibilityValue(configuration)
+    }
+}
+
+// MARK: - Extension
+
+private extension SparkUIRatingDisplay {
+
+    // MARK: - Setter
+
+    func demoText(_ configuration: RatingDisplayComponentUIViewMaker.Configuration) {
+        let text = configuration.text.nilIfEmpty
+        if configuration.uiKitIsAttributedText {
+            self.attributedText = text?.demoNSAttributedString
+        } else if let text {
+            self.text = text
+        } else if self.attributedText != nil {
+            self.attributedText = nil
+        } else if self.text != nil {
+            self.text = nil
+        }
+    }
+
+    func demoCountText(_ configuration: RatingDisplayComponentUIViewMaker.Configuration) {
+        let text = configuration.countText.nilIfEmpty
+        if configuration.uiKitIsAttributedText {
+            self.attributedCountText = text?.demoNSAttributedString
+        } else if let text {
+            self.countText = text
+        } else if self.attributedText != nil {
+            self.attributedCountText = nil
+        } else if self.text != nil {
+            self.countText = nil
+        }
+    }
+
+    func demoAdditionalText(_ configuration: RatingDisplayComponentUIViewMaker.Configuration) {
+        let text = configuration.additionalText.nilIfEmpty
+        if configuration.uiKitIsAttributedText {
+            self.attributedAdditionalText = text?.demoNSAttributedString
+        } else if let text {
+            self.additionalText = text
+        } else if self.attributedText != nil {
+            self.attributedAdditionalText = nil
+        } else if self.text != nil {
+            self.additionalText = nil
+        }
     }
 }

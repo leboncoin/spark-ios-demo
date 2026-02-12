@@ -13,7 +13,7 @@ struct RatingDisplayConfigurationView: ConfigurationViewable, ConfigurationUIVie
     // MARK: - Type Alias
 
     typealias Configuration = RatingDisplayConfiguration
-    typealias ComponentUIView = RatingDisplayUIView
+    typealias ComponentUIView = SparkUIRatingDisplay
 
     // MARK: - Properties
 
@@ -48,10 +48,17 @@ struct RatingDisplayConfigurationView: ConfigurationViewable, ConfigurationUIVie
                 }
             },
             mainItemsView: {
+                StepperConfigurationItemView(
+                    name: "rating",
+                    value: self.configuration.rating,
+                    bounds: 0...5,
+                    step: 0.25
+                )
+
                 EnumConfigurationItemView(
-                    name: "intent",
-                    values: RatingIntent.allCases,
-                    selectedValue: self.configuration.intent
+                    name: "stars",
+                    values: RatingDisplayStars.allCases,
+                    selectedValue: self.configuration.stars
                 )
 
                 EnumConfigurationItemView(
@@ -60,18 +67,39 @@ struct RatingDisplayConfigurationView: ConfigurationViewable, ConfigurationUIVie
                     selectedValue: self.configuration.size
                 )
 
-                EnumConfigurationItemView(
-                    name: "no. of stars",
-                    values: RatingStarsCount.allCases,
-                    selectedValue: self.configuration.numberOfStars
+                TextFieldConfigurationItemView(
+                    name: "text",
+                    text: self.configuration.text
                 )
 
-                StepperConfigurationItemView(
-                    name: "rating",
-                    value: self.configuration.rating,
-                    bounds: 0...5,
-                    step: 0.5
+                TextFieldConfigurationItemView(
+                    name: "count text",
+                    text: self.configuration.countText
                 )
+
+                TextFieldConfigurationItemView(
+                    name: "additional text",
+                    text: self.configuration.additionalText
+                )
+
+                if self.framework.isUIKit {
+                    ToggleConfigurationItemView(
+                        name: "is attributed text",
+                        isOn: self.configuration.uiKitIsAttributedText
+                    )
+                } else {
+                    ToggleConfigurationItemView(
+                        name: "is custom content",
+                        isOn: self.configuration.swiftUIIsCustomContent
+                    )
+
+                    if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                        TextFieldConfigurationItemView(
+                            name: "second text",
+                            text: self.configuration.swiftUISecondText
+                        )
+                    }
+                }
             }
         )
     }

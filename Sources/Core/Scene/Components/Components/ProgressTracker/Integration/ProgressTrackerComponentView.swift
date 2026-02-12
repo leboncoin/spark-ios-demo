@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias ProgressTrackerComponentView = ComponentViewable<ProgressTrackerConfiguration, ProgressTrackerImplementationView, ProgressTrackerConfigurationView>
+typealias ProgressTrackerComponentView = ComponentViewable<ProgressTrackerConfiguration, ProgressTrackerImplementationView, ProgressTrackerConfigurationView, ProgressTrackerExtraTools>
 
 extension ProgressTrackerComponentView {
 

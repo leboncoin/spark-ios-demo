@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias ProgressBarComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarConfiguration, SparkUIProgressBar, ProgressBarConfigurationView, ProgressBarComponentUIViewMaker>
+typealias ProgressBarComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressBarConfiguration, SparkUIProgressBar, ProgressBarConfigurationView, ProgressBarComponentUIViewMaker, ProgressBarExtraTools>
 
 extension ProgressBarComponentUIViewController {
 
@@ -30,7 +30,8 @@ final class ProgressBarComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = ProgressBarConfiguration
     typealias ComponentView = SparkUIProgressBar
     typealias ConfigurationView = ProgressBarConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressBarComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressBarComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = ProgressBarExtraTools
 
     // MARK: - Properties
 

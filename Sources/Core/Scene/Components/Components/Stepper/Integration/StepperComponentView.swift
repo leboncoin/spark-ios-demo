@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias StepperComponentView = ComponentViewable<StepperConfiguration, StepperImplementationView, StepperConfigurationView>
+typealias StepperComponentView = ComponentViewable<StepperConfiguration, StepperImplementationView, StepperConfigurationView, StepperExtraTools>
 
 extension StepperComponentView {
 
@@ -63,7 +63,6 @@ struct StepperImplementationView: ComponentImplementationViewable {
         switch self.configurationWrapped.format {
         case .currency:
             SparkStepper(
-                theme: self.configurationWrapped.theme.value,
                 value: self.$floatValue,
                 in: self.configurationWrapped.bounds(),
                 step: self.configurationWrapped.step(),
@@ -73,7 +72,6 @@ struct StepperImplementationView: ComponentImplementationViewable {
 
         case .percent:
             SparkStepper(
-                theme: self.configurationWrapped.theme.value,
                 value: self.$intValue,
                 in: self.configurationWrapped.bounds().intRange,
                 step: self.configurationWrapped.step().intValue,
@@ -83,7 +81,6 @@ struct StepperImplementationView: ComponentImplementationViewable {
 
         case .none:
             SparkStepper(
-                theme: self.configurationWrapped.theme.value,
                 value: self.intValueForFormField ?? self.$intValue,
                 in: self.configurationWrapped.bounds().intRange,
                 step: self.configurationWrapped.step().intValue

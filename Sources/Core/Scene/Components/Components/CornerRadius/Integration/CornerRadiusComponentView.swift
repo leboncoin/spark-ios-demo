@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias CornerRadiusComponentView = ComponentViewable<CornerRadiusConfiguration, CornerRadiusImplementationView, CornerRadiusConfigurationView>
+typealias CornerRadiusComponentView = ComponentViewable<CornerRadiusConfiguration, CornerRadiusImplementationView, CornerRadiusConfigurationView, CornerRadiusExtraTools>
 
 extension CornerRadiusComponentView {
 

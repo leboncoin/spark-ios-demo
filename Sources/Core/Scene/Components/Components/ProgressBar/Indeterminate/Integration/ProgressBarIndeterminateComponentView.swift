@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias ProgressBarIndeterminateComponentView = ComponentViewable<ProgressBarIndeterminateConfiguration, ProgressBarIndeterminateImplementationView, ProgressBarIndeterminateConfigurationView>
+typealias ProgressBarIndeterminateComponentView = ComponentViewable<ProgressBarIndeterminateConfiguration, ProgressBarIndeterminateImplementationView, ProgressBarIndeterminateConfigurationView, ProgressBarExtraTools>
 
 extension ProgressBarIndeterminateComponentView {
 

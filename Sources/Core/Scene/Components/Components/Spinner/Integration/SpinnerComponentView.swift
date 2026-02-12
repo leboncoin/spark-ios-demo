@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias SpinnerComponentView = ComponentViewable<SpinnerConfiguration, SpinnerImplementationView, SpinnerConfigurationView>
+typealias SpinnerComponentView = ComponentViewable<SpinnerConfiguration, SpinnerImplementationView, SpinnerConfigurationView, SpinnerExtraTools>
 
 // MARK: - Subview
 

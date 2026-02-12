@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias IconButtonComponentView = ComponentViewable<IconButtonConfiguration, IconButtonImplementationView, IconButtonConfigurationView>
+typealias IconButtonComponentView = ComponentViewable<IconButtonConfiguration, IconButtonImplementationView, IconButtonConfigurationView, ButtonExtraTools>
 
 // MARK: - Subview
 
@@ -30,7 +30,6 @@ struct IconButtonImplementationView: ComponentImplementationViewable {
             intent: self.configurationWrapped.intent,
             variant: self.configurationWrapped.variant,
             size: self.configurationWrapped.size,
-            shape: self.configurationWrapped.shape,
             action: {
                 if self.configurationWrapped.swiftUIIsToggle {
                     self.isSelected.toggle()

@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias TabComponentUIViewController = ComponentDisplayViewControllerRepresentable<TabConfiguration, TabUIView, TabConfigurationView, TabComponentUIViewMaker>
+typealias TabComponentUIViewController = ComponentDisplayViewControllerRepresentable<TabConfiguration, TabUIView, TabConfigurationView, TabComponentUIViewMaker, TabExtraTools>
 
 extension TabComponentUIViewController {
 
@@ -29,7 +29,8 @@ final class TabComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = TabConfiguration
     typealias ComponentView = TabUIView
     typealias ConfigurationView = TabConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TabComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TabComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = TabExtraTools
 
     // MARK: - Properties
 

@@ -15,7 +15,6 @@ class ButtonConfiguration: ComponentConfiguration {
     var intent: ButtonIntent = .main
     var variant: ButtonVariant = .filled
     var size: ButtonSize = .medium
-    var shape: ButtonShape = .rounded
     var alignment: ButtonAlignment = .random
     var contentNormal = Content(state: .normal)
     var contentHighlighted = Content(state: .highlighted)
@@ -56,7 +55,6 @@ class ButtonConfiguration: ComponentConfiguration {
         self.intent = .random
         self.variant = .random
         self.size = .random
-        self.shape = .random
         self.alignment = .random
         self.swiftUIIsFullWidth = .random()
         self.swiftUIIsToggle = .random()

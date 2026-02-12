@@ -12,10 +12,22 @@ class RatingDisplayConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: RatingIntent = .random
-    var size: RatingDisplaySize = .random
+    var stars: RatingDisplayStars = .default
+    var size: RatingDisplaySize = .default
     var rating: CGFloat = CGFloat(Int.random(in: 1...5))
-    var numberOfStars: RatingStarsCount = .five
+
+    var text = ""
+    var countText = ""
+    var additionalText = ""
+
+    // MARK: - UIKit Properties Only
+
+    var uiKitIsAttributedText: Bool = false
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "!"
 
     // MARK: - Initialization
 
@@ -23,13 +35,14 @@ class RatingDisplayConfiguration: ComponentConfiguration {
         super.init()
 
         self.accessibilityLabel.showConfiguration = true
+        self.accessibilityValue.showConfiguration = true
     }
 
     // MARK: - Methods
 
     override func random() {
-        self.intent = .random
+        self.stars = .random
         self.size = .random
-        self.numberOfStars = .random
+        self.rating = CGFloat(Int.random(in: 1...5))
     }
 }

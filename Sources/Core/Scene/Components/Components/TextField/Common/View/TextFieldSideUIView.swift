@@ -12,7 +12,8 @@ final class TextFieldSideUIView<
     Configuration: ComponentConfiguration,
     ComponentView: UIView,
     ConfigurationView: ConfigurationUIViewable<Configuration, ComponentView>,
-    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView>
+    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView, ExtraTools>,
+    ExtraTools: ComponentExtraTools
 >{
 
     // MARK: - Properties

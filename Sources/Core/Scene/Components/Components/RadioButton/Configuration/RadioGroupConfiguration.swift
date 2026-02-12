@@ -24,6 +24,7 @@ class RadioGroupConfiguration: ComponentConfiguration {
         }
     }
     var items = [Item]()
+    var isAnimated: Bool = true
 
     // MARK: - SwiftUI Properties Only
 
@@ -33,7 +34,6 @@ class RadioGroupConfiguration: ComponentConfiguration {
 
     var uiKitSelectedId: Int = Bool.random() ? 0 : -1
     var uiKitCanAnimated: Bool = false
-    var uiKitIsAnimated: Bool = false
 
     // MARK: - Initialization
 

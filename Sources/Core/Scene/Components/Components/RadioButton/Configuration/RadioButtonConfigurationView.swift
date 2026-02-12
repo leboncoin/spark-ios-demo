@@ -86,11 +86,9 @@ struct RadioButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewa
             )
         }
 
-        if self.framework.isUIKit {
-            ToggleConfigurationItemView(
-                name: "is animated",
-                isOn: self.configuration.uiKitIsAnimated
-            )
-        }
+        ToggleConfigurationItemView(
+            name: "is animated",
+            isOn: self.configuration.isAnimated
+        )
     }
 }

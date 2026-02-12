@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias IconButtonComponentUIViewController = ComponentDisplayViewControllerRepresentable<IconButtonConfiguration, IconButtonUIView, IconButtonConfigurationView, IconButtonComponentUIViewMaker>
+typealias IconButtonComponentUIViewController = ComponentDisplayViewControllerRepresentable<IconButtonConfiguration, IconButtonUIView, IconButtonConfigurationView, IconButtonComponentUIViewMaker, ButtonExtraTools>
 
 // MARK: - View Maker
 
@@ -22,7 +22,8 @@ final class IconButtonComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = IconButtonConfiguration
     typealias ComponentView = IconButtonUIView
     typealias ConfigurationView = IconButtonConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, IconButtonComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, IconButtonComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = ButtonExtraTools
 
     // MARK: - Properties
 
@@ -37,8 +38,7 @@ final class IconButtonComponentUIViewMaker: ComponentUIViewMaker {
             theme: configuration.theme.value,
             intent: configuration.intent,
             variant: configuration.variant,
-            size: configuration.size,
-            shape: configuration.shape
+            size: configuration.size
         )
         self.updateCommonProperties(componentView, for: configuration)
 
@@ -53,7 +53,6 @@ final class IconButtonComponentUIViewMaker: ComponentUIViewMaker {
         componentView.intent = configuration.intent
         componentView.variant = configuration.variant
         componentView.size = configuration.size
-        componentView.shape = configuration.shape
 
         self.updateCommonProperties(componentView, for: configuration)
     }

@@ -15,7 +15,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias ProgressTrackerComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressTrackerConfiguration, ProgressTrackerUIControl, ProgressTrackerConfigurationView, ProgressTrackerComponentUIViewMaker>
+typealias ProgressTrackerComponentUIViewController = ComponentDisplayViewControllerRepresentable<ProgressTrackerConfiguration, ProgressTrackerUIControl, ProgressTrackerConfigurationView, ProgressTrackerComponentUIViewMaker, ProgressTrackerExtraTools>
 
 extension ProgressTrackerComponentUIViewController {
 
@@ -33,7 +33,8 @@ final class ProgressTrackerComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = ProgressTrackerConfiguration
     typealias ComponentView = ProgressTrackerUIControl
     typealias ConfigurationView = ProgressTrackerConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressTrackerComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ProgressTrackerComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = ProgressTrackerExtraTools
 
     // MARK: - Properties
 

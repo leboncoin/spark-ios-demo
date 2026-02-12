@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias BottomSheetComponentUIViewController = ComponentDisplayViewControllerRepresentable<BottomSheetConfiguration, UIButton, BottomSheetConfigurationView, BottomSheetComponentUIViewMaker>
+typealias BottomSheetComponentUIViewController = ComponentDisplayViewControllerRepresentable<BottomSheetConfiguration, UIButton, BottomSheetConfigurationView, BottomSheetComponentUIViewMaker, BottomSheetExtraTools>
 
 extension BottomSheetComponentUIViewController {
 
@@ -29,7 +29,8 @@ final class BottomSheetComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = BottomSheetConfiguration
     typealias ComponentView = UIButton
     typealias ConfigurationView = BottomSheetConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BottomSheetComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BottomSheetComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = BottomSheetExtraTools
 
     // MARK: - Properties
 

@@ -14,6 +14,7 @@ class RadioButtonConfiguration: ComponentConfiguration {
 
     var intent: RadioButtonIntent = .default
     var text = "My RadioButton"
+    var isAnimated: Bool = true
 
     // MARK: - SwiftUI Properties Only
 
@@ -23,7 +24,6 @@ class RadioButtonConfiguration: ComponentConfiguration {
     // MARK: - UIKit Properties Only
 
     var uiKitIsAttributedText = false
-    var uiKitIsAnimated: Bool = true
 
     // MARK: - Initialization
 

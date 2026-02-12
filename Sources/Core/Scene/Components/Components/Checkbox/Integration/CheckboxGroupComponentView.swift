@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias CheckboxGroupComponentView = ComponentViewable<CheckboxGroupConfiguration, CheckboxGroupImplementationView, CheckboxGroupConfigurationView>
+typealias CheckboxGroupComponentView = ComponentViewable<CheckboxGroupConfiguration, CheckboxGroupImplementationView, CheckboxGroupConfigurationView, CheckboxExtraTools>
 
 extension CheckboxGroupComponentView {
 

@@ -10,13 +10,9 @@ import UIKit
 import SwiftUI
 import Combine
 
-// MARK: - Component
-
-typealias SliderFloatUIView = SliderUIControl<Float>
-
 // MARK: - View Controller
 
-typealias SliderComponentUIViewController = ComponentDisplayViewControllerRepresentable<SliderConfiguration, SliderFloatUIView, SliderConfigurationView, SliderComponentUIViewMaker>
+typealias SliderComponentUIViewController = ComponentDisplayViewControllerRepresentable<SliderConfiguration, SparkUISlider, SliderConfigurationView, SliderComponentUIViewMaker, SliderExtraTools>
 
 extension SliderComponentUIViewController {
 
@@ -32,9 +28,10 @@ final class SliderComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = SliderConfiguration
-    typealias ComponentView = SliderFloatUIView
+    typealias ComponentView = SparkUISlider
     typealias ConfigurationView = SliderConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SliderComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SliderComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = SliderExtraTools
 
     // MARK: - Properties
 
@@ -47,17 +44,16 @@ final class SliderComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            shape: configuration.shape,
-            intent: configuration.intent
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(
             componentView,
             for: configuration
         )
 
-        componentView.valuePublisher.sink { value in
+        componentView.valueChangedPublisher.sink { value in
             configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: value)
+            componentView.demoValueText(configuration)
         }
         .store(in: &self.cancellables)
 
@@ -69,8 +65,6 @@ final class SliderComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.shape = configuration.shape
 
         self.updateCommonProperties(
             componentView,
@@ -84,12 +78,19 @@ final class SliderComponentUIViewMaker: ComponentUIViewMaker {
     ) {
         let value = configuration.value()
 
+        componentView.intent = configuration.intent
         componentView.isContinuous = configuration.uiKitIsContinuous
-        componentView.setValue(value)
-        componentView.range = configuration.bounds()
-        componentView.step = configuration.step()
+        componentView.isFloatingValueLabel = configuration.isFloatingValueLabel
+        componentView.value = value
+        componentView.minimumValue = configuration.minimumValue
+        componentView.maximumValue = configuration.maximumValue
+        componentView.demoStep(configuration)
+        componentView.demoTitle(configuration)
+        componentView.demoValueText(configuration)
+        componentView.demoRangeValuesText(configuration)
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
+        componentView.demoAccessibilityValue(configuration, canSetNil: true)
 
         configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: value)
     }
@@ -102,5 +103,58 @@ final class SliderComponentUIViewMaker: ComponentUIViewMaker {
 
     func isInfoLabel() -> Bool {
         true
+    }
+}
+
+// MARK: - Extension
+
+private extension SparkUISlider {
+
+    // MARK: - Setter
+
+    func demoStep(_ configuration: SliderComponentUIViewMaker.Configuration) {
+        if configuration.isStep {
+            self.step = configuration.step()
+        } else {
+            self.step = nil
+        }
+    }
+
+    func demoTitle(_ configuration: SliderComponentUIViewMaker.Configuration) {
+        let text = configuration.titleString.nilIfEmpty
+
+        if let text, configuration.uiKitIsAttributedText {
+            self.attributedTitle = text.demoNSAttributedString
+        } else {
+            self.title = text
+        }
+    }
+
+    func demoValueText(_ configuration: SliderComponentUIViewMaker.Configuration) {
+        let text = configuration.customValueLabel.nilIfEmpty ?? configuration.getFormattedValue(from: self.value)
+
+        if !configuration.isValueLabel {
+            self.valueText = nil
+        } else if configuration.uiKitIsAttributedText {
+            self.attributedValueText = text.demoNSAttributedString
+        } else {
+            self.valueText = text
+        }
+    }
+
+    func demoRangeValuesText(_ configuration: SliderComponentUIViewMaker.Configuration) {
+        let minimumText = configuration.lowerBoundString
+        let maximumText = configuration.upperBoundString
+
+        if !configuration.isRangeValuesLabel {
+            self.minimumRangeValueText = nil
+            self.maximumRangeValueText = nil
+        } else if configuration.uiKitIsAttributedText {
+            self.attributedMinimumRangeValueText = minimumText.demoNSAttributedString
+            self.attributedMaximumRangeValueText = maximumText.demoNSAttributedString
+        } else {
+            self.minimumRangeValueText = minimumText
+            self.maximumRangeValueText = maximumText
+        }
     }
 }

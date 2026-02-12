@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias AdaptativeStackComponentView = ComponentViewable<AdaptativeStackConfiguration, AdaptativeStackImplementationView, AdaptativeStackConfigurationView>
+typealias AdaptativeStackComponentView = ComponentViewable<AdaptativeStackConfiguration, AdaptativeStackImplementationView, AdaptativeStackConfigurationView, AdaptativeStackExtraTools>
 
 extension AdaptativeStackComponentView {
 

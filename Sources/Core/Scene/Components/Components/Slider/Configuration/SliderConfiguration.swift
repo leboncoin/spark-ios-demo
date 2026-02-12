@@ -12,19 +12,40 @@ class SliderConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SliderIntent = .random
-    var shape: SliderShape = .random
+    var intent: SliderIntent = .default
 
-    var valueString: String = String(Float.random(in: 0..<1))
+    var valueString: String = String(Float(Int.random(in: 0...10))/10)
+    var isStep: Bool = true
 
-    var stepString: String = "0.1"
+    var titleString: String = ""
 
     var lowerBoundString: String = "0.0"
     var upperBoundString: String = "1.0"
+    var stepString: String = "0.1"
+
+    var minimumValue: Float {
+        Float(self.lowerBoundString) ?? 0
+    }
+
+    var maximumValue: Float {
+        Float(self.upperBoundString) ?? 1
+    }
+
+    var isValueLabel: Bool = false
+    var customValueLabel: String = ""
+    var isRangeValuesLabel: Bool = false
+
+    var isFloatingValueLabel: Bool = false
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsContinuous: Bool = .random()
+    var uiKitIsContinuous: Bool = true
+    var uiKitIsAttributedText: Bool = false
+
+    // MARK: - SwiftUI Properties Only
+
+    var swiftUIIsCustomValue: Bool = false
+    var swiftUISecondText = "€"
 
     // MARK: - Initialization
 
@@ -33,6 +54,7 @@ class SliderConfiguration: ComponentConfiguration {
 
         self.isEnabled.showConfiguration = true
         self.accessibilityLabel.showConfiguration = true
+        self.accessibilityValue.showConfiguration = true
     }
 
     // MARK: - Getter
@@ -50,24 +72,43 @@ class SliderConfiguration: ComponentConfiguration {
     }
 
     func bounds() -> ClosedRange<Float> {
-        guard let lowerBound = Float(self.lowerBoundString),
-              let upperBound = Float(self.upperBoundString),
-              upperBound > lowerBound else {
+        guard self.minimumValue < self.maximumValue else {
             return 0...1
         }
 
-        return lowerBound...upperBound
+        return self.minimumValue...self.maximumValue
+    }
+
+    func getFormattedValue(from value: Float) -> String {
+        NumberFormatter.shared.string(for: value) ?? ""
     }
 
     func getInfoValue(from value: Float) -> String {
-        "Value: " + String(format: "%.2f", value)
+        "Value: " + (NumberFormatter.shared.string(for: value) ?? "")
     }
 
     // MARK: - Methods
 
     override func random() {
         self.intent = .random
-        self.shape = .random
         self.uiKitIsContinuous = .random()
+        self.uiKitIsAttributedText = .random()
+        self.isStep = .random()
+        self.swiftUIIsCustomValue = .random()
+        self.isValueLabel = .random()
+        self.isRangeValuesLabel = .random()
     }
 }
+
+// MARK: - Extension
+
+private extension NumberFormatter {
+
+    static let shared: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+}
+

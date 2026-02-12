@@ -14,7 +14,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias BadgeComponentUIViewController = ComponentDisplayViewControllerRepresentable<BadgeConfiguration, UIView, BadgeConfigurationView, BadgeComponentUIViewMaker>
+typealias BadgeComponentUIViewController = ComponentDisplayViewControllerRepresentable<BadgeConfiguration, UIView, BadgeConfigurationView, BadgeComponentUIViewMaker, BadgeExtraTools>
 
 extension BadgeComponentUIViewController {
 
@@ -32,7 +32,8 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = BadgeConfiguration
     typealias ComponentView = UIView
     typealias ConfigurationView = BadgeConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BadgeComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BadgeComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = BadgeExtraTools
 
     // MARK: - Properties
 

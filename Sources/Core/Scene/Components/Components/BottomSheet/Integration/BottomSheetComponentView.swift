@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias BottomSheetComponentView = ComponentViewable<BottomSheetConfiguration, BottomSheetImplementationView, BottomSheetConfigurationView>
+typealias BottomSheetComponentView = ComponentViewable<BottomSheetConfiguration, BottomSheetImplementationView, BottomSheetConfigurationView, BottomSheetExtraTools>
 
 extension BottomSheetComponentView {
 

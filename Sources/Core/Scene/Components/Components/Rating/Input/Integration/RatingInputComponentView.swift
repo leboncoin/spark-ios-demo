@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias RatingInputComponentView = ComponentViewable<RatingInputConfiguration, RatingInputImplementationView, RatingInputConfigurationView>
+typealias RatingInputComponentView = ComponentViewable<RatingInputConfiguration, RatingInputImplementationView, RatingInputConfigurationView, RatingExtraTools>
 
 extension RatingInputComponentView {
 
@@ -26,18 +26,17 @@ struct RatingInputImplementationView: ComponentImplementationViewable {
     // MARK: - Properties
 
     var configuration: Binding<RatingInputConfiguration>
-    @State private var rating: CGFloat = CGFloat(Int.random(in: 0...5))
+    @State private var rating: Double = 0
 
     // MARK: - View
 
     var body: some View {
         VStack {
-            RatingInputView(
-                theme: self.configurationWrapped.theme.value,
-                intent: self.configurationWrapped.intent,
-                rating: self.$rating
-            )
-            .demoAccessibilityLabel(self.configurationWrapped)
+            SparkRatingInput(value: self.$rating)
+                .sparkTheme(self.configurationWrapped.theme.value)
+                .demoDisabled(self.configurationWrapped)
+                .demoAccessibilityLabel(self.configurationWrapped)
+                .demoAccessibilityValue(self.configurationWrapped)
 
             Text(self.configurationWrapped.getInfoValue(from: self.rating))
                 .demoComponentInfoBackground()

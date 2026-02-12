@@ -13,7 +13,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias TextLinkComponentView = ComponentViewable<TextLinkConfiguration, TextLinkImplementationView, TextLinkConfigurationView>
+typealias TextLinkComponentView = ComponentViewable<TextLinkConfiguration, TextLinkImplementationView, TextLinkConfigurationView, TextLinkExtraTools>
 
 // MARK: - Subview
 

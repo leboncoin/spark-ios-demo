@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias TextFieldComponentUIViewController = ComponentDisplayViewControllerRepresentable<TextFieldConfiguration, TextFieldUIView, TextFieldConfigurationView, TextFieldComponentUIViewMaker>
+typealias TextFieldComponentUIViewController = ComponentDisplayViewControllerRepresentable<TextFieldConfiguration, TextFieldUIView, TextFieldConfigurationView, TextFieldComponentUIViewMaker, TextFieldExtraTools>
 
 extension TextFieldComponentUIViewController {
 
@@ -29,8 +29,9 @@ final class TextFieldComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = TextFieldConfiguration
     typealias ComponentView = TextFieldUIView
     typealias ConfigurationView = TextFieldConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TextFieldComponentUIViewMaker>
-    typealias SideView = TextFieldSideUIView<Configuration, ComponentView, ConfigurationView, TextFieldComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TextFieldComponentUIViewMaker, ExtraTools>
+    typealias SideView = TextFieldSideUIView<Configuration, ComponentView, ConfigurationView, TextFieldComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = TextFieldExtraTools
 
     // MARK: - Properties
 

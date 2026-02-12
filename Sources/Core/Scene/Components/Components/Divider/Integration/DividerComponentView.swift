@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias DividerComponentView = ComponentViewable<DividerConfiguration, DividerImplementationView, DividerConfigurationView>
+typealias DividerComponentView = ComponentViewable<DividerConfiguration, DividerImplementationView, DividerConfigurationView, DividerExtraTools>
 
 extension DividerComponentView {
 

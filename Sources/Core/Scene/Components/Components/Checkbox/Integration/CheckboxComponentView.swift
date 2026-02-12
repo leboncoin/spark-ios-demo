@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias CheckboxComponentView = ComponentViewable<CheckboxConfiguration, CheckboxImplementationView, CheckboxConfigurationView>
+typealias CheckboxComponentView = ComponentViewable<CheckboxConfiguration, CheckboxImplementationView, CheckboxConfigurationView, CheckboxExtraTools>
 
 // MARK: - Subview
 
@@ -58,6 +58,8 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
                             .font(.footnote)
                             .foregroundStyle(.blue)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                 }
             )
 

@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias TabComponentView = ComponentViewable<TabConfiguration, TabImplementationView, TabConfigurationView>
+typealias TabComponentView = ComponentViewable<TabConfiguration, TabImplementationView, TabConfigurationView, TabExtraTools>
 
 extension TabComponentView {
 

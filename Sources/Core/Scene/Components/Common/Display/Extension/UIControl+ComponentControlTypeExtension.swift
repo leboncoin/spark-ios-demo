@@ -16,11 +16,12 @@ extension UIControl {
         Configuration: ComponentConfiguration,
         ComponentView: UIView,
         ConfigurationView: ConfigurationUIViewable,
-        ViewMaker: ComponentUIViewMaker
+        ViewMaker: ComponentUIViewMaker,
+        ExtraTools: ComponentExtraTools
     >(
         _ configuration: Configuration,
         event: UIControl.Event = .touchUpInside,
-        on viewController: ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ViewMaker>?
+        on viewController: ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ViewMaker, ExtraTools>?
     ) {
         guard let viewController else {
             return

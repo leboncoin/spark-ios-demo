@@ -8,11 +8,10 @@
 
 import UIKit
 import SwiftUI
-import Combine
 
 // MARK: - View Controller
 
-typealias RatingInputComponentUIViewController = ComponentDisplayViewControllerRepresentable<RatingInputConfiguration, RatingInputUIView, RatingInputConfigurationView, RatingInputComponentUIViewMaker>
+typealias RatingInputComponentUIViewController = ComponentDisplayViewControllerRepresentable<RatingInputConfiguration, SparkUIRatingInput, RatingInputConfigurationView, RatingInputComponentUIViewMaker, RatingExtraTools>
 
 extension RatingInputComponentUIViewController {
 
@@ -28,14 +27,14 @@ final class RatingInputComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = RatingInputConfiguration
-    typealias ComponentView = RatingInputUIView
+    typealias ComponentView = SparkUIRatingInput
     typealias ConfigurationView = RatingInputConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RatingInputComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RatingInputComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = RatingExtraTools
 
     // MARK: - Properties
 
     weak var viewController: DisplayViewController?
-    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Methods
 
@@ -43,16 +42,14 @@ final class RatingInputComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            intent: configuration.intent,
-            rating: configuration.uiKitRating
+            theme: configuration.theme.value
         )
         self.updateCommonProperties(componentView, for: configuration)
 
-        componentView.publisher.sink { value in
-            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: value)
-        }
-        .store(in: &self.cancellables)
+        componentView.addAction(.init(handler: { _ in
+            configuration.uiKitRating = componentView.value
+            configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: componentView.value)
+        }), for: .valueChanged)
 
         return componentView
     }
@@ -62,8 +59,6 @@ final class RatingInputComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.rating = configuration.uiKitRating
         self.updateCommonProperties(componentView, for: configuration)
     }
 
@@ -71,8 +66,10 @@ final class RatingInputComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.value = configuration.uiKitRating
         componentView.demoDisabled(configuration)
         componentView.demoAccessibilityLabel(configuration)
+        componentView.demoAccessibilityValue(configuration)
 
         configuration.uiKitInfoLabel?.text = configuration.getInfoValue(from: configuration.uiKitRating)
     }

@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias SnackbarPresentationComponentUIViewController = ComponentDisplayViewControllerRepresentable<SnackbarPresentationConfiguration, UIButton, SnackbarPresentationConfigurationView, SnackbarPresentationComponentUIViewMaker>
+typealias SnackbarPresentationComponentUIViewController = ComponentDisplayViewControllerRepresentable<SnackbarPresentationConfiguration, UIButton, SnackbarPresentationConfigurationView, SnackbarPresentationComponentUIViewMaker, SnackbarExtraTools>
 
 extension SnackbarPresentationComponentUIViewController {
 
@@ -29,7 +29,8 @@ final class SnackbarPresentationComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = SnackbarPresentationConfiguration
     typealias ComponentView = UIButton
     typealias ConfigurationView = SnackbarPresentationConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SnackbarPresentationComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SnackbarPresentationComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = SnackbarExtraTools
 
     // MARK: - Properties
 

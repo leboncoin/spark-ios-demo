@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias StepperComponentUIViewController = ComponentDisplayViewControllerRepresentable<StepperConfiguration, SparkUIStepper, StepperConfigurationView, StepperComponentUIViewMaker>
+typealias StepperComponentUIViewController = ComponentDisplayViewControllerRepresentable<StepperConfiguration, SparkUIStepper, StepperConfigurationView, StepperComponentUIViewMaker, StepperExtraTools>
 
 extension StepperComponentUIViewController {
 
@@ -30,7 +30,8 @@ final class StepperComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = StepperConfiguration
     typealias ComponentView = SparkUIStepper
     typealias ConfigurationView = StepperConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, StepperComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, StepperComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = StepperExtraTools
 
     // MARK: - Properties
 

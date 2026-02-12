@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias SpinnerComponentUIViewController = ComponentDisplayViewControllerRepresentable<SpinnerConfiguration, SparkUISpinner, SpinnerConfigurationView, SpinnerComponentUIViewMaker>
+typealias SpinnerComponentUIViewController = ComponentDisplayViewControllerRepresentable<SpinnerConfiguration, SparkUISpinner, SpinnerConfigurationView, SpinnerComponentUIViewMaker, SpinnerExtraTools>
 
 extension SpinnerComponentUIViewController {
 
@@ -28,7 +28,8 @@ final class SpinnerComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = SpinnerConfiguration
     typealias ComponentView = SparkUISpinner
     typealias ConfigurationView = SpinnerConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SpinnerComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SpinnerComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = SpinnerExtraTools
 
     // MARK: - Properties
 

@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias MicroAnimationComponentUIViewController = ComponentDisplayViewControllerRepresentable<MicroAnimationConfiguration, MicroAnimationContentUIView, MicroAnimationConfigurationView, MicroAnimationComponentUIViewMaker>
+typealias MicroAnimationComponentUIViewController = ComponentDisplayViewControllerRepresentable<MicroAnimationConfiguration, MicroAnimationContentUIView, MicroAnimationConfigurationView, MicroAnimationComponentUIViewMaker, MicroAnimationExtraTools>
 
 extension MicroAnimationComponentUIViewController {
 
@@ -29,7 +29,8 @@ final class MicroAnimationComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = MicroAnimationConfiguration
     typealias ComponentView = MicroAnimationContentUIView
     typealias ConfigurationView = MicroAnimationConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, MicroAnimationComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, MicroAnimationComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = MicroAnimationExtraTools
 
     // MARK: - Properties
 
