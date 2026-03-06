@@ -23,13 +23,27 @@ struct TextEditorUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let textEditor = TextEditorUIView(
+            theme: theme,
+            intent: .neutral
+        )
+        textEditor.placeholder = "Placeholder"
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let textEditor = TextEditorUIView(
+            theme: theme,
+            intent: .neutral
+        )
+        textEditor.placeholder = "Placeholder"
+        textEditor.isEditable = true
+        textEditor.isScrollEnabled = true
+        textEditor.isEnabled = true
+        textEditor.accessibilityLabel = "Text editor label"
+        textEditor.accessibilityValue = "Text editor value"
+        textEditor.accessibilityHint = "Text editor hint"
         """
     }
 }

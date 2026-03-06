@@ -23,13 +23,22 @@ struct CornerRadiusUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.sparkCornerRadius(
+            theme.border.radius.medium
+        )
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.sparkCornerRadius(
+            theme.border.radius.large,
+            isHighlighted: false
+        )
         """
     }
 }

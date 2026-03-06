@@ -23,13 +23,27 @@ struct ChipUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let chip = SparkUIChip(theme: theme)
+        chip.intent = .main
+        chip.variant = .filled
+        chip.text = "Label"
+        chip.icon = .init(icon: .spark)
+        chip.addAction(UIAction(handler: { _ in }), for: .touchUpInside)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let chip = SparkUIChip(theme: theme)
+        chip.intent = .main
+        chip.variant = .filled
+        chip.alignment = .leadingIcon
+        chip.text = "Label"
+        chip.icon = .init(icon: .spark)
+        chip.isSelected = false
+        chip.isEnabled = true
+        chip.accessibilityLabel = "Chip label"
+        chip.addAction(UIAction(handler: { _ in }), for: .touchUpInside)
         """
     }
 }

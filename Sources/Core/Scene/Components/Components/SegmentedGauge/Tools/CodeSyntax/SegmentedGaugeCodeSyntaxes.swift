@@ -23,13 +23,25 @@ struct SegmentedGaugeCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkSegmentedGauge("My Segmented Gauge")
+            .sparkTheme(theme)
+            .sparkSegmentedGaugeSegments([0.25, 0.5, 0.75])
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkSegmentedGauge(
+            "My Segmented Gauge",
+            description: "Progress description"
+        )
+        .sparkTheme(theme)
+        .sparkSegmentedGaugeSegments([0.2, 0.4, 0.6, 0.8])
+        .sparkSegmentedGaugeSize(.medium)
+        .sparkSegmentedGaugeAlignment(.leading)
+        .sparkSegmentedGaugeWithMarker(true)
+        .sparkSegmentedGaugeType(.info)
+        .accessibilityLabel("Segmented gauge showing progress")
         """
     }
 }

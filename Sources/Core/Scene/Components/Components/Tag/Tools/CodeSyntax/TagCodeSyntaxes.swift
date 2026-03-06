@@ -23,13 +23,25 @@ struct TagCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkTag("My Tag")
+            .sparkTheme(theme)
+            .sparkTagIntent(.main)
+            .sparkTagVariant(.filled)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkTag(
+            "My Tag",
+            icon: .init(icon: .spark)
+        )
+        .sparkTheme(theme)
+        .sparkTagIntent(.main)
+        .sparkTagSize(.medium)
+        .sparkTagVariant(.filled)
+        .sparkTagIsHighlighted(false)
+        .accessibilityLabel("Tag label")
         """
     }
 }

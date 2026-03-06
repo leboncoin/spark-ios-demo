@@ -23,13 +23,20 @@ struct DividerCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkDivider()
+            .sparkTheme(theme)
+            .sparkDividerIntent(.default)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkDivider("My Divider")
+            .sparkTheme(theme)
+            .sparkDividerAlignment(.center)
+            .sparkDividerAxis(.horizontal)
+            .sparkDividerIntent(.outline)
+            .accessibilityLabel("Divider label")
         """
     }
 }

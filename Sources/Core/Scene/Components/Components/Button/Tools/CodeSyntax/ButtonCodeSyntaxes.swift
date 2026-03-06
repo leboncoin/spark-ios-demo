@@ -23,13 +23,37 @@ struct ButtonCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        ButtonView(
+            theme: theme,
+            intent: .main,
+            variant: .filled,
+            size: .medium,
+            alignment: .leadingImage,
+            action: { }
+        )
+        .title("Button", for: .normal)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        ButtonView(
+            theme: theme,
+            intent: .main,
+            variant: .filled,
+            size: .medium,
+            alignment: .leadingImage,
+            action: { }
+        )
+        .disabled(false)
+        .selected(false)
+        .image(.init(icon: .spark), for: .normal)
+        .title("Button", for: .normal)
+        .attributedTitle(attributedString, for: .highlighted)
+        .title("Selected", for: .selected)
+        .title("Disabled", for: .disabled)
+        .frame(maxWidth: .infinity)
+        .accessibilityLabel("Button label")
         """
     }
 }

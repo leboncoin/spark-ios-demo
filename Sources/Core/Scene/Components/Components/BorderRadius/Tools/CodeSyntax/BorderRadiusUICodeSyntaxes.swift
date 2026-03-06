@@ -23,13 +23,36 @@ struct BorderRadiusUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let view = UIView()
+        view.backgroundColor = theme.colors.support.supportVariant.uiColor
+        view.sparkBorderRadius(
+            width: theme.border.width.medium,
+            radius: theme.border.radius.medium,
+            colorToken: theme.colors.main.main
+        )
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let view = UIView()
+        view.backgroundColor = theme.colors.support.supportVariant.uiColor
+
+        // With dash pattern
+        view.sparkBorderRadius(
+            width: theme.border.width.medium,
+            radius: theme.border.radius.medium,
+            dash: 4,
+            colorToken: theme.colors.main.main
+        )
+
+        // With highlight state
+        view.sparkBorderRadius(
+            width: theme.border.width.medium,
+            radius: theme.border.radius.medium,
+            isHighlighted: true,
+            colorToken: theme.colors.main.main
+        )
         """
     }
 }

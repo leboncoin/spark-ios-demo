@@ -23,13 +23,31 @@ struct ChipCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkChip(
+            "Label",
+            icon: .init(icon: .spark),
+            action: { }
+        )
+        .sparkChipIntent(.main)
+        .sparkChipVariant(.filled)
+        .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkChip(
+            "Label",
+            icon: .init(icon: .spark),
+            action: { }
+        )
+        .sparkChipIntent(.main)
+        .sparkChipVariant(.filled)
+        .sparkChipAlignment(.leadingIcon)
+        .sparkIsSelected(false)
+        .disabled(false)
+        .accessibilityLabel("Chip label")
+        .sparkTheme(theme)
         """
     }
 }

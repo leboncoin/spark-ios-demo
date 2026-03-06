@@ -8,8 +8,6 @@
 
 import Foundation
 
-// TODO:
-
 struct TextLinkUICodeSyntaxes {
 
     // MARK: - Properties
@@ -25,13 +23,28 @@ struct TextLinkUICodeSyntaxes {
 
     private static var simple: String {
         """
-        TODO:
+        let textLink = SparkUITextLink(
+            theme: MyTheme.shared
+        )
+        textLink.text = "My TextLink"
         """
     }
 
     private static var full: String {
         """
-        TODO: 
+        let textLink = SparkUITextLink(
+            theme: MyTheme.shared
+        )
+        textLink.alignment = .leadingImage
+        textLink.intent = .main
+        textLink.variant = .underline
+        textLink.typography = .callout
+        textLink.text = "My TextLink"
+        textLink.image = .init(icon: .spark(.arrowHorizontalLeft))
+        textLink.textHighlightRange = NSRange(location: 0, length: 2)
+        textLink.textLabel.textAlignment = .left
+        textLink.textLabel.lineBreakMode = .byTruncatingTail
+        textLink.textLabel.numberOfLines = 2
         """
     }
 }

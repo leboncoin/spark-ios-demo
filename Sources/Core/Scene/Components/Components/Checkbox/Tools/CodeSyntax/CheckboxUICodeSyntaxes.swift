@@ -23,13 +23,23 @@ struct CheckboxUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let checkbox = SparkUICheckbox(theme: theme)
+        checkbox.intent = .main
+        checkbox.text = "Label"
+        checkbox.isSelected = false
+        checkbox.addAction(UIAction(handler: { _ in }), for: .valueChanged)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let checkbox = SparkUICheckbox(theme: theme)
+        checkbox.intent = .main
+        checkbox.text = "Label"
+        checkbox.selectionState = .unselected
+        checkbox.isEnabled = true
+        checkbox.accessibilityLabel = "Checkbox label"
+        checkbox.addAction(UIAction(handler: { _ in }), for: .valueChanged)
         """
     }
 }

@@ -14,40 +14,63 @@ struct RatingUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Display", code: Self.display),
-            .init(title: "Display with parameters", code: Self.displayWithParameters),
-            .init(title: "Input", code: Self.input)
+            .init(title: "Default", code: Self.simple),
+            .init(title: "Full", code: Self.full)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var display: String {
+    private static var simple: String {
         """
-        let ratingDisplay = SparkUIRatingDisplay(theme: MyTheme.shared)
-        ratingDisplay.value = 3.76
-        ratingDisplay.text = "(3,76)"
-        self.addSubview(ratingDisplay)
+        // Display
+        let ratingDisplay = SparkUIRatingDisplay(theme: theme)
+        ratingDisplay.value = 4.5
+
+        // Input
+        let ratingInput = SparkUIRatingInput(theme: theme)
+        ratingInput.value = 3.0
+        ratingInput.addAction(UIAction(handler: { _ in }), for: .valueChanged)
         """
     }
 
-    private static var displayWithParameters: String {
+    private static var full: String {
         """
-        let ratingDisplay = SparkUIRatingDisplay(theme: MyTheme.shared)
-        ratingDisplay.value = 3.76
-        ratingDisplay.size = .large
+        // Display with all text properties
+        let ratingDisplay = SparkUIRatingDisplay(theme: theme)
+        ratingDisplay.value = 4.5
+        ratingDisplay.size = .small
         ratingDisplay.stars = .one
-        ratingDisplay.text = "(3,76)"
-        self.addSubview(ratingDisplay)
-        """
-    }
+        ratingDisplay.text = "4.5"
+        ratingDisplay.countText = "(1,234)"
+        ratingDisplay.additionalText = "Reviews"
 
-    private static var input: String {
-        """
-        let ratingInput = SparkUIRatingInput(theme: MyTheme.shared)
+        // Display with attributed text
+        let attributedRatingDisplay = SparkUIRatingDisplay(theme: theme)
+        attributedRatingDisplay.value = 4.5
+        attributedRatingDisplay.size = .medium
+        attributedRatingDisplay.stars = .five
+        attributedRatingDisplay.attributedText = NSAttributedString(
+            string: "4.5",
+            attributes: [.font: UIFont.boldSystemFont(ofSize: 14)]
+        )
+        attributedRatingDisplay.attributedCountText = NSAttributedString(
+            string: "(1,234)",
+            attributes: [.foregroundColor: UIColor.gray]
+        )
+        attributedRatingDisplay.attributedAdditionalText = NSAttributedString(
+            string: "Reviews",
+            attributes: [.font: UIFont.italicSystemFont(ofSize: 12)]
+        )
+
+        // Input with action
+        let ratingInput = SparkUIRatingInput(theme: theme)
         ratingInput.value = 3.0
         ratingInput.isEnabled = true
-        self.addSubview(ratingInput) 
+        ratingInput.addAction(UIAction(handler: { action in
+            guard let ratingInput = action.sender as? SparkUIRatingInput else { return }
+            print("Rating changed to: \\(ratingInput.value)")
+        }), for: .valueChanged)
         """
     }
 }

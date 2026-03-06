@@ -23,13 +23,27 @@ struct BorderCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        Rectangle()
+            .fill(.background)
+            .frame(height: 48)
+            .sparkBorder(
+                width: 2,
+                colorToken: theme.colors.main.main
+            )
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        Rectangle()
+            .fill(.background)
+            .frame(height: 48)
+            .sparkBorder(
+                width: 4,
+                dash: 8,
+                colorToken: theme.colors.feedback.error,
+                isScaled: true
+            )
         """
     }
 }

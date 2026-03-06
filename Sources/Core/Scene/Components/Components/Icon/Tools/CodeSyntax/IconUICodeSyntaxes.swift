@@ -23,13 +23,25 @@ struct IconUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let icon = SparkUIIcon(
+            theme: theme,
+            image: .init(icon: .arrows)
+        )
+        icon.intent = .main
+        icon.size = .medium
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let icon = SparkUIIcon(
+            theme: theme,
+            image: .init(icon: .arrows)
+        )
+        icon.intent = .main
+        icon.size = .medium
+        icon.accessibilityLabel = "Icon label"
+        icon.isAccessibilityElement = true
         """
     }
 }

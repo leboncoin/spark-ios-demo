@@ -23,13 +23,37 @@ struct ButtonUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let button = ButtonUIView(
+            theme: theme,
+            intent: .main,
+            variant: .filled,
+            size: .medium,
+            alignment: .leadingImage
+        )
+        button.addAction(UIAction(handler: { _ in }), for: .touchUpInside)
+        button.setTitle("Button", for: .normal)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let button = ButtonUIView(
+            theme: theme,
+            intent: .main,
+            variant: .filled,
+            size: .medium,
+            alignment: .leadingImage
+        )
+        button.addAction(UIAction(handler: { _ in }), for: .touchUpInside)
+        button.isEnabled = true
+        button.isSelected = false
+        button.isAnimated = true
+        button.setImage(.init(icon: .spark), for: .normal)
+        button.setTitle("Button", for: .normal)
+        button.setAttributedTitle(attributedString, for: .highlighted)
+        button.setTitle("Selected", for: .selected)
+        button.setTitle("Disabled", for: .disabled)
+        button.accessibilityLabel = "Button label"
         """
     }
 }

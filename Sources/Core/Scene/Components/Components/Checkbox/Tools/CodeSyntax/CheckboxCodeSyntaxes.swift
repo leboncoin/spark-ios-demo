@@ -23,13 +23,25 @@ struct CheckboxCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkCheckbox(
+            "Label",
+            theme: theme,
+            selectionState: $selectionState
+        )
+        .sparkCheckboxIntent(.main)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkCheckbox(
+            "Label",
+            theme: theme,
+            selectionState: $selectionState
+        )
+        .sparkCheckboxIntent(.main)
+        .disabled(false)
+        .accessibilityLabel("Checkbox label")
         """
     }
 }

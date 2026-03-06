@@ -23,13 +23,26 @@ struct CornerRadiusCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        Rectangle()
+            .fill(Color.blue)
+            .sparkCornerRadius(.medium)
+            .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        Rectangle()
+            .fill(Color.blue)
+            .sparkCornerRadius(
+                topLeading: 24,
+                topTrailing: 16,
+                bottomTrailing: 8,
+                bottomLeading: 4,
+                isHighlighted: false,
+                isScaled: true
+            )
+            .sparkTheme(theme)
         """
     }
 }

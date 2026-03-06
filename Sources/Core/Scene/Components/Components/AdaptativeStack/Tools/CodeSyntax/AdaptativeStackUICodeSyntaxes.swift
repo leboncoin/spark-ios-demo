@@ -23,13 +23,43 @@ struct AdaptativeStackUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let label1 = UILabel()
+        label1.text = "First"
+
+        let label2 = UILabel()
+        label2.text = "Second"
+
+        let label3 = UILabel()
+        label3.text = "Third"
+
+        let stackView = SparkAdaptiveUIStackView(
+            arrangedSubviews: [label1, label2, label3]
+        )
+        stackView.regularAxis = .horizontal
+        stackView.spacing = 8
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let label1 = UILabel()
+        label1.text = "Home"
+
+        let label2 = UILabel()
+        label2.text = "Messages"
+
+        let label3 = UILabel()
+        label3.text = "Profile"
+
+        let stackView = SparkAdaptiveUIStackView(
+            arrangedSubviews: [label1, label2, label3]
+        )
+        stackView.regularAxis = .horizontal
+        stackView.regularAlignment = .center
+        stackView.spacing = 16
+        stackView.accessibilityAxis = .vertical
+        stackView.accessibilityAlignment = .leading
+        stackView.accessibilitySpacing = 8
         """
     }
 }

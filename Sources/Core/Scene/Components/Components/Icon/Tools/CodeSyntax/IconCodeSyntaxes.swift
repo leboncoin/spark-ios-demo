@@ -23,13 +23,21 @@ struct IconCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkIcon(.init(icon: .arrows))
+            .sparkIconIntent(.main)
+            .sparkIconSize(.medium)
+            .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkIcon(.init(icon: .arrows))
+            .sparkIconIntent(.main)
+            .sparkIconSize(.medium)
+            .accessibilityLabel("Icon label")
+            .accessibilityHidden(false)
+            .sparkTheme(theme)
         """
     }
 }

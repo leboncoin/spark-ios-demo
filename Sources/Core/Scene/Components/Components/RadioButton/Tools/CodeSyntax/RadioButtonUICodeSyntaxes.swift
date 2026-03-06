@@ -23,13 +23,24 @@ struct RadioButtonUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let radioButton = SparkUIRadioButton(theme: theme)
+        radioButton.intent = .main
+        radioButton.text = "Label"
+        radioButton.isSelected = false
+        radioButton.addAction(UIAction(handler: { _ in }), for: .valueChanged)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let radioButton = SparkUIRadioButton(theme: theme)
+        radioButton.intent = .main
+        radioButton.text = "Label"
+        radioButton.isSelected = false
+        radioButton.setIsSelected(false, animated: true)
+        radioButton.isEnabled = true
+        radioButton.accessibilityLabel = "Radio button label"
+        radioButton.addAction(UIAction(handler: { _ in }), for: .valueChanged)
         """
     }
 }

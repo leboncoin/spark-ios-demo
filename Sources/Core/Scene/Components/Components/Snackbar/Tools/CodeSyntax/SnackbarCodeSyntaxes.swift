@@ -23,13 +23,35 @@ struct SnackbarCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SnackbarView(
+            theme: theme,
+            intent: .neutral,
+            image: Image(icon: .infoOutline)
+        ) {
+            Text("This is a snackbar message")
+        }
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SnackbarView(
+            theme: theme,
+            intent: .success,
+            image: Image(icon: .checkFill)
+        ) {
+            Text("Operation completed successfully")
+        } button: { buttonView in
+            buttonView
+                .title("Dismiss", for: .normal)
+        } action: {
+            // Handle button action
+        }
+        .variant(.tinted)
+        .type(.input)
+        .lineLimit(3)
+        .frame(maxWidth: 600)
+        .padding()
         """
     }
 }

@@ -23,13 +23,22 @@ struct ToggleCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkToggle(
+            theme: theme,
+            isOn: $isOn
+        )
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkToggle(
+            "Label",
+            theme: theme,
+            isOn: $isOn
+        )
+        .disabled(false)
+        .accessibilityLabel("Toggle label")
         """
     }
 }

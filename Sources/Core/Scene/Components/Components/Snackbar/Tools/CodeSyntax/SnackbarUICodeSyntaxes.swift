@@ -23,13 +23,32 @@ struct SnackbarUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let snackbar = SnackbarUIView(
+            theme: theme,
+            intent: .neutral
+        )
+        snackbar.label.text = "This is a snackbar message"
+        snackbar.setImage(.init(icon: .infoOutline))
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let snackbar = SnackbarUIView(
+            theme: theme,
+            intent: .success
+        )
+        snackbar.variant = .tinted
+        snackbar.type = .input
+        snackbar.label.text = "Operation completed successfully"
+        snackbar.label.numberOfLines = 3
+        snackbar.setImage(.init(icon: .checkFill))
+
+        let button = snackbar.addButton()
+        button.setTitle("Dismiss", for: .normal)
+        button.addAction(UIAction(handler: { _ in
+            // Handle button action
+        }), for: .touchUpInside)
         """
     }
 }

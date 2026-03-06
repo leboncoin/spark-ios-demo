@@ -23,13 +23,43 @@ struct TextFieldCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkTextField(
+            "Placeholder",
+            text: $text,
+            theme: theme
+        )
+        .sparkTextFieldIntent(.neutral)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkTextField(
+            "Placeholder",
+            text: $text,
+            theme: theme,
+            leftView: {
+                Image(systemName: "magnifyingglass")
+            },
+            rightView: {
+                Image(systemName: "xmark.circle.fill")
+                    .onTapGesture { text = "" }
+            },
+            leftAddon: {
+                Text("€")
+            },
+            rightAddon: {
+                Text(".00")
+            }
+        )
+        .sparkTextFieldIntent(.neutral)
+        .sparkTextFieldReadOnly(false)
+        .sparkTextFieldClearMode(.whileEditing)
+        .sparkTextFieldSecureEntry(false)
+        .sparkTextFieldLeftAddonConfiguration(hasPadding: true, hasSeparator: true)
+        .sparkTextFieldRightAddonConfiguration(hasPadding: true, hasSeparator: true)
+        .disabled(false)
+        .sparkTextFieldAccessibilityLabel("Text field label")
         """
     }
 }

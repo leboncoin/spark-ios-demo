@@ -23,13 +23,19 @@ struct ProgressBarCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkProgressBar(value: 0.5)
+            .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkProgressBar(value: 0.75)
+            .sparkTheme(theme)
+            .sparkProgressBarIntent(.main)
+            .sparkProgressBarShape(.square)
+            .accessibilityLabel("Progress")
+            .accessibilityValue("75%")
         """
     }
 }

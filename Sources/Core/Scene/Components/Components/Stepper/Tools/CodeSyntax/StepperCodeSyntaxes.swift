@@ -23,13 +23,28 @@ struct StepperCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkStepper(
+            value: $intValue,
+            in: 0...10,
+            step: 1
+        )
+        .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkStepper(
+            value: $floatValue,
+            in: 0...100,
+            step: 5,
+            format: .currency(code: "EUR").locale(.init(identifier: "fr_FR"))
+        )
+        .disabled(false)
+        .contextAccessibilityLabel("Price")
+        .incrementAccessibilityLabel("Increase price")
+        .decrementAccessibilityLabel("Decrease price")
+        .sparkTheme(theme)
         """
     }
 }

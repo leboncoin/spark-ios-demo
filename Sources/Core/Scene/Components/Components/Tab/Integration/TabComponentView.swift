@@ -26,71 +26,71 @@ struct TabImplementationView: ComponentImplementationViewable {
     // MARK: - Properties
 
     var configuration: Binding<TabConfiguration>
-    @State private var selectedTab: Int = 0
+    @State private var selectedTab: Int = 5
 
     // MARK: - View
 
     var body: some View {
-        TabView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            tabSize: self.configurationWrapped.tabSize,
-            content: self.configurationWrapped.items.map {
-                .init(
-                    icon: .init(icon: $0.icon),
-                    title: $0.text
-                )
-            },
-            selectedIndex: self.$selectedTab
-        )
-        .apportionsSegmentWidthsByContent(!self.configurationWrapped.isEqualSize)
-        .demoBadgeItems(self.configurationWrapped)
-        .demoDisabledItems(self.configurationWrapped)
+        SparkTab(selection: self.$selectedTab) {
+
+            ForEach(self.configurationWrapped.items, id: \.id) { item in
+
+                let text = item.text.nilIfEmpty
+                let icon = item.icon
+                let isBadge = item.isBadge
+
+                switch (text, icon) {
+
+                case (nil, let icon?):
+                    let image = Image(icon: icon)
+
+                    if isBadge {
+                        SparkTabItem(
+                            tag: item.id,
+                            icon: image
+                        ) {
+                            self.badge(at: item, configuration: self.configurationWrapped)
+                        }
+                    } else {
+                        SparkTabItem(
+                            tag: item.id,
+                            icon: image
+                        )
+                    }
+
+                default:
+                    let text = text ?? "Unknow"
+
+                    if isBadge {
+                        SparkTabItem(
+                            tag: item.id,
+                            text: text,
+                            icon: .init(icon: item.icon)
+                        ) {
+                            self.badge(at: item, configuration: self.configurationWrapped)
+                        }
+                    } else {
+                        SparkTabItem(
+                            tag: item.id,
+                            text: text,
+                            icon: .init(icon: item.icon)
+                        )
+                    }
+                }
+            }
+        }
+        .sparkTheme(self.configurationWrapped.theme.value)
+        .sparkTabIntent(self.configurationWrapped.intent)
+        .sparkTabSize(self.configurationWrapped.tabSize)
+        .sparkTabApportionsSegmentWidthsByContent(!self.configurationWrapped.isEqualSize)
         .demoDisabled(self.configurationWrapped)
-        .padding(.top, 1)
-    }
-}
-
-// MARK: - Extension
-
-private extension SparkComponentTab.TabView {
-
-    func demoBadgeItems(_ configuration: TabConfiguration) -> Self {
-        var copy = self
-        for (index, item) in configuration.items.enumerated() {
-            let badge = self.demoBadge(at: item, for: configuration)
-            copy = copy.badge(badge, index: index)
-        }
-        return copy
     }
 
-    private func demoBadge(at item: TabConfiguration.Item, for configuration: TabConfiguration) -> BadgeView? {
-        guard item.isBadge else {
-            return nil
-        }
-
-        return BadgeView(
-            theme: configuration.theme.value,
-            intent: .danger,
-            value: item.badgeValue
-        )
-        .size(configuration.tabSize.demoBadgeSize)
-        .borderVisible(false)
-    }
-
-    func demoDisabledItems(_ configuration: TabConfiguration) -> Self {
-        var copy = self
-        for (index, item) in configuration.items.enumerated() {
-            copy = copy.disabled(!item.isEnabled, index: index)
-        }
-        return copy
-    }
-}
-
-// MARK: - Preview
-
-struct TabComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabComponentView()
+    private func badge(at item: TabConfiguration.Item, configuration: TabConfiguration) -> some View {
+        SparkBadge(value: item.badgeValue)
+            .sparkTheme(configuration.theme.value)
+            .sparkBadgeIntent(.basic)
+            .sparkBadgeSize(configuration.tabSize.demoBadgeSize)
+            .sparkBadgeIsBorder(false)
     }
 }

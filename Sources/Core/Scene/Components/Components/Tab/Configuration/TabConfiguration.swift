@@ -12,16 +12,20 @@ class TabConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: TabIntent = .random
-    var isEqualSize: Bool = .random()
-    var tabSize: TabSize = .random
-    var numberOfTabs = 4 {
+    var intent: TabIntent = .default
+    var tabSize: TabSize = .default
+    var isEqualSize: Bool = true
+    var numberOfTabs = 3 {
         didSet {
             self.updateItems()
         }
     }
 
     var items = [Item]()
+
+    // MARK: - UIKit Properties Only
+
+    var uiKitIsAnimated: Bool = false
 
     // MARK: - Initialization
 
@@ -64,10 +68,11 @@ extension TabConfiguration {
 
         let id: Int
         var text: String
-        var icon: Iconography? = .optionalRandom
-        var isEnabled: Bool = .random()
+        var icon: Iconography?
         var isBadge: Bool = .random()
         let badgeValue = Int.random(in: 1...99)
+
+        var uiKitIsAttributedText: Bool = false
 
         // MARK: - Initialization
 
@@ -83,11 +88,11 @@ extension TabConfiguration {
 extension TabSize {
 
     var demoBadgeSize: BadgeSize {
-        switch self {
-        case .md: return .medium
-        case .xs: return .small
-        case .sm: return .small
-        @unknown default: return .medium
+        return switch self {
+        case .xSmall: .small
+        case .small: .small
+        case .medium: .medium
+        default: .medium
         }
     }
 }

@@ -23,13 +23,19 @@ struct DividerUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let divider = SparkUIDivider(theme: theme)
+        divider.intent = .default
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let divider = SparkUIDivider(theme: theme)
+        divider.alignment = .center
+        divider.axis = .horizontal
+        divider.intent = .outline
+        divider.text = "My Divider"
+        divider.accessibilityLabel = "Divider label"
         """
     }
 }

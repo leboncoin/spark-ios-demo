@@ -23,13 +23,21 @@ struct BadgeUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let badge = SparkUIBadge(theme: theme)
+        badge.intent = .main
+        badge.size = .medium
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let badge = SparkUIBadge(theme: theme)
+        badge.intent = .main
+        badge.size = .medium
+        badge.value = 10
+        badge.unit = "items"
+        badge.isBorder = false
+        badge.accessibilityLabel = "Badge label"
         """
     }
 }

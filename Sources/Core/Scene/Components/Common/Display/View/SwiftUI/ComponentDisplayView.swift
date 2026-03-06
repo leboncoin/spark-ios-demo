@@ -136,7 +136,6 @@ struct ComponentDisplayView<
                 Menu("Link", systemImage: "network") {
                     if let documentationLink = self.extraTools.documentationLink {
                         Button("Documentation", systemImage: "append.page.fill") {
-                            // TODO:
                             UIPasteboard.general.string = documentationLink
                             self.showCopiedToast = true
                         }
@@ -144,7 +143,6 @@ struct ComponentDisplayView<
 
                     if let figmaLink = self.extraTools.figmaLink {
                         Button("Figma", systemImage: "f.square") {
-                            // TODO:
                             UIPasteboard.general.string = figmaLink
                             self.showCopiedToast = true
                         }
@@ -155,6 +153,7 @@ struct ComponentDisplayView<
         .toast("Copied !", isPresented: self.$showCopiedToast)
         .sheet(isPresented: self.$showCodeSyntax, content: {
             CodeSyntaxView(content: self.extraTools.swiftUICodeSyntaxes)
+                .dynamicTypeSize(.large)
         })
         .preferredColorScheme(self.colorScheme)
     }

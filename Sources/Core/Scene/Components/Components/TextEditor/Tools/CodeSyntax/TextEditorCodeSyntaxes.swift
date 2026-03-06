@@ -23,13 +23,28 @@ struct TextEditorCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkTextEditor(
+            "Placeholder",
+            text: $text,
+            theme: theme
+        )
+        .sparkTextEditorIntent(.neutral)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkTextEditor(
+            "Placeholder",
+            text: $text,
+            theme: theme
+        )
+        .sparkTextEditorIntent(.neutral)
+        .sparkTextEditorReadOnly(false)
+        .disabled(false)
+        .sparkTextEditorAccessibilityLabel("Text editor label")
+        .sparkTextEditorAccessibilityValue("Text editor value")
+        .sparkTextEditorAccessibilityHint("Text editor hint")
         """
     }
 }

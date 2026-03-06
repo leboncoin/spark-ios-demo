@@ -23,13 +23,26 @@ struct SpinnerUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let spinner = SpinnerUIView(
+            theme: theme,
+            intent: .main,
+            spinnerSize: .medium
+        )
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let spinner = SpinnerUIView(
+            theme: theme,
+            intent: .main,
+            spinnerSize: .medium
+        )
+        spinner.theme = theme
+        spinner.intent = .success
+        spinner.spinnerSize = .small
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.accessibilityIdentifier = "my-spinner"
         """
     }
 }

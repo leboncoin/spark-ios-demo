@@ -23,13 +23,23 @@ struct TagUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let tag = SparkUITag(theme: theme)
+        tag.intent = .main
+        tag.variant = .filled
+        tag.text = "My Tag"
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let tag = SparkUITag(theme: theme)
+        tag.intent = .main
+        tag.size = .medium
+        tag.variant = .filled
+        tag.isHighlighted = false
+        tag.text = "My Tag"
+        tag.icon = .init(icon: .spark)
+        tag.accessibilityLabel = "Tag label"
         """
     }
 }

@@ -48,6 +48,7 @@ struct StepperImplementationView: ComponentImplementationViewable {
 
     var body: some View {
         self.createComponent()
+            .sparkTheme(self.configurationWrapped.theme.value)
             .onAppear() {
                 self.floatValue = Float(self.configurationWrapped.valueString) ?? 0
                 self.intValue = Int(self.configurationWrapped.valueString) ?? 0
@@ -95,7 +96,8 @@ struct StepperImplementationView: ComponentImplementationViewable {
 private extension SparkStepper {
 
     func demoProperties(_ configuration: StepperConfiguration) -> some View {
-        self.demoContextAccessibilityLabel(configuration)
+        self
+            .demoContextAccessibilityLabel(configuration)
             .demoIncrementAccessibilityLabel(configuration)
             .demoDecrementAccessibilityLabel(configuration)
             .demoDisabled(configuration)

@@ -14,68 +14,62 @@ struct RatingCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Display", code: Self.display),
-            .init(title: "Display with environment", code: Self.displayWithEnvironment),
-            .init(title: "Display with text", code: Self.displayWithText),
-            .init(title: "Display with label", code: Self.displayWithLabel),
-            .init(title: "Input", code: Self.input)
+            .init(title: "Default", code: Self.simple),
+            .init(title: "Full", code: Self.full)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var display: String {
+    private static var simple: String {
         """
-        SparkRatingDisplay(value: 2.75)
-            .sparkTheme(MyTheme.shared)
+        // Display
+        SparkRatingDisplay(value: 4.5)
+            .sparkTheme(theme)
+
+        // Input
+        @State private var rating: Double = 3.0
+
+        SparkRatingInput(value: $rating)
+            .sparkTheme(theme)
         """
     }
 
-    private static var displayWithEnvironment: String {
+    private static var full: String {
         """
-        SparkRatingDisplay(value: 2.75)
-            .sparkTheme(MyTheme.shared)
-            .sparkRatingDisplaySize(.small)
-            .sparkRatingDisplayStars(.one)
-        """
-    }
-
-    private static var displayWithText: String {
-        """
+        // Display with text
         SparkRatingDisplay(
-            value: 2.75,
-            text: "(2,75)"
+            value: 4.5,
+            valueText: "4.5",
+            countText: "(1,234)",
+            additionalText: "Reviews"
         )
-        .sparkTheme(MyTheme.shared)
+        .sparkTheme(theme)
         .sparkRatingDisplaySize(.small)
         .sparkRatingDisplayStars(.one)
-        """
-    }
 
-    private static var displayWithLabel: String {
-        """
+        // Display with custom labels
         SparkRatingDisplay(
-            value: 2.75,
-            label: {
-                VStack {
-                    Text("2").bold()
-                    Text("/")
-                    Text("5")
-                }
+            value: 4.5,
+            valueLabel: {
+                Text("4.5").bold()
+            },
+            countLabel: {
+                Text("(1,234)").foregroundColor(.gray)
+            },
+            additionalLabel: {
+                Text("Reviews").italic()
             }
         )
-        .sparkTheme(MyTheme.shared)
-        .sparkRatingDisplaySize(.small)
-        .sparkRatingDisplayStars(.one)
-        """
-    }
+        .sparkTheme(theme)
+        .sparkRatingDisplaySize(.medium)
+        .sparkRatingDisplayStars(.five)
 
-    private static var input: String {
-        """
-        @State var value: Double = 3.0
-        
-        SparkRatingInput(value: self.$value)
-            .sparkTheme(MyTheme.shared)
+        // Input with disabled state
+        @State private var rating: Double = 3.0
+
+        SparkRatingInput(value: $rating)
+            .sparkTheme(theme)
             .disabled(false)
         """
     }

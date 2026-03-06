@@ -23,13 +23,25 @@ struct SpinnerCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SpinnerView(
+            theme: theme,
+            intent: .main,
+            spinnerSize: .medium
+        )
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SpinnerView(
+            theme: theme,
+            intent: .main,
+            spinnerSize: .medium
+        )
+        .intent(.success)
+        .spinnerSize(.small)
+        .frame(width: 50, height: 50)
+        .accessibilityIdentifier("my-spinner")
         """
     }
 }

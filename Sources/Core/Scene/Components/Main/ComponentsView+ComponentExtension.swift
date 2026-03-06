@@ -124,7 +124,7 @@ extension ComponentsView {
             case .snackbarPresentation: .none
             case .spinner: .available
             case .stepper: .available
-            case .tab: .unavailable
+            case .tab: .available
             case .tag: .available
             case .textEditor: .available
             case .textField: .available

@@ -23,13 +23,26 @@ struct BorderUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.sparkBorderRadius(
+            width: 2,
+            radius: 8,
+            colorToken: theme.colors.main.main
+        )
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.sparkBorderRadius(
+            width: 4,
+            radius: 12,
+            dash: 8,
+            colorToken: theme.colors.feedback.error
+        )
         """
     }
 }

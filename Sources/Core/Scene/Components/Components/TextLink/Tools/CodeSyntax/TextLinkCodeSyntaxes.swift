@@ -25,7 +25,6 @@ struct TextLinkCodeSyntax {
         """
         SparkTextLink(
             "My TextLink",
-            image: Image(systemName: "pencil"),
             action: {
                 // Your action
             }
@@ -38,7 +37,7 @@ struct TextLinkCodeSyntax {
         """
         SparkTextLink(
             "My TextLink",
-            image: Image(systemName: "pencil"),
+            image: .init(icon: .spark(.arrowHorizontalLeft)),
             action: {
                 // Your action
             }
@@ -49,6 +48,8 @@ struct TextLinkCodeSyntax {
         .sparkTextLinkIntent(.main)
         .sparkTextLinkTypography(.callout)
         .sparkTextLinkVariant(.underline)
+        .multilineTextAlignment(.leading)
+        .lineLimit(2)
         """
     }
 }

@@ -23,13 +23,25 @@ struct RadioButtonCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkRadioButton(
+            "Label",
+            theme: theme,
+            isSelected: $isSelected
+        )
+        .sparkRadioButtonIntent(.main)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkRadioButton(
+            "Label",
+            theme: theme,
+            isSelected: $isSelected
+        )
+        .sparkRadioButtonIntent(.main)
+        .disabled(false)
+        .accessibilityLabel("Radio button label")
         """
     }
 }

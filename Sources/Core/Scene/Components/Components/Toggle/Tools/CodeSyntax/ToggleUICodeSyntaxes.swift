@@ -23,13 +23,21 @@ struct ToggleUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let toggle = SparkUISwitch(theme: theme)
+        toggle.isOn = false
+        toggle.addAction(UIAction(handler: { _ in }), for: .valueChanged)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let toggle = SparkUISwitch(theme: theme)
+        toggle.text = "Label"
+        toggle.isOn = false
+        toggle.setOn(true, animated: true)
+        toggle.isEnabled = true
+        toggle.accessibilityLabel = "Toggle label"
+        toggle.addAction(UIAction(handler: { _ in }), for: .valueChanged)
         """
     }
 }

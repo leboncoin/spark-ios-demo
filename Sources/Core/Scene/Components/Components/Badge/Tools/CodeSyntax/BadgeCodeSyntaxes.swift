@@ -23,13 +23,21 @@ struct BadgeCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkBadge()
+            .sparkBadgeIntent(.main)
+            .sparkBadgeSize(.medium)
+            .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkBadge(value: 10, unit: "items")
+            .sparkBadgeIntent(.main)
+            .sparkBadgeSize(.medium)
+            .sparkBadgeIsBorder(false)
+            .accessibilityLabel("Badge label")
+            .sparkTheme(theme)
         """
     }
 }

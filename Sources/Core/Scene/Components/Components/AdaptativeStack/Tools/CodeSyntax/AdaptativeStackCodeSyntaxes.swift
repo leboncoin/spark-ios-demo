@@ -23,13 +23,32 @@ struct AdaptativeStackCodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        SparkAdaptiveStack(
+            axis: .horizontal,
+            spacing: 8
+        ) {
+            Text("First")
+            Text("Second")
+            Text("Third")
+        }
+        .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        SparkAdaptiveStack(
+            axis: .horizontal,
+            alignment: .center,
+            spacing: 16,
+            accessibilityAlignment: .leading,
+            accessibilitySpacing: 8
+        ) {
+            Text("Home")
+            Text("Messages")
+            Text("Profile")
+        }
+        .sparkTheme(theme)
         """
     }
 }

@@ -23,13 +23,35 @@ struct TextFieldUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let textField = TextFieldUIView(
+            theme: theme,
+            intent: .neutral
+        )
+        textField.placeholder = "Placeholder"
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let textField = TextFieldUIView(
+            theme: theme,
+            intent: .neutral
+        )
+        textField.placeholder = "Placeholder"
+        textField.isSecureTextEntry = false
+        textField.isReadOnly = false
+        textField.clearButtonMode = .whileEditing
+        textField.isEnabled = true
+
+        let leftImageView = UIImageView(image: UIImage(systemName: "magnifyingglass"))
+        textField.leftView = leftImageView
+        textField.leftViewMode = .always
+
+        let rightImageView = UIImageView(image: UIImage(systemName: "xmark.circle.fill"))
+        textField.rightView = rightImageView
+        textField.rightViewMode = .whileEditing
+
+        textField.accessibilityLabel = "Text field label"
         """
     }
 }

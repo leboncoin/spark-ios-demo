@@ -51,7 +51,23 @@ struct SliderCodeSyntaxes {
 
     private static var step: String {
         """
-        // TODO: 
+        SparkSlider(
+            value: self.$value,
+            in: 0...100,
+            step: 10,
+            title: "Volume",
+            valueText: "\\(Int(self.value))",
+            minValueText: "0",
+            maxValueText: "100",
+            onEditingChanged: { isEditing in
+                // Do what you want.
+            }
+        )
+        .sparkTheme(self.theme)
+        .sparkSliderIntent(.support)
+        .sparkSliderIsFloatingValueLabel(true)
+        .disabled(false)
+        .accessibilityLabel("Volume slider")
         """
     }
 }

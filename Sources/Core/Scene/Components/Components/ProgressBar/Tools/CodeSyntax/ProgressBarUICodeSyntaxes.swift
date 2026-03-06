@@ -23,13 +23,19 @@ struct ProgressBarUICodeSyntaxes {
 
     private static var simple: String {
         """
-        // TODO:
+        let progressBar = SparkUIProgressBar(theme: theme)
+        progressBar.value = 0.5
         """
     }
 
     private static var full: String {
         """
-        // TODO: 
+        let progressBar = SparkUIProgressBar(theme: theme)
+        progressBar.value = 0.75
+        progressBar.intent = .main
+        progressBar.shape = .square
+        progressBar.accessibilityLabel = "Progress"
+        progressBar.accessibilityValue = "75%"
         """
     }
 }

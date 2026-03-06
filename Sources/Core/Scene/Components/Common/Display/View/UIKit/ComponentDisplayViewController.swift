@@ -438,15 +438,7 @@ class ComponentDisplayViewController<
     // MARK: - Actions
 
     @objc func showCodeSyntax() {
-        // TODO:
-//        let newConfiguration = Configuration()
-//        self.configurations.append(newConfiguration)
-//
-//        // Show a present configuration view
-//        if self.style.showConfiguration {
-//            self.selectedConfiguration = newConfiguration
-//            self.presentConfigurationView()
-//        }
+        self.presentCodeSyntaxView()
     }
 
     @objc func addComponentAction() {
@@ -486,7 +478,7 @@ class ComponentDisplayViewController<
         }
 
         let configurationView = self.createConfigurationView(for: selectedConfiguration)
-        .navigationViewStyle(StackNavigationViewStyle())
+//        .navigationViewStyle(StackNavigationViewStyle()) TODO: Needed ??
 
         let hostingController = ComponentDisplayConfigurationController(rootView: configurationView)
         hostingController.delegate = self
@@ -502,6 +494,14 @@ class ComponentDisplayViewController<
 
         let configurationView = self.createConfigurationView(for: selectedConfiguration, afterUpdate: true)
         hostingController.rootView = configurationView
+    }
+
+    private func presentCodeSyntaxView() {
+        let codeSyntaxView = CodeSyntaxView(content: self.extraTools.uiKitCodeSyntaxes)
+            .dynamicTypeSize(.large)
+
+        let viewController = UIHostingController(rootView: codeSyntaxView)
+        self.present(viewController, animated: true)
     }
 
     // MARK: - Alert
