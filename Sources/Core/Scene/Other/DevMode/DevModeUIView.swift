@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+@_spi(SI_SPI) import SparkCommon
 
 struct DevModeUIViewRepresentable: UIViewControllerRepresentable {
     typealias UIViewControllerType = DevModeUIViewController
@@ -27,10 +28,12 @@ final class DevModeUIViewController: UIViewController {
 
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            self.label
+            self.label,
+            UIView()
         ])
         stackView.axis = .vertical
-        stackView.alignment = .center
+        stackView.alignment = .fill
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()

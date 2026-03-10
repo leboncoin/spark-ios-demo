@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias CheckboxComponentUIViewController = ComponentDisplayViewControllerRepresentable<CheckboxConfiguration, SparkUICheckbox, CheckboxConfigurationView, CheckboxComponentUIViewMaker>
+typealias CheckboxComponentUIViewController = ComponentDisplayViewControllerRepresentable<CheckboxConfiguration, SparkUICheckbox, CheckboxConfigurationView, CheckboxComponentUIViewMaker, CheckboxExtraTools>
 
 extension CheckboxComponentUIViewController {
 
@@ -30,7 +30,8 @@ final class CheckboxComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = CheckboxConfiguration
     typealias ComponentView = SparkUICheckbox
     typealias ConfigurationView = CheckboxConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CheckboxComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CheckboxComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = CheckboxExtraTools
 
     // MARK: - Properties
 

@@ -16,7 +16,7 @@ typealias SparkUICheckboxGroupInt = SparkUICheckboxGroup<Int>
 
 // MARK: - View Controller
 
-typealias CheckboxGroupComponentUIViewController = ComponentDisplayViewControllerRepresentable<CheckboxGroupConfiguration, SparkUICheckboxGroupInt, CheckboxGroupConfigurationView, CheckboxGroupComponentUIViewMaker>
+typealias CheckboxGroupComponentUIViewController = ComponentDisplayViewControllerRepresentable<CheckboxGroupConfiguration, SparkUICheckboxGroupInt, CheckboxGroupConfigurationView, CheckboxGroupComponentUIViewMaker, CheckboxExtraTools>
 
 extension CheckboxGroupComponentUIViewController {
 
@@ -34,7 +34,8 @@ final class CheckboxGroupComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = CheckboxGroupConfiguration
     typealias ComponentView = SparkUICheckboxGroupInt
     typealias ConfigurationView = CheckboxGroupConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CheckboxGroupComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CheckboxGroupComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = CheckboxExtraTools
 
     // MARK: - Properties
 

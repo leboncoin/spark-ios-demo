@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias BadgeComponentView = ComponentViewable<BadgeConfiguration, BadgeImplementationView, BadgeConfigurationView>
+typealias BadgeComponentView = ComponentViewable<BadgeConfiguration, BadgeImplementationView, BadgeConfigurationView, BadgeExtraTools>
 
 // MARK: - Subview
 

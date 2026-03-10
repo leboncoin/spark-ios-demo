@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias SegmentedGaugeComponentView = ComponentViewable<SegmentedGaugeConfiguration, SegmentedGaugeImplementationView, SegmentedGaugeConfigurationView>
+typealias SegmentedGaugeComponentView = ComponentViewable<SegmentedGaugeConfiguration, SegmentedGaugeImplementationView, SegmentedGaugeConfigurationView, SegmentedGaugeExtraTools>
 
 // MARK: - Subview
 

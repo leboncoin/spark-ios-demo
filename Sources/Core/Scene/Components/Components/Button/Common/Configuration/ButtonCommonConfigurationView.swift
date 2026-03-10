@@ -38,12 +38,6 @@ struct ButtonCommonConfigurationView<Configuration: ButtonConfiguration>: View {
             selectedValue: self.configuration.size
         )
 
-        EnumConfigurationItemView(
-            name: "shape",
-            values: ButtonShape.allCases,
-            selectedValue: self.configuration.shape
-        )
-
         if !self.isIconButton { // Only for the button
             EnumConfigurationItemView(
                 name: "alignment",

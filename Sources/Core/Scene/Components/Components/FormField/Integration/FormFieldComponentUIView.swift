@@ -12,7 +12,7 @@ import Combine
 
 // MARK: - View Controller
 
-typealias FormFieldComponentUIViewController = ComponentDisplayViewControllerRepresentable<FormFieldConfiguration, FormFieldDynamicUIView, FormFieldConfigurationView, FormFieldComponentUIViewMaker>
+typealias FormFieldComponentUIViewController = ComponentDisplayViewControllerRepresentable<FormFieldConfiguration, FormFieldDynamicUIView, FormFieldConfigurationView, FormFieldComponentUIViewMaker, FormFieldExtraTools>
 
 extension FormFieldComponentUIViewController {
 
@@ -33,7 +33,8 @@ final class FormFieldComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = FormFieldConfiguration
     typealias ComponentView = FormFieldDynamicUIView
     typealias ConfigurationView = FormFieldConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, FormFieldComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, FormFieldComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = FormFieldExtraTools
 
     // MARK: - Properties
 

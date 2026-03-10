@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias TextEditorComponentView = ComponentViewable<TextEditorConfiguration, TextEditorImplementationView, TextEditorConfigurationView>
+typealias TextEditorComponentView = ComponentViewable<TextEditorConfiguration, TextEditorImplementationView, TextEditorConfigurationView, TextEditorExtraTools>
 
 extension TextEditorComponentView {
 

@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias TextEditorComponentUIViewController = ComponentDisplayViewControllerRepresentable<TextEditorConfiguration, TextEditorUIView, TextEditorConfigurationView, TextEditorComponentUIViewMaker>
+typealias TextEditorComponentUIViewController = ComponentDisplayViewControllerRepresentable<TextEditorConfiguration, TextEditorUIView, TextEditorConfigurationView, TextEditorComponentUIViewMaker, TextEditorExtraTools>
 
 extension TextEditorComponentUIViewController {
 
@@ -29,7 +29,8 @@ final class TextEditorComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = TextEditorConfiguration
     typealias ComponentView = TextEditorUIView
     typealias ConfigurationView = TextEditorConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TextEditorComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TextEditorComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = TextEditorExtraTools
 
     // MARK: - Properties
 

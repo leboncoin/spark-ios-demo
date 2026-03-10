@@ -8,12 +8,9 @@
 
 import SwiftUI
 
-// TODO: To fix :
-// Check to migrate sizeCategory in TextLink to dynamicTypeSize.
-
 // MARK: - View
 
-typealias TextLinkComponentView = ComponentViewable<TextLinkConfiguration, TextLinkImplementationView, TextLinkConfigurationView>
+typealias TextLinkComponentView = ComponentViewable<TextLinkConfiguration, TextLinkImplementationView, TextLinkConfigurationView, TextLinkExtraTools>
 
 // MARK: - Subview
 

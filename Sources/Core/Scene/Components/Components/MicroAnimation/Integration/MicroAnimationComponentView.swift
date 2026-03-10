@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias MicroAnimationComponentView = ComponentViewable<MicroAnimationConfiguration, MicroAnimationImplementationView, MicroAnimationConfigurationView>
+typealias MicroAnimationComponentView = ComponentViewable<MicroAnimationConfiguration, MicroAnimationImplementationView, MicroAnimationConfigurationView, MicroAnimationExtraTools>
 
 extension MicroAnimationComponentView {
 

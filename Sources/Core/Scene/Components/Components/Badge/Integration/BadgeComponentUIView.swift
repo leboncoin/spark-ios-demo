@@ -14,7 +14,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias BadgeComponentUIViewController = ComponentDisplayViewControllerRepresentable<BadgeConfiguration, UIView, BadgeConfigurationView, BadgeComponentUIViewMaker>
+typealias BadgeComponentUIViewController = ComponentDisplayViewControllerRepresentable<BadgeConfiguration, UIView, BadgeConfigurationView, BadgeComponentUIViewMaker, BadgeExtraTools>
 
 extension BadgeComponentUIViewController {
 
@@ -32,14 +32,12 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = BadgeConfiguration
     typealias ComponentView = UIView
     typealias ConfigurationView = BadgeConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BadgeComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, BadgeComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = BadgeExtraTools
 
     // MARK: - Properties
 
     weak var viewController: DisplayViewController?
-
-    var rectangleView: UIView?
-    var badgeView: SparkUIBadge?
 
     private var leadingConstraint: NSLayoutConstraint?
     private var topConstraint: NSLayoutConstraint?
@@ -60,13 +58,11 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
             rectangleView.widthAnchor.constraint(equalToConstant: 40),
             rectangleView.heightAnchor.constraint(equalToConstant: 40)
         ])
-        self.rectangleView = rectangleView
 
         // Badge
         let badgeView = SparkUIBadge(
             theme: configuration.theme.value
         )
-        self.badgeView = badgeView
 
         // Background
         let backgroundView = UIView()
@@ -83,7 +79,7 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        self.badgeView?.theme = configuration.theme.value
+        self.getBadgeView(on: componentView)?.theme = configuration.theme.value
 
         self.updateCommonProperties(componentView, for: configuration)
     }
@@ -92,7 +88,8 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        guard let badgeView, let rectangleView else {
+        guard let badgeView = self.getBadgeView(on: componentView),
+              let rectangleView = self.getRectangleView(on: componentView) else {
             return
         }
 
@@ -137,5 +134,15 @@ final class BadgeComponentUIViewMaker: ComponentUIViewMaker {
 
         self.bottomConstraint = referenceView.bottomAnchor.constraint(equalTo: componentView.bottomAnchor)
         self.bottomConstraint?.isActive = true
+    }
+
+    // MARK: - Getter
+
+    private func getBadgeView(on view: UIView) -> SparkUIBadge? {
+        view.subviews.compactMap { $0 as? SparkUIBadge }.first
+    }
+
+    private func getRectangleView(on view: UIView) -> UIView? {
+        view.subviews.filter { !($0 is SparkUIBadge) }.first
     }
 }

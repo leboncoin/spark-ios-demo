@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias ToggleComponentView = ComponentViewable<ToggleConfiguration, ToggleImplementationView, ToggleConfigurationView>
+typealias ToggleComponentView = ComponentViewable<ToggleConfiguration, ToggleImplementationView, ToggleConfigurationView, ToggleExtraTools>
 
 extension ToggleComponentView {
 

@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias FormFieldComponentView = ComponentViewable<FormFieldConfiguration, FormFieldImplementationView, FormFieldConfigurationView>
+typealias FormFieldComponentView = ComponentViewable<FormFieldConfiguration, FormFieldImplementationView, FormFieldConfigurationView, FormFieldExtraTools>
 
 extension FormFieldComponentView {
 

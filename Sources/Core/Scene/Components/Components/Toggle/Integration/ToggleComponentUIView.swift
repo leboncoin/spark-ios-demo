@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias ToggleComponentUIViewController = ComponentDisplayViewControllerRepresentable<ToggleConfiguration, SparkUISwitch, ToggleConfigurationView, ToggleComponentUIViewMaker>
+typealias ToggleComponentUIViewController = ComponentDisplayViewControllerRepresentable<ToggleConfiguration, SparkUISwitch, ToggleConfigurationView, ToggleComponentUIViewMaker, ToggleExtraTools>
 
 extension ToggleComponentUIViewController {
 
@@ -28,7 +28,8 @@ final class ToggleComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = ToggleConfiguration
     typealias ComponentView = SparkUISwitch
     typealias ConfigurationView = ToggleConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ToggleComponentUIViewMaker>
+    typealias ExtraTools = ToggleExtraTools
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ToggleComponentUIViewMaker, ExtraTools>
 
     // MARK: - Properties
 

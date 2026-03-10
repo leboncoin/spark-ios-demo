@@ -10,17 +10,18 @@ import UIKit
 import SwiftUI
 
 /// Used by UIKit components only
-protocol ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView> {
+protocol ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView, ExtraTools> {
 
     // MARK: - Type Alias
 
     associatedtype Configuration: ComponentConfiguration
     associatedtype ComponentView: UIView
     associatedtype ConfigurationView: ConfigurationUIViewable<Configuration, ComponentView>
+    associatedtype ExtraTools: ComponentExtraTools
 
     // MARK: - Properties
 
-    var viewController: ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, Self>? { get set }
+    var viewController: ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, Self, ExtraTools>? { get set }
 
     // MARK: - Initialization
 

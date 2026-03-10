@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias RadioButtonComponentView = ComponentViewable<RadioButtonConfiguration, RadioButtonImplementationView, RadioButtonConfigurationView>
+typealias RadioButtonComponentView = ComponentViewable<RadioButtonConfiguration, RadioButtonImplementationView, RadioButtonConfigurationView, RadioButtonExtraTools>
 
 // MARK: - Subview
 
@@ -27,6 +27,7 @@ struct RadioButtonImplementationView: ComponentImplementationViewable {
         VStack(alignment: .leading, spacing: .medium) {
             self.component()
             .sparkRadioButtonIntent(self.configurationWrapped.intent)
+            .sparkRadioButtonIsAnimated(self.configurationWrapped.isAnimated)
             .demoDisabled(self.configurationWrapped)
             .demoFrame(self.configurationWrapped)
             .demoAccessibilityLabel(self.configurationWrapped)

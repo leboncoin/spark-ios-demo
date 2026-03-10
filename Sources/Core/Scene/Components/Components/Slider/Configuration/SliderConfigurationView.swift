@@ -13,7 +13,7 @@ struct SliderConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     // MARK: - Type Alias
 
     typealias Configuration = SliderConfiguration
-    typealias ComponentUIView = SliderFloatUIView
+    typealias ComponentUIView = SparkUISlider
 
     // MARK: - Properties
 
@@ -47,7 +47,8 @@ struct SliderConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                     SliderImplementationView(configuration: self.configuration)
                 }
             },
-            mainItemsView: { self.itemsView() }
+            mainItemsView: { self.itemsView() },
+            otherSectionItemsView: { self.otherSectionItemsView() }
         )
     }
 
@@ -59,30 +60,23 @@ struct SliderConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             selectedValue: self.configuration.intent
         )
 
-        EnumConfigurationItemView(
-            name: "shape",
-            values: SliderShape.allCases,
-            selectedValue: self.configuration.shape
+        ToggleConfigurationItemView(
+            name: "is step",
+            isOn: self.configuration.isStep
         )
 
-        if self.framework.isUIKit {
+        if self.configuration.isStep.wrappedValue {
+            TextFieldConfigurationItemView(
+                name: "step",
+                text: self.configuration.stepString,
+                keyboardType: .numberPad
+            )
+        } else {
             ToggleConfigurationItemView(
                 name: "is continuous",
                 isOn: self.configuration.uiKitIsContinuous
             )
         }
-
-        TextFieldConfigurationItemView(
-            name: "value",
-            text: self.configuration.valueString,
-            keyboardType: .numberPad
-        )
-
-        TextFieldConfigurationItemView(
-            name: "step",
-            text: self.configuration.stepString,
-            keyboardType: .numberPad
-        )
 
         HStack {
             TextFieldConfigurationItemView(
@@ -97,6 +91,61 @@ struct SliderConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                 text: self.configuration.upperBoundString,
                 keyboardType: .numberPad
             )
+        }
+    }
+
+    @ViewBuilder
+    private func otherSectionItemsView() -> some View {
+        Section("Label") {
+            TextFieldConfigurationItemView(
+                name: "title",
+                text: self.configuration.titleString
+            )
+
+            ToggleConfigurationItemView(
+                name: "is value label",
+                isOn: self.configuration.isValueLabel
+            )
+
+            if self.configuration.wrappedValue.isValueLabel {
+                TextFieldConfigurationItemView(
+                    name: "custom value label",
+                    text: self.configuration.customValueLabel,
+                    orientation: .vertical
+                )
+
+                ToggleConfigurationItemView(
+                    name: "is floating value label",
+                    isOn: self.configuration.isFloatingValueLabel
+                )
+            }
+
+            ToggleConfigurationItemView(
+                name: "is range values label",
+                isOn: self.configuration.isRangeValuesLabel
+            )
+
+            if self.configuration.isValueLabel.wrappedValue || self.configuration.isRangeValuesLabel.wrappedValue {
+
+                if self.framework.isUIKit {
+                    ToggleConfigurationItemView(
+                        name: "is attributed text",
+                        isOn: self.configuration.uiKitIsAttributedText
+                    )
+                } else {
+                    ToggleConfigurationItemView(
+                        name: "is custom content",
+                        isOn: self.configuration.swiftUIIsCustomValue
+                    )
+
+                    if self.configuration.wrappedValue.swiftUIIsCustomValue {
+                        TextFieldConfigurationItemView(
+                            name: "second text",
+                            text: self.configuration.swiftUISecondText
+                        )
+                    }
+                }
+            }
         }
     }
 }

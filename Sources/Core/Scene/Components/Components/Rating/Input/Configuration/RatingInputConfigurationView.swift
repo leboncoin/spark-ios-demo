@@ -13,7 +13,7 @@ struct RatingInputConfigurationView: ConfigurationViewable, ConfigurationUIViewa
     // MARK: - Type Alias
 
     typealias Configuration = RatingInputConfiguration
-    typealias ComponentUIView = RatingInputUIView
+    typealias ComponentUIView = SparkUIRatingInput
 
     // MARK: - Properties
 
@@ -46,13 +46,6 @@ struct RatingInputConfigurationView: ConfigurationViewable, ConfigurationUIViewa
                 } else {
                     RatingInputImplementationView(configuration: self.configuration)
                 }
-            },
-            mainItemsView: {
-                EnumConfigurationItemView(
-                    name: "intent",
-                    values: RatingIntent.allCases,
-                    selectedValue: self.configuration.intent
-                )
             }
         )
     }

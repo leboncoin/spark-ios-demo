@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias TabComponentUIViewController = ComponentDisplayViewControllerRepresentable<TabConfiguration, TabUIView, TabConfigurationView, TabComponentUIViewMaker>
+typealias TabComponentUIViewController = ComponentDisplayViewControllerRepresentable<TabConfiguration, SparkUITab, TabConfigurationView, TabComponentUIViewMaker, TabExtraTools>
 
 extension TabComponentUIViewController {
 
@@ -27,9 +27,10 @@ final class TabComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = TabConfiguration
-    typealias ComponentView = TabUIView
+    typealias ComponentView = SparkUITab
     typealias ConfigurationView = TabConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TabComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TabComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = TabExtraTools
 
     // MARK: - Properties
 
@@ -42,15 +43,9 @@ final class TabComponentUIViewMaker: ComponentUIViewMaker {
     ) -> ComponentView {
         let componentView = ComponentView(
             theme: configuration.theme.value,
-            intent: configuration.intent,
-            tabSize: configuration.tabSize,
-            content: configuration.items.map {
-                TabUIItemContent(
-                    icon: .init(icon: $0.icon),
-                    title: $0.text
-                )
-            },
-            apportionsSegmentWidthsByContent: !configuration.isEqualSize
+            titles: configuration.items.map { item in
+                item.text.nilIfEmpty ?? "unknow"
+            }
         )
 
         self.updateCommonProperties(componentView, for: configuration)
@@ -63,9 +58,6 @@ final class TabComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
-        componentView.tabSize = configuration.tabSize
-        componentView.apportionsSegmentWidthsByContent = !configuration.isEqualSize
         componentView.demoContent(for: configuration)
 
         self.updateCommonProperties(componentView, for: configuration)
@@ -75,32 +67,29 @@ final class TabComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        componentView.demoDisable(for: configuration)
+        componentView.intent = configuration.intent
+        componentView.size = configuration.tabSize
+        componentView.apportionsSegmentWidthsByContent = !configuration.isEqualSize
+        componentView.demoDisabled(configuration)
         componentView.demoBadge(for: configuration)
         componentView.demoAccessibilityLabel(configuration)
+    }
+
+    // MARK: - Getter
+
+    func isFullWidth() -> Bool {
+        true
     }
 }
 
 // MARK: - Extension
 
-private extension TabUIView {
-
-    func demoDisable(for configuration: TabComponentUIViewMaker.Configuration) {
-        if !configuration.isEnabled.value {
-            self.isEnabled = false
-        } else {
-
-            for (index, item) in configuration.items.enumerated() {
-                if self.segments.count > index {
-                    self.segments[index].isEnabled = item.isEnabled
-                }
-            }
-        }
-    }
+private extension SparkUITab {
 
     func demoContent(for configuration: TabComponentUIViewMaker.Configuration) {
+        let animated = configuration.uiKitIsAnimated
         if configuration.numberOfTabs < self.numberOfSegments {
-            self.removeSegment(at: self.numberOfSegments - 1, animated: true)
+            self.removeSegment(at: self.numberOfSegments - 1, animated: animated)
         } else if configuration.numberOfTabs >= self.numberOfSegments {
 
             for (index, item) in configuration.items.enumerated() {
@@ -112,32 +101,31 @@ private extension TabUIView {
                     switch (text, icon) {
                     case let (text?, icon?):
                         self.addSegment(
-                            withImage: icon,
-                            andTitle: text,
-                            animated: true
+                            with: .init(title: text, image: icon),
+                            animated: animated
                         )
 
                     case (let text?, nil):
                         self.addSegment(
                             with: text,
-                            animated: true
+                            animated: animated
                         )
 
                     case (nil, let icon?):
                         self.addSegment(
                             with: icon,
-                            animated: true
+                            animated: animated
                         )
 
-                    default:
-                        self.addSegment(
-                            with: "Unkwow",
-                            animated: true
-                        )
+                    default: break
                     }
                 } else { // Update segment
+                    if item.uiKitIsAttributedText {
+                        self.setAttributedTitle(text?.demoNSAttributedString, forSegmentAt: index)
+                    } else {
+                        self.setTitle(text, forSegmentAt: index)
+                    }
                     self.setImage(icon, forSegmentAt: index)
-                    self.setTitle(text, forSegmentAt: index)
                 }
             }
         }
@@ -145,15 +133,13 @@ private extension TabUIView {
 
     func demoBadge(for configuration: TabComponentUIViewMaker.Configuration) {
         for (index, item) in configuration.items.enumerated() {
-            if self.segments.count > index {
 
-                let badge = self.demoCreateBadge(
-                    at: item,
-                    for: configuration
-                )
+            let badge = self.demoCreateBadge(
+                at: item,
+                for: configuration
+            )
 
-                self.setBadge(badge, forSegementAt: index)
-            }
+            self.setExtraView(badge, forSegmentAt: index)
         }
     }
 
@@ -166,10 +152,12 @@ private extension TabUIView {
         let badge = SparkUIBadge(
             theme: self.theme
         )
-        badge.intent = .danger
+        badge.intent = .basic
         badge.value = item.badgeValue
         badge.isBorder = false
         badge.size = configuration.tabSize.demoBadgeSize
+        badge.accessibilityLabel = "\(item.badgeValue)"
+
         return badge
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias IconComponentView = ComponentViewable<IconConfiguration, IconImplementationView, IconConfigurationView>
+typealias IconComponentView = ComponentViewable<IconConfiguration, IconImplementationView, IconConfigurationView, IconExtraTools>
 
 // MARK: - Subview
 

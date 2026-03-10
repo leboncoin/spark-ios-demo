@@ -12,7 +12,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias RadioGroupComponentView = ComponentViewable<RadioGroupConfiguration, RadioGroupImplementationView, RadioGroupConfigurationView>
+typealias RadioGroupComponentView = ComponentViewable<RadioGroupConfiguration, RadioGroupImplementationView, RadioGroupConfigurationView, RadioButtonExtraTools>
 
 extension RadioGroupComponentView {
 
@@ -59,6 +59,7 @@ struct RadioGroupImplementationView: ComponentImplementationViewable {
             self.component()
                 .sparkRadioGroupAxis(self.configurationWrapped.axis)
                 .sparkRadioButtonIntent(self.configurationWrapped.intent)
+                .sparkRadioButtonIsAnimated(self.configurationWrapped.isAnimated)
                 .demoDisabled(self.configurationWrapped)
                 .demoFrame(self.configurationWrapped)
                 .demoAccessibilityLabel(self.configurationWrapped)

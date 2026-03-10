@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias StepperComponentView = ComponentViewable<StepperConfiguration, StepperImplementationView, StepperConfigurationView>
+typealias StepperComponentView = ComponentViewable<StepperConfiguration, StepperImplementationView, StepperConfigurationView, StepperExtraTools>
 
 extension StepperComponentView {
 
@@ -48,6 +48,7 @@ struct StepperImplementationView: ComponentImplementationViewable {
 
     var body: some View {
         self.createComponent()
+            .sparkTheme(self.configurationWrapped.theme.value)
             .onAppear() {
                 self.floatValue = Float(self.configurationWrapped.valueString) ?? 0
                 self.intValue = Int(self.configurationWrapped.valueString) ?? 0
@@ -63,7 +64,6 @@ struct StepperImplementationView: ComponentImplementationViewable {
         switch self.configurationWrapped.format {
         case .currency:
             SparkStepper(
-                theme: self.configurationWrapped.theme.value,
                 value: self.$floatValue,
                 in: self.configurationWrapped.bounds(),
                 step: self.configurationWrapped.step(),
@@ -73,7 +73,6 @@ struct StepperImplementationView: ComponentImplementationViewable {
 
         case .percent:
             SparkStepper(
-                theme: self.configurationWrapped.theme.value,
                 value: self.$intValue,
                 in: self.configurationWrapped.bounds().intRange,
                 step: self.configurationWrapped.step().intValue,
@@ -83,7 +82,6 @@ struct StepperImplementationView: ComponentImplementationViewable {
 
         case .none:
             SparkStepper(
-                theme: self.configurationWrapped.theme.value,
                 value: self.intValueForFormField ?? self.$intValue,
                 in: self.configurationWrapped.bounds().intRange,
                 step: self.configurationWrapped.step().intValue
@@ -98,7 +96,8 @@ struct StepperImplementationView: ComponentImplementationViewable {
 private extension SparkStepper {
 
     func demoProperties(_ configuration: StepperConfiguration) -> some View {
-        self.demoContextAccessibilityLabel(configuration)
+        self
+            .demoContextAccessibilityLabel(configuration)
             .demoIncrementAccessibilityLabel(configuration)
             .demoDecrementAccessibilityLabel(configuration)
             .demoDisabled(configuration)

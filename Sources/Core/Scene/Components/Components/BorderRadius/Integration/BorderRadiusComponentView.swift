@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias BorderRadiusComponentView = ComponentViewable<BorderRadiusConfiguration, BorderRadiusImplementationView, BorderRadiusConfigurationView>
+typealias BorderRadiusComponentView = ComponentViewable<BorderRadiusConfiguration, BorderRadiusImplementationView, BorderRadiusConfigurationView, BorderRadiusExtraTools>
 
 extension BorderRadiusComponentView {
 

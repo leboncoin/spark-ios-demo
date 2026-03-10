@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+@_spi(SI_SPI) import SparkCommon
 
 struct DevModeView: View {
 
@@ -17,7 +18,12 @@ struct DevModeView: View {
     // MARK: - View
 
     var body: some View {
-        Text("Replace me with your UI content")
+        VStack {
+            Text("Replace me with your UI content")
+
+            Spacer()
+        }
+        .padding(20)
     }
 }
 

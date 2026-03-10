@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias ChipComponentView = ComponentViewable<ChipConfiguration, ChipImplementationView, ChipConfigurationView>
+typealias ChipComponentView = ComponentViewable<ChipConfiguration, ChipImplementationView, ChipConfigurationView, ChipExtraTools>
 
 // MARK: - Subview
 

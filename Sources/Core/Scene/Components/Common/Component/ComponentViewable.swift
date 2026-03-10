@@ -13,7 +13,8 @@ import SwiftUI
 struct ComponentViewable<
     Configuration: ComponentConfiguration,
     ComponentView: ComponentImplementationViewable<Configuration>,
-    ConfigurationView: ConfigurationViewable<Configuration>
+    ConfigurationView: ConfigurationViewable<Configuration>,
+    ExtraTools: ComponentExtraTools
 >: View {
 
     // MARK: - Properties
@@ -30,6 +31,7 @@ struct ComponentViewable<
             configurations: self.configurations,
             style: self.style,
             styles: self.styles,
+            extraTools: ExtraTools(),
             componentView: { $configuration in
                 ComponentView(configuration: $configuration)
             },

@@ -15,7 +15,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias ChipComponentUIViewController = ComponentDisplayViewControllerRepresentable<ChipConfiguration, SparkUIChip, ChipConfigurationView, ChipComponentUIViewMaker>
+typealias ChipComponentUIViewController = ComponentDisplayViewControllerRepresentable<ChipConfiguration, SparkUIChip, ChipConfigurationView, ChipComponentUIViewMaker, ChipExtraTools>
 
 // MARK: - View Maker
 
@@ -26,7 +26,8 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = ChipConfiguration
     typealias ComponentView = SparkUIChip
     typealias ConfigurationView = ChipConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ChipComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ChipComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = ChipExtraTools
 
     // MARK: - Properties
 

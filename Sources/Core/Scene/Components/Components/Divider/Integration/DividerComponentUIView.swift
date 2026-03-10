@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias DividerComponentUIViewController = ComponentDisplayViewControllerRepresentable<DividerConfiguration, SparkUIDivider, DividerConfigurationView, DividerComponentUIViewMaker>
+typealias DividerComponentUIViewController = ComponentDisplayViewControllerRepresentable<DividerConfiguration, SparkUIDivider, DividerConfigurationView, DividerComponentUIViewMaker, DividerExtraTools>
 
 // MARK: - View Maker
 
@@ -22,7 +22,8 @@ final class DividerComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = DividerConfiguration
     typealias ComponentView = SparkUIDivider
     typealias ConfigurationView = DividerConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, DividerComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, DividerComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = DividerExtraTools
 
     // MARK: - Properties
 

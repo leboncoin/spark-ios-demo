@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias PopoverComponentUIViewController = ComponentDisplayViewControllerRepresentable<PopoverConfiguration, UIButton, PopoverConfigurationView, PopoverComponentUIViewMaker>
+typealias PopoverComponentUIViewController = ComponentDisplayViewControllerRepresentable<PopoverConfiguration, UIButton, PopoverConfigurationView, PopoverComponentUIViewMaker, PopoverExtraTools>
 
 extension PopoverComponentUIViewController {
 
@@ -29,7 +29,8 @@ final class PopoverComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = PopoverConfiguration
     typealias ComponentView = UIButton
     typealias ConfigurationView = PopoverConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, PopoverComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, PopoverComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = PopoverExtraTools
 
     // MARK: - Properties
 

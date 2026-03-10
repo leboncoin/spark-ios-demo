@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias AdaptativeStackComponentUIViewController = ComponentDisplayViewControllerRepresentable<AdaptativeStackConfiguration, AdaptativeStackUIView, AdaptativeStackConfigurationView, AdaptativeStackComponentUIViewMaker>
+typealias AdaptativeStackComponentUIViewController = ComponentDisplayViewControllerRepresentable<AdaptativeStackConfiguration, AdaptativeStackUIView, AdaptativeStackConfigurationView, AdaptativeStackComponentUIViewMaker, AdaptativeStackExtraTools>
 
 extension AdaptativeStackComponentUIViewController {
 
@@ -28,7 +28,8 @@ final class AdaptativeStackComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = AdaptativeStackConfiguration
     typealias ComponentView = AdaptativeStackUIView
     typealias ConfigurationView = AdaptativeStackConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, AdaptativeStackComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, AdaptativeStackComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = AdaptativeStackExtraTools
 
     // MARK: - Properties
 

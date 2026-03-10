@@ -17,23 +17,30 @@ struct ComponentDisplayViewControllerRepresentable<
     Configuration: ComponentConfiguration,
     ComponentView: UIView,
     ConfigurationView: ConfigurationUIViewable<Configuration, ComponentView>,
-    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView>
+    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView, ExtraTools>,
+    ExtraTools: ComponentExtraTools
 >: UIViewControllerRepresentable {
 
     // MARK: - Type Alias
 
-    typealias UIViewControllerType = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ViewMaker>
+    typealias UIViewControllerType = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, ViewMaker, ExtraTools>
 
     // MARK: - Properties
 
     var configurations: [Configuration] = [.init()]
     var style: ComponentDisplayStyle = .default
     var styles = ComponentDisplayStyle.allUIKitCases
+    var extraTools = ExtraTools()
 
     // MARK: - View
 
     func makeUIViewController(context: Context) -> UIViewControllerType {
-        .init(configurations: self.configurations, style: self.style, styles: self.styles)
+        .init(
+            configurations: self.configurations,
+            style: self.style,
+            styles: self.styles,
+            extraTools: self.extraTools
+        )
     }
 
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
@@ -46,7 +53,8 @@ class ComponentDisplayViewController<
     Configuration: ComponentConfiguration,
     ComponentView: UIView,
     ConfigurationView: ConfigurationUIViewable<Configuration, ComponentView>,
-    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView>
+    ViewMaker: ComponentUIViewMaker<Configuration, ComponentView, ConfigurationView, ExtraTools>,
+    ExtraTools: ComponentExtraTools
 >: UIViewController, ComponentDisplayTableViewDelegate, ComponentDisplayConfigurationControllerDelegate {
 
     // MARK: - Components
@@ -110,7 +118,7 @@ class ComponentDisplayViewController<
     }()
 
     private lazy var verticalTableView: ComponentDisplayTableView = {
-        let tableView = ComponentDisplayTableView<Configuration, ComponentView, ConfigurationView, ViewMaker>(
+        let tableView = ComponentDisplayTableView<Configuration, ComponentView, ConfigurationView, ViewMaker, ExtraTools>(
             viewMaker: self.viewMaker
         )
         tableView.delegate = self
@@ -128,6 +136,8 @@ class ComponentDisplayViewController<
         }
     }
     private let styles: [ComponentDisplayStyle]
+
+    private let extraTools: ExtraTools
 
     private var configurations: [Configuration] {
         didSet {
@@ -160,12 +170,14 @@ class ComponentDisplayViewController<
     init(
         configurations: [Configuration],
         style: ComponentDisplayStyle,
-        styles: [ComponentDisplayStyle]
+        styles: [ComponentDisplayStyle],
+        extraTools: ExtraTools,
     ) {
         self.configurations = configurations
         self.selectedConfiguration = configurations.first
         self.style = style
         self.styles = styles
+        self.extraTools = extraTools
 
         super.init(nibName: nil, bundle: nil)
 
@@ -306,12 +318,35 @@ class ComponentDisplayViewController<
 
     private func reloadNavigationItems() {
         var rightBarButtonItems = [UIBarButtonItem]()
+
+        if self.extraTools.showLinks() {
+
+            // TODO: 
+//            let menu = UIMenu(children: self.extraTools.links().compactMap { link in
+//                UIAction(title: style.name, image: UIImage(systemName: style.systemImage), handler: { _ in
+//                    self.style = style
+//                })
+//            })
+//
+//            rightBarButtonItems.append(.init(
+//                image: UIImage(systemName: "network"),
+//                menu: menu
+//            ))
+        }
+        if !self.extraTools.uiKitCodeSyntaxes.isEmpty {
+            rightBarButtonItems.append(.init(
+                image: .init(systemName: "curlybraces"),
+                style: .plain,
+                target: self,
+                action: #selector(self.showCodeSyntax)
+            ))
+        }
         if self.styles.hasAddButton(currentStyle: self.style) {
             rightBarButtonItems.append(.init(
                 image: .init(systemName: "plus"),
                 style: .plain,
                 target: self,
-                action: #selector(addComponentAction)
+                action: #selector(self.addComponentAction)
             ))
         }
         if self.selectedConfiguration != nil && self.style == .alone {
@@ -319,7 +354,7 @@ class ComponentDisplayViewController<
                 image: .init(systemName: "pencil"),
                 style: .plain,
                 target: self,
-                action: #selector(updateItemAction)
+                action: #selector(self.updateItemAction)
             ))
         }
         if self.styles.count > 1 {
@@ -402,6 +437,10 @@ class ComponentDisplayViewController<
 
     // MARK: - Actions
 
+    @objc func showCodeSyntax() {
+        self.presentCodeSyntaxView()
+    }
+
     @objc func addComponentAction() {
         let newConfiguration = Configuration()
         self.configurations.append(newConfiguration)
@@ -439,7 +478,7 @@ class ComponentDisplayViewController<
         }
 
         let configurationView = self.createConfigurationView(for: selectedConfiguration)
-        .navigationViewStyle(StackNavigationViewStyle())
+//        .navigationViewStyle(StackNavigationViewStyle()) TODO: Needed ??
 
         let hostingController = ComponentDisplayConfigurationController(rootView: configurationView)
         hostingController.delegate = self
@@ -455,6 +494,14 @@ class ComponentDisplayViewController<
 
         let configurationView = self.createConfigurationView(for: selectedConfiguration, afterUpdate: true)
         hostingController.rootView = configurationView
+    }
+
+    private func presentCodeSyntaxView() {
+        let codeSyntaxView = CodeSyntaxView(content: self.extraTools.uiKitCodeSyntaxes)
+            .dynamicTypeSize(.large)
+
+        let viewController = UIHostingController(rootView: codeSyntaxView)
+        self.present(viewController, animated: true)
     }
 
     // MARK: - Alert

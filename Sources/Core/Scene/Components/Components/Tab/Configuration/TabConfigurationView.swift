@@ -13,7 +13,7 @@ struct TabConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
     // MARK: - Type Alias
 
     typealias Configuration = TabConfiguration
-    typealias ComponentUIView = TabUIView
+    typealias ComponentUIView = SparkUITab
 
     // MARK: - Properties
 
@@ -76,6 +76,13 @@ struct TabConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                 isOn: self.configuration.isEqualSize
             )
         }
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.uiKitIsAnimated
+            )
+        }
     }
 
     @ViewBuilder
@@ -95,6 +102,13 @@ struct TabConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                     text: item.text
                 )
 
+                if self.framework.isUIKit {
+                    ToggleConfigurationItemView(
+                        name: "is attributed text",
+                        isOn: item.uiKitIsAttributedText
+                    )
+                }
+
                 OptionalEnumConfigurationItemView(
                     name: "icon",
                     values: Iconography.allCases,
@@ -104,11 +118,6 @@ struct TabConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
                 ToggleConfigurationItemView(
                     name: "is badge",
                     isOn: item.isBadge
-                )
-
-                ToggleConfigurationItemView(
-                    name: "is enabled",
-                    isOn: item.isEnabled
                 )
             }
         }

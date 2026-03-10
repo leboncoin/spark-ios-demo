@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias CornerRadiusComponentUIViewController = ComponentDisplayViewControllerRepresentable<CornerRadiusConfiguration, CornerRadiusUIView, CornerRadiusConfigurationView, CornerRadiusComponentUIViewMaker>
+typealias CornerRadiusComponentUIViewController = ComponentDisplayViewControllerRepresentable<CornerRadiusConfiguration, CornerRadiusUIView, CornerRadiusConfigurationView, CornerRadiusComponentUIViewMaker, CornerRadiusExtraTools>
 
 extension CornerRadiusComponentUIViewController {
 
@@ -28,7 +28,8 @@ final class CornerRadiusComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = CornerRadiusConfiguration
     typealias ComponentView = CornerRadiusUIView
     typealias ConfigurationView = CornerRadiusConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CornerRadiusComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, CornerRadiusComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = CornerRadiusExtraTools
 
     // MARK: - Properties
 

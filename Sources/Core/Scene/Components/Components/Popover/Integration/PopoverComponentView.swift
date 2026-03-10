@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias PopoverComponentView = ComponentViewable<PopoverConfiguration, PopoverImplementationView, PopoverConfigurationView>
+typealias PopoverComponentView = ComponentViewable<PopoverConfiguration, PopoverImplementationView, PopoverConfigurationView, PopoverExtraTools>
 
 extension PopoverComponentView {
 

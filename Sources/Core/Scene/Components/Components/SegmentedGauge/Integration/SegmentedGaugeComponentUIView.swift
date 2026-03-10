@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias SegmentedGaugeComponentUIViewController = ComponentDisplayViewControllerRepresentable<SegmentedGaugeConfiguration, SparkUISegmentedGauge, SegmentedGaugeConfigurationView, SegmentedGaugeComponentUIViewMaker>
+typealias SegmentedGaugeComponentUIViewController = ComponentDisplayViewControllerRepresentable<SegmentedGaugeConfiguration, SparkUISegmentedGauge, SegmentedGaugeConfigurationView, SegmentedGaugeComponentUIViewMaker, SegmentedGaugeExtraTools>
 
 extension SegmentedGaugeComponentUIViewController {
 
@@ -29,7 +29,8 @@ final class SegmentedGaugeComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = SegmentedGaugeConfiguration
     typealias ComponentView = SparkUISegmentedGauge
     typealias ConfigurationView = SegmentedGaugeConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SegmentedGaugeComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SegmentedGaugeComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = SegmentedGaugeExtraTools
 
     // MARK: - Properties
 

@@ -16,7 +16,7 @@ typealias SparkUIRadioGroupInt = SparkUIRadioGroup<Int>
 
 // MARK: - View Controller
 
-typealias RadioGroupComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioGroupConfiguration, SparkUIRadioGroupInt, RadioGroupConfigurationView, RadioGroupComponentUIViewMaker>
+typealias RadioGroupComponentUIViewController = ComponentDisplayViewControllerRepresentable<RadioGroupConfiguration, SparkUIRadioGroupInt, RadioGroupConfigurationView, RadioGroupComponentUIViewMaker, RadioButtonExtraTools>
 
 extension RadioGroupComponentUIViewController {
 
@@ -34,7 +34,8 @@ final class RadioGroupComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = RadioGroupConfiguration
     typealias ComponentView = SparkUIRadioGroupInt
     typealias ConfigurationView = RadioGroupConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RadioGroupComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, RadioGroupComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = RadioButtonExtraTools
 
     // MARK: - Properties
 
@@ -128,7 +129,7 @@ private extension SparkUIRadioGroup<Int> {
         if configuration.uiKitCanAnimated {
             self.selectedID = selectedID
         } else {
-            self.setSelectedID(selectedID, animated: configuration.uiKitIsAnimated)
+            self.setSelectedID(selectedID, animated: configuration.isAnimated)
         }
     }
 }

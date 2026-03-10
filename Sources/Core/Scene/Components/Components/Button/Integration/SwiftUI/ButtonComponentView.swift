@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - View
 
-typealias ButtonComponentView = ComponentViewable<ButtonConfiguration, ButtonImplementationView, ButtonConfigurationView>
+typealias ButtonComponentView = ComponentViewable<ButtonConfiguration, ButtonImplementationView, ButtonConfigurationView, ButtonExtraTools>
 
 // MARK: - Subview
 
@@ -30,7 +30,6 @@ struct ButtonImplementationView: ComponentImplementationViewable {
             intent: self.configurationWrapped.intent,
             variant: self.configurationWrapped.variant,
             size: self.configurationWrapped.size,
-            shape: self.configurationWrapped.shape,
             alignment: self.configurationWrapped.alignment,
             action: {
                 if self.configurationWrapped.swiftUIIsToggle {

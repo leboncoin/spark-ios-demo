@@ -1,0 +1,41 @@
+//
+//  DividerUICodeSyntaxes.swift
+//  SparkDemo
+//
+//  Created by robin.lemaire on 22/01/2026.
+//  Copyright © 2026 Leboncoin. All rights reserved.
+//
+
+import Foundation
+
+struct DividerUICodeSyntaxes {
+
+    // MARK: - Properties
+
+    static var content: [CodeSyntax] = {
+        return [
+            .init(title: "Default", code: Self.simple),
+            .init(title: "Full", code: Self.full)
+        ]
+    }()
+
+    // MARK: - Private Properties
+
+    private static var simple: String {
+        """
+        let divider = SparkUIDivider(theme: theme)
+        divider.intent = .default
+        """
+    }
+
+    private static var full: String {
+        """
+        let divider = SparkUIDivider(theme: theme)
+        divider.alignment = .center
+        divider.axis = .horizontal
+        divider.intent = .outline
+        divider.text = "My Divider"
+        divider.accessibilityLabel = "Divider label"
+        """
+    }
+}

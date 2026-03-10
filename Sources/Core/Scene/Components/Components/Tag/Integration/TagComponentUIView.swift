@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias TagComponentUIViewController = ComponentDisplayViewControllerRepresentable<TagConfiguration, SparkUITag, TagConfigurationView, TagComponentUIViewMaker>
+typealias TagComponentUIViewController = ComponentDisplayViewControllerRepresentable<TagConfiguration, SparkUITag, TagConfigurationView, TagComponentUIViewMaker, TagExtraTools>
 
 // MARK: - View Maker
 
@@ -22,7 +22,8 @@ final class TagComponentUIViewMaker: ComponentUIViewMaker {
     typealias Configuration = TagConfiguration
     typealias ComponentView = SparkUITag
     typealias ConfigurationView = TagConfigurationView
-    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TagComponentUIViewMaker>
+    typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, TagComponentUIViewMaker, ExtraTools>
+    typealias ExtraTools = TagExtraTools
 
     // MARK: - Properties
 
