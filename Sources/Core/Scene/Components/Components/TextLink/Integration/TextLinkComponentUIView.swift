@@ -9,10 +9,6 @@
 import UIKit
 import SwiftUI
 
-// TODO: Tox fix :
-// - add intrinsic content size
-// - no multiline on configuration view ...
-
 // MARK: - View Controller
 
 typealias TextLinkComponentUIViewController = ComponentDisplayViewControllerRepresentable<TextLinkConfiguration, SparkUITextLink, TextLinkConfigurationView, TextLinkComponentUIViewMaker, TextLinkExtraTools>

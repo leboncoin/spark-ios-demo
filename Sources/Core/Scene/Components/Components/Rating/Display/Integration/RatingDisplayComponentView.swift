@@ -46,7 +46,6 @@ struct RatingDisplayImplementationView: ComponentImplementationViewable {
         let countText = self.configurationWrapped.countText.nilIfEmpty
         let additionalText = self.configurationWrapped.additionalText.nilIfEmpty
 
-
         switch (text, countText, additionalText) {
             // Text only
         case (let text?, nil, nil):

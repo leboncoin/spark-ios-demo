@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-// TODO: Add the codeblock to copy past an example integration
-
 struct ComponentsView: View {
 
     // MARK: - Properties

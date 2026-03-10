@@ -7,7 +7,7 @@
 //
 
 extension ComponentsView {
-    
+
     enum Familly: String, CaseIterable, Hashable {
         case all
         case action

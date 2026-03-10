@@ -99,7 +99,7 @@ struct SliderConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
         Section("Label") {
             TextFieldConfigurationItemView(
                 name: "title",
-                text: self.configuration.titleString,
+                text: self.configuration.titleString
             )
 
             ToggleConfigurationItemView(

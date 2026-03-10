@@ -68,8 +68,7 @@ struct RatingUICodeSyntaxes {
         ratingInput.value = 3.0
         ratingInput.isEnabled = true
         ratingInput.addAction(UIAction(handler: { action in
-            guard let ratingInput = action.sender as? SparkUIRatingInput else { return }
-            print("Rating changed to: \\(ratingInput.value)")
+            // TODO: Your action
         }), for: .valueChanged)
         """
     }

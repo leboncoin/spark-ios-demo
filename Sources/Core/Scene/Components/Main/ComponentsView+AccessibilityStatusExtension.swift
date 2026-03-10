@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension ComponentsView {
-    
+
     enum AccessibilityStatus: String, CaseIterable, Hashable {
         case all
         case none

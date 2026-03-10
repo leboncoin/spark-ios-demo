@@ -9,10 +9,6 @@
 import UIKit
 import SwiftUI
 
-// TODO: To Fix
-// Remove enableComponentUserInteraction
-// Remove action
-
 // MARK: - View Controller
 
 typealias CardComponentUIViewController = ComponentDisplayViewControllerRepresentable<CardConfiguration, SparkUICard, CardConfigurationView, CardComponentUIViewMaker, CardExtraTools>

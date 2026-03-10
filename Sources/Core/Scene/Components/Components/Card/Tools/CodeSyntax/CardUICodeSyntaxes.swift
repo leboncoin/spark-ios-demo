@@ -49,6 +49,7 @@ struct CardUICodeSyntaxes {
         """
     }
 
+    // swiftlint:disable no_debugging_method
     private static var full: String {
         """
         // Create tag

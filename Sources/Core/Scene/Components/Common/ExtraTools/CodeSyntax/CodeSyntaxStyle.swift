@@ -59,10 +59,10 @@ struct CodeSyntaxStyle {
         color: SwiftUI.Color
     ) {
         let string = String(attributed.characters)
-        let regex = try! NSRegularExpression(pattern: pattern)
+        let regex = try? NSRegularExpression(pattern: pattern)
         let nsRange = NSRange(string.startIndex..<string.endIndex, in: string)
 
-        regex.enumerateMatches(in: string, range: nsRange) { match, _, _ in
+        regex?.enumerateMatches(in: string, range: nsRange) { match, _, _ in
             guard let range = match?.range,
                   let swiftRange = Range(range, in: string),
                   let lower = AttributedString.Index(swiftRange.lowerBound, within: attributed),

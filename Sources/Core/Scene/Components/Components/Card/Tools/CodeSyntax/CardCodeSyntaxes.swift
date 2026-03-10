@@ -40,6 +40,7 @@ struct CardCodeSyntaxes {
         """
     }
 
+    // swiftlint:disable no_debugging_method
     private static var full: String {
         """
         SparkCard(

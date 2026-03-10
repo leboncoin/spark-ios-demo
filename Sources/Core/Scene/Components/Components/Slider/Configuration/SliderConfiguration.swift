@@ -14,7 +14,7 @@ class SliderConfiguration: ComponentConfiguration {
 
     var intent: SliderIntent = .default
 
-    var valueString: String = String(Float(Int.random(in: 0...10))/10)
+    var valueString: String = String(Float(Int.random(in: 0...10)) / 10)
     var isStep: Bool = true
 
     var titleString: String = ""

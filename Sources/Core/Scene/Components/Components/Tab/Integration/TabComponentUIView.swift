@@ -156,6 +156,7 @@ private extension SparkUITab {
         badge.value = item.badgeValue
         badge.isBorder = false
         badge.size = configuration.tabSize.demoBadgeSize
+        badge.accessibilityLabel = "\(item.badgeValue)"
 
         return badge
     }
