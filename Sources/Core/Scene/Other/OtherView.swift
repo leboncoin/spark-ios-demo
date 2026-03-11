@@ -41,6 +41,16 @@ struct OtherView: View {
         }
     }
 
+    // MARK: - Properties
+
+    private var appVersion: String? {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+
+    private var buildNumber: String? {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+    }
+
     // MARK: - View
 
     var body: some View {
@@ -51,6 +61,26 @@ struct OtherView: View {
                         ForEach(section.redirections, id: \.self) { redirection in
                             NavigationLink(redirection.name, value: redirection)
                         }
+                    }
+                }
+
+                if let appVersion {
+                    Section {
+                        HStack {
+                            Text("App Version")
+
+                            Spacer()
+
+                            HStack(spacing: 2) {
+                                Text(appVersion)
+                                if let buildNumber {
+                                    Text("(\(buildNumber))")
+                                }
+                            }
+                            .bold()
+                        }
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                     }
                 }
             }
