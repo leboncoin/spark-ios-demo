@@ -152,7 +152,7 @@ private extension SparkUITab {
         let badge = SparkUIBadge(
             theme: self.theme
         )
-        badge.intent = .basic
+        badge.intent = .main
         badge.value = item.badgeValue
         badge.isBorder = false
         badge.size = configuration.tabSize.demoBadgeSize

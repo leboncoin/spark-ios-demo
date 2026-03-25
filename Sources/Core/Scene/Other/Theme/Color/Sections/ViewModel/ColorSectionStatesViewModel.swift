@@ -27,8 +27,6 @@ struct ColorSectionStatesViewModel: ColorSectionViewModelable {
                 .init(name: "accentPressed", colorToken: color.accentPressed),
                 .init(name: "accentVariantPressed", colorToken: color.accentVariantPressed),
                 .init(name: "accentContainerPressed", colorToken: color.accentContainerPressed),
-                .init(name: "basicPressed", colorToken: color.basicPressed),
-                .init(name: "basicContainerPressed", colorToken: color.basicContainerPressed),
                 .init(name: "surfacePressed", colorToken: color.surfacePressed),
                 .init(name: "surfaceInversePressed", colorToken: color.surfaceInversePressed),
                 .init(name: "successPressed", colorToken: color.successPressed),

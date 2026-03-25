@@ -57,7 +57,7 @@ struct TabCodeSyntaxes {
             ) {
                 SparkBadge(value: 5)
                     .sparkTheme(theme)
-                    .sparkBadgeIntent(.basic)
+                    .sparkBadgeIntent(.support)
                     .sparkBadgeSize(.medium)
                     .sparkBadgeIsBorder(false)
             }
@@ -75,7 +75,7 @@ struct TabCodeSyntaxes {
         }
         .disabled(false)
         .sparkTheme(theme)
-        .sparkTabIntent(.basic)
+        .sparkTabIntent(.support)
         .sparkTabSize(.medium)
         .sparkTabApportionsSegmentWidthsByContent(true)
         """

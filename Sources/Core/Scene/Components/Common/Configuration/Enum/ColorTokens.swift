@@ -14,8 +14,6 @@ enum ColorTokens: String, CaseIterable {
     case accentVariant
     case alert
     case alertContainer
-    case basic
-    case basicContainer
     case error
     case errorContainer
     case info
@@ -52,8 +50,6 @@ enum ColorTokens: String, CaseIterable {
         case .accentVariant: colors.accent.accentVariant
         case .alert: colors.feedback.alert
         case .alertContainer: colors.feedback.alertContainer
-        case .basic: colors.basic.basic
-        case .basicContainer: colors.basic.basicContainer
         case .error: colors.feedback.error
         case .errorContainer: colors.feedback.errorContainer
         case .info: colors.feedback.info

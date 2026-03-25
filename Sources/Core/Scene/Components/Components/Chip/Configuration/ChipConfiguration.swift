@@ -79,7 +79,6 @@ private extension ChipIntent {
         switch self {
         case .accent: .accent
         case .alert: .alert
-        case .basic: .basic
         case .danger: .danger
         case .info: .info
         case .main: .main

@@ -89,7 +89,7 @@ struct TabImplementationView: ComponentImplementationViewable {
     private func badge(at item: TabConfiguration.Item, configuration: TabConfiguration) -> some View {
         SparkBadge(value: item.badgeValue)
             .sparkTheme(configuration.theme.value)
-            .sparkBadgeIntent(.basic)
+            .sparkBadgeIntent(.support)
             .sparkBadgeSize(configuration.tabSize.demoBadgeSize)
             .sparkBadgeIsBorder(false)
     }

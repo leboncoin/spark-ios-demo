@@ -68,7 +68,7 @@ extension MicroAnimationConfiguration {
             let icon: Iconography = .bellOutline
 
             self.iconConfiguration.icon = icon
-            self.iconConfiguration.intent = .basic
+            self.iconConfiguration.intent = .main
             self.iconConfiguration.size = .medium
 
             self.iconButtonConfiguration.contentNormal.icon = icon
