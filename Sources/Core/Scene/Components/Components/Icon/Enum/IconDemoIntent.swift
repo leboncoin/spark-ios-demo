@@ -9,7 +9,6 @@
 enum IconDemoIntent: CaseIterable {
     case accent
     case alert
-    case basic
     case error
     case info
     case main
@@ -20,12 +19,10 @@ enum IconDemoIntent: CaseIterable {
 
     // MARK: - Properties
 
-    /// The default case. Equals to **.basic**.
     static let `default`: Self = {
         switch IconIntent.default {
         case .accent: .accent
         case .alert: .alert
-        case .basic: .basic
         case .error: .error
         case .info: .info
         case .main: .main
@@ -42,7 +39,6 @@ enum IconDemoIntent: CaseIterable {
         switch self {
         case .accent: .accent
         case .alert: .alert
-        case .basic: .basic
         case .error: .error
         case .info: .info
         case .main: .main

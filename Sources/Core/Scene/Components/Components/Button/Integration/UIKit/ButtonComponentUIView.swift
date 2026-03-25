@@ -39,6 +39,7 @@ final class ButtonComponentUIViewMaker: ComponentUIViewMaker {
             intent: configuration.intent,
             variant: configuration.variant,
             size: configuration.size,
+            shape: .pill,
             alignment: configuration.alignment
         )
         self.updateCommonProperties(componentView, for: configuration)

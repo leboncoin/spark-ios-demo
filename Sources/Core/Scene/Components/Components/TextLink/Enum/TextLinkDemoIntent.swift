@@ -11,7 +11,6 @@ import Foundation
 enum TextLinkDemoIntent: CaseIterable {
     case accent
     case alert
-    case basic
     case danger
     case info
     case main
@@ -22,12 +21,10 @@ enum TextLinkDemoIntent: CaseIterable {
 
     // MARK: - Properties
 
-    /// The default case. Equals to **.basic**.
     static let `default`: Self = {
         switch TextLinkIntent.default {
         case .accent: .accent
         case .alert: .alert
-        case .basic: .basic
         case .danger: .danger
         case .info: .info
         case .main: .main
@@ -45,7 +42,6 @@ enum TextLinkDemoIntent: CaseIterable {
         switch self {
         case .accent: .accent
         case .alert: .alert
-        case .basic: .basic
         case .danger: .danger
         case .info: .info
         case .main: .main

@@ -38,7 +38,8 @@ final class IconButtonComponentUIViewMaker: ComponentUIViewMaker {
             theme: configuration.theme.value,
             intent: configuration.intent,
             variant: configuration.variant,
-            size: configuration.size
+            size: configuration.size,
+            shape: .pill
         )
         self.updateCommonProperties(componentView, for: configuration)
 

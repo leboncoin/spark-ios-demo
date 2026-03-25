@@ -19,7 +19,6 @@ enum SegmentedGaugeDemoType: CaseIterable {
 
     // MARK: - Properties
 
-    /// The default case. Equals to **.basic**.
     static let `default`: Self = {
         switch SegmentedGaugeType.default {
         case .veryHigh: .veryHigh

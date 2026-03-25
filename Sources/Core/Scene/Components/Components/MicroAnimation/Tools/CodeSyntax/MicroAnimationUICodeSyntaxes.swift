@@ -25,7 +25,7 @@ struct MicroAnimationUICodeSyntaxes {
         """
         let iconView = SparkUIIcon(
             icon: .bellOutline,
-            intent: .basic,
+            intent: .support,
             size: .medium
         )
 
@@ -42,7 +42,7 @@ struct MicroAnimationUICodeSyntaxes {
         // Create animated components
         let iconView = SparkUIIcon(
             icon: .bellOutline,
-            intent: .basic,
+            intent: .support,
             size: .medium
         )
 

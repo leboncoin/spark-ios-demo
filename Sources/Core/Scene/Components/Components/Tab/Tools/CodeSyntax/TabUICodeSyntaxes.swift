@@ -39,7 +39,7 @@ struct TabUICodeSyntaxes {
             titles: ["Home", "Messages", "Profile"]
         )
         tab.selectedSegmentIndex = 0
-        tab.intent = .basic
+        tab.intent = .main
         tab.size = .medium
         tab.apportionsSegmentWidthsByContent = false
         tab.isEnabled = true
@@ -51,7 +51,7 @@ struct TabUICodeSyntaxes {
 
         // Add badge to first segment
         let badge = SparkUIBadge(theme: theme)
-        badge.intent = .basic
+        badge.intent = .main
         badge.value = 5
         badge.isBorder = false
         badge.size = .medium

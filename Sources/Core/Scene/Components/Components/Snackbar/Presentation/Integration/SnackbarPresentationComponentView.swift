@@ -49,7 +49,7 @@ struct SnackbarPresentationImplementationView: ComponentImplementationViewable {
             snackbar: {
                 SnackbarView(
                     theme: DemoThemes.shared.mainTheme.value,
-                    intent: .basic,
+                    intent: .support,
                     image: .init(icon: .infoOutline)) {
                         Text("This is a snackbar")
                     } button: { buttonView in

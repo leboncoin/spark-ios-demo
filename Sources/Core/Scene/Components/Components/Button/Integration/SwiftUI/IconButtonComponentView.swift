@@ -30,6 +30,7 @@ struct IconButtonImplementationView: ComponentImplementationViewable {
             intent: self.configurationWrapped.intent,
             variant: self.configurationWrapped.variant,
             size: self.configurationWrapped.size,
+            shape: .pill,
             action: {
                 if self.configurationWrapped.swiftUIIsToggle {
                     self.isSelected.toggle()
