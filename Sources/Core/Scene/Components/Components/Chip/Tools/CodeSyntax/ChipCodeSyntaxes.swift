@@ -14,40 +14,121 @@ struct ChipCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Icon Only", code: Self.iconOnly),
+            .init(title: "Text Only", code: Self.textOnly),
+            .init(title: "Text + Icon", code: Self.textIcon),
+            .init(title: "Custom Label", code: Self.customLabel),
+            .init(title: "With Extra Content", code: Self.withExtraContent),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var iconOnly: String {
         """
         SparkChip(
-            "Label",
-            icon: .init(icon: .spark),
-            action: { }
+            icon: Image(icon: .spark),
+            action: {
+                // Your action
+            }
         )
+        .sparkTheme(theme)
         .sparkChipIntent(.main)
         .sparkChipVariant(.filled)
-        .sparkTheme(theme)
+        .accessibilityLabel("Chip icon")
         """
     }
 
-    private static var full: String {
+    private static var textOnly: String {
         """
         SparkChip(
-            "Label",
-            icon: .init(icon: .spark),
-            action: { }
+            "My Chip",
+            action: {
+                // Your action
+            }
         )
+        .sparkTheme(theme)
+        .sparkChipIntent(.main)
+        .sparkChipVariant(.filled)
+        """
+    }
+
+    private static var textIcon: String {
+        """
+        SparkChip(
+            "My Chip",
+            icon: Image(icon: .spark),
+            action: {
+                // Your action
+            }
+        )
+        .sparkTheme(theme)
+        .sparkChipIntent(.support)
+        .sparkChipVariant(.outlined)
+        .sparkChipAlignment(.trailingIcon)
+        """
+    }
+
+    private static var customLabel: String {
+        """
+        SparkChip(
+            icon: Image(icon: .spark),
+            action: {
+                // Your action
+            },
+            label: {
+                VStack(alignment: .leading) {
+                    Text("Primary")
+                    Text("Secondary")
+                        .font(.caption)
+                }
+            }
+        )
+        .sparkTheme(theme)
+        .sparkChipIntent(.main)
+        .sparkChipVariant(.filled)
+        """
+    }
+
+    private static var withExtraContent: String {
+        """
+        SparkChip(
+            "Notifications",
+            icon: Image(icon: .spark),
+            action: {
+                // Your action
+            },
+            extraContent: {
+                Text("99")
+                    .font(.caption)
+                    .padding(4)
+                    .background(.red)
+                    .cornerRadius(8)
+            }
+        )
+        .sparkTheme(theme)
+        .sparkChipIntent(.main)
+        .sparkChipVariant(.filled)
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        SparkChip(
+            "Full Configuration",
+            icon: Image(icon: .spark),
+            action: {
+                // Your action
+            }
+        )
+        .sparkTheme(theme)
         .sparkChipIntent(.main)
         .sparkChipVariant(.filled)
         .sparkChipAlignment(.leadingIcon)
         .sparkIsSelected(false)
         .disabled(false)
-        .accessibilityLabel("Chip label")
-        .sparkTheme(theme)
+        .accessibilityLabel("Full configuration chip")
         """
     }
 }

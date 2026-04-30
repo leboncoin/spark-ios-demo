@@ -17,6 +17,6 @@ struct TextLinkExtraTools: ComponentExtraTools {
 
     // MARK: - Code Syntax
 
-    let swiftUICodeSyntaxes: [CodeSyntax] = TextLinkCodeSyntax.content
+    let swiftUICodeSyntaxes: [CodeSyntax] = TextLinkCodeSyntaxes.content
     let uiKitCodeSyntaxes: [CodeSyntax] = TextLinkUICodeSyntaxes.content
 }

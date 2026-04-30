@@ -15,7 +15,10 @@ struct ToggleCodeSyntaxes {
     static var content: [CodeSyntax] = {
         return [
             .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "With Text (LocalizedStringKey)", code: Self.withTextKey),
+            .init(title: "With Text (String)", code: Self.withText),
+            .init(title: "With Custom Label", code: Self.withCustomLabel),
+            .init(title: "Full Configuration", code: Self.full)
         ]
     }()
 
@@ -23,20 +26,54 @@ struct ToggleCodeSyntaxes {
 
     private static var simple: String {
         """
+        SparkToggle(isOn: $isOn)
+            .sparkTheme(theme)
+            .accessibilityLabel("Toggle")
+        """
+    }
+
+    private static var withTextKey: String {
+        """
         SparkToggle(
-            theme: theme,
+            "Enable notifications",
             isOn: $isOn
         )
+        .sparkTheme(theme)
+        """
+    }
+
+    private static var withText: String {
+        """
+        SparkToggle(
+            "Enable notifications",
+            isOn: $isOn
+        )
+        .sparkTheme(theme)
+        """
+    }
+
+    private static var withCustomLabel: String {
+        """
+        SparkToggle(
+            isOn: $isOn,
+            label: {
+                VStack(alignment: .leading) {
+                    Text("Settings")
+                    Text("Enable all notifications")
+                }
+            }
+        )
+        .sparkTheme(theme)
         """
     }
 
     private static var full: String {
         """
         SparkToggle(
-            "Label",
-            theme: theme,
+            "Enable notifications",
             isOn: $isOn
         )
+        .sparkTheme(theme)
         .disabled(false)
         .accessibilityLabel("Toggle label")
         """

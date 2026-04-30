@@ -14,35 +14,29 @@ struct SpinnerUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Default", code: Self.defaultExample),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var defaultExample: String {
         """
-        let spinner = SpinnerUIView(
-            theme: theme,
-            intent: .main,
-            spinnerSize: .medium
-        )
+        let spinner = SparkUISpinner(theme: theme)
+        spinner.intent = .main
+        spinner.size = .small
         """
     }
 
-    private static var full: String {
+    private static var fullConfiguration: String {
         """
-        let spinner = SpinnerUIView(
-            theme: theme,
-            intent: .main,
-            spinnerSize: .medium
-        )
+        let spinner = SparkUISpinner(theme: theme)
         spinner.theme = theme
-        spinner.intent = .success
-        spinner.spinnerSize = .small
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.accessibilityIdentifier = "my-spinner"
+        spinner.intent = .support
+        spinner.size = .medium
+        spinner.isAccessibilityElement = true
+        spinner.accessibilityLabel = "Loading"
         """
     }
 }

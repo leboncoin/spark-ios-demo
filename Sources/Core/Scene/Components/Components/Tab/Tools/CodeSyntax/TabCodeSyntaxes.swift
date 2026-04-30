@@ -14,70 +14,85 @@ struct TabCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Text Only", code: Self.textOnly),
+            .init(title: "Icons Only", code: Self.iconsOnly),
+            .init(title: "With Extra View", code: Self.withExtraView),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var textOnly: String {
         """
-        @State private var selectedTab: Int = 0
+        @State private var selection = 1
 
-        SparkTab(selection: $selectedTab) {
-            SparkTabItem(
-                tag: 1,
-                text: "Tab 1"
-            )
-
-            SparkTabItem(
-                tag: 2,
-                text: "Tab 2"
-            )
-
-            SparkTabItem(
-                tag: 3,
-                text: "Tab 3"
-            )
+        SparkTab(selection: $selection) {
+            SparkTabItem(tag: 1, text: "First")
+            SparkTabItem(tag: 2, text: "Second")
+            SparkTabItem(tag: 3, text: "Third")
         }
         .sparkTheme(theme)
+        .sparkTabIntent(.main)
+        .sparkTabSize(.medium)
+        .sparkTabApportionsSegmentWidthsByContent(true)
         """
     }
 
-    private static var full: String {
+    private static var iconsOnly: String {
         """
-        @State private var selectedTab: Int = 0
+        @State private var selection = 1
 
-        SparkTab(selection: $selectedTab) {
-            SparkTabItem(
-                tag: 1,
-                text: "Home",
-                icon: Image(systemName: "house")
-            ) {
+        SparkTab(selection: $selection) {
+            SparkTabItem(tag: 1, icon: Image(systemName: "house"))
+            SparkTabItem(tag: 2, icon: Image(systemName: "star"))
+            SparkTabItem(tag: 3, icon: Image(systemName: "person"))
+        }
+        .sparkTheme(theme)
+        .sparkTabIntent(.main)
+        .sparkTabSize(.medium)
+        .sparkTabApportionsSegmentWidthsByContent(true)
+        """
+    }
+
+    private static var withExtraView: String {
+        """
+        @State private var selection = 1
+
+        SparkTab(selection: $selection) {
+            SparkTabItem(tag: 1, text: "First", icon: Image(systemName: "house")) {
+                Text("99+")
+            }
+            SparkTabItem(tag: 2, text: "Second", icon: Image(systemName: "star"))
+            SparkTabItem(tag: 3, text: "Third", icon: Image(systemName: "person"))
+        }
+        .sparkTheme(theme)
+        .sparkTabIntent(.main)
+        .sparkTabSize(.medium)
+        .sparkTabApportionsSegmentWidthsByContent(true)
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        @State private var selection = 1
+
+        SparkTab(selection: $selection) {
+            SparkTabItem(tag: 1, text: "Home", icon: Image(systemName: "house")) {
                 SparkBadge(value: 5)
                     .sparkTheme(theme)
                     .sparkBadgeIntent(.support)
                     .sparkBadgeSize(.medium)
                     .sparkBadgeIsBorder(false)
             }
-
-            SparkTabItem(
-                tag: 2,
-                text: "Messages",
-                icon: Image(systemName: "message")
-            )
-
-            SparkTabItem(
-                tag: 3,
-                icon: Image(systemName: "person")
-            )
+            SparkTabItem(tag: 2, text: "Messages", icon: Image(systemName: "message"))
+            SparkTabItem(tag: 3, text: "Profile", icon: Image(systemName: "person"))
         }
-        .disabled(false)
         .sparkTheme(theme)
-        .sparkTabIntent(.support)
+        .sparkTabIntent(.main)
         .sparkTabSize(.medium)
         .sparkTabApportionsSegmentWidthsByContent(true)
+        .disabled(false)
         """
     }
 }

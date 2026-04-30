@@ -22,9 +22,9 @@ extension ComponentsView {
         case chip
         case cornerRadius
         case divider
+        case fileUpload
         case formField
         case icon
-        case iconButton
         case microAnimation
         case popover
         case progressBar
@@ -64,9 +64,9 @@ extension ComponentsView {
             case .chip: .dataInput
             case .cornerRadius: .style
             case .divider: .dataDisplay
+            case .fileUpload: .dataInput
             case .formField: .dataInput
             case .icon: .dataDisplay
-            case .iconButton: .action
             case .microAnimation: .other
             case .popover: .overlays
             case .progressBar: .indicator
@@ -106,9 +106,9 @@ extension ComponentsView {
             case .chip: .available
             case .cornerRadius: .available
             case .divider: .available
+            case .fileUpload: .available
             case .formField: .available
             case .icon: .available
-            case .iconButton: .available
             case .microAnimation: .none
             case .popover: .unavailable
             case .progressBar: .available
@@ -144,9 +144,9 @@ extension ComponentsView {
             case .checkboxGroup: .init(.checkbox)
             case .chip: .init(.chip)
             case .divider: .init(.divider)
-            case .formField: .init(.textField)
+            case .formField: .init(.formField)
+            case .fileUpload: .init(.fileUpload)
             case .icon: .init(.icon)
-            case .iconButton: .init(.iconButton)
             case .popover: .init(.popover)
             case .progressBar: .init(.progressBar)
             case .progressBarIndeterminate: .init(.progressBar)
@@ -215,9 +215,9 @@ extension ComponentsView {
             case .chip: ChipComponentView()
             case .cornerRadius: CornerRadiusComponentView()
             case .divider: DividerComponentView()
+            case .fileUpload: FileUploadComponentsView()
             case .formField: FormFieldComponentView()
             case .icon: IconComponentView()
-            case .iconButton: IconButtonComponentView()
             case .microAnimation: MicroAnimationComponentView()
             case .popover: PopoverComponentView()
             case .progressBar: ProgressBarComponentView()
@@ -259,7 +259,6 @@ extension ComponentsView {
             case .divider: DividerComponentUIViewController()
             case .formField: FormFieldComponentUIViewController()
             case .icon: IconComponentUIViewController()
-            case .iconButton: IconButtonComponentUIViewController()
             case .microAnimation: MicroAnimationComponentUIViewController()
             case .popover: PopoverComponentUIViewController()
             case .progressBar: ProgressBarComponentUIViewController()
@@ -298,7 +297,8 @@ extension ComponentsView {
             switch framework {
             case .uiKit:
                 values = self.allCases.filter {
-                    $0 != .border
+                    $0 != .border &&
+                    $0 != .fileUpload
                 }
             case .swiftUI:
                 values = self.allCases.filter {

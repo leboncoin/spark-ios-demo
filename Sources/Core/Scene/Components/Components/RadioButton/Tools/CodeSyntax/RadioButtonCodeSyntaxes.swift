@@ -14,32 +14,38 @@ struct RadioButtonCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Default", code: Self.defaultExample),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var defaultExample: String {
         """
-        SparkRadioButton(
-            "Label",
+        @State var selectedID: Int = 1
+
+        RadioButtonView(
             theme: theme,
-            isSelected: $isSelected
+            id: 1,
+            label: "Label 1",
+            selectedID: $selectedID
         )
-        .sparkRadioButtonIntent(.main)
         """
     }
 
-    private static var full: String {
+    private static var fullConfiguration: String {
         """
-        SparkRadioButton(
-            "Label",
+        @State var selectedID: Int = 1
+
+        RadioButtonView(
             theme: theme,
-            isSelected: $isSelected
+            intent: .support,
+            id: 1,
+            label: "Label 1",
+            selectedID: $selectedID,
+            labelAlignment: .trailing
         )
-        .sparkRadioButtonIntent(.main)
         .disabled(false)
         .accessibilityLabel("Radio button label")
         """

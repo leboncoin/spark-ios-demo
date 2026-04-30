@@ -8,20 +8,21 @@
 
 import Foundation
 
-struct TextLinkCodeSyntax {
+struct TextLinkCodeSyntaxes {
 
     // MARK: - Properties
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Text Only", code: Self.textOnly),
+            .init(title: "Text + Image", code: Self.textImage),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var textOnly: String {
         """
         SparkTextLink(
             "My TextLink",
@@ -29,20 +30,35 @@ struct TextLinkCodeSyntax {
                 // Your action
             }
         )
-        .sparkTheme(MyTheme.shared)
+        .sparkTheme(theme)
         """
     }
 
-    private static var full: String {
+    private static var textImage: String {
         """
         SparkTextLink(
             "My TextLink",
-            image: .init(icon: .spark(.arrowHorizontalLeft)),
+            image: Image(systemName: "pencil"),
             action: {
                 // Your action
             }
         )
-        .sparkTheme(MyTheme.shared)
+        .sparkTheme(theme)
+        .sparkTextLinkIntent(.main)
+        .sparkTextLinkAlignment(.leadingImage)
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        SparkTextLink(
+            "My TextLink",
+            image: Image(systemName: "pencil"),
+            action: {
+                // Your action
+            }
+        )
+        .sparkTheme(theme)
         .sparkTextLinkAlignment(.leadingImage)
         .sparkTextLinkHighlightRange(NSRange(location: 0, length: 2))
         .sparkTextLinkIntent(.main)
@@ -50,6 +66,7 @@ struct TextLinkCodeSyntax {
         .sparkTextLinkVariant(.underline)
         .multilineTextAlignment(.leading)
         .lineLimit(2)
+        .accessibilityLabel("My custom label")
         """
     }
 }

@@ -14,50 +14,93 @@ struct TabUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Titles Only", code: Self.titlesOnly),
+            .init(title: "Images Only", code: Self.imagesOnly),
+            .init(title: "With Segments", code: Self.withSegments),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var titlesOnly: String {
         """
-        let tab = SparkUITab(
-            theme: theme,
-            titles: ["Tab 1", "Tab 2", "Tab 3"]
-        )
+        let tab = SparkUITab(theme: theme, titles: ["First", "Second", "Third"])
         tab.selectedSegmentIndex = 0
-        tab.addAction(UIAction(handler: { _ in }), for: .valueChanged)
+        tab.intent = .main
+        tab.size = .medium
+        tab.apportionsSegmentWidthsByContent = false
+        tab.addAction(UIAction { _ in
+            // Your action
+        }, for: .valueChanged)
         """
     }
 
-    private static var full: String {
+    private static var imagesOnly: String {
         """
-        let tab = SparkUITab(
-            theme: theme,
-            titles: ["Home", "Messages", "Profile"]
-        )
+        let images = [
+            UIImage(systemName: "house")!,
+            UIImage(systemName: "star")!,
+            UIImage(systemName: "person")!
+        ]
+        let tab = SparkUITab(theme: theme, images: images)
+        tab.selectedSegmentIndex = 0
+        tab.intent = .main
+        tab.size = .medium
+        tab.addAction(UIAction { _ in
+            // Your action
+        }, for: .valueChanged)
+        """
+    }
+
+    private static var withSegments: String {
+        """
+        let segments = [
+            TabUISegment(title: "First", image: UIImage(systemName: "house")!),
+            TabUISegment(title: "Second", image: UIImage(systemName: "star")!),
+            TabUISegment(title: "Third", image: UIImage(systemName: "person")!)
+        ]
+        let tab = SparkUITab(theme: theme, segments: segments)
+        tab.selectedSegmentIndex = 0
+        tab.intent = .main
+        tab.size = .medium
+        tab.apportionsSegmentWidthsByContent = true
+        tab.addAction(UIAction { _ in
+            // Your action
+        }, for: .valueChanged)
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        let segments = [
+            TabUISegment(title: "Home", image: UIImage(systemName: "house")!),
+            TabUISegment(title: "Messages", image: UIImage(systemName: "message")!),
+            TabUISegment(title: "Profile", image: UIImage(systemName: "person")!)
+        ]
+        let tab = SparkUITab(theme: theme, segments: segments)
         tab.selectedSegmentIndex = 0
         tab.intent = .main
         tab.size = .medium
         tab.apportionsSegmentWidthsByContent = false
         tab.isEnabled = true
 
-        // Add images to segments
+        // Set images
         tab.setImage(UIImage(systemName: "house"), forSegmentAt: 0)
         tab.setImage(UIImage(systemName: "message"), forSegmentAt: 1)
         tab.setImage(UIImage(systemName: "person"), forSegmentAt: 2)
 
         // Add badge to first segment
         let badge = SparkUIBadge(theme: theme)
-        badge.intent = .main
+        badge.intent = .support
         badge.value = 5
         badge.isBorder = false
         badge.size = .medium
         tab.setExtraView(badge, forSegmentAt: 0)
 
-        tab.addAction(UIAction(handler: { _ in }), for: .valueChanged)
+        tab.addAction(UIAction { _ in
+            // Your action
+        }, for: .valueChanged)
         """
     }
 }

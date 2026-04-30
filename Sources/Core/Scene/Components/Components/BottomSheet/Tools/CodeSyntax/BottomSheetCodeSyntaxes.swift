@@ -14,14 +14,16 @@ struct BottomSheetCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Simple with Medium Detent", code: Self.simpleWithMediumDetent),
+            .init(title: "Multiple Detents", code: Self.multipleDetents),
+            .init(title: "With ScrollView", code: Self.withScrollView),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var simpleWithMediumDetent: String {
         """
         import SwiftUI
 
@@ -55,13 +57,46 @@ struct BottomSheetCodeSyntaxes {
         """
     }
 
-    private static var full: String {
+    private static var multipleDetents: String {
         """
         import SwiftUI
 
         struct ContentView: View {
             @State private var isPresented = false
-            @State private var height: CGFloat = 100
+
+            var body: some View {
+                Button("Show Bottom Sheet") {
+                    isPresented = true
+                }
+                .sheet(isPresented: $isPresented) {
+                    VStack(spacing: 16) {
+                        Text("Bottom Sheet")
+                            .font(.title)
+
+                        Text("This sheet supports multiple detents.")
+                            .font(.body)
+                            .multilineTextAlignment(.center)
+                            .padding()
+
+                        Button("Dismiss") {
+                            isPresented = false
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                    .padding(.top, 24)
+                    .presentationDetents([.medium, .large])
+                }
+            }
+        }
+        """
+    }
+
+    private static var withScrollView: String {
+        """
+        import SwiftUI
+
+        struct ContentView: View {
+            @State private var isPresented = false
 
             var body: some View {
                 Button("Show Bottom Sheet") {
@@ -69,44 +104,75 @@ struct BottomSheetCodeSyntaxes {
                 }
                 .buttonStyle(.borderedProminent)
                 .sheet(isPresented: $isPresented) {
-                    // With ScrollView for long content
                     ScrollView {
-                        presentedView()
+                        VStack(spacing: 24) {
+                            VStack(spacing: 16) {
+                                Text("Bottom Sheet")
+                                    .font(.title)
+
+                                Text("With ScrollView")
+                                    .font(.title3)
+                            }
+
+                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                                .font(.body)
+                                .multilineTextAlignment(.center)
+                                .padding()
+
+                            Button("Dismiss") {
+                                isPresented = false
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                        .padding(.top, 24)
                     }
                     .scrollIndicators(.visible)
                     .presentationDetents([.medium, .large])
-
-                    // OR with dynamic height for short content
-                    // presentedView()
-                    //     .readHeight($height)
-                    //     .presentationDetents([.height(height), .medium])
                 }
             }
+        }
+        """
+    }
 
-            private func presentedView() -> some View {
-                VStack(spacing: 24) {
-                    VStack(spacing: 16) {
-                        Text("Bottom Sheet")
-                            .font(.title)
+    private static var fullConfiguration: String {
+        """
+        import SwiftUI
 
-                        Text("Content Type Description")
-                            .font(.title3)
-                    }
+        struct ContentView: View {
+            @State private var isPresented = false
+            @State private var selectedDetent: PresentationDetent = .medium
 
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-                        .font(.body)
-                        .multilineTextAlignment(.center)
-                        .padding()
-
-                    Button {
-                        isPresented = false
-                    } label: {
-                        Text("Dismiss")
-                    }
-                    .buttonStyle(.borderedProminent)
+            var body: some View {
+                Button("Show Bottom Sheet") {
+                    isPresented = true
                 }
-                .padding(.top, 24)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .buttonStyle(.borderedProminent)
+                .sheet(isPresented: $isPresented) {
+                    ScrollView {
+                        VStack(spacing: 24) {
+                            Text("Bottom Sheet")
+                                .font(.title)
+
+                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                                .font(.body)
+                                .multilineTextAlignment(.center)
+                                .padding()
+
+                            Button("Dismiss") {
+                                isPresented = false
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                        .padding(.top, 24)
+                        .frame(maxWidth: .infinity)
+                    }
+                    .scrollIndicators(.visible)
+                    .presentationDetents([.medium, .large], selection: $selectedDetent)
+                    .presentationDragIndicator(.visible)
+                    .presentationCornerRadius(20)
+                    .presentationBackgroundInteraction(.enabled)
+                    .interactiveDismissDisabled(false)
+                }
             }
         }
         """

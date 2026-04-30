@@ -39,7 +39,6 @@ struct TagImplementationView: ComponentImplementationViewable {
            let text = self.configurationWrapped.text.nilIfEmpty,
            self.configurationWrapped.swiftUIIsCustomContent {
             SparkTag(
-                theme: self.configurationWrapped.theme.value,
                 icon: .init(icon: icon),
                 label: {
                     Group {
@@ -54,7 +53,6 @@ struct TagImplementationView: ComponentImplementationViewable {
         } else if let text = self.configurationWrapped.text.nilIfEmpty,
                   self.configurationWrapped.swiftUIIsCustomContent {
             SparkTag(
-                theme: self.configurationWrapped.theme.value,
                 label: {
                     Group {
                         Text(text + " ") +
@@ -69,20 +67,17 @@ struct TagImplementationView: ComponentImplementationViewable {
                   let text = self.configurationWrapped.text.nilIfEmpty {
             SparkTag(
                 text,
-                icon: .init(icon: icon),
-                theme: self.configurationWrapped.theme.value
+                icon: .init(icon: icon)
             )
 
         } else if let icon = self.configurationWrapped.icon {
             SparkTag(
-                theme: self.configurationWrapped.theme.value,
                 icon: .init(icon: icon)
             )
 
         } else {
             SparkTag(
-                self.configurationWrapped.text.nilIfEmpty ?? "My Tag",
-                theme: self.configurationWrapped.theme.value
+                self.configurationWrapped.text.nilIfEmpty ?? "My Tag"
             )
         }
     }

@@ -106,15 +106,15 @@ final class MicroAnimationContentUIView: UIView {
         )
     }()
 
-    private lazy var iconButton: IconButtonUIView = {
-        let maker = IconButtonComponentUIViewMaker()
+    private lazy var iconButton: SparkUIButton = {
+        let maker = ButtonComponentUIViewMaker()
 
         return maker.createComponentView(
             for: self.configuration.bellConfiguration.iconButtonConfiguration
         )
     }()
 
-    private lazy var button: ButtonUIView = {
+    private lazy var button: SparkUIButton = {
         let maker = ButtonComponentUIViewMaker()
 
         return maker.createComponentView(

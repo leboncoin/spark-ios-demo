@@ -14,14 +14,20 @@ struct CardUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Simple Content", code: Self.simpleContent),
+            .init(title: "With Action", code: Self.withAction),
+            .init(title: "With Backdrop", code: Self.withBackdrop),
+            .init(title: "Highlighted Style", code: Self.highlightedStyle),
+            .init(title: "No Padding", code: Self.noPadding),
+            .init(title: "Different Variants", code: Self.differentVariants),
+            .init(title: "TableView/CollectionView", code: Self.tableViewUsage),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var simpleContent: String {
         """
         let contentStackView = UIStackView()
         contentStackView.axis = .vertical
@@ -50,14 +56,176 @@ struct CardUICodeSyntaxes {
     }
 
     // swiftlint:disable no_debugging_method
-    private static var full: String {
+    private static var withAction: String {
+        """
+        let contentStackView = UIStackView()
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 12
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Welcome on Card"
+        titleLabel.font = theme.typography.headline2.uiFont
+        titleLabel.numberOfLines = 0
+
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = "Nam eu sapien finibus, auctor purusan varius, sagittis turpis."
+        descriptionLabel.font = theme.typography.body1.uiFont
+        descriptionLabel.numberOfLines = 0
+
+        contentStackView.addArrangedSubview(titleLabel)
+        contentStackView.addArrangedSubview(descriptionLabel)
+
+        let card = SparkUICard(
+            theme: theme,
+            contentView: contentStackView
+        )
+        card.intent = .support
+        card.variant = .filled
+        card.addAction(.init(handler: { _ in
+            // Your action
+        }), for: .touchUpInside)
+        """
+    }
+
+    private static var withBackdrop: String {
+        """
+        let contentStackView = UIStackView()
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 12
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Card with Backdrop"
+        titleLabel.font = theme.typography.headline2.uiFont
+        titleLabel.numberOfLines = 0
+
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = "The backdrop appears at the top of the card."
+        descriptionLabel.font = theme.typography.body1.uiFont
+        descriptionLabel.numberOfLines = 0
+
+        contentStackView.addArrangedSubview(titleLabel)
+        contentStackView.addArrangedSubview(descriptionLabel)
+
+        let card = SparkUICard(
+            theme: theme,
+            contentView: contentStackView
+        )
+        card.intent = .main
+        card.variant = .tinted
+        card.isBackdrop = true
+        """
+    }
+
+    private static var highlightedStyle: String {
+        """
+        let contentStackView = UIStackView()
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 12
+
+        let titleLabel = UILabel()
+        titleLabel.text = "Highlighted Card"
+        titleLabel.font = theme.typography.headline2.uiFont
+        titleLabel.numberOfLines = 0
+
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = "This card has a highlighted style with different corner radius."
+        descriptionLabel.font = theme.typography.body1.uiFont
+        descriptionLabel.numberOfLines = 0
+
+        contentStackView.addArrangedSubview(titleLabel)
+        contentStackView.addArrangedSubview(descriptionLabel)
+
+        let card = SparkUICard(
+            theme: theme,
+            contentView: contentStackView
+        )
+        card.intent = .success
+        card.variant = .outlined
+        card.isHighlightedStyle = true
+        """
+    }
+
+    private static var noPadding: String {
+        """
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "photo")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+
+        let card = SparkUICard(
+            theme: theme,
+            contentView: imageView
+        )
+        card.intent = .main
+        card.variant = .filled
+        card.isPadding = false
+        """
+    }
+
+    private static var differentVariants: String {
+        """
+        // Filled variant
+        let filledCard = SparkUICard(
+            theme: theme,
+            contentView: createContentView(text: "Filled variant")
+        )
+        filledCard.intent = .main
+        filledCard.variant = .filled
+
+        // Outlined variant
+        let outlinedCard = SparkUICard(
+            theme: theme,
+            contentView: createContentView(text: "Outlined variant")
+        )
+        outlinedCard.intent = .support
+        outlinedCard.variant = .outlined
+
+        // Tinted variant
+        let tintedCard = SparkUICard(
+            theme: theme,
+            contentView: createContentView(text: "Tinted variant")
+        )
+        tintedCard.intent = .success
+        tintedCard.variant = .tinted
+        """
+    }
+
+    private static var tableViewUsage: String {
+        """
+        // Inside UITableViewCell or UICollectionViewCell
+        let card = SparkUICard(
+            theme: theme,
+            contentView: contentStackView
+        )
+        card.intent = .main
+        card.variant = .filled
+        card.isUserInteractionEnabled = false
+
+        // In delegate methods:
+        func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+            if let cell = collectionView.cellForItem(at: indexPath) as? MyCell {
+                cell.card.isHighlighted = true
+            }
+        }
+
+        func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+            if let cell = collectionView.cellForItem(at: indexPath) as? MyCell {
+                cell.card.isHighlighted = false
+            }
+        }
+        """
+    }
+
+    private static var fullConfiguration: String {
         """
         // Create tag
         let tag = SparkUITag(
             theme: theme,
             intent: .main,
             variant: .filled,
-            text: "Tag"
+            text: "Featured"
         )
 
         // Create title with icon
@@ -73,7 +241,7 @@ struct CardUICodeSyntaxes {
         )
 
         let titleLabel = UILabel()
-        titleLabel.text = "Welcome on Card"
+        titleLabel.text = "Complete Card Example"
         titleLabel.font = theme.typography.headline2.uiFont
         titleLabel.numberOfLines = 0
 
@@ -92,18 +260,17 @@ struct CardUICodeSyntaxes {
             descriptionLabel
         ])
         textStackView.axis = .vertical
-        textStackView.spacing = Spacing.small.rawValue
+        textStackView.spacing = 8
 
         // Create button
-        let button = ButtonUIView(
-            theme: theme,
-            intent: .main,
-            variant: .filled,
-            size: .medium,
-            alignment: .leadingImage
-        )
-        button.addAction(UIAction(handler: { _ in print("Button tapped") }), for: .touchUpInside)
-        button.setTitle("Action", for: .normal)
+        let button = SparkUIButton(theme: theme)
+        button.setTitle("Take Action", for: .normal)
+        button.intent = .main
+        button.variant = .filled
+        button.size = .medium
+        button.addAction(UIAction { _ in
+            // Your action
+        }, for: .touchUpInside)
 
         // Create content stack view
         let contentStackView = UIStackView(arrangedSubviews: [
@@ -112,7 +279,7 @@ struct CardUICodeSyntaxes {
             button
         ])
         contentStackView.axis = .vertical
-        contentStackView.spacing = Spacing.medium.rawValue
+        contentStackView.spacing = 16
 
         // Create card
         let card = SparkUICard(
@@ -120,12 +287,15 @@ struct CardUICodeSyntaxes {
             contentView: contentStackView
         )
         card.intent = .main
-        card.variant = .filled
-        card.isBackdrop = false
-        card.isHighlightedStyle = false
+        card.variant = .tinted
+        card.isBackdrop = true
+        card.isHighlightedStyle = true
         card.isPadding = true
         card.isEnabled = true
-        card.accessibilityLabel = "Card label"
+        card.accessibilityLabel = "Complete card example"
+        card.addAction(.init(handler: { _ in
+            // Your action
+        }), for: .touchUpInside)
         """
     }
 }
