@@ -15,6 +15,7 @@ struct OtherView: View {
     private enum RedirectionSection: String, CaseIterable, Hashable {
         case theme
         case devMode
+        case featureToggles
 
         var redirections: [Redirection] {
             switch self {
@@ -23,6 +24,7 @@ struct OtherView: View {
                 .devModeSwiftUI,
                 .devModeUIKit
             ]
+            case .featureToggles: [.featureToggles]
             }
         }
     }
@@ -31,12 +33,14 @@ struct OtherView: View {
         case theme
         case devModeSwiftUI
         case devModeUIKit
+        case featureToggles
 
         var name: String {
             switch self {
             case .theme: "Theme"
             case .devModeSwiftUI: "SwiftUI"
             case .devModeUIKit: "UIKit"
+            case .featureToggles: "Feature Toggles"
             }
         }
     }
@@ -95,6 +99,9 @@ struct OtherView: View {
                 case .devModeUIKit:
                     DevModeUIViewRepresentable()
                         .navigationBarTitle(RedirectionSection.devMode.name)
+                case .featureToggles:
+                    FeatureTogglesView()
+                        .navigationBarTitle(RedirectionSection.featureToggles.name)
                 }
             })
             .navigationBarTitle("Other")

@@ -12,10 +12,11 @@ class ButtonConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: ButtonIntent = .main
-    var variant: ButtonVariant = .filled
-    var alignment: ButtonAlignment = .random
-    var size: ButtonSize = .medium
+    var intent: ButtonIntent = .default
+    var variant: ButtonVariant = .default
+    var alignment: ButtonAlignment = .default
+    var shape: ButtonShape = .default
+    var size: ButtonSize = .default
     var hasFeedback: Bool = false
     var isLoading: Bool = false
     var removeStyles: Bool = false

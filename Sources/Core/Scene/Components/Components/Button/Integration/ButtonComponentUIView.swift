@@ -55,6 +55,7 @@ final class ButtonComponentUIViewMaker: ComponentUIViewMaker {
     ) {
         componentView.intent = configuration.intent
         componentView.variant = configuration.variant
+        componentView.shape = configuration.shape
         componentView.size = configuration.size
         componentView.alignment = configuration.alignment
         componentView.contentVisibility = configuration.contentVisibility

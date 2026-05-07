@@ -71,6 +71,12 @@ struct ButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
         )
 
         EnumConfigurationItemView(
+            name: "shape",
+            values: ButtonShape.allCases,
+            selectedValue: self.configuration.shape
+        )
+
+        EnumConfigurationItemView(
             name: "size",
             values: ButtonSize.allCases,
             selectedValue: self.configuration.size

@@ -30,6 +30,7 @@ struct ButtonImplementationView: ComponentImplementationViewable {
         .sparkTheme(self.configurationWrapped.theme.value)
         .sparkButtonIntent(self.configurationWrapped.intent)
         .sparkButtonVariant(self.configurationWrapped.variant)
+        .sparkButtonShape(self.configurationWrapped.shape)
         .sparkButtonSize(self.configurationWrapped.size)
         .sparkButtonAlignment(self.configurationWrapped.alignment)
         .sparkButtonContentVisibility(self.configurationWrapped.contentVisibility)

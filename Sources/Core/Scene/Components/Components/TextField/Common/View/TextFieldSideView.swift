@@ -81,7 +81,8 @@ struct TextFieldSideView: View {
             variant: self.isAddon ? .tinted : .filled,
             size: self.isAddon ? .large : .small,
             shape: self.isAddon ? .square : .pill,
-            alignment: .leadingImage) {
+            alignment: .leadingImage
+        ) {
                 self.isShowingAlert = true
             }
             .title(self.side.rawValue, for: .normal)
