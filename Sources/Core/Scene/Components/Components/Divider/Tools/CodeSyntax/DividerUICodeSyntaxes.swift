@@ -14,28 +14,66 @@ struct DividerUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Without Text", code: Self.withoutText),
+            .init(title: "With Text", code: Self.withText),
+            .init(title: "With Attributed Text", code: Self.withAttributedText),
+            .init(title: "Vertical Divider", code: Self.verticalDivider),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var withoutText: String {
         """
         let divider = SparkUIDivider(theme: theme)
-        divider.intent = .default
+        divider.intent = .outline
+        divider.axis = .horizontal
         """
     }
 
-    private static var full: String {
+    private static var withText: String {
+        """
+        let divider = SparkUIDivider(theme: theme)
+        divider.text = "My text"
+        divider.intent = .outlineHigh
+        divider.axis = .horizontal
+        divider.alignment = .center
+        """
+    }
+
+    private static var withAttributedText: String {
+        """
+        let divider = SparkUIDivider(theme: theme)
+        let attributedText = NSAttributedString(
+            string: "Styled text",
+            attributes: [.foregroundColor: UIColor.blue]
+        )
+        divider.attributedText = attributedText
+        divider.intent = .outline
+        divider.axis = .horizontal
+        divider.alignment = .leading
+        """
+    }
+
+    private static var verticalDivider: String {
+        """
+        let divider = SparkUIDivider(theme: theme)
+        divider.text = "Section"
+        divider.intent = .outline
+        divider.axis = .vertical
+        divider.alignment = .top
+        """
+    }
+
+    private static var fullConfiguration: String {
         """
         let divider = SparkUIDivider(theme: theme)
         divider.alignment = .center
         divider.axis = .horizontal
-        divider.intent = .outline
-        divider.text = "My Divider"
-        divider.accessibilityLabel = "Divider label"
+        divider.intent = .outlineHigh
+        divider.text = "Section Divider"
+        divider.accessibilityLabel = "Custom divider label"
         """
     }
 }

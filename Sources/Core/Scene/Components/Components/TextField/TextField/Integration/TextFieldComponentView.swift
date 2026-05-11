@@ -6,6 +6,8 @@
 //  Copyright © 2025 Leboncoin. All rights reserved.
 //
 
+// TODO: Maj le theme hors de l'init
+
 import SwiftUI
 
 // MARK: - View

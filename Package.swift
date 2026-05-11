@@ -57,6 +57,11 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
+            url: "https://github.com/leboncoin/spark-ios-component-file-upload.git",
+            // path: "../spark-ios-component-file-upload"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
             url: "https://github.com/leboncoin/spark-ios-component-form-field.git",
             // path: "../spark-ios-component-form-field"
             /*version*/ "0.0.1"..."999.999.999"
@@ -176,6 +181,10 @@ let package = Package(
                 .product(
                     name: "SparkComponentDivider",
                     package: "spark-ios-component-divider"
+                ),
+                .product(
+                    name: "SparkComponentFileUpload",
+                    package: "spark-ios-component-file-upload"
                 ),
                 .product(
                     name: "SparkComponentFormField",

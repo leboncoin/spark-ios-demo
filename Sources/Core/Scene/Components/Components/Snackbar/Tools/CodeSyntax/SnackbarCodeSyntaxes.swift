@@ -14,14 +14,16 @@ struct SnackbarCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Without Button", code: Self.withoutButton),
+            .init(title: "With Button Configuration", code: Self.withButtonConfiguration),
+            .init(title: "With Button Builder", code: Self.withButtonBuilder),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var withoutButton: String {
         """
         SnackbarView(
             theme: theme,
@@ -33,7 +35,7 @@ struct SnackbarCodeSyntaxes {
         """
     }
 
-    private static var full: String {
+    private static var withButtonConfiguration: String {
         """
         SnackbarView(
             theme: theme,
@@ -41,17 +43,54 @@ struct SnackbarCodeSyntaxes {
             image: Image(icon: .checkFill)
         ) {
             Text("Operation completed successfully")
+        } button: { buttonConfig in
+            SparkButton("Dismiss") {
+                // Your action
+            }
+            .sparkTheme(theme)
+            .sparkButtonIntent(buttonConfig.intent)
+            .sparkButtonVariant(buttonConfig.variant)
+            .sparkButtonSize(buttonConfig.size)
+            .sparkButtonShape(buttonConfig.shape)
+        }
+        """
+    }
+
+    private static var withButtonBuilder: String {
+        """
+        SnackbarView(
+            theme: theme,
+            intent: .alert,
+            image: Image(icon: .alertDiamond)
+        ) {
+            Text("Action required")
+        } button: { buttonView in
+            buttonView
+                .title("Undo", for: .normal)
+        } action: {
+            // Handle button action
+        }
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        SnackbarView(
+            theme: theme,
+            intent: .success,
+            image: Image(icon: .checkFill)
+        ) {
+            Text("Your changes have been saved successfully")
         } button: { buttonView in
             buttonView
                 .title("Dismiss", for: .normal)
         } action: {
             // Handle button action
         }
+        .theme(theme)
+        .intent(.success)
         .variant(.tinted)
-        .type(.input)
-        .lineLimit(3)
-        .frame(maxWidth: 600)
-        .padding()
+        .type(.horizontal)
         """
     }
 }

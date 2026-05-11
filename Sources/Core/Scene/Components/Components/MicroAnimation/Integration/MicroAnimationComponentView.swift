@@ -75,7 +75,7 @@ struct MicroAnimationImplementationView: ComponentImplementationViewable {
                     self.isPlayed = false
                 }
 
-            IconButtonImplementationView(
+            ButtonImplementationView(
                 configuration: bellConfiguration.iconButtonConfiguration
             )
             .animate(

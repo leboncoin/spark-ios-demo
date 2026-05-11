@@ -14,14 +14,19 @@ struct CardCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Simple Content", code: Self.simpleContent),
+            .init(title: "With Action", code: Self.withAction),
+            .init(title: "With Backdrop", code: Self.withBackdrop),
+            .init(title: "Highlighted Style", code: Self.highlightedStyle),
+            .init(title: "No Padding", code: Self.noPadding),
+            .init(title: "Different Variants", code: Self.differentVariants),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var simpleContent: String {
         """
         SparkCard(
             content: {
@@ -31,7 +36,6 @@ struct CardCodeSyntaxes {
                     Text("This is the description of the card.")
                         .font(.body)
                 }
-                .padding(30)
             }
         )
         .sparkTheme(theme)
@@ -41,19 +45,123 @@ struct CardCodeSyntaxes {
     }
 
     // swiftlint:disable no_debugging_method
-    private static var full: String {
+    private static var withAction: String {
         """
         SparkCard(
             content: {
-                VStack(alignment: .leading, spacing: .medium) {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Image(systemName: "info.circle")
+                        Text("Welcome on Card")
+                    }
+
+                    Text("Nam eu sapien finibus, auctor purusan varius, sagittis turpis. Sed ipsum elit, lacinia id porta ut, bibendum at risus.")
+                        .multilineTextAlignment(.leading)
+                }
+            },
+            action: {
+                // Your action
+            }
+        )
+        .sparkTheme(theme)
+        .sparkCardIntent(.support)
+        .sparkCardVariant(.filled)
+        """
+    }
+
+    private static var withBackdrop: String {
+        """
+        SparkCard(
+            content: {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Card with Backdrop")
+                        .font(.headline)
+                    Text("The backdrop appears at the top of the card.")
+                        .font(.body)
+                }
+            }
+        )
+        .sparkTheme(theme)
+        .sparkCardIntent(.main)
+        .sparkCardVariant(.tinted)
+        .sparkCardIsBackdrop(true)
+        """
+    }
+
+    private static var highlightedStyle: String {
+        """
+        SparkCard(
+            content: {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Highlighted Card")
+                        .font(.headline)
+                    Text("This card has a highlighted style with different corner radius.")
+                        .font(.body)
+                }
+            }
+        )
+        .sparkTheme(theme)
+        .sparkCardIntent(.success)
+        .sparkCardVariant(.outlined)
+        .sparkCardIsHighlighted(true)
+        """
+    }
+
+    private static var noPadding: String {
+        """
+        SparkCard(
+            content: {
+                Image(systemName: "photo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 200)
+                    .clipped()
+            }
+        )
+        .sparkTheme(theme)
+        .sparkCardIntent(.main)
+        .sparkCardVariant(.filled)
+        .sparkCardIsPadding(false)
+        """
+    }
+
+    private static var differentVariants: String {
+        """
+        VStack(spacing: 16) {
+            // Filled variant
+            SparkCard(content: { Text("Filled variant") })
+                .sparkTheme(theme)
+                .sparkCardIntent(.main)
+                .sparkCardVariant(.filled)
+
+            // Outlined variant
+            SparkCard(content: { Text("Outlined variant") })
+                .sparkTheme(theme)
+                .sparkCardIntent(.support)
+                .sparkCardVariant(.outlined)
+
+            // Tinted variant
+            SparkCard(content: { Text("Tinted variant") })
+                .sparkTheme(theme)
+                .sparkCardIntent(.success)
+                .sparkCardVariant(.tinted)
+        }
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        SparkCard(
+            content: {
+                VStack(alignment: .leading, spacing: 16) {
                     SparkTag(
                         theme: theme,
                         intent: .main,
                         variant: .filled,
-                        text: "Tag"
+                        text: "Featured"
                     )
 
-                    VStack(alignment: .leading, spacing: .small) {
+                    VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             SparkIcon(
                                 theme: theme,
@@ -62,36 +170,34 @@ struct CardCodeSyntaxes {
                                 iconImage: .spark
                             )
 
-                            Text("Welcome on Card")
+                            Text("Complete Card Example")
                         }
 
                         Text("Nam eu sapien finibus, auctor purusan varius, sagittis turpis. Sed ipsum elit, lacinia id porta ut, bibendum at risus.")
                             .multilineTextAlignment(.leading)
-                            .truncationMode(.middle)
                     }
 
-                    ButtonView(
-                        theme: theme,
-                        intent: .main,
-                        variant: .filled,
-                        size: .medium,
-                        alignment: .leadingImage,
-                        action: { }
-                    )
-                    .title("Action", for: .normal)
+                    SparkButton("Take Action") {
+                        // Button action
+                    }
+                    .sparkTheme(theme)
+                    .sparkButtonIntent(.main)
+                    .sparkButtonVariant(.filled)
+                    .sparkButtonSize(.medium)
                 }
-                .padding(30)
             },
-            action: { print("Card tapped") }
+            action: {
+                // Your action
+            }
         )
         .sparkTheme(theme)
         .sparkCardIntent(.main)
-        .sparkCardVariant(.filled)
-        .sparkCardIsBackdrop(false)
-        .sparkCardIsHighlighted(false)
+        .sparkCardVariant(.tinted)
+        .sparkCardIsBackdrop(true)
+        .sparkCardIsHighlighted(true)
         .sparkCardIsPadding(true)
         .disabled(false)
-        .accessibilityLabel("Card label")
+        .accessibilityLabel("Complete card example")
         .accessibilityHidden(false)
         """
     }

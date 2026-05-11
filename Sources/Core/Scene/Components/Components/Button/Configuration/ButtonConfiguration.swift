@@ -12,23 +12,32 @@ class ButtonConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: ButtonIntent = .main
-    var variant: ButtonVariant = .filled
-    var size: ButtonSize = .medium
-    var alignment: ButtonAlignment = .random
-    var contentNormal = Content(state: .normal)
-    var contentHighlighted = Content(state: .highlighted)
-    var contentDisabled = Content(state: .disabled)
-    var contentSelected = Content(state: .selected)
+    var intent: ButtonIntent = .default
+    var variant: ButtonVariant = .default
+    var alignment: ButtonAlignment = .default
+    var shape: ButtonShape = .default
+    var size: ButtonSize = .default
+    var hasFeedback: Bool = false
+    var isLoading: Bool = false
+    var removeStyles: Bool = false
+    var animateIcon: Bool = false
+    var contentVisibility: ButtonContentVisibility = .default
 
     // MARK: - SwiftUI Properties Only
 
+    var swiftUIIsMenu: Bool = false
     var swiftUIIsFullWidth: Bool = false
-    var swiftUIIsToggle: Bool = false
+    var swiftUIIcon: Iconography? = .random
+    var swiftUITitle: String = "My Button"
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondText = "is amazing"
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsAnimated: Bool = false
+    var uiKitContentNormal = Content(state: .normal)
+    var uiKitContentHighlighted = Content(state: .highlighted)
+    var uiKitContentDisabled = Content(state: .disabled)
+    var uiKitContentSelected = Content(state: .selected)
 
     // MARK: - Initialization
 
@@ -49,6 +58,18 @@ class ButtonConfiguration: ComponentConfiguration {
         self.intent == .surface
     }
 
+    // MARK: - Setter
+
+    func setIcon(_ icon: Iconography) {
+        self.swiftUIIcon = icon
+        self.uiKitContentNormal.icon = icon
+    }
+
+    func setTitle(_ title: String) {
+        self.swiftUITitle = title
+        self.uiKitContentNormal.title = title
+    }
+
     // MARK: - Methods
 
     override func random() {
@@ -56,8 +77,11 @@ class ButtonConfiguration: ComponentConfiguration {
         self.variant = .random
         self.size = .random
         self.alignment = .random
+        self.animateIcon = .random()
+        self.swiftUIIsMenu = .random()
         self.swiftUIIsFullWidth = .random()
-        self.swiftUIIsToggle = .random()
+        self.swiftUIIcon = .random
+        self.swiftUIIsCustomContent = .random()
     }
 }
 
@@ -68,14 +92,14 @@ extension ButtonConfiguration {
 
         // MARK: - Properties
 
-        let id: ControlState
+        let id: ButtonControlState
         var title: String
-        var icon: Iconography? = .optionalRandom
         var isAttributedTitle: Bool = false
+        var icon: Iconography? = .optionalRandom
 
         // MARK: - Initialization
 
-        init(state: ControlState) {
+        init(state: ButtonControlState) {
             let isNormalState = state == .normal
             self.id = state
             self.title = (isNormalState || Bool.random()) ? "My \(state) title" : ""

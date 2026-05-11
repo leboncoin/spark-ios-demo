@@ -14,14 +14,15 @@ struct ProgressTrackerCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "With Number of Pages", code: Self.withNumberOfPages),
+            .init(title: "With Labels", code: Self.withLabels),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var withNumberOfPages: String {
         """
         ProgressTrackerView(
             theme: theme,
@@ -35,7 +36,7 @@ struct ProgressTrackerCodeSyntaxes {
         """
     }
 
-    private static var full: String {
+    private static var withLabels: String {
         """
         ProgressTrackerView(
             theme: theme,
@@ -46,14 +47,32 @@ struct ProgressTrackerCodeSyntaxes {
             orientation: .horizontal,
             currentPageIndex: $currentPageIndex
         )
-        .interactionState(.enabled)
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        ProgressTrackerView(
+            theme: theme,
+            intent: .main,
+            variant: .outlined,
+            size: .medium,
+            labels: ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"],
+            orientation: .horizontal,
+            currentPageIndex: $currentPageIndex
+        )
         .useFullWidth(true)
-        .completedIndicatorImage(.init(iconImage: checkmarkImage))
-        .disable(true, forIndex: 3)
-        .currentPageIndicatorImage(.init(iconImage: starImage), forIndex: 2)
+        .indicatorImage(Image(icon: .spark), forIndex: 1)
+        .currentPageIndicatorImage(Image(icon: .sparkStarFill), forIndex: 2)
+        .attributedLabel(AttributedString("Custom Label"), forIndex: 0)
+        .label("Label Text", forIndex: 1)
         .indicatorLabel("A", forIndex: 0)
-        .indicatorImage(.init(iconImage: iconImage), forIndex: 1)
+        .completedIndicatorImage(Image(icon: .sparkCheck))
+        .disable(true, forIndex: 3)
+        .preferredIndicatorImage(Image(icon: .spark))
+        .preferredCurrentPageIndicatorImage(Image(icon: .sparkStarFill))
         .showDefaultPageNumber(true)
+        .interactionState(.continuous)
         """
     }
 }

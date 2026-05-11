@@ -14,14 +14,17 @@ struct BorderCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Simple Border", code: Self.simpleBorder),
+            .init(title: "Border with Dash", code: Self.borderWithDash),
+            .init(title: "Border with Position", code: Self.borderWithPosition),
+            .init(title: "Border without Scaling", code: Self.borderWithoutScaling),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var simpleBorder: String {
         """
         Rectangle()
             .fill(.background)
@@ -33,7 +36,46 @@ struct BorderCodeSyntaxes {
         """
     }
 
-    private static var full: String {
+    private static var borderWithDash: String {
+        """
+        Rectangle()
+            .fill(.background)
+            .frame(height: 48)
+            .sparkBorder(
+                width: 2,
+                dash: 4,
+                colorToken: theme.colors.main.main
+            )
+        """
+    }
+
+    private static var borderWithPosition: String {
+        """
+        Rectangle()
+            .fill(.background)
+            .frame(height: 48)
+            .sparkBorder(
+                width: 2,
+                colorToken: theme.colors.main.main,
+                position: .inside
+            )
+        """
+    }
+
+    private static var borderWithoutScaling: String {
+        """
+        Rectangle()
+            .fill(.background)
+            .frame(height: 48)
+            .sparkBorder(
+                width: 2,
+                colorToken: theme.colors.main.main,
+                isScaled: false
+            )
+        """
+    }
+
+    private static var fullConfiguration: String {
         """
         Rectangle()
             .fill(.background)
@@ -42,6 +84,7 @@ struct BorderCodeSyntaxes {
                 width: 4,
                 dash: 8,
                 colorToken: theme.colors.feedback.error,
+                position: .outside,
                 isScaled: true
             )
         """

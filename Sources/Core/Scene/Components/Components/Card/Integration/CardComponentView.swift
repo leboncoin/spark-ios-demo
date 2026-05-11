@@ -63,7 +63,6 @@ struct CardImplementationView: ComponentImplementationViewable {
 
             ButtonImplementationView(configuration: self.configuration.button)
         }
-        .padding(30)
     }
 }
 

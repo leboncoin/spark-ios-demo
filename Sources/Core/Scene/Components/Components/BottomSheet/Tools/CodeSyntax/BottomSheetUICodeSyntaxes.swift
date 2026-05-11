@@ -14,14 +14,17 @@ struct BottomSheetUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Simple with Medium Detent", code: Self.simpleWithMediumDetent),
+            .init(title: "Multiple Detents", code: Self.multipleDetents),
+            .init(title: "With Custom Detent", code: Self.withCustomDetent),
+            .init(title: "With ScrollView", code: Self.withScrollView),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var simpleWithMediumDetent: String {
         """
         import UIKit
 
@@ -91,32 +94,33 @@ struct BottomSheetUICodeSyntaxes {
         """
     }
 
-    private static var full: String {
+    private static var multipleDetents: String {
         """
         import UIKit
 
         class ViewController: UIViewController {
-            override func viewDidLoad() {
-                super.viewDidLoad()
-
-                let button = UIButton(configuration: .filled())
-                button.setTitle("Show Bottom Sheet", for: .normal)
-                button.addAction(UIAction { [weak self] _ in
-                    self?.showBottomSheet()
-                }, for: .touchUpInside)
-
-                view.addSubview(button)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-                ])
-            }
-
             private func showBottomSheet() {
                 let controller = BottomSheetViewController()
 
-                // Configure sheet presentation with multiple detents
+                if let sheet = controller.sheetPresentationController {
+                    sheet.detents = [.medium(), .large()]
+                    sheet.prefersGrabberVisible = true
+                }
+
+                present(controller, animated: true)
+            }
+        }
+        """
+    }
+
+    private static var withCustomDetent: String {
+        """
+        import UIKit
+
+        class ViewController: UIViewController {
+            private func showBottomSheet() {
+                let controller = BottomSheetViewController()
+
                 if let sheet = controller.sheetPresentationController {
                     sheet.detents = [
                         .medium(),
@@ -125,15 +129,18 @@ struct BottomSheetUICodeSyntaxes {
                             return context.maximumDetentValue * 0.75
                         })
                     ]
-                    sheet.prefersScrollingExpandsWhenScrolledToEdge = true
                     sheet.prefersGrabberVisible = true
-                    sheet.prefersEdgeAttachedInCompactHeight = true
-                    sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
                 }
 
                 present(controller, animated: true)
             }
         }
+        """
+    }
+
+    private static var withScrollView: String {
+        """
+        import UIKit
 
         class BottomSheetViewController: UIViewController {
             private lazy var scrollView: UIScrollView = {
@@ -146,9 +153,7 @@ struct BottomSheetUICodeSyntaxes {
             private lazy var contentStackView: UIStackView = {
                 let stackView = UIStackView(arrangedSubviews: [
                     titleLabel,
-                    subtitleLabel,
                     textLabel,
-                    UIView(),
                     dismissButton
                 ])
                 stackView.axis = .vertical
@@ -165,17 +170,9 @@ struct BottomSheetUICodeSyntaxes {
                 return label
             }()
 
-            private let subtitleLabel: UILabel = {
-                let label = UILabel()
-                label.text = "With ScrollView"
-                label.font = .systemFont(ofSize: 18, weight: .medium)
-                label.numberOfLines = 0
-                return label
-            }()
-
             private let textLabel: UILabel = {
                 let label = UILabel()
-                label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+                label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                 label.numberOfLines = 0
                 label.textAlignment = .center
                 return label
@@ -187,7 +184,6 @@ struct BottomSheetUICodeSyntaxes {
                 button.addAction(UIAction { [weak self] _ in
                     self?.dismiss(animated: true)
                 }, for: .touchUpInside)
-                button.heightAnchor.constraint(equalToConstant: 44).isActive = true
                 return button
             }()
 
@@ -208,10 +204,32 @@ struct BottomSheetUICodeSyntaxes {
                     contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
                     contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
                     contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-                    contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-
-                    scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
+                    contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
                 ])
+            }
+        }
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        import UIKit
+
+        class ViewController: UIViewController {
+            private func showBottomSheet() {
+                let controller = BottomSheetViewController()
+
+                if let sheet = controller.sheetPresentationController {
+                    sheet.detents = [.medium(), .large()]
+                    sheet.prefersScrollingExpandsWhenScrolledToEdge = true
+                    sheet.prefersGrabberVisible = true
+                    sheet.prefersEdgeAttachedInCompactHeight = true
+                    sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+                    sheet.largestUndimmedDetentIdentifier = .medium
+                    sheet.prefersSourceViewAlignment = true
+                }
+
+                present(controller, animated: true)
             }
         }
         """

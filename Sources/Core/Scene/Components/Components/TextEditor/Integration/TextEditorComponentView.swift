@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+// TODO: Maj le theme hors de l'init
+
 // MARK: - View
 
 typealias TextEditorComponentView = ComponentViewable<TextEditorConfiguration, TextEditorImplementationView, TextEditorConfigurationView, TextEditorExtraTools>

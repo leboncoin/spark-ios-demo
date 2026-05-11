@@ -14,14 +14,16 @@ struct PopoverCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Basic", code: Self.basic),
+            .init(title: "With Intent", code: Self.withIntent),
+            .init(title: "With Attachment Anchor", code: Self.withAttachmentAnchor),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var basic: String {
         """
         @State private var isPresented: Bool = false
 
@@ -39,7 +41,47 @@ struct PopoverCodeSyntaxes {
         """
     }
 
-    private static var full: String {
+    private static var withIntent: String {
+        """
+        @State private var isPresented: Bool = false
+
+        Button("Show popover") {
+            isPresented = true
+        }
+        .popover(
+            theme: theme,
+            intent: .success,
+            isPresented: $isPresented
+        ) { colors in
+            Text("Success message")
+                .foregroundStyle(colors.foreground.color)
+                .padding()
+        }
+        """
+    }
+
+    private static var withAttachmentAnchor: String {
+        """
+        @State private var isPresented: Bool = false
+
+        Button("Show popover") {
+            isPresented = true
+        }
+        .popover(
+            theme: theme,
+            intent: .main,
+            isPresented: $isPresented,
+            attachmentAnchor: .rect(.bounds),
+            arrowEdge: .bottom
+        ) { colors in
+            Text("Attached to bottom")
+                .foregroundStyle(colors.foreground.color)
+                .padding()
+        }
+        """
+    }
+
+    private static var fullConfiguration: String {
         """
         @State private var isPresented: Bool = false
 

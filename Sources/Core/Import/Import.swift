@@ -10,6 +10,7 @@
 @_exported import SparkComponentCard
 @_exported import SparkComponentChip
 @_exported import SparkComponentDivider
+@_exported import SparkComponentFileUpload
 @_exported import SparkComponentFormField
 @_exported import SparkComponentIcon
 @_exported import SparkComponentPopover

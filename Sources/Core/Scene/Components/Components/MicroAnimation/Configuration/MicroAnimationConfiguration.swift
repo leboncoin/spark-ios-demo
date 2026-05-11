@@ -8,9 +8,6 @@
 
 import Foundation
 
-// TODO: Tox fix :
-// add CaseIterable on SparkCommon SparkAnimationType
-
 class MicroAnimationConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
@@ -59,7 +56,7 @@ extension MicroAnimationConfiguration {
         // MARK: - Properties
 
         var iconConfiguration = IconConfiguration()
-        var iconButtonConfiguration = IconButtonConfiguration()
+        var iconButtonConfiguration = ButtonConfiguration()
         var buttonConfiguration = ButtonConfiguration()
 
         // MARK: - Initialization
@@ -71,23 +68,16 @@ extension MicroAnimationConfiguration {
             self.iconConfiguration.intent = .main
             self.iconConfiguration.size = .medium
 
-            self.iconButtonConfiguration.contentNormal.icon = icon
+            self.iconButtonConfiguration.setIcon(icon)
             self.iconButtonConfiguration.intent = .main
             self.iconButtonConfiguration.variant = .filled
             self.iconButtonConfiguration.size = .medium
 
-            self.buttonConfiguration.contentNormal.icon = icon
+            self.buttonConfiguration.setIcon(icon)
             self.buttonConfiguration.intent = .main
             self.buttonConfiguration.variant = .filled
             self.buttonConfiguration.size = .medium
-            self.buttonConfiguration.contentNormal.title = "My Button"
-            self.buttonConfiguration.contentNormal.isAttributedTitle = false
+            self.buttonConfiguration.setTitle("My Button")
         }
     }
-}
-
-// MARK: - Extension
-
-extension SparkAnimationType: @retroactive CaseIterable {
-    public static var allCases: [SparkAnimationType] = [.bell]
 }

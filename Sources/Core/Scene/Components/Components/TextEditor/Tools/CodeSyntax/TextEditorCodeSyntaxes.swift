@@ -14,37 +14,88 @@ struct TextEditorCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Basic", code: Self.basic),
+            .init(title: "With Theme Environment", code: Self.withThemeEnvironment),
+            .init(title: "With Intent", code: Self.withIntent),
+            .init(title: "Read Only", code: Self.readOnly),
+            .init(title: "With Accessibility", code: Self.withAccessibility),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var basic: String {
         """
         SparkTextEditor(
-            "Placeholder",
-            text: $text,
-            theme: theme
+            "Enter your text",
+            text: $text
         )
+        .sparkTheme(theme)
+        """
+    }
+
+    private static var withThemeEnvironment: String {
+        """
+        SparkTextEditor(
+            "Enter your text",
+            text: $text
+        )
+        .sparkTheme(theme)
         .sparkTextEditorIntent(.neutral)
         """
     }
 
-    private static var full: String {
+    private static var withIntent: String {
         """
         SparkTextEditor(
-            "Placeholder",
-            text: $text,
-            theme: theme
+            "Enter your message",
+            text: $text
         )
+        .sparkTheme(theme)
+        .sparkTextEditorIntent(.success)
+        """
+    }
+
+    private static var readOnly: String {
+        """
+        SparkTextEditor(
+            "Read only text",
+            text: $text
+        )
+        .sparkTheme(theme)
+        .sparkTextEditorIntent(.neutral)
+        .sparkTextEditorReadOnly(true)
+        """
+    }
+
+    private static var withAccessibility: String {
+        """
+        SparkTextEditor(
+            "Description",
+            text: $text
+        )
+        .sparkTheme(theme)
+        .sparkTextEditorIntent(.neutral)
+        .sparkTextEditorAccessibilityLabel("Product description")
+        .sparkTextEditorAccessibilityValue("Current description text")
+        .sparkTextEditorAccessibilityHint("Enter a detailed product description")
+        """
+    }
+
+    private static var fullConfiguration: String {
+        """
+        SparkTextEditor(
+            "Enter your comment",
+            text: $text
+        )
+        .sparkTheme(theme)
         .sparkTextEditorIntent(.neutral)
         .sparkTextEditorReadOnly(false)
         .disabled(false)
-        .sparkTextEditorAccessibilityLabel("Text editor label")
-        .sparkTextEditorAccessibilityValue("Text editor value")
-        .sparkTextEditorAccessibilityHint("Text editor hint")
+        .sparkTextEditorAccessibilityLabel("Comment field")
+        .sparkTextEditorAccessibilityValue("User comment")
+        .sparkTextEditorAccessibilityHint("Type your comment here")
         """
     }
 }

@@ -48,8 +48,8 @@ class CardConfiguration: ComponentConfiguration {
         self.icon.intent = .info
         self.icon.icon = .infoOutline
 
-        self.button.contentNormal.title = "Tap"
-        self.button.contentHighlighted.title = ""
+        self.button.setTitle("Tap")
+        self.button.uiKitContentHighlighted.title = ""
         self.button.uiKitIsSelected.value = false
         self.button.isEnabled.value = true
         self.button.swiftUIIsFullWidth = false

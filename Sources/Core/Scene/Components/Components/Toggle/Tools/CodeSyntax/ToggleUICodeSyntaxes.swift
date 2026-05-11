@@ -15,7 +15,9 @@ struct ToggleUICodeSyntaxes {
     static var content: [CodeSyntax] = {
         return [
             .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "With Text", code: Self.withText),
+            .init(title: "With Attributed Text", code: Self.withAttributedText),
+            .init(title: "Full Configuration", code: Self.full)
         ]
     }()
 
@@ -29,10 +31,29 @@ struct ToggleUICodeSyntaxes {
         """
     }
 
+    private static var withText: String {
+        """
+        let toggle = SparkUISwitch(theme: theme)
+        toggle.text = "Enable notifications"
+        toggle.isOn = false
+        toggle.addAction(UIAction(handler: { _ in }), for: .valueChanged)
+        """
+    }
+
+    private static var withAttributedText: String {
+        """
+        let toggle = SparkUISwitch(theme: theme)
+        let attributedText = NSAttributedString(string: "Enable notifications")
+        toggle.attributedText = attributedText
+        toggle.isOn = false
+        toggle.addAction(UIAction(handler: { _ in }), for: .valueChanged)
+        """
+    }
+
     private static var full: String {
         """
         let toggle = SparkUISwitch(theme: theme)
-        toggle.text = "Label"
+        toggle.text = "Enable notifications"
         toggle.isOn = false
         toggle.setOn(true, animated: true)
         toggle.isEnabled = true

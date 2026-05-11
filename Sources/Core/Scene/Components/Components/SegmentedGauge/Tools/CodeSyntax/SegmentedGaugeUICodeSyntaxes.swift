@@ -14,32 +14,95 @@ struct SegmentedGaugeUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Default", code: Self.simple),
-            .init(title: "Full", code: Self.full)
+            .init(title: "Basic", code: Self.basic),
+            .init(title: "With Title String", code: Self.withTitleString),
+            .init(title: "With Title Attributed String", code: Self.withTitleAttributedString),
+            .init(title: "With Description String", code: Self.withDescriptionString),
+            .init(title: "With Description Attributed String", code: Self.withDescriptionAttributedString),
+            .init(title: "Full Configuration", code: Self.fullConfiguration)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var simple: String {
+    private static var basic: String {
         """
         let segmentedGauge = SparkUISegmentedGauge(theme: theme)
-        segmentedGauge.title = "My Segmented Gauge"
-        segmentedGauge.segments = [0.25, 0.5, 0.75]
+        segmentedGauge.alignment = .horizontal
+        segmentedGauge.withMarker = true
+        segmentedGauge.segments = .five
+        segmentedGauge.size = .small
+        segmentedGauge.type = .high
         """
     }
 
-    private static var full: String {
+    private static var withTitleString: String {
+        """
+        let segmentedGauge = SparkUISegmentedGauge(theme: theme)
+        segmentedGauge.title = "My Segmented Gauge"
+        segmentedGauge.alignment = .horizontal
+        segmentedGauge.withMarker = true
+        segmentedGauge.segments = .five
+        segmentedGauge.size = .small
+        segmentedGauge.type = .high
+        """
+    }
+
+    private static var withTitleAttributedString: String {
+        """
+        let segmentedGauge = SparkUISegmentedGauge(theme: theme)
+        let attributedTitle = NSAttributedString(
+            string: "My Segmented Gauge",
+            attributes: [.foregroundColor: UIColor.blue]
+        )
+        segmentedGauge.attributedTitle = attributedTitle
+        segmentedGauge.alignment = .horizontal
+        segmentedGauge.withMarker = true
+        segmentedGauge.segments = .five
+        segmentedGauge.size = .small
+        segmentedGauge.type = .high
+        """
+    }
+
+    private static var withDescriptionString: String {
+        """
+        let segmentedGauge = SparkUISegmentedGauge(theme: theme)
+        segmentedGauge.descriptionString = "My description"
+        segmentedGauge.alignment = .horizontal
+        segmentedGauge.withMarker = true
+        segmentedGauge.segments = .five
+        segmentedGauge.size = .small
+        segmentedGauge.type = .high
+        """
+    }
+
+    private static var withDescriptionAttributedString: String {
+        """
+        let segmentedGauge = SparkUISegmentedGauge(theme: theme)
+        let attributedDescription = NSAttributedString(
+            string: "My description",
+            attributes: [.foregroundColor: UIColor.blue]
+        )
+        segmentedGauge.attributedDescription = attributedDescription
+        segmentedGauge.alignment = .horizontal
+        segmentedGauge.withMarker = true
+        segmentedGauge.segments = .five
+        segmentedGauge.size = .small
+        segmentedGauge.type = .high
+        """
+    }
+
+    private static var fullConfiguration: String {
         """
         let segmentedGauge = SparkUISegmentedGauge(theme: theme)
         segmentedGauge.title = "My Segmented Gauge"
         segmentedGauge.descriptionString = "Progress description"
-        segmentedGauge.segments = [0.2, 0.4, 0.6, 0.8]
-        segmentedGauge.size = .medium
-        segmentedGauge.alignment = .leading
+        segmentedGauge.alignment = .horizontal
         segmentedGauge.withMarker = true
-        segmentedGauge.type = .info
-        segmentedGauge.accessibilityLabel = "Segmented gauge showing progress"
+        segmentedGauge.segments = .five
+        segmentedGauge.size = .medium
+        segmentedGauge.type = .high
+        segmentedGauge.accessibilityLabel = "Custom accessibility label"
         """
     }
 }
