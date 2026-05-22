@@ -13,7 +13,7 @@ struct SnackbarConfigurationView: ConfigurationViewable, ConfigurationUIViewable
     // MARK: - Type Alias
 
     typealias Configuration = SnackbarConfiguration
-    typealias ComponentUIView = SnackbarUIView
+    typealias ComponentUIView = SparkUISnackbar
 
     // MARK: - Properties
 
@@ -58,17 +58,11 @@ struct SnackbarConfigurationView: ConfigurationViewable, ConfigurationUIViewable
             values: SnackbarIntent.allCases,
             selectedValue: self.configuration.intent
         )
-
+        
         EnumConfigurationItemView(
-            name: "type",
-            values: SnackbarType.allCases,
-            selectedValue: self.configuration.type
-        )
-
-        EnumConfigurationItemView(
-            name: "variant",
-            values: SnackbarVariant.allCases,
-            selectedValue: self.configuration.variant
+            name: "alignment",
+            values: SnackbarAlignment.allCases,
+            selectedValue: self.configuration.alignment
         )
 
         OptionalEnumConfigurationItemView(
@@ -77,28 +71,55 @@ struct SnackbarConfigurationView: ConfigurationViewable, ConfigurationUIViewable
             selectedValue: self.configuration.icon
         )
 
-        TextFieldConfigurationItemView(
-            name: "text",
-            text: self.configuration.text
-        )
-
-        StepperConfigurationItemView(
-            name: "max no. of lines",
-            value: self.configuration.maxNumberOfLines,
-            bounds: 0...100
-        )
-
-        EnumConfigurationItemView(
-            name: "content type",
-            values: SnackbarContentType.allCases(for: self.framework),
-            selectedValue: self.configuration.contentType
-        )
-
-        if self.configuration.wrappedValue.contentType == .button {
-            TextFieldConfigurationItemView(
-                name: "button",
-                text: self.configuration.buttonTitle
+        if self.framework.isSwiftUI {
+            ToggleConfigurationItemView(
+                name: "is custom content",
+                isOn: self.configuration.swiftUIIsCustomContent
             )
         }
+
+        TextFieldConfigurationItemView(
+            name: "title",
+            text: self.configuration.title
+        )
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is attributed title",
+                isOn: self.configuration.uiKitIsAttributedTitle
+            )
+        } else {
+
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second title text",
+                    text: self.configuration.swiftUISecondTitleText
+                )
+            }
+        }
+
+        TextFieldConfigurationItemView(
+            name: "message",
+            text: self.configuration.message
+        )
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is attributed message",
+                isOn: self.configuration.uiKitIsAttributedMessage
+            )
+        } else {
+            if self.configuration.wrappedValue.swiftUIIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second message text",
+                    text: self.configuration.swiftUISecondMessageText
+                )
+            }
+        }
+
+        TextFieldConfigurationItemView(
+            name: "button",
+            text: self.configuration.buttonTitle
+        )
     }
 }

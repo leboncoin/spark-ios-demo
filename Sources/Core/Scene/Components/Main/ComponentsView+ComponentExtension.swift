@@ -120,7 +120,7 @@ extension ComponentsView {
             case .ratingInput: .available
             case .segmentedGauge: .available
             case .slider: .available
-            case .snackbar: .unavailable
+            case .snackbar: .available
             case .snackbarPresentation: .none
             case .spinner: .available
             case .stepper: .available

@@ -14,78 +14,64 @@ struct SnackbarUICodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Without Button", code: Self.withoutButton),
-            .init(title: "With Button", code: Self.withButton),
-            .init(title: "Show And Dismiss", code: Self.showAndDismiss),
-            .init(title: "Full Configuration", code: Self.fullConfiguration)
+            .init(title: "Basic Snackbar", code: Self.basicSnackbar),
+            .init(title: "With Icon", code: Self.withIcon),
+            .init(title: "With Action Button", code: Self.withActionButton),
+            .init(title: "Different Alignment", code: Self.differentAlignment)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var withoutButton: String {
+    private static var basicSnackbar: String {
         """
-        let snackbar = SnackbarUIView(theme: theme, intent: .neutral)
-        snackbar.label.text = "This is a snackbar message"
-        snackbar.setImage(UIImage(icon: .infoOutline))
-        """
-    }
-
-    private static var withButton: String {
-        """
-        let snackbar = SnackbarUIView(theme: theme, intent: .success)
-        snackbar.label.text = "Operation completed successfully"
-        snackbar.setImage(UIImage(icon: .checkFill))
-
-        let button = snackbar.addButton()
-        button.setTitle("Dismiss", for: .normal)
-        button.addAction(UIAction { _ in
-            // Handle button action
-        }, for: .touchUpInside)
+        let snackbar = SparkUISnackbar(theme: theme)
+        snackbar.title = "Upload complete"
+        snackbar.message = "Your file has been uploaded successfully"
+        snackbar.intent = .success
+        view.addSubview(snackbar)
         """
     }
 
-    private static var showAndDismiss: String {
+    private static var withIcon: String {
         """
-        let snackbar = SnackbarUIView(theme: theme, intent: .alert)
-        snackbar.label.text = "Action required"
-        snackbar.setImage(UIImage(icon: .alertDiamond))
-
-        snackbar.showAndDismiss(
-            in: view,
-            from: .bottom,
-            animated: true,
-            insets: .zero,
-            useSafeAreaLayoutGuide: false,
-            autoDismissDelay: .fast
-        ) { finished in
-            // Completion handler
-        }
+        let snackbar = SparkUISnackbar(theme: theme)
+        snackbar.icon = UIImage(systemName: "wifi.slash")
+        snackbar.title = "Connection lost"
+        snackbar.message = "Unable to reach the server"
+        snackbar.intent = .error
+        view.addSubview(snackbar)
         """
     }
 
-    private static var fullConfiguration: String {
+    private static var withActionButton: String {
         """
-        let snackbar = SnackbarUIView(theme: theme, intent: .success)
-        snackbar.variant = .tinted
-        snackbar.type = .horizontal
-        snackbar.label.text = "Your changes have been saved"
-        snackbar.label.numberOfLines = 2
-        snackbar.setImage(UIImage(icon: .checkFill))
+        let snackbar = SparkUISnackbar(theme: theme)
+        snackbar.icon = UIImage(systemName: "trash")
+        snackbar.title = "Item deleted"
+        snackbar.message = "The item has been removed"
+        snackbar.intent = .alert
 
-        let button = snackbar.addButton()
+        let button = SparkUIButton(theme: theme)
         button.setTitle("Undo", for: .normal)
+        button.variant = .ghost
         button.addAction(UIAction { _ in
-            // Handle button action
+            // Undo action
         }, for: .touchUpInside)
+        snackbar.button = button
 
-        snackbar.show(
-            in: view,
-            from: .bottom,
-            animated: true,
-            insets: .zero,
-            useSafeAreaLayoutGuide: true
-        )
+        view.addSubview(snackbar)
+        """
+    }
+
+    private static var differentAlignment: String {
+        """
+        let snackbar = SparkUISnackbar(theme: theme)
+        snackbar.title = "Settings saved"
+        snackbar.message = "Your preferences have been updated"
+        snackbar.intent = .success
+        snackbar.alignment = .vertical
+        view.addSubview(snackbar)
         """
     }
 }

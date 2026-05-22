@@ -12,31 +12,33 @@ class SnackbarConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
-    var intent: SnackbarIntent = .random
-    var type: SnackbarType = .random
-    var variant: SnackbarVariant = .random
+    var intent: SnackbarIntent = .default
+    var alignment: SnackbarAlignment = .default
     var icon: Iconography? = .optionalRandom
-    var contentType: SnackbarContentType = .button // Because UIKit doesn't have allCases
 
-    var text: String = "This is the snackbar text"
+    var title: String = "Title"
+    var message: String = "Snackbar placeholder"
+
+    var hasButton: Bool = true
     var buttonTitle: String = "Tap"
 
-    var maxNumberOfLines: Int = 0
+    // MARK: - SwiftUI Properties Only
 
-    // MARK: - Initialization
+    var swiftUIIsCustomContent: Bool = false
+    var swiftUISecondTitleText = "other"
+    var swiftUISecondMessageText = "other"
 
-    required init() {
-        super.init()
+    // MARK: - UIKit Properties Only
 
-        self.accessibilityLabel.showConfiguration = true
-    }
+    var uiKitIsAttributedTitle: Bool = false
+    var uiKitIsAttributedMessage: Bool = false
 
     // MARK: - Methods
 
     override func random() {
         self.intent = .random
-        self.type = .random
-        self.variant = .random
+        self.alignment = .random
         self.icon = .optionalRandom
+        self.hasButton = .random()
     }
 }

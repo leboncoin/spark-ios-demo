@@ -53,43 +53,16 @@ struct SnackbarPresentationConfigurationView: ConfigurationViewable, Configurati
 
     @ViewBuilder
     private func itemsView() -> some View {
-        EnumConfigurationItemView(
-            name: "direction",
-            values: SnackbarPresentationDirection.allCases,
-            selectedValue: self.configuration.direction
-        )
-
         OptionalEnumConfigurationItemView(
             name: "auto dismiss delay",
             values: SnackbarAutoDismissDelay.allCases,
             selectedValue: self.configuration.autoDismissDelay
         )
 
-        HStack {
-            TextFieldConfigurationItemView(
-                name: "inset",
-                placeholder: "left",
-                text: self.configuration.leftInsetString
-            )
-
-            VStack {
-                TextField(
-                    name: "top",
-                    text: self.configuration.topInsetString,
-                    keyboardType: .numberPad
-                )
-
-                TextField(
-                    name: "bottom",
-                    text: self.configuration.bottomInsetString,
-                    keyboardType: .numberPad
-                )
-            }
-
-            TextField(
-                name: "right",
-                text: self.configuration.rightInsetString,
-                keyboardType: .numberPad
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.uiKitIsAnimated
             )
         }
     }

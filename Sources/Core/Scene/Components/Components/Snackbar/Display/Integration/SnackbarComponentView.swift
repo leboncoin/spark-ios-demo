@@ -32,95 +32,138 @@ struct SnackbarImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        VStack {
-            switch self.configurationWrapped.contentType {
-            case .empty:
-                self.emptySnackbar()
-            case .button:
-                self.snackbarWithButton()
-            case .custom:
-                self.snackbarWithCustomView()
+        self.component {
+            self.isShowingAlert = true
+        }
+        .sparkTheme(self.configurationWrapped.theme.value)
+        .sparkSnackbarIntent(self.configurationWrapped.intent)
+        .sparkSnackbarAlignment(self.configurationWrapped.alignment)
+        .demoAccessibilityLabel(self.configurationWrapped)
+        .alert("Button tap", isPresented: self.$isShowingAlert) {
+            Button("OK", role: .cancel) { }
+        }
+    }
+
+    @ViewBuilder
+    private func component(action: @escaping @MainActor () -> Void) -> some View {
+        let icon = Image(icon: self.configurationWrapped.icon)
+        let title = self.configurationWrapped.title.nilIfEmpty
+        let message = self.configurationWrapped.message.nilIfEmpty
+        let hasButton = self.configurationWrapped.hasButton
+
+        let isCustomContent = self.configurationWrapped.swiftUIIsCustomContent
+
+        switch (isCustomContent, hasButton) {
+        // Custom content + button
+        case (true, true):
+            self.makeSnackbarWithButton(
+                icon: icon,
+                action: action
+            ) {
+                self.makeCustomTitle(title)
+            } descriptionLabel: {
+                self.makeCustomMessage(message)
+            }
+
+        // Custom content
+        case (true, false):
+            self.makeSnackbar(
+                icon: icon
+            ) {
+                self.makeCustomTitle(title)
+            } descriptionLabel: {
+                self.makeCustomMessage(message)
+            }
+
+        // Button only
+        case (false, true):
+            self.makeSnackbarWithButton(
+                icon: icon,
+                action: action
+            ) {
+                self.makeTitle(title)
+            } descriptionLabel: {
+                self.makeMessage(message)
+            }
+
+        // Default
+        case (false, false):
+            self.makeSnackbar(
+                icon: icon
+            ) {
+                self.makeTitle(title)
+            } descriptionLabel: {
+                self.makeMessage(message)
             }
         }
-        .lineLimit(self.configurationWrapped.maxNumberOfLines)
-        .demoAccessibilityLabel(self.configurationWrapped)
-        .alert(isPresented: self.$isShowingAlert) {
-            Alert(
-                title: Text("Button has been pressed"),
-                message: nil,
-                dismissButton: Alert.Button.cancel()
+    }
+
+    @ViewBuilder
+    private func makeSnackbar<TitleLabel: View, DescriptionLabel: View>(
+        icon: Image?,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+        @ViewBuilder descriptionLabel: @escaping () -> DescriptionLabel
+    ) -> some View {
+        SparkSnackbar(
+            icon,
+            titleLabel: titleLabel,
+            descriptionLabel: descriptionLabel
+        )
+    }
+
+    @ViewBuilder
+    private func makeSnackbarWithButton<TitleLabel: View, DescriptionLabel: View>(
+        icon: Image?,
+        action: @escaping @MainActor () -> Void,
+        @ViewBuilder titleLabel: @escaping () -> TitleLabel,
+        @ViewBuilder descriptionLabel: @escaping () -> DescriptionLabel
+    ) -> some View {
+        SparkSnackbar(
+            icon,
+            titleLabel: titleLabel,
+            descriptionLabel: descriptionLabel
+        ) {
+            SparkButton(
+                self.configurationWrapped.buttonTitle,
+                action: action
             )
         }
     }
 
-    @ViewBuilder private func emptySnackbar() -> SnackbarView<EmptyView> {
-        SnackbarView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            image: Image(icon: self.configurationWrapped.icon)) {
-                Text(self.configurationWrapped.text)
-            }
-            .variant(self.configurationWrapped.variant)
-            .type(self.configurationWrapped.type)
+    @ViewBuilder
+    private func makeTitle(_ title: String?) -> some View {
+        if let title {
+            Text(title)
+        }
     }
 
-    @ViewBuilder private func snackbarWithButton() -> SnackbarView<ButtonView> {
-        SnackbarView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            image: Image(icon: self.configurationWrapped.icon)) {
-                Text(self.configurationWrapped.text)
-            } button: { configuration in
-                ButtonView(
-                    theme: self.configurationWrapped.theme.value,
-                    intent: configuration.intent,
-                    variant: configuration.variant,
-                    size: configuration.size,
-                    shape: configuration.shape,
-                    alignment: .leadingImage) {
-                        self.isShowingAlert = true
-                    }
-                    .title(self.configurationWrapped.buttonTitle, for: .normal)
-            }
-            .variant(self.configurationWrapped.variant)
-            .type(self.configurationWrapped.type)
+    @ViewBuilder
+    private func makeMessage(_ message: String?) -> some View {
+        if let message {
+            Text(message)
+        }
     }
 
-    @ViewBuilder private func snackbarWithCustomView() -> SnackbarView<some View> {
-        SnackbarView(
-            theme: self.configurationWrapped.theme.value,
-            intent: self.configurationWrapped.intent,
-            image: Image(icon: self.configurationWrapped.icon)) {
-                Text(self.configurationWrapped.text)
-            } button: { configuration in
-                HStack {
-                    IconButtonView(
-                        theme: self.configurationWrapped.theme.value,
-                        intent: .danger,
-                        variant: .filled,
-                        size: .large,
-                        shape: .pill,
-                        action: {
-                            self.isShowingAlert = true
-                        }
-                    )
-                    .image(.init(icon: .warningFill), for: .normal)
-
-                    IconButtonView(
-                        theme: self.configurationWrapped.theme.value,
-                        intent: .success,
-                        variant: .contrast,
-                        size: .small,
-                        shape: .square,
-                        action: {
-                            self.isShowingAlert = true
-                        }
-                    )
-                    .image(.init(icon: .infoOutline), for: .normal)
-                }
+    private func makeCustomTitle(_ title: String?) -> some View {
+        HStack {
+            if let title {
+                Text(title)
             }
-            .variant(self.configurationWrapped.variant)
-            .type(self.configurationWrapped.type)
+            Text(self.configurationWrapped.swiftUISecondTitleText)
+                .font(.footnote)
+                .foregroundStyle(.blue)
+        }
+    }
+
+    private func makeCustomMessage(_ message: String?) -> some View {
+        HStack {
+            if let message {
+                Text(message)
+            }
+            Text(self.configurationWrapped.swiftUISecondMessageText)
+                .font(.caption)
+                .foregroundStyle(.green)
+        }
     }
 }
 

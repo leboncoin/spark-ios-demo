@@ -11,12 +11,12 @@ import SwiftUI
 
 // MARK: - View Controller
 
-typealias SnackbarComponentUIViewController = ComponentDisplayViewControllerRepresentable<SnackbarConfiguration, SnackbarUIView, SnackbarConfigurationView, SnackbarComponentUIViewMaker, SnackbarExtraTools>
+typealias SnackbarComponentUIViewController = ComponentDisplayViewControllerRepresentable<SnackbarConfiguration, SparkUISnackbar, SnackbarConfigurationView, SnackbarComponentUIViewMaker, SnackbarExtraTools>
 
 extension SnackbarComponentUIViewController {
 
     init() {
-        self.init(style: .verticalList, styles: [.alone, .verticalList])
+        self.init(style: .alone, styles: [.alone])
     }
 }
 
@@ -27,7 +27,7 @@ final class SnackbarComponentUIViewMaker: ComponentUIViewMaker {
     // MARK: - Type Alias
 
     typealias Configuration = SnackbarConfiguration
-    typealias ComponentView = SnackbarUIView
+    typealias ComponentView = SparkUISnackbar
     typealias ConfigurationView = SnackbarConfigurationView
     typealias DisplayViewController = ComponentDisplayViewController<Configuration, ComponentView, ConfigurationView, SnackbarComponentUIViewMaker, ExtraTools>
     typealias ExtraTools = SnackbarExtraTools
@@ -42,8 +42,7 @@ final class SnackbarComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let componentView = ComponentView(
-            theme: configuration.theme.value,
-            intent: configuration.intent
+            theme: configuration.theme.value
         )
 
         self.updateCommonProperties(componentView, for: configuration)
@@ -55,7 +54,6 @@ final class SnackbarComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.theme = configuration.theme.value
-        componentView.intent = configuration.intent
 
         self.updateCommonProperties(componentView, for: configuration)
     }
@@ -64,20 +62,13 @@ final class SnackbarComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
-        componentView.variant = configuration.variant
-        componentView.type = configuration.type
-        componentView.label.text = configuration.text
-        componentView.label.numberOfLines = configuration.maxNumberOfLines
-        componentView.setImage(.init(icon: configuration.icon))
+        componentView.intent = configuration.intent
+        componentView.alignment = configuration.alignment
+        componentView.icon = .init(icon: configuration.icon)
 
-        switch configuration.contentType {
-        case .button:
-            componentView.addButton(configuration)
-        default:
-            componentView.removeButton()
-        }
-
-        componentView.demoAccessibilityLabel(configuration)
+        componentView.demoTitle(configuration)
+        componentView.demoMessage(configuration)
+        componentView.demoButton(configuration)
     }
 
     // MARK: - Getter
@@ -89,10 +80,39 @@ final class SnackbarComponentUIViewMaker: ComponentUIViewMaker {
 
 // MARK: - Extension
 
-extension SnackbarUIView {
+private extension SparkUISnackbar {
 
-    func addButton(_ configuration: SnackbarComponentUIViewMaker.Configuration) {
-        let button = self.addButton()
-        button.setTitle(configuration.buttonTitle, for: .normal)
+    // MARK: - Setter
+
+    func demoTitle(_ configuration: SnackbarComponentUIViewMaker.Configuration) {
+        let text = configuration.title.nilIfEmpty
+
+        if let text, configuration.uiKitIsAttributedTitle {
+            self.attributedTitle = text.demoNSAttributedString
+        } else {
+            self.title = text
+        }
+    }
+
+    func demoMessage(_ configuration: SnackbarComponentUIViewMaker.Configuration) {
+        let text = configuration.message.nilIfEmpty
+
+        if let text, configuration.uiKitIsAttributedMessage {
+            self.attributedMessage = text.demoNSAttributedString
+        } else {
+            self.message = text
+        }
+    }
+
+    func demoButton(_ configuration: SnackbarComponentUIViewMaker.Configuration) {
+        guard configuration.hasButton else {
+            self.button = nil
+            return
+        }
+
+        let text = configuration.buttonTitle.nilIfEmpty ?? "Action"
+        let button = SparkUIButton(theme: configuration.theme.value)
+        button.setTitle(text, for: .normal)
+        self.button = button
     }
 }

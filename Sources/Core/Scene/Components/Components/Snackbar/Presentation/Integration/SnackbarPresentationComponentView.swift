@@ -42,33 +42,23 @@ struct SnackbarPresentationImplementationView: ComponentImplementationViewable {
                 .frame(maxWidth: .infinity)
         })
         .buttonStyle(.borderedProminent)
-        .snackbar(
+        .sparkSnackbar(
             isPresented: self.$isPresented,
-            direction: self.configurationWrapped.direction,
             autoDismissDelay: self.configurationWrapped.autoDismissDelay,
             snackbar: {
-                SnackbarView(
-                    theme: DemoThemes.shared.mainTheme.value,
-                    intent: .support,
-                    image: .init(icon: .infoOutline)) {
-                        Text("This is a snackbar")
-                    } button: { buttonView in
-                        buttonView
-                            .title("Dismiss", for: .normal)
-                    } action: {
+                
+                SparkSnackbar(
+                    title: "Title",
+                    description: "Snackbar placeholder"
+                ) {
+                    SparkButton("Action") {
                         self.isPresented = false
                     }
-                    .frame(maxWidth: 600)
-                    .padding(
-                        .init(
-                            top: self.configurationWrapped.topInsetString.cgFloat ?? 0,
-                            leading: self.configurationWrapped.leftInsetString.cgFloat ?? 0,
-                            bottom: self.configurationWrapped.bottomInsetString.cgFloat ?? 0,
-                            trailing: self.configurationWrapped.rightInsetString.cgFloat ?? 0
-                        )
-                    )
+                }
+                .frame(maxWidth: 600)
             }
         )
+        .sparkTheme(self.configurationWrapped.theme.value)
     }
 }
 

@@ -36,24 +36,25 @@ final class SnackbarPresentationComponentUIViewMaker: ComponentUIViewMaker {
 
     weak var viewController: DisplayViewController?
 
-    private var snackbar: SnackbarUIView = {
-        let view = SnackbarUIView(
-            theme: DemoThemes.shared.mainTheme.value,
-            intent: .neutral
-        )
-        view.label.text = "Snackbar text"
-        view.widthAnchor.constraint(lessThanOrEqualToConstant: 600).isActive = true
+    private var snackbar: SparkUISnackbar = {
+        let theme = DemoThemes.shared.mainTheme.value
 
-        let button = view.addButton()
-        button.setTitle("Dismiss", for: .normal)
+        let snackbar = SparkUISnackbar(theme: theme)
+        snackbar.title = "Title"
+        snackbar.message = "Snackbar placeholder"
+        snackbar.widthAnchor.constraint(lessThanOrEqualToConstant: 600).isActive = true
+
+        let button = SparkUIButton(theme: theme)
+        button.setTitle("Action", for: .normal)
         button.addAction(.init(handler: { _ in
-            view.dismiss(completion: { isFinished in
+            snackbar.dismiss(completion: { isFinished in
                 // swiftlint:disable no_debugging_method
                 print("Dismiss action", isFinished)
             })
         }), for: .touchUpInside)
+        snackbar.button = button
 
-        return view
+        return snackbar
     }()
 
     // MARK: - Methods
@@ -62,7 +63,7 @@ final class SnackbarPresentationComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) -> ComponentView {
         let button = UIButton(configuration: .filled())
-        button.setTitle("Show Snackbar", for: .normal)
+        button.setTitle("Show snackbar", for: .normal)
         button.addAction(.init(handler: { [weak self] _ in
             self?.actionHandler(for: configuration)
         }), for: .touchUpInside)
@@ -86,8 +87,7 @@ final class SnackbarPresentationComponentUIViewMaker: ComponentUIViewMaker {
         if let autoDismissDelay = configuration.autoDismissDelay {
             self.snackbar.showAndDismiss(
                 in: viewController.view,
-                from: configuration.direction,
-                insets: .init(configuration),
+                animated: configuration.uiKitIsAnimated,
                 autoDismissDelay: autoDismissDelay
             ) { isFinished in
                 // swiftlint:disable no_debugging_method
@@ -96,8 +96,7 @@ final class SnackbarPresentationComponentUIViewMaker: ComponentUIViewMaker {
         } else {
             self.snackbar.show(
                 in: viewController.view,
-                from: configuration.direction,
-                insets: .init(configuration)
+                animated: configuration.uiKitIsAnimated
             )
         }
     }
@@ -109,16 +108,3 @@ final class SnackbarPresentationComponentUIViewMaker: ComponentUIViewMaker {
     }
 }
 
-// MARK: - Extension
-
-private extension UIEdgeInsets {
-
-    init(_ configuration: SnackbarPresentationComponentUIViewMaker.Configuration) {
-        self = .init(
-            top: configuration.topInsetString.cgFloat ?? 0,
-            left: configuration.leftInsetString.cgFloat ?? 0,
-            bottom: configuration.bottomInsetString.cgFloat ?? 0,
-            right: configuration.rightInsetString.cgFloat ?? 0
-        )
-    }
-}

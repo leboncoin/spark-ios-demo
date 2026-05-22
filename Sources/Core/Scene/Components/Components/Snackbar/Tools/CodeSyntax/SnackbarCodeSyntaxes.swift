@@ -14,83 +14,86 @@ struct SnackbarCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Without Button", code: Self.withoutButton),
-            .init(title: "With Button Configuration", code: Self.withButtonConfiguration),
-            .init(title: "With Button Builder", code: Self.withButtonBuilder),
-            .init(title: "Full Configuration", code: Self.fullConfiguration)
+            .init(title: "Basic Snackbar", code: Self.basicSnackbar),
+            .init(title: "With Icon", code: Self.withIcon),
+            .init(title: "With Action Button", code: Self.withActionButton),
+            .init(title: "Custom Content", code: Self.customContent),
+            .init(title: "Different Alignment", code: Self.differentAlignment)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var withoutButton: String {
+    private static var basicSnackbar: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .neutral,
-            image: Image(icon: .infoOutline)
-        ) {
-            Text("This is a snackbar message")
-        }
+        SparkSnackbar(
+            title: "Upload complete",
+            description: "Your file has been uploaded successfully"
+        )
+        .sparkTheme(theme)
+        .sparkSnackbarIntent(.success)
         """
     }
 
-    private static var withButtonConfiguration: String {
+    private static var withIcon: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .success,
-            image: Image(icon: .checkFill)
+        SparkSnackbar(
+            Image(systemName: "wifi.slash"),
+            title: "Connection lost",
+            description: "Unable to reach the server"
+        )
+        .sparkTheme(theme)
+        .sparkSnackbarIntent(.error)
+        """
+    }
+
+    private static var withActionButton: String {
+        """
+        SparkSnackbar(
+            Image(systemName: "trash"),
+            title: "Item deleted",
+            description: "The item has been removed"
         ) {
-            Text("Operation completed successfully")
-        } button: { buttonConfig in
-            SparkButton("Dismiss") {
-                // Your action
+            SparkButton("Undo") {
+                // Undo action
             }
-            .sparkTheme(theme)
-            .sparkButtonIntent(buttonConfig.intent)
-            .sparkButtonVariant(buttonConfig.variant)
-            .sparkButtonSize(buttonConfig.size)
-            .sparkButtonShape(buttonConfig.shape)
+            .sparkButtonVariant(.ghost)
         }
+        .sparkTheme(theme)
+        .sparkSnackbarIntent(.alert)
         """
     }
 
-    private static var withButtonBuilder: String {
+    private static var customContent: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .alert,
-            image: Image(icon: .alertDiamond)
-        ) {
-            Text("Action required")
-        } button: { buttonView in
-            buttonView
-                .title("Undo", for: .normal)
-        } action: {
-            // Handle button action
-        }
+        SparkSnackbar(
+            Image(systemName: "bell.fill"),
+            titleLabel: {
+                Text("New Message")
+                    .bold()
+            },
+            descriptionLabel: {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("John Doe")
+                    Text("Hello, how are you?")
+                        .font(.caption)
+                }
+            }
+        )
+        .sparkTheme(theme)
+        .sparkSnackbarIntent(.info)
         """
     }
 
-    private static var fullConfiguration: String {
+    private static var differentAlignment: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .success,
-            image: Image(icon: .checkFill)
-        ) {
-            Text("Your changes have been saved successfully")
-        } button: { buttonView in
-            buttonView
-                .title("Dismiss", for: .normal)
-        } action: {
-            // Handle button action
-        }
-        .theme(theme)
-        .intent(.success)
-        .variant(.tinted)
-        .type(.horizontal)
+        SparkSnackbar(
+            title: "Settings saved",
+            description: "Your preferences have been updated"
+        )
+        .sparkTheme(theme)
+        .sparkSnackbarIntent(.success)
+        .sparkSnackbarAlignment(.vertical)
         """
     }
 }
