@@ -3,7 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 29/01/2025.
-//  Copyright © 2025 Leboncoin. All rights reserved.
+//  Copyright © 2026 Leboncoin. All rights reserved.
 //
 
 import Foundation
@@ -11,6 +11,8 @@ import Foundation
 class SnackbarConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
+
+    var autoDismissDelay: SnackbarAutoDismissDelay? = .optionalRandom
 
     var intent: SnackbarIntent = .default
     var alignment: SnackbarAlignment = .default
@@ -27,18 +29,26 @@ class SnackbarConfiguration: ComponentConfiguration {
     var swiftUIIsCustomContent: Bool = false
     var swiftUISecondTitleText = "other"
     var swiftUISecondMessageText = "other"
+    var swiftUIIsCompleted: Bool = false
 
     // MARK: - UIKit Properties Only
 
     var uiKitIsAttributedTitle: Bool = false
     var uiKitIsAttributedMessage: Bool = false
+    var uiKitIsAnimated: Bool = true
+
+    // MARK: - Initialization
+
+    required init() {
+        super.init()
+
+        self.swiftUIFixHeight.value = false
+    }
 
     // MARK: - Methods
 
     override func random() {
-        self.intent = .random
-        self.alignment = .random
-        self.icon = .optionalRandom
-        self.hasButton = .random()
+        self.autoDismissDelay = .optionalRandom
+        self.uiKitIsAnimated = .random()
     }
 }

@@ -167,7 +167,10 @@ struct ComponentDisplayView<
                 .id(self.aloneID)
                 .padding(.horizontal, .medium)
                 .padding(.bottom, .medium)
-                .fixedSize(horizontal: false, vertical: true)
+                .fixedSize(
+                    horizontal: false,
+                    vertical: configuration.swiftUIFixHeight.value.wrappedValue
+                )
         } else {
             EmptyView()
         }

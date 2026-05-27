@@ -37,7 +37,6 @@ extension ComponentsView {
         case segmentedGauge
         case slider
         case snackbar
-        case snackbarPresentation
         case spinner
         case stepper
         case tab
@@ -79,7 +78,6 @@ extension ComponentsView {
             case .segmentedGauge: .indicator
             case .slider: .dataInput
             case .snackbar: .overlays
-            case .snackbarPresentation: .overlays
             case .spinner: .indicator
             case .stepper: .dataInput
             case .tab: .navigation
@@ -121,7 +119,6 @@ extension ComponentsView {
             case .segmentedGauge: .available
             case .slider: .available
             case .snackbar: .available
-            case .snackbarPresentation: .none
             case .spinner: .available
             case .stepper: .available
             case .tab: .available
@@ -158,7 +155,6 @@ extension ComponentsView {
             case .segmentedGauge: .init(.segmentedGauge)
             case .slider: .init(.slider)
             case .snackbar: .init(.snackbar)
-            case .snackbarPresentation: .init(.snackbar)
             case .spinner: .init(.spinner)
             case .stepper: .init(.stepper)
             case .tab: .init(.tab)
@@ -230,7 +226,6 @@ extension ComponentsView {
             case .segmentedGauge: SegmentedGaugeComponentView()
             case .slider: SliderComponentView()
             case .snackbar: SnackbarComponentView()
-            case .snackbarPresentation: SnackbarPresentationComponentView()
             case .spinner: SpinnerComponentView()
             case .stepper: StepperComponentView()
             case .tab: TabComponentView()
@@ -271,7 +266,6 @@ extension ComponentsView {
             case .segmentedGauge: SegmentedGaugeComponentUIViewController()
             case .slider: SliderComponentUIViewController()
             case .snackbar: SnackbarComponentUIViewController()
-            case .snackbarPresentation: SnackbarPresentationComponentUIViewController()
             case .spinner: SpinnerComponentUIViewController()
             case .stepper: StepperComponentUIViewController()
             case .tab: TabComponentUIViewController()

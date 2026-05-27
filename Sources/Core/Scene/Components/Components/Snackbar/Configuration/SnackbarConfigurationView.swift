@@ -3,7 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 12/02/2025.
-//  Copyright © 2025 Leboncoin. All rights reserved.
+//  Copyright © 2026 Leboncoin. All rights reserved.
 //
 
 import SwiftUI
@@ -13,7 +13,7 @@ struct SnackbarConfigurationView: ConfigurationViewable, ConfigurationUIViewable
     // MARK: - Type Alias
 
     typealias Configuration = SnackbarConfiguration
-    typealias ComponentUIView = SparkUISnackbar
+    typealias ComponentUIView = UIButton
 
     // MARK: - Properties
 
@@ -58,7 +58,7 @@ struct SnackbarConfigurationView: ConfigurationViewable, ConfigurationUIViewable
             values: SnackbarIntent.allCases,
             selectedValue: self.configuration.intent
         )
-        
+
         EnumConfigurationItemView(
             name: "alignment",
             values: SnackbarAlignment.allCases,
@@ -117,9 +117,36 @@ struct SnackbarConfigurationView: ConfigurationViewable, ConfigurationUIViewable
             }
         }
 
-        TextFieldConfigurationItemView(
-            name: "button",
-            text: self.configuration.buttonTitle
+        ToggleConfigurationItemView(
+            name: "has button",
+            isOn: self.configuration.hasButton
         )
+
+        if self.configuration.wrappedValue.hasButton {
+            TextFieldConfigurationItemView(
+                name: "button",
+                text: self.configuration.buttonTitle
+            )
+        }
+
+        OptionalEnumConfigurationItemView(
+            name: "auto dismiss delay",
+            values: SnackbarAutoDismissDelay.allCases,
+            selectedValue: self.configuration.autoDismissDelay
+        )
+
+        if self.framework.isUIKit {
+            ToggleConfigurationItemView(
+                name: "is animated",
+                isOn: self.configuration.uiKitIsAnimated
+            )
+        }
+
+        if self.framework.isSwiftUI {
+            ToggleConfigurationItemView(
+                name: "is completed",
+                isOn: self.configuration.swiftUIIsCompleted
+            )
+        }
     }
 }

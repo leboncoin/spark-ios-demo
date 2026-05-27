@@ -28,6 +28,7 @@ class ComponentConfiguration: Identifiable {
 
     var swiftUIIsMinWidth = ShowConfigurationBool()
     var swiftUIWidth = ShowConfigurationSize(name: "Width")
+    var swiftUIFixHeight = ShowConfigurationBool()
     var height = ShowConfigurationSize(name: "Height")
 
     // MARK: - UIKit only Properties
