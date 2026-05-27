@@ -47,6 +47,7 @@ class ButtonConfiguration: ComponentConfiguration {
         self.isEnabled.showConfiguration = true
 
         self.uiKitIsSelected.showConfiguration = true
+        self.uiKitIsSelected.value = false
         self.uiKitControlType.showConfiguration = true
 
         self.accessibilityLabel.showConfiguration = true

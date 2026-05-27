@@ -14,83 +14,226 @@ struct SnackbarCodeSyntaxes {
 
     static var content: [CodeSyntax] = {
         return [
-            .init(title: "Without Button", code: Self.withoutButton),
-            .init(title: "With Button Configuration", code: Self.withButtonConfiguration),
-            .init(title: "With Button Builder", code: Self.withButtonBuilder),
-            .init(title: "Full Configuration", code: Self.fullConfiguration)
+            .init(title: "Title & Description", code: Self.titleAndDescription),
+            .init(title: "With Icon", code: Self.withIcon),
+            .init(title: "With Action Button", code: Self.withActionButton),
+            .init(title: "Description Only", code: Self.descriptionOnly),
+            .init(title: "Description with Button", code: Self.descriptionWithButton),
+            .init(title: "Custom Title & Description", code: Self.customTitleAndDescription),
+            .init(title: "Custom Description Only", code: Self.customDescriptionOnly),
+            .init(title: "Custom Description with Button", code: Self.customDescriptionWithButton),
+            .init(title: "Custom All with Button", code: Self.customAllWithButton)
         ]
     }()
 
     // MARK: - Private Properties
 
-    private static var withoutButton: String {
+    private static var titleAndDescription: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .neutral,
-            image: Image(icon: .infoOutline)
-        ) {
-            Text("This is a snackbar message")
+        VStack {
+            Text("My content")
+            Spacer()
         }
+        .sparkSnackbar(
+            title: "Upload complete",
+            description: "Your file has been uploaded successfully",
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.success)
         """
     }
 
-    private static var withButtonConfiguration: String {
+    private static var withIcon: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .success,
-            image: Image(icon: .checkFill)
-        ) {
-            Text("Operation completed successfully")
-        } button: { buttonConfig in
-            SparkButton("Dismiss") {
-                // Your action
+        VStack {
+            Text("My content")
+            Spacer()
+        }
+        .sparkSnackbar(
+            Image(systemName: "checkmark.circle"),
+            title: "Email sent",
+            description: "Your message was sent successfully",
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.success)
+        """
+    }
+
+    private static var withActionButton: String {
+        """
+        VStack {
+            Text("My content")
+            Spacer()
+        }
+        .sparkSnackbar(
+            Image(systemName: "envelope.fill"),
+            title: "Email sent",
+            description: "Your message was sent successfully",
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default,
+            button: {
+                SparkButton("View") {
+                    // View action
+                }
+                .sparkButtonVariant(.ghost)
             }
-            .sparkTheme(theme)
-            .sparkButtonIntent(buttonConfig.intent)
-            .sparkButtonVariant(buttonConfig.variant)
-            .sparkButtonSize(buttonConfig.size)
-            .sparkButtonShape(buttonConfig.shape)
-        }
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.success)
         """
     }
 
-    private static var withButtonBuilder: String {
+    private static var descriptionOnly: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .alert,
-            image: Image(icon: .alertDiamond)
-        ) {
-            Text("Action required")
-        } button: { buttonView in
-            buttonView
-                .title("Undo", for: .normal)
-        } action: {
-            // Handle button action
+        VStack {
+            Text("My content")
+            Spacer()
         }
+        .sparkSnackbar(
+            Image(systemName: "checkmark.circle"),
+            description: "File saved successfully",
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.success)
         """
     }
 
-    private static var fullConfiguration: String {
+    private static var descriptionWithButton: String {
         """
-        SnackbarView(
-            theme: theme,
-            intent: .success,
-            image: Image(icon: .checkFill)
-        ) {
-            Text("Your changes have been saved successfully")
-        } button: { buttonView in
-            buttonView
-                .title("Dismiss", for: .normal)
-        } action: {
-            // Handle button action
+        VStack {
+            Text("My content")
+            Spacer()
         }
-        .theme(theme)
-        .intent(.success)
-        .variant(.tinted)
-        .type(.horizontal)
+        .sparkSnackbar(
+            Image(systemName: "trash"),
+            description: "Item deleted",
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default,
+            button: {
+                SparkButton("Undo") {
+                    // Undo action
+                }
+                .sparkButtonVariant(.ghost)
+            }
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.alert)
+        """
+    }
+
+    private static var customTitleAndDescription: String {
+        """
+        VStack {
+            Text("My content")
+            Spacer()
+        }
+        .sparkSnackbar(
+            Image(systemName: "bell.fill"),
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default,
+            titleLabel: {
+                Text("New Message")
+                    .bold()
+            },
+            descriptionLabel: {
+                VStack(alignment: .leading) {
+                    Text("John Doe")
+                    Text("Hello, how are you?")
+                }
+            }
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.info)
+        """
+    }
+
+    private static var customDescriptionOnly: String {
+        """
+        VStack {
+            Text("My content")
+            Spacer()
+        }
+        .sparkSnackbar(
+            Image(systemName: "info.circle"),
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default,
+            descriptionLabel: {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("System update available")
+                    Text("Version 2.0.1")
+                        .font(.caption)
+                }
+            }
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.info)
+        """
+    }
+
+    private static var customDescriptionWithButton: String {
+        """
+        VStack {
+            Text("My content")
+            Spacer()
+        }
+        .sparkSnackbar(
+            Image(systemName: "photo"),
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default,
+            descriptionLabel: {
+                HStack {
+                    Text("Photo uploaded")
+                    Image(systemName: "checkmark")
+                        .foregroundColor(.green)
+                }
+            },
+            button: {
+                SparkButton("View") {
+                    // View action
+                }
+                .sparkButtonVariant(.ghost)
+            }
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.success)
+        """
+    }
+
+    private static var customAllWithButton: String {
+        """
+        VStack {
+            Text("My content")
+            Spacer()
+        }
+        .sparkSnackbar(
+            Image(systemName: "star.fill"),
+            isPresented: self.$showSnackbar,
+            autoDismissDelay: .default,
+            titleLabel: {
+                Text("Achievement Unlocked")
+                    .bold()
+            },
+            descriptionLabel: {
+                VStack(alignment: .leading) {
+                    Text("Level 10 reached!")
+                    Text("Keep up the great work")
+                }
+            },
+            button: {
+                SparkButton("View") {
+                    // View action
+                }
+                .sparkButtonVariant(.ghost)
+            }
+        )
+        .sparkTheme(self.theme)
+        .sparkSnackbarIntent(.success)
         """
     }
 }
