@@ -3,7 +3,7 @@ on: workflow_call
 
 env:
   app_name: SparkDemoApp
-  xcode_path: "/Applications/Xcode_26.1.app"
+  xcode_path: "/Applications/Xcode_26.3.app"
 
 jobs:
   build:
