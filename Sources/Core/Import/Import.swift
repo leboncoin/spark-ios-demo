@@ -9,6 +9,7 @@
 @_exported import SparkComponentButton
 @_exported import SparkComponentCard
 @_exported import SparkComponentChip
+@_exported import SparkComponentCircularMeter
 @_exported import SparkComponentDivider
 @_exported import SparkComponentFileUpload
 @_exported import SparkComponentFormField

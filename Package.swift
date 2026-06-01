@@ -50,6 +50,10 @@ let package = Package(
             url: "https://github.com/leboncoin/spark-ios-component-chip.git",
             // path: "../spark-ios-component-chip"
             /*version*/ "0.0.1"..."999.999.999"
+        .package(
+            // url: "https://github.com/leboncoin/spark-ios-component-circular-meter.git",
+            path: "../spark-ios-component-circular-meter"
+            // /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-divider.git",
@@ -177,6 +181,10 @@ let package = Package(
                 .product(
                     name: "SparkComponentChip",
                     package: "spark-ios-component-chip"
+                ),
+                .product(
+                    name: "SparkComponentCircularMeter",
+                    package: "spark-ios-component-circular-meter"
                 ),
                 .product(
                     name: "SparkComponentDivider",

@@ -20,6 +20,7 @@ extension ComponentsView {
         case checkbox
         case checkboxGroup
         case chip
+        case circularMeter
         case cornerRadius
         case divider
         case fileUpload
@@ -61,6 +62,7 @@ extension ComponentsView {
             case .checkbox: .dataInput
             case .checkboxGroup: .dataInput
             case .chip: .dataInput
+            case .circularMeter: .indicator
             case .cornerRadius: .style
             case .divider: .dataDisplay
             case .fileUpload: .dataInput
@@ -102,6 +104,7 @@ extension ComponentsView {
             case .checkbox: .available
             case .checkboxGroup: .available
             case .chip: .available
+            case .circularMeter: .available
             case .cornerRadius: .available
             case .divider: .available
             case .fileUpload: .available
@@ -140,6 +143,7 @@ extension ComponentsView {
             case .checkbox: .init(.checkbox)
             case .checkboxGroup: .init(.checkbox)
             case .chip: .init(.chip)
+            case .circularMeter: .init(.meter)
             case .divider: .init(.divider)
             case .formField: .init(.formField)
             case .fileUpload: .init(.fileUpload)
@@ -209,6 +213,7 @@ extension ComponentsView {
             case .checkbox: CheckboxComponentView()
             case .checkboxGroup: CheckboxGroupComponentView()
             case .chip: ChipComponentView()
+            case .circularMeter: CircularMeterComponentView()
             case .cornerRadius: CornerRadiusComponentView()
             case .divider: DividerComponentView()
             case .fileUpload: FileUploadComponentsView()
@@ -292,6 +297,7 @@ extension ComponentsView {
             case .uiKit:
                 values = self.allCases.filter {
                     $0 != .border &&
+                    $0 != .circularMeter &&
                     $0 != .fileUpload
                 }
             case .swiftUI:
