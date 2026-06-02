@@ -19,7 +19,8 @@ struct SkyColors: Colors {
         mainVariant: ColorTokenDefault(named: "main-variant", in: .module),
         onMainVariant: ColorTokenDefault(named: "on-main-variant", in: .module),
         mainContainer: ColorTokenDefault(named: "main-container", in: .module),
-        onMainContainer: ColorTokenDefault(named: "on-main-container", in: .module))
+        onMainContainer: ColorTokenDefault(named: "on-main-container", in: .module)
+    )
 
     let support: any ColorsSupport = ColorsSupportDefault(
         support: ColorTokenDefault(named: "support", in: .module),
@@ -27,7 +28,8 @@ struct SkyColors: Colors {
         supportVariant: ColorTokenDefault(named: "support-variant", in: .module),
         onSupportVariant: ColorTokenDefault(named: "on-support-variant", in: .module),
         supportContainer: ColorTokenDefault(named: "support-container", in: .module),
-        onSupportContainer: ColorTokenDefault(named: "on-support-container", in: .module))
+        onSupportContainer: ColorTokenDefault(named: "on-support-container", in: .module)
+    )
 
     let accent: any ColorsAccent = ColorsAccentDefault(
         accent: ColorTokenDefault(named: "accent", in: .module),
@@ -35,7 +37,8 @@ struct SkyColors: Colors {
         accentVariant: ColorTokenDefault(named: "accent-variant", in: .module),
         onAccentVariant: ColorTokenDefault(named: "on-accent-variant", in: .module),
         accentContainer: ColorTokenDefault(named: "accent-container", in: .module),
-        onAccentContainer: ColorTokenDefault(named: "on-accent-container", in: .module))
+        onAccentContainer: ColorTokenDefault(named: "on-accent-container", in: .module)
+    )
 
     let base: any ColorsBase = ColorsBaseDefault(
         background: ColorTokenDefault(named: "background", in: .module),
@@ -49,7 +52,8 @@ struct SkyColors: Colors {
         outline: ColorTokenDefault(named: "outline", in: .module),
         outlineHigh: ColorTokenDefault(named: "outline-high", in: .module),
         overlay: ColorTokenDefault(named: "overlay", in: .module),
-        onOverlay: ColorTokenDefault(named: "on-overlay", in: .module))
+        onOverlay: ColorTokenDefault(named: "on-overlay", in: .module)
+    )
 
     let feedback: any ColorsFeedback = ColorsFeedbackDefault(
         success: ColorTokenDefault(named: "success", in: .module),
@@ -95,5 +99,13 @@ struct SkyColors: Colors {
         infoPressed: ColorTokenDefault(named: "info-pressed", in: .module),
         infoContainerPressed: ColorTokenDefault(named: "info-container-pressed", in: .module),
         neutralPressed: ColorTokenDefault(named: "neutral-pressed", in: .module),
-        neutralContainerPressed: ColorTokenDefault(named: "neutral-container-pressed", in: .module))
+        neutralContainerPressed: ColorTokenDefault(named: "neutral-container-pressed", in: .module)
+    )
+
+    let ia: any ColorsIA = ColorsIADefault(
+        ia: ColorTokenDefault(named: "ia", in: .module),
+        onIA: ColorTokenDefault(named: "on-ia", in: .module),
+        iaContainer: ColorTokenDefault(named: "ia-container", in: .module),
+        onIAContainer: ColorTokenDefault(named: "on-ia-container", in: .module)
+    )
 }

@@ -136,7 +136,7 @@ struct CircularMeterImplementationView: ComponentImplementationViewable {
                 }
             }
         } else { // No text/Label
-            
+
             SparkCircularMeter(
                 value: self.configurationWrapped.value
             )
