@@ -89,7 +89,7 @@ struct CircularMeterImplementationView: ComponentImplementationViewable {
     private func componentWithImage() -> some View {
         SparkCircularMeter(
             value: self.configurationWrapped.value,
-            image: Image(.meter)
+            image: Image(.circleMeter)
         )
     }
 
@@ -116,7 +116,7 @@ struct CircularMeterImplementationView: ComponentImplementationViewable {
                 } else {
                     SparkCircularMeter(
                         value: self.configurationWrapped.value,
-                        valueText: self.configurationWrapped.valueText,
+                        valueText: valueText,
                         contentText: contentText
                     )
                 }
@@ -131,7 +131,7 @@ struct CircularMeterImplementationView: ComponentImplementationViewable {
                 } else {
                     SparkCircularMeter(
                         value: self.configurationWrapped.value,
-                        valueText: self.configurationWrapped.valueText
+                        valueText: valueText
                     )
                 }
             }

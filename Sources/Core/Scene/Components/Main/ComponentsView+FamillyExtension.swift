@@ -11,12 +11,13 @@ extension ComponentsView {
     enum Familly: String, CaseIterable, Hashable {
         case all
         case action
-        case dataDisplay
         case dataInput
         case indicator
+        case layout
         case navigation
         case other
         case overlays
+        case visualAsset
         case style
     }
 }
