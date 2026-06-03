@@ -38,7 +38,9 @@ struct ColorSectionStatesViewModel: ColorSectionViewModelable {
                 .init(name: "infoPressed", colorToken: color.infoPressed),
                 .init(name: "infoContainerPressed", colorToken: color.infoContainerPressed),
                 .init(name: "neutralPressed", colorToken: color.neutralPressed),
-                .init(name: "neutralContainerPressed", colorToken: color.neutralContainerPressed)
+                .init(name: "neutralContainerPressed", colorToken: color.neutralContainerPressed),
+                .init(name: "iaPressed", colorToken: color.iaPressed),
+                .init(name: "iaContainerPressed", colorToken: color.iaContainerPressed)
             ]
         ]
     }

@@ -99,7 +99,9 @@ struct SkyColors: Colors {
         infoPressed: ColorTokenDefault(named: "info-pressed", in: .module),
         infoContainerPressed: ColorTokenDefault(named: "info-container-pressed", in: .module),
         neutralPressed: ColorTokenDefault(named: "neutral-pressed", in: .module),
-        neutralContainerPressed: ColorTokenDefault(named: "neutral-container-pressed", in: .module)
+        neutralContainerPressed: ColorTokenDefault(named: "neutral-container-pressed", in: .module),
+        iaPressed: ColorTokenDefault(named: "ia-pressed", in: .module),
+        iaContainerPressed: ColorTokenDefault(named: "ia-container-pressed", in: .module)
     )
 
     let ia: any ColorsIA = ColorsIADefault(
