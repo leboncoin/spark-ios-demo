@@ -20,6 +20,7 @@ extension ComponentsView {
         case checkbox
         case checkboxGroup
         case chip
+        case circularMeter
         case cornerRadius
         case divider
         case fileUpload
@@ -57,15 +58,16 @@ extension ComponentsView {
             case .borderRadius: .style
             case .bottomSheet: .overlays
             case .button: .action
-            case .card: .dataDisplay
+            case .card: .layout
             case .checkbox: .dataInput
             case .checkboxGroup: .dataInput
             case .chip: .dataInput
+            case .circularMeter: .indicator
             case .cornerRadius: .style
-            case .divider: .dataDisplay
+            case .divider: .layout
             case .fileUpload: .dataInput
             case .formField: .dataInput
-            case .icon: .dataDisplay
+            case .icon: .visualAsset
             case .microAnimation: .other
             case .popover: .overlays
             case .progressBar: .indicator
@@ -73,7 +75,7 @@ extension ComponentsView {
             case .progressTracker: .indicator
             case .radioButton: .dataInput
             case .radioGroup: .dataInput
-            case .ratingDisplay: .dataDisplay
+            case .ratingDisplay: .indicator
             case .ratingInput: .dataInput
             case .segmentedGauge: .indicator
             case .slider: .dataInput
@@ -81,7 +83,7 @@ extension ComponentsView {
             case .spinner: .indicator
             case .stepper: .dataInput
             case .tab: .navigation
-            case .tag: .dataDisplay
+            case .tag: .layout
             case .textEditor: .dataInput
             case .textField: .dataInput
             case .textFieldAddons: .dataInput
@@ -102,6 +104,7 @@ extension ComponentsView {
             case .checkbox: .available
             case .checkboxGroup: .available
             case .chip: .available
+            case .circularMeter: .available
             case .cornerRadius: .available
             case .divider: .available
             case .fileUpload: .available
@@ -140,10 +143,12 @@ extension ComponentsView {
             case .checkbox: .init(.checkbox)
             case .checkboxGroup: .init(.checkbox)
             case .chip: .init(.chip)
+            case .circularMeter: .init(.circleMeter)
             case .divider: .init(.divider)
             case .formField: .init(.formField)
             case .fileUpload: .init(.fileUpload)
             case .icon: .init(.icon)
+            case .microAnimation: .init(.motion)
             case .popover: .init(.popover)
             case .progressBar: .init(.progressBar)
             case .progressBarIndeterminate: .init(.progressBar)
@@ -175,7 +180,6 @@ extension ComponentsView {
             case .border: BorderIllustrationView()
             case .borderRadius: BorderRadiusIllustrationView()
             case .cornerRadius: CornerRadiusIllustrationView()
-            case .microAnimation: MicroAnimationllustrationView()
             default:
                 ZStack {
                     if let illustration {
@@ -209,6 +213,7 @@ extension ComponentsView {
             case .checkbox: CheckboxComponentView()
             case .checkboxGroup: CheckboxGroupComponentView()
             case .chip: ChipComponentView()
+            case .circularMeter: CircularMeterComponentView()
             case .cornerRadius: CornerRadiusComponentView()
             case .divider: DividerComponentView()
             case .fileUpload: FileUploadComponentsView()
@@ -292,6 +297,7 @@ extension ComponentsView {
             case .uiKit:
                 values = self.allCases.filter {
                     $0 != .border &&
+                    $0 != .circularMeter &&
                     $0 != .fileUpload
                 }
             case .swiftUI:
