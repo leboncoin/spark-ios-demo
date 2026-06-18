@@ -14,6 +14,7 @@
 @_exported import SparkComponentFileUpload
 @_exported import SparkComponentFormField
 @_exported import SparkComponentIcon
+@_exported import SparkComponentInputOTP
 @_exported import SparkComponentPopover
 @_exported import SparkComponentProgressBar
 @_exported import SparkComponentProgressTracker

@@ -16,7 +16,6 @@ struct CardUICodeSyntaxes {
         return [
             .init(title: "Simple Content", code: Self.simpleContent),
             .init(title: "With Action", code: Self.withAction),
-            .init(title: "With Backdrop", code: Self.withBackdrop),
             .init(title: "Highlighted Style", code: Self.highlightedStyle),
             .init(title: "No Padding", code: Self.noPadding),
             .init(title: "Different Variants", code: Self.differentVariants),
@@ -84,35 +83,6 @@ struct CardUICodeSyntaxes {
         card.addAction(.init(handler: { _ in
             // Your action
         }), for: .touchUpInside)
-        """
-    }
-
-    private static var withBackdrop: String {
-        """
-        let contentStackView = UIStackView()
-        contentStackView.axis = .vertical
-        contentStackView.spacing = 12
-
-        let titleLabel = UILabel()
-        titleLabel.text = "Card with Backdrop"
-        titleLabel.font = theme.typography.headline2.uiFont
-        titleLabel.numberOfLines = 0
-
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = "The backdrop appears at the top of the card."
-        descriptionLabel.font = theme.typography.body1.uiFont
-        descriptionLabel.numberOfLines = 0
-
-        contentStackView.addArrangedSubview(titleLabel)
-        contentStackView.addArrangedSubview(descriptionLabel)
-
-        let card = SparkUICard(
-            theme: theme,
-            contentView: contentStackView
-        )
-        card.intent = .main
-        card.variant = .tinted
-        card.isBackdrop = true
         """
     }
 
@@ -288,7 +258,6 @@ struct CardUICodeSyntaxes {
         )
         card.intent = .main
         card.variant = .tinted
-        card.isBackdrop = true
         card.isHighlightedStyle = true
         card.isPadding = true
         card.isEnabled = true

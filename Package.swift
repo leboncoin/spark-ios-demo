@@ -77,6 +77,11 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
+            url: "https://github.com/leboncoin/spark-ios-component-input-otp.git",
+            // path: "../spark-ios-component-input-otp"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
             url: "https://github.com/leboncoin/spark-ios-component-popover.git",
             // path: "../spark-ios-component-popover"
             /*version*/ "0.0.1"..."999.999.999"
@@ -202,6 +207,10 @@ let package = Package(
                 .product(
                     name: "SparkComponentIcon",
                     package: "spark-ios-component-icon"
+                ),
+                .product(
+                    name: "SparkComponentInputOTP",
+                    package: "spark-ios-component-input-otp"
                 ),
                 .product(
                     name: "SparkComponentPopover",

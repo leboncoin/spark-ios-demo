@@ -58,9 +58,8 @@ final class CardComponentUIViewMaker: ComponentUIViewMaker {
         for configuration: Configuration
     ) {
         componentView.intent = configuration.intent
-        componentView.isBackdrop = configuration.isBackdrop
         componentView.isHighlightedStyle = configuration.isHighlighted
-        componentView.isPadding = configuration.isPadding
+        componentView.isPadding = configuration.uiKitIsPadding
         componentView.variant = configuration.variant
         componentView.demoControlType(configuration, on: self.viewController)
         componentView.demoDisabled(configuration)

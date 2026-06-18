@@ -49,6 +49,11 @@ struct CardConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             },
             mainItemsView: {
                 self.itemsView()
+            },
+            otherSectionItemsView: {
+                if self.framework.isSwiftUI {
+                    self.headerItemsView()
+                }
             }
         )
     }
@@ -68,24 +73,62 @@ struct CardConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
         )
 
         ToggleConfigurationItemView(
-            name: "is backdrop",
-            isOn: self.configuration.isBackdrop
-        )
-
-        ToggleConfigurationItemView(
             name: "is highlighted",
             isOn: self.configuration.isHighlighted
         )
 
-        ToggleConfigurationItemView(
-            name: "is padding",
-            isOn: self.configuration.isPadding
-        )
+        if framework.isSwiftUI {
+            EnumConfigurationItemView(
+                name: "padding",
+                values: CardPadding.allCases,
+                selectedValue: self.configuration.swiftUIPadding
+            )
+        } else {
+            ToggleConfigurationItemView(
+                name: "is padding",
+                isOn: self.configuration.uiKitIsPadding
+            )
+        }
 
         if self.framework.isSwiftUI {
             ToggleConfigurationItemView(
                 name: "with action",
                 isOn: self.configuration.swiftUIWithAction
+            )
+        }
+    }
+
+    @ViewBuilder
+    private func headerItemsView() -> some View {
+        EnumConfigurationItemView(
+            name: "position",
+            values: CardHeaderPosition.allCases,
+            selectedValue: self.configuration.swiftUIHeaderPosition
+        )
+
+        TextFieldConfigurationItemView(
+            name: "header",
+            text: self.configuration.swiftUIHeader
+        )
+
+        if self.framework.isSwiftUI {
+
+            ToggleConfigurationItemView(
+                name: "is custom header content",
+                isOn: self.configuration.swiftUIHeaderIsCustomContent
+            )
+
+            if self.configuration.wrappedValue.swiftUIHeaderIsCustomContent {
+                TextFieldConfigurationItemView(
+                    name: "second header",
+                    text: self.configuration.swiftUIHeaderSecondText
+                )
+            }
+
+        } else {
+            ToggleConfigurationItemView(
+                name: "is attributed text",
+                isOn: self.configuration.uiKitIsAttributedHeader
             )
         }
     }

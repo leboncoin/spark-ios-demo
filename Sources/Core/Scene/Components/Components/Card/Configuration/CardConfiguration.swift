@@ -14,9 +14,7 @@ class CardConfiguration: ComponentConfiguration {
 
     var intent: CardIntent = .default
     var variant: CardVariant = .default
-    var isBackdrop: Bool = false
     var isHighlighted: Bool = false
-    var isPadding: Bool = true
 
     var tag = TagConfiguration()
     var icon = IconConfiguration()
@@ -24,11 +22,18 @@ class CardConfiguration: ComponentConfiguration {
 
     // MARK: - SwiftUI Properties Only
 
+    var swiftUIPadding: CardPadding = .default
     var swiftUIWithAction: Bool = false
+    
+    var swiftUIHeader: String = "New !"
+    var swiftUIHeaderPosition: CardHeaderPosition = .default
+    var swiftUIHeaderIsCustomContent: Bool = false
+    var swiftUIHeaderSecondText = "is amazing"
 
     // MARK: - UIKit Properties Only
 
-    var uiKitIsAttributedText = false
+    var uiKitIsAttributedHeader = false
+    var uiKitIsPadding = true
 
     // MARK: - Initialization
 
@@ -61,7 +66,7 @@ class CardConfiguration: ComponentConfiguration {
     override func isInvertedBackground() -> Bool {
         if self.variant == .outlined {
             return false
-        } else if !self.isBackdrop, self.intent != .surface {
+        } else if self.intent != .surface {
             return false
         } else {
             return true
@@ -72,9 +77,10 @@ class CardConfiguration: ComponentConfiguration {
 
     override func random() {
         self.intent = .random
-        self.isBackdrop = .random()
         self.isHighlighted = .random()
-        self.isPadding = .random()
+        self.swiftUIPadding = .random
+        self.uiKitIsPadding = .random()
         self.variant = .random
+        self.swiftUIHeaderPosition = .random
     }
 }
