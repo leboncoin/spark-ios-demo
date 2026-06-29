@@ -11,6 +11,7 @@ extension ComponentsView {
 
     enum Component: String, CaseIterable, Hashable {
         case adaptativeStack
+        case awarenessCard
         case badge
         case border
         case borderRadius
@@ -26,6 +27,7 @@ extension ComponentsView {
         case fileUpload
         case formField
         case icon
+        case inputOTP
         case microAnimation
         case popover
         case progressBar
@@ -35,6 +37,7 @@ extension ComponentsView {
         case radioGroup
         case ratingDisplay
         case ratingInput
+        case segmentedControl
         case segmentedGauge
         case slider
         case snackbar
@@ -53,6 +56,7 @@ extension ComponentsView {
         var familly: Familly {
             switch self {
             case .adaptativeStack: .style
+            case .awarenessCard: .layout
             case .badge: .indicator
             case .border: .style
             case .borderRadius: .style
@@ -68,6 +72,7 @@ extension ComponentsView {
             case .fileUpload: .dataInput
             case .formField: .dataInput
             case .icon: .visualAsset
+            case .inputOTP: .dataInput
             case .microAnimation: .other
             case .popover: .overlays
             case .progressBar: .indicator
@@ -77,6 +82,7 @@ extension ComponentsView {
             case .radioGroup: .dataInput
             case .ratingDisplay: .indicator
             case .ratingInput: .dataInput
+            case .segmentedControl: .dataInput
             case .segmentedGauge: .indicator
             case .slider: .dataInput
             case .snackbar: .overlays
@@ -95,6 +101,7 @@ extension ComponentsView {
         var accessibilityStatus: AccessibilityStatus {
             switch self {
             case .adaptativeStack: .available
+            case .awarenessCard: .available
             case .badge: .available
             case .border: .available
             case .borderRadius: .available
@@ -110,6 +117,7 @@ extension ComponentsView {
             case .fileUpload: .available
             case .formField: .available
             case .icon: .available
+            case .inputOTP: .available
             case .microAnimation: .none
             case .popover: .unavailable
             case .progressBar: .available
@@ -119,6 +127,7 @@ extension ComponentsView {
             case .radioGroup: .available
             case .ratingDisplay: .available
             case .ratingInput: .available
+            case .segmentedControl: .available
             case .segmentedGauge: .available
             case .slider: .available
             case .snackbar: .available
@@ -136,6 +145,7 @@ extension ComponentsView {
 
         private var illustration: Image? {
             switch self {
+            case .awarenessCard: .init(.awarenessCard)
             case .badge: .init(.badge)
             case .button: .init(.button)
             case .bottomSheet: .init(.bottomSheet)
@@ -148,6 +158,7 @@ extension ComponentsView {
             case .formField: .init(.formField)
             case .fileUpload: .init(.fileUpload)
             case .icon: .init(.icon)
+            case .inputOTP: .init(.inputOTP)
             case .microAnimation: .init(.motion)
             case .popover: .init(.popover)
             case .progressBar: .init(.progressBar)
@@ -157,6 +168,7 @@ extension ComponentsView {
             case .radioGroup: .init(.radioButton)
             case .ratingDisplay: .init(.rating)
             case .ratingInput: .init(.rating)
+            case .segmentedControl: .init(.segmentedControl)
             case .segmentedGauge: .init(.segmentedGauge)
             case .slider: .init(.slider)
             case .snackbar: .init(.snackbar)
@@ -204,6 +216,7 @@ extension ComponentsView {
         var swiftUIComponent: some View {
             switch self {
             case .adaptativeStack: AdaptativeStackComponentView()
+            case .awarenessCard: AwarenessCardComponentView()
             case .badge: BadgeComponentView()
             case .border: BorderComponentView()
             case .borderRadius: BorderRadiusComponentView()
@@ -219,6 +232,7 @@ extension ComponentsView {
             case .fileUpload: FileUploadComponentsView()
             case .formField: FormFieldComponentView()
             case .icon: IconComponentView()
+            case .inputOTP: InputOTPComponentView()
             case .microAnimation: MicroAnimationComponentView()
             case .popover: PopoverComponentView()
             case .progressBar: ProgressBarComponentView()
@@ -228,6 +242,7 @@ extension ComponentsView {
             case .radioGroup: RadioGroupComponentView()
             case .ratingDisplay: RatingDisplayComponentView()
             case .ratingInput: RatingInputComponentView()
+            case .segmentedControl: SegmentedControlComponentView()
             case .segmentedGauge: SegmentedGaugeComponentView()
             case .slider: SliderComponentView()
             case .snackbar: SnackbarComponentView()
@@ -296,9 +311,12 @@ extension ComponentsView {
             switch framework {
             case .uiKit:
                 values = self.allCases.filter {
+                    $0 != .awarenessCard &&
                     $0 != .border &&
                     $0 != .circularMeter &&
-                    $0 != .fileUpload
+                    $0 != .fileUpload &&
+                    $0 != .inputOTP &&
+                    $0 != .segmentedControl
                 }
             case .swiftUI:
                 values = self.allCases.filter {

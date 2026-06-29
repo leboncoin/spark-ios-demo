@@ -7,7 +7,7 @@ import PackageDescription
 let package = Package(
     name: "SparkDemo",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v17)
     ],
     products: [
         .library(
@@ -77,6 +77,11 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
+            url: "https://github.com/leboncoin/spark-ios-component-input-otp.git",
+            // path: "../spark-ios-component-input-otp"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
             url: "https://github.com/leboncoin/spark-ios-component-popover.git",
             // path: "../spark-ios-component-popover"
             /*version*/ "0.0.1"..."999.999.999"
@@ -94,6 +99,11 @@ let package = Package(
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-rating.git",
             // path: "../spark-ios-component-rating"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
+            url: "https://github.com/leboncoin/spark-ios-component-segmented-control.git",
+            // path: "../spark-ios-component-segmented-control"
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
@@ -204,6 +214,10 @@ let package = Package(
                     package: "spark-ios-component-icon"
                 ),
                 .product(
+                    name: "SparkComponentInputOTP",
+                    package: "spark-ios-component-input-otp"
+                ),
+                .product(
                     name: "SparkComponentPopover",
                     package: "spark-ios-component-popover"
                 ),
@@ -218,6 +232,10 @@ let package = Package(
                 .product(
                     name: "SparkComponentRating",
                     package: "spark-ios-component-rating"
+                ),
+                .product(
+                    name: "SparkComponentSegmentedControl",
+                    package: "spark-ios-component-segmented-control"
                 ),
                 .product(
                     name: "SparkComponentSegmentedGauge",

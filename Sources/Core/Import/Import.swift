@@ -14,10 +14,12 @@
 @_exported import SparkComponentFileUpload
 @_exported import SparkComponentFormField
 @_exported import SparkComponentIcon
+@_exported import SparkComponentInputOTP
 @_exported import SparkComponentPopover
 @_exported import SparkComponentProgressBar
 @_exported import SparkComponentProgressTracker
 @_exported import SparkComponentRating
+@_exported import SparkComponentSegmentedControl
 @_exported import SparkComponentSegmentedGauge
 @_exported import SparkComponentSelectionControls
 @_exported import SparkComponentSlider

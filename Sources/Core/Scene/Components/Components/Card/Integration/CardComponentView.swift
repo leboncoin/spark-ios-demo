@@ -24,24 +24,58 @@ struct CardImplementationView: ComponentImplementationViewable {
     // MARK: - View
 
     var body: some View {
-        SparkCard(
-            content: self.content,
-            action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil
-        )
+        self.component()
             .sparkTheme(self.configurationWrapped.theme.value)
             .sparkCardIntent(self.configurationWrapped.intent)
-            .sparkCardIsBackdrop(self.configurationWrapped.isBackdrop)
             .sparkCardIsHighlighted(self.configurationWrapped.isHighlighted)
-            .sparkCardIsPadding(self.configurationWrapped.isPadding)
+            .sparkCardPadding(self.configurationWrapped.swiftUIPadding)
             .sparkCardVariant(self.configurationWrapped.variant)
+            .sparkCardHeaderPosition(self.configurationWrapped.swiftUIHeaderPosition)
             .demoDisabled(self.configurationWrapped)
             .demoAccessibilityLabel(self.configurationWrapped)
             .demoAccessibilityHidden(self.configurationWrapped)
+            .padding(.top, self.configurationWrapped.swiftUIHeaderPosition == .border ? 20 : 0)
             .demoBackground(self.configurationWrapped)
             .alert("Pressed", isPresented: self.$showAlertAction) {
                 Button("OK", role: .cancel) {
                 }
             }
+    }
+
+    @ViewBuilder
+    private func component() -> some View {
+        // With header
+        if let header = self.configurationWrapped.swiftUIHeader.nilIfEmpty {
+
+            if self.configurationWrapped.swiftUIHeaderIsCustomContent {
+                SparkCard(
+                    header: self.header,
+                    content: self.content,
+                    action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil
+                )
+            } else {
+                SparkCard(
+                    header: header,
+                    content: self.content,
+                    action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil
+                )
+            }
+
+        } else { // Without header
+            SparkCard(
+                content: self.content,
+                action: self.configurationWrapped.swiftUIWithAction ? { self.showAlertAction = true} : nil
+            )
+        }
+    }
+
+    @ViewBuilder
+    private func header() -> some View {
+        VStack {
+            Text(self.configurationWrapped.swiftUIHeader)
+            Text(self.configurationWrapped.swiftUIHeaderSecondText)
+                .bold()
+        }
     }
 
     @ViewBuilder
