@@ -63,7 +63,15 @@ struct OtherView: View {
                 ForEach(RedirectionSection.allCases, id: \.self) { section in
                     Section(section.name) {
                         ForEach(section.redirections, id: \.self) { redirection in
-                            NavigationLink(redirection.name, value: redirection)
+
+                            if redirection == .theme {
+                                NavigationLink(value: redirection) {
+                                    Image(.tokens)
+                                }
+                                .navigationLinkIndicatorVisibility(.hidden)
+                            } else {
+                                NavigationLink(redirection.name, value: redirection)
+                            }
                         }
                     }
                 }

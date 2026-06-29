@@ -7,7 +7,7 @@ import PackageDescription
 let package = Package(
     name: "SparkDemo",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v17)
     ],
     products: [
         .library(
@@ -99,6 +99,11 @@ let package = Package(
         .package(
             url: "https://github.com/leboncoin/spark-ios-component-rating.git",
             // path: "../spark-ios-component-rating"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
+            url: "https://github.com/leboncoin/spark-ios-component-segmented-control.git",
+            // path: "../spark-ios-component-segmented-control"
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
@@ -227,6 +232,10 @@ let package = Package(
                 .product(
                     name: "SparkComponentRating",
                     package: "spark-ios-component-rating"
+                ),
+                .product(
+                    name: "SparkComponentSegmentedControl",
+                    package: "spark-ios-component-segmented-control"
                 ),
                 .product(
                     name: "SparkComponentSegmentedGauge",

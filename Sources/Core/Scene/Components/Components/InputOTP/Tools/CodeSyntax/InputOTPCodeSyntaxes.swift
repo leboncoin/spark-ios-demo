@@ -63,7 +63,6 @@ struct InputOTPCodeSyntaxes {
         """
         SparkInputOTP(value: $otpValue) { completedValue in
             // Handle completion
-            print("OTP completed: \\(completedValue)")
         }
         .sparkTheme(theme)
         """

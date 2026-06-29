@@ -6,26 +6,26 @@
 //
 
 enum ColorSectionType: CaseIterable {
-    case main
-    case support
     case accent
+    case ai
     case base
     case feedback
+    case main
     case states
-    case ia
+    case support
 
     // MARK: - Properties
 
     func viewModel() -> any ColorSectionViewModelable {
         let colors = DemoThemes.shared.mainTheme.value.colors
         return switch self {
-        case .main: ColorSectionMainViewModel(color: colors.main)
-        case .support: ColorSectionSupportViewModel(color: colors.support)
         case .accent: ColorSectionAccentViewModel(color: colors.accent)
+        case .ai: ColorSectionAIViewModel(color: colors.ai)
         case .base: ColorSectionBaseViewModel(color: colors.base)
         case .feedback: ColorSectionFeedbackViewModel(color: colors.feedback)
+        case .main: ColorSectionMainViewModel(color: colors.main)
         case .states: ColorSectionStatesViewModel(color: colors.states)
-        case .ia: ColorSectionIAViewModel(color: colors.ia)
+        case .support: ColorSectionSupportViewModel(color: colors.support)
         }
     }
 }

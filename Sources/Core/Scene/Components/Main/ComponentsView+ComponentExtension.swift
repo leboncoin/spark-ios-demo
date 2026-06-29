@@ -37,6 +37,7 @@ extension ComponentsView {
         case radioGroup
         case ratingDisplay
         case ratingInput
+        case segmentedControl
         case segmentedGauge
         case slider
         case snackbar
@@ -81,6 +82,7 @@ extension ComponentsView {
             case .radioGroup: .dataInput
             case .ratingDisplay: .indicator
             case .ratingInput: .dataInput
+            case .segmentedControl: .dataInput
             case .segmentedGauge: .indicator
             case .slider: .dataInput
             case .snackbar: .overlays
@@ -125,6 +127,7 @@ extension ComponentsView {
             case .radioGroup: .available
             case .ratingDisplay: .available
             case .ratingInput: .available
+            case .segmentedControl: .available
             case .segmentedGauge: .available
             case .slider: .available
             case .snackbar: .available
@@ -165,6 +168,7 @@ extension ComponentsView {
             case .radioGroup: .init(.radioButton)
             case .ratingDisplay: .init(.rating)
             case .ratingInput: .init(.rating)
+            case .segmentedControl: .init(.segmentedControl)
             case .segmentedGauge: .init(.segmentedGauge)
             case .slider: .init(.slider)
             case .snackbar: .init(.snackbar)
@@ -238,6 +242,7 @@ extension ComponentsView {
             case .radioGroup: RadioGroupComponentView()
             case .ratingDisplay: RatingDisplayComponentView()
             case .ratingInput: RatingInputComponentView()
+            case .segmentedControl: SegmentedControlComponentView()
             case .segmentedGauge: SegmentedGaugeComponentView()
             case .slider: SliderComponentView()
             case .snackbar: SnackbarComponentView()
@@ -310,7 +315,8 @@ extension ComponentsView {
                     $0 != .border &&
                     $0 != .circularMeter &&
                     $0 != .fileUpload &&
-                    $0 != .inputOTP
+                    $0 != .inputOTP &&
+                    $0 != .segmentedControl
                 }
             case .swiftUI:
                 values = self.allCases.filter {

@@ -100,14 +100,14 @@ struct SkyColors: Colors {
         infoContainerPressed: ColorTokenDefault(named: "info-container-pressed", in: .module),
         neutralPressed: ColorTokenDefault(named: "neutral-pressed", in: .module),
         neutralContainerPressed: ColorTokenDefault(named: "neutral-container-pressed", in: .module),
-        iaPressed: ColorTokenDefault(named: "ia-pressed", in: .module),
-        iaContainerPressed: ColorTokenDefault(named: "ia-container-pressed", in: .module)
+        aiPressed: ColorTokenDefault(named: "ai-pressed", in: .module),
+        aiContainerPressed: ColorTokenDefault(named: "ai-container-pressed", in: .module)
     )
 
-    let ia: any ColorsIA = ColorsIADefault(
-        ia: ColorTokenDefault(named: "ia", in: .module),
-        onIA: ColorTokenDefault(named: "on-ia", in: .module),
-        iaContainer: ColorTokenDefault(named: "ia-container", in: .module),
-        onIAContainer: ColorTokenDefault(named: "on-ia-container", in: .module)
+    let ai: any ColorsAI = ColorsAIDefault(
+        ai: ColorTokenDefault(named: "ai", in: .module),
+        onAI: ColorTokenDefault(named: "on-ai", in: .module),
+        aiContainer: ColorTokenDefault(named: "ai-container", in: .module),
+        onAIContainer: ColorTokenDefault(named: "on-ai-container", in: .module)
     )
 }

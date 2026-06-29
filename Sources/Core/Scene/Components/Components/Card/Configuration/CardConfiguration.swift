@@ -24,7 +24,7 @@ class CardConfiguration: ComponentConfiguration {
 
     var swiftUIPadding: CardPadding = .default
     var swiftUIWithAction: Bool = false
-    
+
     var swiftUIHeader: String = "New !"
     var swiftUIHeaderPosition: CardHeaderPosition = .default
     var swiftUIHeaderIsCustomContent: Bool = false
