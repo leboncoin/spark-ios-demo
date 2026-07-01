@@ -1,6 +1,6 @@
 //
 //  SkyTypography.swift
-//  Spark
+//  SparkDemo
 //
 //  Created by robin.lemaire on 22/08/2023.
 //  Copyright © 2023 Leboncoin. All rights reserved.
@@ -14,72 +14,87 @@ public struct SkyTypography: Typography {
 
     // MARK: - Properties
 
-    public let display1: any TypographyFontToken = RainbowTypographyToken(
+    public let display1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 40,
-        isHighlighted: true
+        style: .bold,
+        textStyle: .largeTitle
     )
-    public let display2: any TypographyFontToken = RainbowTypographyToken(
+    public let display2: any TypographyFontToken = TypographyFontTokenDefault(
         size: 32,
-        isHighlighted: true
+        style: .bold,
+        textStyle: .largeTitle
     )
-    public let display3: any TypographyFontToken = RainbowTypographyToken(
+    public let display3: any TypographyFontToken = TypographyFontTokenDefault(
         size: 24,
-        isHighlighted: true
+        style: .bold,
+        textStyle: .largeTitle
     )
 
-    public let headline1: any TypographyFontToken = RainbowTypographyToken(
+    public let headline1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 20,
-        isHighlighted: true
+        style: .bold,
+        textStyle: .headline
     )
-    public let headline2: any TypographyFontToken = RainbowTypographyToken(
+    public let headline2: any TypographyFontToken = TypographyFontTokenDefault(
         size: 18,
-        isHighlighted: true
+        style: .bold,
+        textStyle: .headline
     )
 
-    public let subhead: any TypographyFontToken = RainbowTypographyToken(
+    public let subhead: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        isHighlighted: true
+        style: .bold,
+        textStyle: .subheadline
     )
 
-    public let body1: any TypographyFontToken = RainbowTypographyToken(
+    public let body1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        isHighlighted: false
+        style: .regular,
+        textStyle: .body
     )
-    public let body1Highlight: any TypographyFontToken = RainbowTypographyToken(
+    public let body1Highlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        isHighlighted: true
+        style: .medium,
+        textStyle: .body
     )
 
-    public let body2: any TypographyFontToken = RainbowTypographyToken(
+    public let body2: any TypographyFontToken = TypographyFontTokenDefault(
         size: 14,
-        isHighlighted: false
+        style: .regular,
+        textStyle: .body
     )
-    public let body2Highlight: any TypographyFontToken = RainbowTypographyToken(
+    public let body2Highlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 14,
-        isHighlighted: true
+        style: .medium,
+        textStyle: .body
     )
 
-    public let caption: any TypographyFontToken = RainbowTypographyToken(
+    public let caption: any TypographyFontToken = TypographyFontTokenDefault(
         size: 12,
-        isHighlighted: false
+        style: .regular,
+        textStyle: .caption
     )
-    public let captionHighlight: any TypographyFontToken = RainbowTypographyToken(
+    public let captionHighlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 12,
-        isHighlighted: true
+        style: .medium,
+        textStyle: .caption
     )
 
-    public let small: any TypographyFontToken = RainbowTypographyToken(
+    public let small: any TypographyFontToken = TypographyFontTokenDefault(
         size: 10,
-        isHighlighted: false
+        style: .regular,
+        textStyle: .footnote
     )
-    public let smallHighlight: any TypographyFontToken = RainbowTypographyToken(
+    public let smallHighlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 10,
-        isHighlighted: true
+        style: .medium,
+        textStyle: .footnote
     )
 
-    public let callout: any TypographyFontToken = RainbowTypographyToken(
+    public let callout: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        isHighlighted: true
+        style: .medium,
+        textStyle: .callout
     )
 
     // MARK: - Initialization
@@ -94,46 +109,26 @@ private extension TypographyFontTokenDefault {
     // MARK: - Constants
 
     private enum Constants {
-        static let boldFontName = "NunitoSans-Bold"
         static let regularFontName = "NunitoSans-Regular"
+        static let boldFontName = "NunitoSans-Bold"
     }
 
     // MARK: - Initialization
 
     init(
         size: CGFloat,
-        isHighlighted: Bool,
+        style: TypographyFontStyle,
         textStyle: TextStyle
     ) {
         self.init(
-            isHighlighted: isHighlighted,
-            regularFontName: Constants.regularFontName,
-            boldFontName: Constants.boldFontName,
+            names: .init(
+                regular: Constants.regularFontName,
+                medium: Constants.boldFontName,
+                bold: Constants.boldFontName
+            ),
+            style: style,
             size: size,
             textStyle: textStyle
         )
-    }
-}
-
-// MARK: - Private Token
-
-private struct RainbowTypographyToken: TypographyFontToken {
-
-    // MARK: - Properties
-
-    let font: Font
-    let uiFont: UIFont
-
-    // MARK: - Initialization
-
-    init(
-        size: CGFloat,
-        isHighlighted: Bool
-    ) {
-        self.font = .system(
-            size: size,
-            weight: isHighlighted ? .bold : .regular
-        )
-        self.uiFont = isHighlighted ? .boldSystemFont(ofSize: size) : .systemFont(ofSize: size)
     }
 }
