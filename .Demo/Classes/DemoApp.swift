@@ -17,7 +17,8 @@ struct DemoApp: App {
     // MARK: - Initialization
 
     init() {
-        // Configuration
+        // Configurations
+        DemoConfiguration.load()
         SparkConfiguration.load()
     }
 

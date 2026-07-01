@@ -280,8 +280,7 @@ let package = Package(
             ],
             path: "Sources/Core",
             resources: [
-                .process("Resources/Assets.xcassets"),
-                .process("Resources/Colors.xcassets")
+                .process("Resources/")
             ]
         )
     ]
