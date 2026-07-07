@@ -100,6 +100,20 @@ public struct SkyTypography: Typography {
     // MARK: - Initialization
 
     public init() {}
+
+    // MARK: - Methods
+
+    public func custom(
+        size: CGFloat,
+        style: TypographyFontStyle,
+        textStyle: TextStyle
+    ) -> any TypographyFontToken {
+        TypographyFontTokenDefault(
+            size: size,
+            style: style,
+            textStyle: textStyle
+        )
+    }
 }
 
 // MARK: - TypographyFont Extension
