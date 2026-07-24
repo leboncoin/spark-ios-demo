@@ -95,6 +95,7 @@ final class SnackbarComponentUIViewMaker: ComponentUIViewMaker {
         if let autoDismissDelay = configuration.autoDismissDelay {
             snackbar.showAndDismiss(
                 in: viewController.view,
+                from: configuration.direction,
                 animated: configuration.uiKitIsAnimated,
                 autoDismissDelay: autoDismissDelay
             ) { isFinished in
@@ -104,6 +105,7 @@ final class SnackbarComponentUIViewMaker: ComponentUIViewMaker {
         } else {
             snackbar.show(
                 in: viewController.view,
+                from: configuration.direction,
                 animated: configuration.uiKitIsAnimated
             )
         }

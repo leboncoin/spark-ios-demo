@@ -11,6 +11,7 @@ extension ComponentsView {
 
     enum Component: String, CaseIterable, Hashable {
         case adaptativeStack
+        case avatar
         case awarenessCard
         case badge
         case border
@@ -56,6 +57,7 @@ extension ComponentsView {
         var familly: Familly {
             switch self {
             case .adaptativeStack: .style
+            case .avatar: .visualAsset
             case .awarenessCard: .layout
             case .badge: .indicator
             case .border: .style
@@ -101,6 +103,7 @@ extension ComponentsView {
         var accessibilityStatus: AccessibilityStatus {
             switch self {
             case .adaptativeStack: .available
+            case .avatar: .available
             case .awarenessCard: .available
             case .badge: .available
             case .border: .available
@@ -145,6 +148,7 @@ extension ComponentsView {
 
         private var illustration: Image? {
             switch self {
+            case .avatar: .init(.avatar)
             case .awarenessCard: .init(.awarenessCard)
             case .badge: .init(.badge)
             case .button: .init(.button)
@@ -216,6 +220,7 @@ extension ComponentsView {
         var swiftUIComponent: some View {
             switch self {
             case .adaptativeStack: AdaptativeStackComponentView()
+            case .avatar: AvatarComponentView()
             case .awarenessCard: AwarenessCardComponentView()
             case .badge: BadgeComponentView()
             case .border: BorderComponentView()
@@ -311,6 +316,7 @@ extension ComponentsView {
             switch framework {
             case .uiKit:
                 values = self.allCases.filter {
+                    $0 != .avatar &&
                     $0 != .awarenessCard &&
                     $0 != .border &&
                     $0 != .circularMeter &&

@@ -60,6 +60,9 @@ struct SnackbarImplementationView: ComponentImplementationViewable {
             }
         }
         .sparkTheme(self.configurationWrapped.theme.value)
+        .sparkSnackbarIntent(self.configurationWrapped.intent)
+        .sparkSnackbarAlignment(self.configurationWrapped.alignment)
+        .sparkSnackbarDirection(self.configurationWrapped.direction)
     }
 }
 
