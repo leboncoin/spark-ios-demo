@@ -91,6 +91,7 @@ struct ComponentsView: View {
                 }
             })
             .navigationBarTitle(self.framework.name)
+            .navigationBarTitleDisplayMode(.inline)
             .searchable(text: self.$searchText)
             .toolbar {
                 Menu("Settings", systemImage: "slider.horizontal.3") {

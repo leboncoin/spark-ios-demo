@@ -27,6 +27,11 @@ let package = Package(
             /*version*/ "0.0.1"..."999.999.999"
         ),
         .package(
+            url: "https://github.com/leboncoin/spark-ios-component-avatar.git",
+            // path: "../spark-ios-component-avatar"
+            /*version*/ "0.0.1"..."999.999.999"
+        ),
+        .package(
             url: "https://github.com/leboncoin/spark-ios-component-badge.git",
             // path: "../spark-ios-component-badge"
             /*version*/ "0.0.1"..."999.999.999"
@@ -172,6 +177,10 @@ let package = Package(
                 .product(
                     name: "SparkTheme",
                     package: "spark-ios-theming"
+                ),
+                .product(
+                    name: "SparkComponentAvatar",
+                    package: "spark-ios-component-avatar"
                 ),
                 .product(
                     name: "SparkComponentBadge",

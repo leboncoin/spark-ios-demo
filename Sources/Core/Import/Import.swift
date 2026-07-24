@@ -2,8 +2,7 @@
 // https://docs.swift.org/swift-book
 
 @_exported import SparkCommon
-@_exported import SparkTheming
-@_exported import SparkTheme
+@_exported import SparkComponentAvatar
 @_exported import SparkComponentBadge
 @_exported import SparkComponentBottomSheet
 @_exported import SparkComponentButton
@@ -30,3 +29,5 @@
 @_exported import SparkComponentTag
 @_exported import SparkComponentTextInput
 @_exported import SparkComponentTextLink
+@_exported import SparkTheming
+@_exported import SparkTheme

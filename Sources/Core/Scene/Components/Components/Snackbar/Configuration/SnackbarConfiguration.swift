@@ -14,6 +14,7 @@ class SnackbarConfiguration: ComponentConfiguration {
 
     var autoDismissDelay: SnackbarAutoDismissDelay? = .optionalRandom
 
+    var direction: SnackbarDirection = .default
     var intent: SnackbarIntent = .default
     var alignment: SnackbarAlignment = .default
     var icon: Iconography? = .optionalRandom
@@ -49,6 +50,17 @@ class SnackbarConfiguration: ComponentConfiguration {
 
     override func random() {
         self.autoDismissDelay = .optionalRandom
+        self.direction = .random
+        self.intent = .random
+        self.alignment = .random
+        self.icon = .random
+        self.hasButton = .random()
+
+        self.swiftUIIsCustomContent = .random()
+        self.swiftUIIsCompleted = .random()
+
+        self.uiKitIsAttributedTitle = .random()
+        self.uiKitIsAttributedMessage = .random()
         self.uiKitIsAnimated = .random()
     }
 }

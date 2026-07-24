@@ -54,6 +54,12 @@ struct SnackbarConfigurationView: ConfigurationViewable, ConfigurationUIViewable
     @ViewBuilder
     private func itemsView() -> some View {
         EnumConfigurationItemView(
+            name: "direction",
+            values: SnackbarDirection.allCases,
+            selectedValue: self.configuration.direction
+        )
+
+        EnumConfigurationItemView(
             name: "intent",
             values: SnackbarIntent.allCases,
             selectedValue: self.configuration.intent
