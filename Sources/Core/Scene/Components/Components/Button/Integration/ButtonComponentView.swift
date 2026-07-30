@@ -3,7 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 29/01/2025.
-//  Copyright © 2025 Leboncoin. All rights reserved.
+//  Copyright © 2026 Leboncoin. All rights reserved.
 //
 
 import SwiftUI
@@ -28,8 +28,7 @@ struct ButtonImplementationView: ComponentImplementationViewable {
             self.showAlertAction = true
         }
         .sparkTheme(self.configurationWrapped.theme.value)
-        .sparkButtonIntent(self.configurationWrapped.intent)
-        .sparkButtonVariant(self.configurationWrapped.variant)
+        .styled(configuration: self.configurationWrapped)
         .sparkButtonShape(self.configurationWrapped.shape)
         .sparkButtonSize(self.configurationWrapped.size)
         .sparkButtonAlignment(self.configurationWrapped.alignment)
@@ -250,5 +249,20 @@ struct ButtonImplementationView: ComponentImplementationViewable {
         Button("Edit") { }
         Button("Delete") { }
         Button("Share") { }
+    }
+}
+
+// MARK: - Extension
+
+private extension View {
+
+    @ViewBuilder
+    func styled(configuration: ButtonConfiguration) -> some View {
+        if let appearance = configuration.appearance {
+            self.sparkButtonAppearance(appearance)
+        } else {
+            self.sparkButtonIntent(configuration.intent)
+            .sparkButtonVariant(configuration.variant)
+        }
     }
 }

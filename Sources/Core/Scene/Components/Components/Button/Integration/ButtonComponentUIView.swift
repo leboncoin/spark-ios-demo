@@ -3,7 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 05/02/2025.
-//  Copyright © 2025 Leboncoin. All rights reserved.
+//  Copyright © 2026 Leboncoin. All rights reserved.
 //
 
 import UIKit
@@ -53,6 +53,7 @@ final class ButtonComponentUIViewMaker: ComponentUIViewMaker {
         _ componentView: ComponentView,
         for configuration: Configuration
     ) {
+        componentView.appearance = configuration.appearance
         componentView.intent = configuration.intent
         componentView.variant = configuration.variant
         componentView.shape = configuration.shape
