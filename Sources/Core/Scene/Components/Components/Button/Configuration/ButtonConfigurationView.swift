@@ -3,7 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 12/02/2025.
-//  Copyright © 2025 Leboncoin. All rights reserved.
+//  Copyright © 2026 Leboncoin. All rights reserved.
 //
 
 import SwiftUI
@@ -58,17 +58,25 @@ struct ButtonConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
 
     @ViewBuilder
     private func itemsView() -> some View {
-        EnumConfigurationItemView(
-            name: "intent",
-            values: ButtonIntent.allCases,
-            selectedValue: self.configuration.intent
+        OptionalEnumConfigurationItemView(
+            name: "appearance",
+            values: ButtonAppearance.allCases,
+            selectedValue: self.configuration.appearance
         )
 
-        EnumConfigurationItemView(
-            name: "variant",
-            values: ButtonVariant.allCases,
-            selectedValue: self.configuration.variant
-        )
+        if self.configuration.wrappedValue.appearance == nil {
+            EnumConfigurationItemView(
+                name: "intent",
+                values: ButtonIntent.allCases,
+                selectedValue: self.configuration.intent
+            )
+
+            EnumConfigurationItemView(
+                name: "variant",
+                values: ButtonVariant.allCases,
+                selectedValue: self.configuration.variant
+            )
+        }
 
         EnumConfigurationItemView(
             name: "shape",

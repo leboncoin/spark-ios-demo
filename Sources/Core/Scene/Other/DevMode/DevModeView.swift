@@ -3,7 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 11/09/2025.
-//  Copyright © 2025 Leboncoin. All rights reserved.
+//  Copyright © 2026 Leboncoin. All rights reserved.
 //
 
 import SwiftUI

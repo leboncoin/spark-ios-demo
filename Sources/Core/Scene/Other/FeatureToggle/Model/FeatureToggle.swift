@@ -14,9 +14,21 @@ final class FeatureToggle: ObservableObject {
 
     static let shared = FeatureToggle()
 
+    @Published var appearance: Bool = false {
+        didSet {
+            SparkFeatureToggleService.shared.appearance = self.appearance
+        }
+    }
+
     @Published var rebranding: Bool = false {
         didSet {
             SparkFeatureToggleService.shared.rebranding = self.rebranding
+        }
+    }
+
+    @Published var visualIdentification: Bool = false {
+        didSet {
+            SparkFeatureToggleService.shared.visualIdentification = self.visualIdentification
         }
     }
 }

@@ -3,7 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 29/01/2025.
-//  Copyright © 2025 Leboncoin. All rights reserved.
+//  Copyright © 2026 Leboncoin. All rights reserved.
 //
 
 import Foundation
@@ -12,6 +12,7 @@ class ButtonConfiguration: ComponentConfiguration {
 
     // MARK: - Properties
 
+    var appearance: ButtonAppearance? = .default
     var intent: ButtonIntent = .default
     var variant: ButtonVariant = .default
     var alignment: ButtonAlignment = .default
@@ -74,6 +75,7 @@ class ButtonConfiguration: ComponentConfiguration {
     // MARK: - Methods
 
     override func random() {
+        self.appearance = .optionalRandom
         self.intent = .random
         self.variant = .random
         self.size = .random
