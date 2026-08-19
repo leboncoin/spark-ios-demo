@@ -12,6 +12,9 @@ struct TypographyViewModel {
         let typographies = DemoThemes.shared.mainTheme.value.typography
         return [
             [
+                .init(name: "bigTitle", token: typographies.bigTitle)
+            ],
+            [
                 .init(name: "display1", token: typographies.display1),
                 .init(name: "display2", token: typographies.display2),
                 .init(name: "display3", token: typographies.display3)

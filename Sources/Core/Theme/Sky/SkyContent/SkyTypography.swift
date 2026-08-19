@@ -14,6 +14,12 @@ public struct SkyTypography: Typography {
 
     // MARK: - Properties
 
+    public let bigTitle: any TypographyFontToken = TypographyFontTokenDefault(
+        size: 80,
+        style: .bold,
+        textStyle: .largeTitle
+    )
+
     public let display1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 40,
         style: .bold,
@@ -32,18 +38,18 @@ public struct SkyTypography: Typography {
 
     public let headline1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 20,
-        style: .bold,
+        style: .semiBold,
         textStyle: .headline
     )
     public let headline2: any TypographyFontToken = TypographyFontTokenDefault(
         size: 18,
-        style: .bold,
+        style: .semiBold,
         textStyle: .headline
     )
 
     public let subhead: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        style: .bold,
+        style: .semiBold,
         textStyle: .subheadline
     )
 
@@ -138,6 +144,7 @@ private extension TypographyFontTokenDefault {
             names: .init(
                 regular: Constants.regularFontName,
                 medium: Constants.boldFontName,
+                semiBold: Constants.boldFontName,
                 bold: Constants.boldFontName
             ),
             style: style,
