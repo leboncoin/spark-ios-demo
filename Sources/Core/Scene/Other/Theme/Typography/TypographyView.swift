@@ -2,7 +2,7 @@
 //  TypographyView.swift
 //  SparkDemo
 //
-//  Created by luis.figueiredo-ext on 08/02/2023.
+//  Created by robin.lemaire on 08/02/2023.
 //  Copyright © 2023 Leboncoin. All rights reserved.
 //
 
@@ -17,19 +17,24 @@ struct TypographyView: View {
     // MARK: - View
 
     var body: some View {
-        List(self.viewModel.itemViewModels(), id: \.self) { itemViewModels in
-            Section {
-                ForEach(itemViewModels, id: \.self) { itemViewModel in
-                    TypographyItemView(viewModel: itemViewModel)
+        List {
+            ForEach(self.viewModel.itemViewModels(), id: \.self) { itemViewModels in
+                Section {
+                    ForEach(itemViewModels, id: \.self) { itemViewModel in
+                        TypographyItemView(viewModel: itemViewModel)
+                    }
                 }
             }
+
+            NavigationLink("Custom", value: Redirection.custom)
         }
+        .navigationDestination(for: Redirection.self, destination: { _ in
+            TypographyCustomView()
+        })
         .navigationBarTitle("Typography")
     }
 }
 
-struct TypographyView_Previews: PreviewProvider {
-    static var previews: some View {
-        TypographyView()
-    }
+private enum Redirection: String, CaseIterable, Hashable {
+    case custom
 }
