@@ -101,7 +101,15 @@ struct SkyColors: Colors {
         neutralPressed: ColorTokenDefault(named: "neutral-pressed", in: .module),
         neutralContainerPressed: ColorTokenDefault(named: "neutral-container-pressed", in: .module),
         aiPressed: ColorTokenDefault(named: "ai-pressed", in: .module),
-        aiContainerPressed: ColorTokenDefault(named: "ai-container-pressed", in: .module)
+        aiContainerPressed: ColorTokenDefault(named: "ai-container-pressed", in: .module),
+        focusPressed: ColorTokenDefault(named: "focus-pressed", in: .module),
+        focusContainerPressed: ColorTokenDefault(named: "focus-container-pressed", in: .module),
+        newPressed: ColorTokenDefault(named: "new-pressed", in: .module),
+        newContainerPressed: ColorTokenDefault(named: "new-container-pressed", in: .module),
+        businessPressed: ColorTokenDefault(named: "business-pressed", in: .module),
+        businessContainerPressed: ColorTokenDefault(named: "business-container-pressed", in: .module),
+        servicePressed: ColorTokenDefault(named: "service-pressed", in: .module),
+        serviceContainerPressed: ColorTokenDefault(named: "service-container-pressed", in: .module)
     )
 
     let ai: any ColorsAI = ColorsAIDefault(
@@ -109,5 +117,33 @@ struct SkyColors: Colors {
         onAI: ColorTokenDefault(named: "on-ai", in: .module),
         aiContainer: ColorTokenDefault(named: "ai-container", in: .module),
         onAIContainer: ColorTokenDefault(named: "on-ai-container", in: .module)
+    )
+
+    let focus: any ColorsFocus = ColorsFocusDefault(
+        focus: ColorTokenDefault(named: "focus", in: .module),
+        onFocus: ColorTokenDefault(named: "on-focus", in: .module),
+        focusContainer: ColorTokenDefault(named: "focus-container", in: .module),
+        onFocusContainer: ColorTokenDefault(named: "on-focus-container", in: .module)
+    )
+
+    let new: any ColorsNew = ColorsNewDefault(
+        new: ColorTokenDefault(named: "new", in: .module),
+        onNew: ColorTokenDefault(named: "on-new", in: .module),
+        newContainer: ColorTokenDefault(named: "new-container", in: .module),
+        onNewContainer: ColorTokenDefault(named: "on-new-container", in: .module)
+    )
+
+    let business: any ColorsBusiness = ColorsBusinessDefault(
+        business: ColorTokenDefault(named: "business", in: .module),
+        onBusiness: ColorTokenDefault(named: "on-business", in: .module),
+        businessContainer: ColorTokenDefault(named: "business-container", in: .module),
+        onBusinessContainer: ColorTokenDefault(named: "on-business-container", in: .module)
+    )
+
+    let service: any ColorsService = ColorsServiceDefault(
+        service: ColorTokenDefault(named: "service", in: .module),
+        onService: ColorTokenDefault(named: "on-service", in: .module),
+        serviceContainer: ColorTokenDefault(named: "service-container", in: .module),
+        onServiceContainer: ColorTokenDefault(named: "on-service-container", in: .module)
     )
 }

@@ -3,6 +3,7 @@
 //  SparkDemo
 //
 //  Created by robin.lemaire on 01/03/2023.
+//  Copyright © 2023 Leboncoin. All rights reserved.
 //
 
 struct ColorSectionStatesViewModel: ColorSectionViewModelable {
@@ -40,7 +41,15 @@ struct ColorSectionStatesViewModel: ColorSectionViewModelable {
                 .init(name: "neutralPressed", colorToken: color.neutralPressed),
                 .init(name: "neutralContainerPressed", colorToken: color.neutralContainerPressed),
                 .init(name: "aiPressed", colorToken: color.aiPressed),
-                .init(name: "aiContainerPressed", colorToken: color.aiContainerPressed)
+                .init(name: "aiContainerPressed", colorToken: color.aiContainerPressed),
+                .init(name: "focusPressed", colorToken: color.focusPressed),
+                .init(name: "focusContainerPressed", colorToken: color.focusContainerPressed),
+                .init(name: "newPressed", colorToken: color.newPressed),
+                .init(name: "newContainerPressed", colorToken: color.newContainerPressed),
+                .init(name: "businessPressed", colorToken: color.businessPressed),
+                .init(name: "businessContainerPressed", colorToken: color.businessContainerPressed),
+                .init(name: "servicePressed", colorToken: color.servicePressed),
+                .init(name: "serviceContainerPressed", colorToken: color.serviceContainerPressed)
             ]
         ]
     }
