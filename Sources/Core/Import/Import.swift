@@ -1,5 +1,9 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  Import.swift
+//  SparkDemo
+//
+//  Copyright © 2024 Leboncoin. All rights reserved.
+//
 
 @_exported import SparkCommon
 @_exported import SparkComponentAvatar
