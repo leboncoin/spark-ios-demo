@@ -67,11 +67,3 @@ struct ToggleImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct ToggleComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ToggleComponentView()
-    }
-}

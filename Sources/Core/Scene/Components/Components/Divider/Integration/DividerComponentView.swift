@@ -63,11 +63,3 @@ struct DividerImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct DividerComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        DividerComponentView()
-    }
-}

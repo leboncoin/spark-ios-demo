@@ -40,11 +40,3 @@ struct ProgressBarImplementationView: ComponentImplementationViewable {
         .demoAccessibilityValue(self.configurationWrapped)
     }
 }
-
-// MARK: - Preview
-
-struct ProgressBarComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressBarComponentView()
-    }
-}

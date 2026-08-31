@@ -13,13 +13,11 @@ struct OtherView: View {
     // MARK: - Enum
 
     private enum RedirectionSection: String, CaseIterable, Hashable {
-        case theme
         case devMode
         case featureToggles
 
         var redirections: [Redirection] {
             switch self {
-            case .theme: [.theme]
             case .devMode: [
                 .devModeSwiftUI,
                 .devModeUIKit
@@ -30,14 +28,12 @@ struct OtherView: View {
     }
 
     private enum Redirection: String, CaseIterable, Hashable {
-        case theme
         case devModeSwiftUI
         case devModeUIKit
         case featureToggles
 
         var name: String {
             switch self {
-            case .theme: "Theme"
             case .devModeSwiftUI: "SwiftUI"
             case .devModeUIKit: "UIKit"
             case .featureToggles: "Feature Toggles"
@@ -46,6 +42,10 @@ struct OtherView: View {
     }
 
     // MARK: - Properties
+
+    private var themes: [DemoThemes.Theme] {
+        DemoThemes.shared.themes
+    }
 
     private var appVersion: String? {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -60,18 +60,19 @@ struct OtherView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section("Theme") {
+                    ForEach(self.themes, id: \.self) { theme in
+                        NavigationLink(value: theme) {
+                            Text(theme.name)
+                                .foregroundColor(.primary)
+                        }
+                    }
+                }
+
                 ForEach(RedirectionSection.allCases, id: \.self) { section in
                     Section(section.name) {
                         ForEach(section.redirections, id: \.self) { redirection in
-
-                            if redirection == .theme {
-                                NavigationLink(value: redirection) {
-                                    Image(.tokens)
-                                }
-                                .navigationLinkIndicatorVisibility(.hidden)
-                            } else {
-                                NavigationLink(redirection.name, value: redirection)
-                            }
+                            NavigationLink(redirection.name, value: redirection)
                         }
                     }
                 }
@@ -98,9 +99,6 @@ struct OtherView: View {
             }
             .navigationDestination(for: Redirection.self, destination: { redirection in
                 switch redirection {
-                case .theme:
-                    ThemeView()
-                        .navigationBarTitle(RedirectionSection.theme.name)
                 case .devModeSwiftUI:
                     DevModeView()
                         .navigationBarTitle(RedirectionSection.devMode.name)
@@ -112,6 +110,10 @@ struct OtherView: View {
                         .navigationBarTitle(RedirectionSection.featureToggles.name)
                 }
             })
+            .navigationDestination(for: DemoThemes.Theme.self) { theme in
+                ThemeView(theme: theme.value)
+                    .navigationBarTitle(theme.name + " Theme")
+            }
             .navigationBarTitle("Other")
         }
     }

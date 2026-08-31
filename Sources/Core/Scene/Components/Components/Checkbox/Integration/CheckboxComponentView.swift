@@ -90,12 +90,3 @@ private extension Image {
         .init(icon: Iconography.minus)
     }
 }
-
-// MARK: - Preview
-
-struct CheckboxComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckboxComponentView()
-    }
-}
-

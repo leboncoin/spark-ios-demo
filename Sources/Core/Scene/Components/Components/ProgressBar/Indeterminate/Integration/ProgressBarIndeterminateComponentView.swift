@@ -40,11 +40,3 @@ struct ProgressBarIndeterminateImplementationView: ComponentImplementationViewab
         .demoAccessibilityHidden(self.configurationWrapped)
     }
 }
-
-// MARK: - Preview
-
-struct ProgressBarIndeterminateComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressBarIndeterminateComponentView()
-    }
-}

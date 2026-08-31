@@ -10,6 +10,10 @@ import SwiftUI
 
 struct ThemeView: View {
 
+    // MARK: - Properties
+
+    let theme: any Theme
+
     // MARK: - Enum
 
     private enum Styles: String, CaseIterable {
@@ -24,10 +28,11 @@ struct ThemeView: View {
     // MARK: - View
 
     var body: some View {
-            List(Styles.allCases, id: \.self) { component in
-                NavigationLink(component.name, value: component)
-            }
-            .navigationDestination(for: Styles.self, destination: { component in
+        List(Styles.allCases, id: \.self) { component in
+            NavigationLink(component.name, value: component)
+        }
+        .navigationDestination(for: Styles.self, destination: { component in
+            Group {
                 switch component {
                 case .border: BorderView()
                 case .colors: ColorView()
@@ -36,13 +41,8 @@ struct ThemeView: View {
                 case .layout: LayoutView()
                 case .typography: TypographyView()
                 }
-            })
-            .navigationBarTitle("Theme")
-    }
-}
-
-struct ThemeView_Previews: PreviewProvider {
-    static var previews: some View {
-        ThemeView()
+            }
+            .sparkTheme(self.theme)
+        })
     }
 }

@@ -13,6 +13,7 @@ struct FeatureTogglesView: View {
     // MARK: - Properties
 
     @ObservedObject private var featureToggle = FeatureToggle()
+    @ObservedObject private var featureToggles = ExternalFeatureToggles.shared
 
     // MARK: - Enum
 
@@ -34,8 +35,20 @@ struct FeatureTogglesView: View {
 
     var body: some View {
         List {
+            // Internal Feature Toggles Section
             ForEach(Properties.allCases, id: \.self) { property in
-                Button {
+
+                let isEnabled = switch property {
+                case .appearance: self.featureToggle.appearance
+                case .rebranding: self.featureToggle.rebranding
+                case .visualIdentification: self.featureToggle.visualIdentification
+                }
+
+                self.button(
+                    name: property.name,
+                    description: property.description,
+                    isEnabled: isEnabled
+                ) {
                     switch property {
                     case .appearance:
                         self.featureToggle.appearance.toggle()
@@ -44,38 +57,50 @@ struct FeatureTogglesView: View {
                     case .visualIdentification:
                         self.featureToggle.visualIdentification.toggle()
                     }
+                }
+            }
 
-                } label: {
+            // External Feature Toggles Section
+            if !self.featureToggles.items.isEmpty {
+                Section(header: Text("External Toggles")) {
+                    ForEach(self.featureToggles.items) { toggle in
 
-                    let value = switch property {
-                    case .appearance: self.featureToggle.appearance
-                    case .rebranding: self.featureToggle.rebranding
-                    case .visualIdentification: self.featureToggle.visualIdentification
-                    }
-
-                    VStack(alignment: .leading, spacing: .xSmall) {
-                        HStack {
-                            Text(property.name)
-                                .foregroundColor(.primary)
-
-                            Spacer()
-
-                            if value {
-                                Image(systemName: "checkmark")
-                            }
+                        self.button(
+                            name: toggle.name,
+                            description: toggle.description,
+                            isEnabled: toggle.isEnabled
+                        ) {
+                            self.featureToggles.toggle(name: toggle.name)
                         }
-
-                        Text(property.description)
-                            .foregroundColor(.gray)
-                            .italic()
                     }
-
                 }
             }
         }
     }
-}
 
-#Preview {
-    FeatureTogglesView()
+    private func button(
+        name: String,
+        description: String,
+        isEnabled: Bool,
+        action: @escaping @MainActor () -> Void
+    ) -> some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: .xSmall) {
+                HStack {
+                    Text(name)
+                        .foregroundColor(.primary)
+
+                    Spacer()
+
+                    if isEnabled {
+                        Image(systemName: "checkmark")
+                    }
+                }
+
+                Text(description)
+                    .foregroundColor(.gray)
+                    .italic()
+            }
+        }
+    }
 }

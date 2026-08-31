@@ -31,11 +31,3 @@ struct IconImplementationView: ComponentImplementationViewable {
         .demoAccessibilityHidden(self.configurationWrapped)
     }
 }
-
-// MARK: - Preview
-
-struct IconComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        IconComponentView()
-    }
-}

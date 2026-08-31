@@ -12,11 +12,11 @@ struct BorderItemView: View {
 
     // MARK: - Properties
 
+    @Environment(\.theme) private var theme
+
     let viewModel: BorderItemViewModel
 
     // MARK: - View
-
-    var theme: any Theme = DemoThemes.shared.mainTheme.value
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -32,14 +32,8 @@ struct BorderItemView: View {
                     width: self.viewModel.width,
                     radius: self.viewModel.radius,
                     isHighlighted: self.viewModel.isHighlighted,
-                    colorToken: self.theme.colors.base.surfaceInverse
+                    colorToken: self.theme.value.colors.base.surfaceInverse
                 )
         }
-    }
-}
-
-struct BorderItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        BorderItemView(viewModel: .init(name: "Title", width: 10, radius: 4))
     }
 }

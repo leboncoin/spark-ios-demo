@@ -64,11 +64,3 @@ private extension View {
         }
     }
 }
-
-// MARK: - Preview
-
-struct CornerRadiusComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        CornerRadiusComponentView()
-    }
-}

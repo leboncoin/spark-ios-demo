@@ -12,24 +12,23 @@ struct BorderView: View {
 
     // MARK: - Properties
 
-    private let viewModel = BorderViewModel()
+    @Environment(\.theme) private var theme
+
+    @ObservedObject private var viewModel = BorderViewModel()
 
     // MARK: - View
 
     var body: some View {
-        List(self.viewModel.sectionViewModels(), id: \.self) { sectionViewModel in
+        List(self.viewModel.sectionViewModels, id: \.self) { sectionViewModel in
             Section(header: Text(sectionViewModel.name)) {
                 ForEach(sectionViewModel.itemViewModels, id: \.self) { itemViewModel in
                     BorderItemView(viewModel: itemViewModel)
                 }
             }
         }
+        .onChange(of: self.theme, initial: true) {
+            self.viewModel.theme = self.theme.value
+        }
         .navigationBarTitle("Border")
-    }
-}
-
-struct BorderView_Previews: PreviewProvider {
-    static var previews: some View {
-        BorderView()
     }
 }

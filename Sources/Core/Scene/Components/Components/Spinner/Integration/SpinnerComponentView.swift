@@ -41,11 +41,3 @@ struct SpinnerImplementationView: ComponentImplementationViewable {
         .demoAccessibilityHidden(self.configurationWrapped)
     }
 }
-
-// MARK: - Preview
-
-struct SpinnerComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        SpinnerComponentView()
-    }
-}

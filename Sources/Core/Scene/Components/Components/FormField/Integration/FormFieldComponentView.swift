@@ -175,11 +175,3 @@ private extension FormFieldView {
         }
     }
 }
-
-// MARK: - Preview
-
-struct FormFieldComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        FormFieldComponentView()
-    }
-}

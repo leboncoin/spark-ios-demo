@@ -19,10 +19,10 @@ enum ColorSectionType: CaseIterable {
     case states
     case support
 
-    // MARK: - Properties
+    // MARK: - Methods
 
-    func viewModel() -> any ColorSectionViewModelable {
-        let colors = DemoThemes.shared.mainTheme.value.colors
+    func viewModel(theme: any Theme) -> any ColorSectionViewModelable {
+        let colors = theme.colors
         return switch self {
         case .accent: ColorSectionAccentViewModel(color: colors.accent)
         case .ai: ColorSectionAIViewModel(color: colors.ai)

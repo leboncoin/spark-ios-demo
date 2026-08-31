@@ -131,11 +131,3 @@ private extension SparkStepper {
         }
     }
 }
-
-// MARK: - Preview
-
-struct StepperComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        StepperComponentView()
-    }
-}

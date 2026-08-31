@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ElevationView: View {
 
+    // MARK: - View
+
     var body: some View {
         List {
             Section(header: Text("Drop Shadow")) {
@@ -19,10 +21,3 @@ struct ElevationView: View {
         .navigationTitle("Elevation")
     }
 }
-
-struct ElevationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ElevationView()
-    }
-}
-

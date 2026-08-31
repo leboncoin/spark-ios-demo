@@ -12,20 +12,19 @@ struct DimsView: View {
 
     // MARK: - Properties
 
-    private let viewModel = DimsViewModel()
+    @Environment(\.theme) private var theme
+
+    @ObservedObject private var viewModel = DimsViewModel()
 
     // MARK: - View
 
     var body: some View {
-        List(self.viewModel.dimItemViewModels(), id: \.self) {
+        List(self.viewModel.dimItemViewModels, id: \.self) {
             DimItemView(viewModel: $0)
         }
+        .onChange(of: self.theme, initial: true) {
+            self.viewModel.theme = self.theme.value
+        }
         .navigationBarTitle("Dims")
-    }
-}
-
-struct DimsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DimsView()
     }
 }

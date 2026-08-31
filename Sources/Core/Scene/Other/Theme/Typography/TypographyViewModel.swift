@@ -6,11 +6,27 @@
 //  Copyright © 2023 Leboncoin. All rights reserved.
 //
 
-struct TypographyViewModel {
+import SwiftUI
 
-    func itemViewModels() -> [[TypographyItemViewModel]] {
-        let typographies = DemoThemes.shared.mainTheme.value.typography
-        return [
+final class TypographyViewModel: ObservableObject {
+
+    // MARK: - Properties
+
+    @Published private(set) var itemViewModels = [[TypographyItemViewModel]]()
+
+    var theme: (any Theme)? {
+        didSet {
+            self.updateItemViewModels()
+        }
+    }
+
+    // MARK: - Methods
+
+    private func updateItemViewModels() {
+        guard let typographies = self.theme?.typography else {
+            return
+        }
+        self.itemViewModels = [
             [
                 .init(name: "bigTitle", token: typographies.bigTitle)
             ],

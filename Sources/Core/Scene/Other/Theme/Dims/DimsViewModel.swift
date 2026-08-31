@@ -8,14 +8,26 @@
 
 import SwiftUI
 
-struct DimsViewModel {
+final class DimsViewModel: ObservableObject {
 
     // MARK: - Properties
 
-    func dimItemViewModels() -> [DimItemViewModel] {
-        let theme = DemoThemes.shared.mainTheme.value
+    @Published private(set) var dimItemViewModels = [DimItemViewModel]()
 
-        return [
+    var theme: (any Theme)? {
+        didSet {
+            self.updateDimItemViewModels()
+        }
+    }
+
+    // MARK: - Methods
+
+    private func updateDimItemViewModels() {
+        guard let theme = self.theme else {
+            return
+        }
+
+        self.dimItemViewModels = [
             .init(name: "none", value: theme.dims.none),
             .init(name: "dim1", value: theme.dims.dim1),
             .init(name: "dim2", value: theme.dims.dim2),

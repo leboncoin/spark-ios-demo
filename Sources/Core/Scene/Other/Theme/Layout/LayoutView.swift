@@ -12,20 +12,19 @@ struct LayoutView: View {
 
     // MARK: - Properties
 
-    private let viewModel = LayoutViewModel()
+    @Environment(\.theme) private var theme
+
+    @ObservedObject private var viewModel = LayoutViewModel()
 
     // MARK: - View
 
     var body: some View {
-        List(self.viewModel.spacingItemViewModels(), id: \.self) {
+        List(self.viewModel.spacingItemViewModels, id: \.self) {
             LayoutSpacingItemView(viewModel: $0)
         }
+        .onChange(of: self.theme, initial: true) {
+            self.viewModel.theme = self.theme.value
+        }
         .navigationBarTitle("Layout")
-    }
-}
-
-struct LayoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        LayoutView()
     }
 }

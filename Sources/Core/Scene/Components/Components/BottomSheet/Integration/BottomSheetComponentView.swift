@@ -86,11 +86,3 @@ struct BottomSheetImplementationView: ComponentImplementationViewable {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
-
-// MARK: - Preview
-
-struct BottomSheetComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        BottomSheetComponentView()
-    }
-}

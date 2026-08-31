@@ -60,11 +60,3 @@ struct AdaptativeStackImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct AdaptativeStackComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdaptativeStackComponentView()
-    }
-}

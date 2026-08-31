@@ -10,17 +10,24 @@ import SwiftUI
 
 struct DropShadowView: View {
 
-    private let viewModel = DropShadowViewModel()
+    // MARK: - Properties
 
-    var theme: any Theme = DemoThemes.shared.mainTheme.value
+    @Environment(\.theme) private var theme
+
+    @ObservedObject private var viewModel = DropShadowViewModel()
+
+    // MARK: - View
 
     var body: some View {
-        ForEach(viewModel.itemViewModels(for: self.theme), id: \.id) { itemViewModel in
+        ForEach(viewModel.itemViewModels, id: \.id) { itemViewModel in
             DropShadowItemView(
                 itemViewModel: itemViewModel,
-                backgroundColor: self.theme.colors.main.main.color
+                backgroundColor: self.theme.value.colors.main.main.color
             )
-            .listRowBackground(self.theme.colors.base.surface.color)
+            .listRowBackground(self.theme.value.colors.base.surface.color)
+        }
+        .onChange(of: self.theme, initial: true) {
+            self.viewModel.theme = self.theme.value
         }
     }
 }

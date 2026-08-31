@@ -63,14 +63,6 @@ struct TextEditorImplementationView: ComponentImplementationViewable {
     }
 }
 
-// MARK: - Preview
-
-struct TextEditorComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TextEditorComponentView()
-    }
-}
-
 // MARK: - Extension
 
 private extension View {

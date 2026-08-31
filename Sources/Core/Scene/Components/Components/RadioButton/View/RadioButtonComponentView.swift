@@ -72,11 +72,3 @@ struct RadioButtonImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct RadioButtonComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        RadioButtonComponentView()
-    }
-}

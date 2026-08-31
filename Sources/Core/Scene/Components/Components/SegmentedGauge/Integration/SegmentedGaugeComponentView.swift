@@ -108,11 +108,3 @@ private extension View {
         self.sparkSegmentedGaugeType(configuration.type.toRealType(configuration))
     }
 }
-
-// MARK: - Preview
-
-struct SegmentedGaugeComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        SegmentedGaugeComponentView()
-    }
-}
