@@ -89,11 +89,3 @@ struct MicroAnimationImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct MicroAnimationComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MicroAnimationComponentView()
-    }
-}

@@ -109,11 +109,3 @@ struct RadioGroupImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct RadioGroupComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        RadioGroupComponentView()
-    }
-}

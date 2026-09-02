@@ -119,11 +119,3 @@ struct ChipImplementationView: ComponentImplementationViewable {
         BadgeImplementationView(configuration: self.configuration.badgeConfiguration)
     }
 }
-
-// MARK: - Preview
-
-struct ChipComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChipComponentView()
-    }
-}

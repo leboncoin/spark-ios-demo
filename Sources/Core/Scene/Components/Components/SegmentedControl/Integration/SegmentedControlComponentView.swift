@@ -144,11 +144,3 @@ struct SegmentedControlImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct SegmentedControlComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        SegmentedControlComponentView()
-    }
-}

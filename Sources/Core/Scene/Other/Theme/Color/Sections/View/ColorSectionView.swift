@@ -28,9 +28,3 @@ struct ColorSectionView: View {
         .navigationBarTitle(self.viewModel.name)
     }
 }
-
-struct ColorSectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorSectionView(viewModel: ColorSectionType.main.viewModel())
-    }
-}

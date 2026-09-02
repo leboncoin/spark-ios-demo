@@ -44,11 +44,3 @@ struct TextLinkImplementationView: ComponentImplementationViewable {
         .alertAction("TextLink tap", showAlert: self.$showAlertAction)
     }
 }
-
-// MARK: - Preview
-
-struct TextLinkComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TextLinkComponentView()
-    }
-}

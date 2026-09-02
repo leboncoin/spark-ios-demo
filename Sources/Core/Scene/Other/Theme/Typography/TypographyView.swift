@@ -12,13 +12,15 @@ struct TypographyView: View {
 
     // MARK: - Properties
 
-    private let viewModel = TypographyViewModel()
+    @Environment(\.theme) private var theme
+
+    @ObservedObject private var viewModel = TypographyViewModel()
 
     // MARK: - View
 
     var body: some View {
         List {
-            ForEach(self.viewModel.itemViewModels(), id: \.self) { itemViewModels in
+            ForEach(self.viewModel.itemViewModels, id: \.self) { itemViewModels in
                 Section {
                     ForEach(itemViewModels, id: \.self) { itemViewModel in
                         TypographyItemView(viewModel: itemViewModel)
@@ -30,7 +32,11 @@ struct TypographyView: View {
         }
         .navigationDestination(for: Redirection.self, destination: { _ in
             TypographyCustomView()
+                .sparkTheme(self.theme.value)
         })
+        .onChange(of: self.theme, initial: true) {
+            self.viewModel.theme = self.theme.value
+        }
         .navigationBarTitle("Typography")
     }
 }

@@ -6,11 +6,27 @@
 //  Copyright © 2023 Leboncoin. All rights reserved.
 //
 
-struct DropShadowViewModel {
+import SwiftUI
 
-    func itemViewModels(for theme: any Theme) -> [DropShadowItemViewModel] {
-        let dropShadow = theme.elevation.dropShadow
-        return [
+final class DropShadowViewModel: ObservableObject {
+
+    // MARK: - Properties
+
+    @Published private(set) var itemViewModels = [DropShadowItemViewModel]()
+
+    var theme: (any Theme)? {
+        didSet {
+            self.updateItemViewModels()
+        }
+    }
+
+    // MARK: - Methods
+
+    private func updateItemViewModels() {
+        guard let dropShadow = self.theme?.elevation.dropShadow else {
+            return
+        }
+        self.itemViewModels = [
             .init(name: "none", shadow: dropShadow.none),
             .init(name: "small", shadow: dropShadow.small),
             .init(name: "default", shadow: dropShadow),

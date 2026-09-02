@@ -61,11 +61,3 @@ struct BadgeImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct BadgeComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        BadgeComponentView()
-    }
-}

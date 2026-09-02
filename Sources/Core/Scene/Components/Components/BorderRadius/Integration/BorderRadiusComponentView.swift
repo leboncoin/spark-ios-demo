@@ -72,11 +72,3 @@ private extension View {
         }
     }
 }
-
-// MARK: - Preview
-
-struct BorderRadiusComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        BorderRadiusComponentView()
-    }
-}

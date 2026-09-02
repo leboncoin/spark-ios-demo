@@ -27,12 +27,3 @@ struct TypographyItemView: View {
         }
     }
 }
-
-struct TypographyItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        TypographyItemView(viewModel: .init(name: "Title",
-                                            token: TypographyFontTokenDefault(named: "Roboto",
-                                                                              size: 12,
-                                                                              textStyle: .body)))
-    }
-}

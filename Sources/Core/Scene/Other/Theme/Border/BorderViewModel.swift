@@ -6,13 +6,28 @@
 //  Copyright © 2023 Leboncoin. All rights reserved.
 //
 
-struct BorderViewModel {
+import SwiftUI
+
+final class BorderViewModel: ObservableObject {
+
+    // MARK: - Properties
+
+    @Published private(set) var sectionViewModels = [BorderSectionViewModel]()
+
+    var theme: (any Theme)? {
+        didSet {
+            self.updateSectionViewModels()
+        }
+    }
 
     // MARK: - Methods
 
-    func sectionViewModels() -> [BorderSectionViewModel] {
-        let border = DemoThemes.shared.mainTheme.value.border
-        return [
+    private func updateSectionViewModels() {
+        guard let border = self.theme?.border else {
+            return
+        }
+
+        self.sectionViewModels = [
             .init(name: "none width",
                   itemViewModels: [
                     .init(name: "none", width: border.width.none, radius: border.radius.none),

@@ -8,14 +8,26 @@
 
 import SwiftUI
 
-struct LayoutViewModel {
+final class LayoutViewModel: ObservableObject {
 
     // MARK: - Properties
 
-    func spacingItemViewModels() -> [LayoutSpacingItemViewModel] {
-        let layout = DemoThemes.shared.mainTheme.value.layout
+    @Published private(set) var spacingItemViewModels = [LayoutSpacingItemViewModel]()
 
-        return [
+    var theme: (any Theme)? {
+        didSet {
+            self.updateSpacingItemViewModels()
+        }
+    }
+
+    // MARK: - Methods
+
+    private func updateSpacingItemViewModels() {
+        guard let layout = self.theme?.layout else {
+            return
+        }
+
+        self.spacingItemViewModels = [
             .init(name: "none", value: layout.spacing.none),
             .init(name: "small", value: layout.spacing.small),
             .init(name: "medium", value: layout.spacing.medium),

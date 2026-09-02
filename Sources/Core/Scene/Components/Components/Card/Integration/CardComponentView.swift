@@ -99,11 +99,3 @@ struct CardImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct CardComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardComponentView()
-    }
-}

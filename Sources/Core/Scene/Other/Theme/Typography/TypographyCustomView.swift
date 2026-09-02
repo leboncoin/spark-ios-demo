@@ -7,16 +7,17 @@
 //
 
 import SwiftUI
+@_spi(SI_SPI) import SparkTheming
 
 struct TypographyCustomView: View {
 
     // MARK: - Properties
 
-    var theme = DemoThemes.shared.mainTheme
+    @Environment(\.theme) private var theme
 
     @State private var size: CGFloat = 16
-    @State private var style: TypographyFontStyle = .regular
-    @State private var textStyle: TextStyle = .body
+    @State private var weight: TypographyFontWeight = .regular
+    @State private var style: TypographyFontStyle = .body
     @State private var text = "Abg"
     @State private var compareFonts = true
 
@@ -30,22 +31,32 @@ struct TypographyCustomView: View {
                     HStack(spacing: .medium) {
 
                         VStack {
-                            self.text(for: self.theme.value)
+                            Text(self.text)
+                                .font(self.theme.value.typography.custom(
+                                    size: self.size,
+                                    weight: self.weight,
+                                    style: self.style
+                                ))
 
                             if self.compareFonts {
-                                self.fontDescriptionText("new")
+                                self.fontDescriptionText("spark")
                             }
                         }
                         .frame(maxWidth: .infinity)
 
-                        // Show the old fonts
+                        // Show the native fonts
                         if self.compareFonts {
 
                             Divider()
 
                             VStack {
-                                self.text(for: SkyTheme.shared)
-                                self.fontDescriptionText("old")
+                                Text(self.text)
+                                    .font(.system(
+                                        size: self.size,
+                                        weight: .init(from: self.weight)
+                                    ))
+
+                                self.fontDescriptionText("native")
                             }
                             .frame(maxWidth: .infinity)
                         }
@@ -62,15 +73,15 @@ struct TypographyCustomView: View {
                     )
 
                     EnumConfigurationItemView(
-                        name: "style",
-                        values: TypographyFontStyle.allCases,
-                        selectedValue: self.$style
+                        name: "weight",
+                        values: TypographyFontWeight.allCases,
+                        selectedValue: self.$weight
                     )
 
                     EnumConfigurationItemView(
-                        name: "textStyle",
-                        values: TextStyle.allCases,
-                        selectedValue: self.$textStyle
+                        name: "style",
+                        values: TypographyFontStyle.allCases,
+                        selectedValue: self.$style
                     )
 
                     ToggleConfigurationItemView(
@@ -87,16 +98,6 @@ struct TypographyCustomView: View {
 
         }
         .navigationBarTitle("Custom Typography")
-        .sparkTheme(self.theme.value)
-    }
-
-    private func text(for theme: any Theme) -> some View {
-        Text(self.text)
-            .font(theme.typography.custom(
-                size: self.size,
-                style: self.style,
-                textStyle: self.textStyle
-            ))
     }
 
     private func fontDescriptionText(_ value: String) -> some View {

@@ -44,11 +44,3 @@ struct BorderImplementationView: ComponentImplementationViewable {
             )
     }
 }
-
-// MARK: - Preview
-
-struct BorderComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        BorderComponentView()
-    }
-}

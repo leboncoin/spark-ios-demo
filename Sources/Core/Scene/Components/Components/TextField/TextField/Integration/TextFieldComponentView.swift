@@ -203,11 +203,3 @@ private extension View {
         }
     }
 }
-
-// MARK: - Preview
-
-struct TextFieldComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TextFieldComponentView()
-    }
-}

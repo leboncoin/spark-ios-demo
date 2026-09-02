@@ -163,11 +163,3 @@ struct CircularMeterImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct CircularMeterComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        CircularMeterComponentView()
-    }
-}

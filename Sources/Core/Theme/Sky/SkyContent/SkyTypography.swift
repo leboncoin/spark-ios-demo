@@ -16,91 +16,91 @@ public struct SkyTypography: Typography {
 
     public let bigTitle: any TypographyFontToken = TypographyFontTokenDefault(
         size: 80,
-        style: .bold,
-        textStyle: .largeTitle
+        weight: .bold,
+        style: .largeTitle
     )
 
     public let display1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 40,
-        style: .bold,
-        textStyle: .largeTitle
+        weight: .bold,
+        style: .largeTitle
     )
     public let display2: any TypographyFontToken = TypographyFontTokenDefault(
         size: 32,
-        style: .bold,
-        textStyle: .largeTitle
+        weight: .bold,
+        style: .largeTitle
     )
     public let display3: any TypographyFontToken = TypographyFontTokenDefault(
         size: 24,
-        style: .bold,
-        textStyle: .largeTitle
+        weight: .bold,
+        style: .largeTitle
     )
 
     public let headline1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 20,
-        style: .semiBold,
-        textStyle: .headline
+        weight: .semibold,
+        style: .headline
     )
     public let headline2: any TypographyFontToken = TypographyFontTokenDefault(
         size: 18,
-        style: .semiBold,
-        textStyle: .headline
+        weight: .semibold,
+        style: .headline
     )
 
     public let subhead: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        style: .semiBold,
-        textStyle: .subheadline
+        weight: .semibold,
+        style: .subheadline
     )
 
     public let body1: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        style: .regular,
-        textStyle: .body
+        weight: .regular,
+        style: .body
     )
     public let body1Highlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        style: .medium,
-        textStyle: .body
+        weight: .medium,
+        style: .body
     )
 
     public let body2: any TypographyFontToken = TypographyFontTokenDefault(
         size: 14,
-        style: .regular,
-        textStyle: .body
+        weight: .regular,
+        style: .body
     )
     public let body2Highlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 14,
-        style: .medium,
-        textStyle: .body
+        weight: .medium,
+        style: .body
     )
 
     public let caption: any TypographyFontToken = TypographyFontTokenDefault(
         size: 12,
-        style: .regular,
-        textStyle: .caption
+        weight: .regular,
+        style: .caption
     )
     public let captionHighlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 12,
-        style: .medium,
-        textStyle: .caption
+        weight: .medium,
+        style: .caption
     )
 
     public let small: any TypographyFontToken = TypographyFontTokenDefault(
         size: 10,
-        style: .regular,
-        textStyle: .footnote
+        weight: .regular,
+        style: .footnote
     )
     public let smallHighlight: any TypographyFontToken = TypographyFontTokenDefault(
         size: 10,
-        style: .medium,
-        textStyle: .footnote
+        weight: .medium,
+        style: .footnote
     )
 
     public let callout: any TypographyFontToken = TypographyFontTokenDefault(
         size: 16,
-        style: .medium,
-        textStyle: .callout
+        weight: .medium,
+        style: .callout
     )
 
     // MARK: - Initialization
@@ -111,13 +111,13 @@ public struct SkyTypography: Typography {
 
     public func custom(
         size: CGFloat,
-        style: TypographyFontStyle,
-        textStyle: TextStyle
+        weight: TypographyFontWeight,
+        style: TypographyFontStyle
     ) -> any TypographyFontToken {
         TypographyFontTokenDefault(
             size: size,
-            style: style,
-            textStyle: textStyle
+            weight: weight,
+            style: style
         )
     }
 }
@@ -137,19 +137,19 @@ private extension TypographyFontTokenDefault {
 
     init(
         size: CGFloat,
-        style: TypographyFontStyle,
-        textStyle: TextStyle
+        weight: TypographyFontWeight,
+        style: TypographyFontStyle
     ) {
         self.init(
             names: .init(
                 regular: Constants.regularFontName,
                 medium: Constants.boldFontName,
-                semiBold: Constants.boldFontName,
+                semibold: Constants.boldFontName,
                 bold: Constants.boldFontName
             ),
-            style: style,
+            weight: weight,
             size: size,
-            textStyle: textStyle
+            style: style
         )
     }
 }

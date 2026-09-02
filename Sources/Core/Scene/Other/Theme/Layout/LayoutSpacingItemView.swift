@@ -33,9 +33,3 @@ struct LayoutSpacingItemView: View {
         }
     }
 }
-
-struct LayoutSpacingItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        LayoutSpacingItemView(viewModel: .init(name: "Small", value: 10))
-    }
-}

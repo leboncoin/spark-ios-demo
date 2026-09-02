@@ -246,11 +246,3 @@ struct AwarenessCardImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct AwarenessCardComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        AwarenessCardComponentView()
-    }
-}

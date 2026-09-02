@@ -123,11 +123,3 @@ private extension ProgressTrackerView {
         }
     }
 }
-
-// MARK: - Preview
-
-struct ProgressTrackerComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressTrackerComponentView()
-    }
-}

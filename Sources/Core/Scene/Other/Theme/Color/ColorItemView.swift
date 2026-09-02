@@ -31,10 +31,3 @@ struct ColorItemView: View {
         }
     }
 }
-
-struct ColorItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorItemView(viewModel: .init(name: "Title",
-                                       colorToken: ColorTokenDefault(named: "red", in: Bundle())))
-    }
-}

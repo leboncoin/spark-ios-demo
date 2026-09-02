@@ -54,11 +54,3 @@ struct PopoverImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct PopoverComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        PopoverComponentView()
-    }
-}

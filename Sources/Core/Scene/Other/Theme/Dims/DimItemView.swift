@@ -31,9 +31,3 @@ struct DimItemView: View {
         }
     }
 }
-
-struct DimsItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        DimItemView(viewModel: .init(name: "dim1", value: 0.4))
-    }
-}

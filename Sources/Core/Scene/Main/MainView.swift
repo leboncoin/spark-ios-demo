@@ -103,9 +103,3 @@ public struct MainView<OtherTab>: View where OtherTab: View {
         .tint(Color.level1)
     }
 }
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}

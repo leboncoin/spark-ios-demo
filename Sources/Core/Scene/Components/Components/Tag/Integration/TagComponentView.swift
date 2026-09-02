@@ -82,11 +82,3 @@ struct TagImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct TagComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TagComponentView()
-    }
-}

@@ -12,22 +12,21 @@ struct ColorView: View {
 
     // MARK: - Properties
 
-    private let viewModel = ColorViewModel()
+    @Environment(\.theme) private var theme
+
+    @ObservedObject private var viewModel = ColorViewModel()
 
     // MARK: - View
 
     var body: some View {
-        List(self.viewModel.sectionViewModels(), id: \.name) { sectionViewModel in
+        List(self.viewModel.sectionViewModels, id: \.name) { sectionViewModel in
             NavigationLink(sectionViewModel.name) {
                 ColorSectionView(viewModel: sectionViewModel)
             }
         }
+        .onChange(of: self.theme, initial: true) {
+            self.viewModel.theme = self.theme.value
+        }
         .navigationBarTitle("Color")
-    }
-}
-
-struct ColorView_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorView()
     }
 }

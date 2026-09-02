@@ -43,11 +43,3 @@ struct RatingInputImplementationView: ComponentImplementationViewable {
         }
     }
 }
-
-// MARK: - Preview
-
-struct RatingInputComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        RatingInputComponentView()
-    }
-}
