@@ -27,6 +27,8 @@ struct ColorSectionBaseViewModel: ColorSectionViewModelable {
                 .init(name: "onSurface", colorToken: color.onSurface),
                 .init(name: "surfaceInverse", colorToken: color.surfaceInverse),
                 .init(name: "onSurfaceInverse", colorToken: color.onSurfaceInverse),
+                .init(name: "surfaceDark", colorToken: color.surfaceDark),
+                .init(name: "onSurfaceDark", colorToken: color.onSurfaceDark),
                 .init(name: "outline", colorToken: color.outline),
                 .init(name: "outlineHigh", colorToken: color.outlineHigh),
                 .init(name: "overlay", colorToken: color.overlay),
