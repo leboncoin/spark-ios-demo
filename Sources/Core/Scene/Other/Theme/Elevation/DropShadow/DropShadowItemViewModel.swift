@@ -15,9 +15,13 @@ struct DropShadowItemViewModel: Identifiable {
     let name: String
     let description: String
     let shadow: any ElevationShadow
+    let bottomPadding: Padding
 
-    init(name: String,
-         shadow: any ElevationShadow) {
+    init(
+        name: String,
+        shadow: any ElevationShadow,
+        bottomPadding: Padding
+    ) {
         self.name = name
         self.description =
         """
@@ -26,5 +30,6 @@ struct DropShadowItemViewModel: Identifiable {
         opacity: \(shadow.opacity)
         """
         self.shadow = shadow
+        self.bottomPadding = bottomPadding
     }
 }

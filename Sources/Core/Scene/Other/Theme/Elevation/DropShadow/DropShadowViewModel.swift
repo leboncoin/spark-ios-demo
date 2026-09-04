@@ -26,13 +26,14 @@ final class DropShadowViewModel: ObservableObject {
         guard let dropShadow = self.theme?.elevation.dropShadow else {
             return
         }
+
         self.itemViewModels = [
-            .init(name: "none", shadow: dropShadow.none),
-            .init(name: "small", shadow: dropShadow.small),
-            .init(name: "default", shadow: dropShadow),
-            .init(name: "medium", shadow: dropShadow.medium),
-            .init(name: "large", shadow: dropShadow.large),
-            .init(name: "extraLarge", shadow: dropShadow.extraLarge)
+            .init(name: "none", shadow: dropShadow.none, bottomPadding: .xSmall),
+            .init(name: "small", shadow: dropShadow.small, bottomPadding: .small),
+            .init(name: "default", shadow: dropShadow, bottomPadding: .small),
+            .init(name: "medium", shadow: dropShadow.medium, bottomPadding: .medium),
+            .init(name: "large", shadow: dropShadow.large, bottomPadding: .large),
+            .init(name: "extraLarge", shadow: dropShadow.extraLarge, bottomPadding: .xLarge)
         ]
     }
 }
