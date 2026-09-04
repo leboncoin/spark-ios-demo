@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 struct DropShadowItemView: View {
 
     // MARK: - Properties

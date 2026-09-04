@@ -26,7 +26,7 @@ final class DropShadowViewModel: ObservableObject {
         guard let dropShadow = self.theme?.elevation.dropShadow else {
             return
         }
-        
+
         self.itemViewModels = [
             .init(name: "none", shadow: dropShadow.none, bottomPadding: .xSmall),
             .init(name: "small", shadow: dropShadow.small, bottomPadding: .small),
