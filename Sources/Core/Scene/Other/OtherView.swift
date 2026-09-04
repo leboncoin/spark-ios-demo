@@ -16,6 +16,14 @@ struct OtherView: View {
         case devMode
         case featureToggles
 
+        static var allConfiguredCases: [Self] {
+            if DemoConfiguration.isDevMode {
+                self.allCases
+            } else {
+                [.featureToggles]
+            }
+        }
+
         var redirections: [Redirection] {
             switch self {
             case .devMode: [
@@ -69,7 +77,7 @@ struct OtherView: View {
                     }
                 }
 
-                ForEach(RedirectionSection.allCases, id: \.self) { section in
+                ForEach(RedirectionSection.allConfiguredCases, id: \.self) { section in
                     Section(section.name) {
                         ForEach(section.redirections, id: \.self) { redirection in
                             NavigationLink(redirection.name, value: redirection)

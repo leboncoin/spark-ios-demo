@@ -16,9 +16,15 @@ public struct DemoConfiguration {
 
     private class Class {}
 
+    // MARK: - Public Properties
+
+    public static var isDevMode = true
+
+    // MARK: - Properties
+
     private static var didLoad = false
 
-    // MARK: - static func
+    // MARK: - Static func
 
     public static func load() {
         guard !self.didLoad else { return }
