@@ -25,7 +25,7 @@ struct DimItemView: View {
                 .foregroundColor(.gray)
 
             Rectangle()
-                .fill(.blue)
+                .fill(.gray)
                 .frame(height: 50)
                 .opacity(viewModel.value)
         }

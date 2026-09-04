@@ -19,38 +19,17 @@ struct DropShadowView: View {
     // MARK: - View
 
     var body: some View {
-        ForEach(viewModel.itemViewModels, id: \.id) { itemViewModel in
-            DropShadowItemView(
-                itemViewModel: itemViewModel,
-                backgroundColor: self.theme.value.colors.main.main.color
-            )
-            .listRowBackground(self.theme.value.colors.base.surface.color)
+        Section(header: Text("Drop Shadow")) {
+            ForEach(viewModel.itemViewModels, id: \.id) { itemViewModel in
+                DropShadowItemView(
+                    itemViewModel: itemViewModel,
+                    backgroundColor: self.theme.value.colors.main.main.color
+                )
+                .listRowBackground(self.theme.value.colors.base.surface.color)
+            }
         }
         .onChange(of: self.theme, initial: true) {
             self.viewModel.theme = self.theme.value
         }
-    }
-}
-
-struct DropShadowItemView: View {
-
-    let itemViewModel: DropShadowItemViewModel
-    let backgroundColor: Color
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(itemViewModel.name)
-            Text(itemViewModel.description)
-                .font(Font.caption2)
-                .italic()
-                .foregroundColor(.gray)
-                .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true)
-            self.backgroundColor
-                .frame(height: 50)
-                .cornerRadius(5)
-                .shadow(itemViewModel.shadow)
-        }
-        .padding(.bottom)
     }
 }

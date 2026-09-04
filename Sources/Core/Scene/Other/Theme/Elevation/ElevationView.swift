@@ -14,9 +14,7 @@ struct ElevationView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Drop Shadow")) {
-                DropShadowView()
-            }
+            DropShadowView()
         }
         .navigationTitle("Elevation")
     }
