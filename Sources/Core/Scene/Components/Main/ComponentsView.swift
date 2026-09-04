@@ -58,16 +58,18 @@ struct ComponentsView: View {
                     Text("\(self.searchResults.count) components")
                 }
 
-                Section {
-                    NavigationLink("Dev Mode") {
-                        switch self.framework {
-                        case .uiKit:
-                            DevModeUIViewRepresentable()
-                                .navigationBarTitle("Dev Mode")
+                if DemoConfiguration.isDevMode {
+                    Section {
+                        NavigationLink("Dev Mode") {
+                            switch self.framework {
+                            case .uiKit:
+                                DevModeUIViewRepresentable()
+                                    .navigationBarTitle("Dev Mode")
 
-                        case .swiftUI:
-                            DevModeView()
-                                .navigationBarTitle("Dev Mode")
+                            case .swiftUI:
+                                DevModeView()
+                                    .navigationBarTitle("Dev Mode")
+                            }
                         }
                     }
                 }

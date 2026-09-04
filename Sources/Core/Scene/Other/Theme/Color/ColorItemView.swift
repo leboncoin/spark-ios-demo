@@ -17,17 +17,76 @@ struct ColorItemView: View {
     // MARK: - View
 
     var body: some View {
-        ZStack {
-            self.viewModel.color
-                .frame(height: 60)
-
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                )
+        VStack(alignment: .leading, spacing: .medium) {
             Text(self.viewModel.name)
-                .foregroundColor(self.viewModel.foregroundColor)
+                .font(.title2)
+
+            HStack(spacing: .medium) {
+                // Light mode
+                ColorItemShape(
+                    color: self.viewModel.color.resolveColor(
+                        userInterfaceStyle: .light,
+                        contrast: .normal
+                    )
+                )
+
+                // Dark mode
+                ColorItemShape(
+                    color: self.viewModel.color.resolveColor(
+                        userInterfaceStyle: .dark,
+                        contrast: .normal
+                    )
+                )
+
+                // High contrast light
+                ColorItemShape(
+                    color: self.viewModel.color.resolveColor(
+                        userInterfaceStyle: .light,
+                        contrast: .high
+                    )
+                )
+
+                // High contrast dark
+                ColorItemShape(
+                    color: self.viewModel.color.resolveColor(
+                        userInterfaceStyle: .dark,
+                        contrast: .high
+                    )
+                )
+            }
+            .frame(height: 50)
         }
+    }
+}
+
+// MARK: - Subview
+
+private struct ColorItemShape: View {
+
+    // MARK: - Properties
+
+    let color: Color
+
+    // MARK: - View
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: 12, )
+            .stroke(.gray.opacity(0.3), lineWidth: 2)
+            .fill(color)
+    }
+}
+
+// MARK: - Extension
+
+private extension Color {
+
+    func resolveColor(userInterfaceStyle: UIUserInterfaceStyle, contrast: UIAccessibilityContrast) -> Color {
+        let traits = UITraitCollection { mutableTraits in
+            mutableTraits.userInterfaceStyle = userInterfaceStyle
+            mutableTraits.accessibilityContrast = contrast
+        }
+
+        let uiColor = UIColor(self).resolvedColor(with: traits)
+        return Color(uiColor: uiColor)
     }
 }
