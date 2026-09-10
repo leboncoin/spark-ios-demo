@@ -29,6 +29,7 @@ struct ChipImplementationView: ComponentImplementationViewable {
             .sparkChipAlignment(self.configurationWrapped.alignment)
             .sparkChipIntent(self.configurationWrapped.intent)
             .sparkChipVariant(self.configurationWrapped.variant)
+            .sparkChipSize(self.configurationWrapped.size)
             .sparkIsSelected(self.configurationWrapped.isSelected)
             .demoDisabled(self.configurationWrapped)
             .demoBackground(self.configurationWrapped)

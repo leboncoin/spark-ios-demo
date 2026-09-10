@@ -103,6 +103,7 @@ struct ChipUICodeSyntaxes {
         chip.intent = .main
         chip.variant = .filled
         chip.alignment = .leadingIcon
+        chip.size = .large
         chip.isSelected = false
         chip.isEnabled = true
         chip.accessibilityLabel = "Full configuration chip"

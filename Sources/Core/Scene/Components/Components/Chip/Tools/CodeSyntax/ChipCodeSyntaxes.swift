@@ -126,6 +126,7 @@ struct ChipCodeSyntaxes {
         .sparkChipIntent(.main)
         .sparkChipVariant(.filled)
         .sparkChipAlignment(.leadingIcon)
+        .sparkChipSize(.large)
         .sparkIsSelected(false)
         .disabled(false)
         .accessibilityLabel("Full configuration chip")

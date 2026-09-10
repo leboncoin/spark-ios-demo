@@ -60,6 +60,7 @@ final class ChipComponentUIViewMaker: ComponentUIViewMaker {
         componentView.intent = configuration.intent
         componentView.variant = configuration.variant
         componentView.alignment = configuration.alignment
+        componentView.size = configuration.size
         componentView.icon = .init(icon: configuration.icon)
         componentView.demoControlType(configuration, on: self.viewController)
         componentView.demoBadgeComponent(configuration)

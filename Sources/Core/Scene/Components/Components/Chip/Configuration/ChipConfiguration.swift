@@ -19,6 +19,7 @@ class ChipConfiguration: ComponentConfiguration {
     }
     var variant: ChipVariant = .default
     var alignment: ChipAlignment = .default
+    var size: ChipSize = .default
     var text = "My Chip"
     var icon: Iconography? = .optionalRandom
     var withExtraComponent: Bool = .random()
@@ -65,6 +66,7 @@ class ChipConfiguration: ComponentConfiguration {
         self.intent = .random
         self.variant = .random
         self.alignment = .random
+        self.size = .random
         self.icon = .random
         self.withExtraComponent = .random()
         self.isSelected = .random()

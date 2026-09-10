@@ -76,6 +76,12 @@ struct ChipConfigurationView: ConfigurationViewable, ConfigurationUIViewable {
             selectedValue: self.configuration.alignment
         )
 
+        EnumConfigurationItemView(
+            name: "size",
+            values: ChipSize.allCases,
+            selectedValue: self.configuration.size
+        )
+
         TextFieldConfigurationItemView(
             name: "text",
             text: self.configuration.text
