@@ -26,10 +26,11 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
     var body: some View {
         VStack(alignment: .center, spacing: .medium) {
             self.component()
-            .sparkCheckboxIntent(self.configurationWrapped.intent)
-            .demoDisabled(self.configurationWrapped)
-            .demoFrame(self.configurationWrapped)
-            .demoAccessibilityLabel(self.configurationWrapped)
+                .sparkTheme(self.configurationWrapped.theme.value)
+                .sparkCheckboxIntent(self.configurationWrapped.intent)
+                .demoDisabled(self.configurationWrapped)
+                .demoFrame(self.configurationWrapped)
+                .demoAccessibilityLabel(self.configurationWrapped)
 
             Text(self.configurationWrapped.getInfoValue(from: self.selectionState))
                 .demoComponentInfoBackground()
@@ -48,7 +49,6 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
     private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkCheckbox(
-                theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState,
                 label: {
                     VStack(alignment: .leading) {
@@ -66,12 +66,10 @@ struct CheckboxImplementationView: ComponentImplementationViewable {
         } else if let text = configurationWrapped.text.nilIfEmpty {
             SparkCheckbox(
                 text,
-                theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState
             )
         } else {
             SparkCheckbox(
-                theme: self.configurationWrapped.theme.value,
                 selectionState: self.$selectionState
             )
         }

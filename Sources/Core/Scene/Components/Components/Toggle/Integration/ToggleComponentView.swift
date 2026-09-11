@@ -32,6 +32,7 @@ struct ToggleImplementationView: ComponentImplementationViewable {
 
     var body: some View {
         self.component()
+            .sparkTheme(self.configurationWrapped.theme.value)
             .demoAccessibilityLabel(self.configurationWrapped)
             .demoDisabled(self.configurationWrapped)
             .demoFrame(self.configurationWrapped)
@@ -41,7 +42,6 @@ struct ToggleImplementationView: ComponentImplementationViewable {
     private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkToggle(
-                theme: self.configurationWrapped.theme.value,
                 isOn: self.$isOn,
                 label: {
                     VStack(alignment: .leading) {
@@ -56,12 +56,10 @@ struct ToggleImplementationView: ComponentImplementationViewable {
         } else if let text = configurationWrapped.text.nilIfEmpty {
             SparkToggle(
                 text,
-                theme: self.configurationWrapped.theme.value,
                 isOn: self.$isOn
             )
         } else {
             SparkToggle(
-                theme: self.configurationWrapped.theme.value,
                 isOn: self.$isOn
             )
         }
