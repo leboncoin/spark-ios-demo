@@ -54,6 +54,7 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
         VStack(alignment: .center, spacing: .medium) {
 
             self.component()
+                .sparkTheme(self.configurationWrapped.theme.value)
                 .sparkCheckboxGroupAxis(self.configurationWrapped.axis)
                 .sparkCheckboxIntent(self.configurationWrapped.intent)
                 .demoDisabled(self.configurationWrapped)
@@ -71,7 +72,6 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
     private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkCheckboxGroup(
-                theme: self.configurationWrapped.theme.value,
                 selectedIDs: self.selectedIDsForFormField ?? self.$selectedIDs,
                 items: self.configurationWrapped.items.map { item in
                     CheckboxGroupItem(
@@ -92,7 +92,6 @@ struct CheckboxGroupImplementationView: ComponentImplementationViewable {
 
         } else {
             SparkCheckboxGroup(
-                theme: self.configurationWrapped.theme.value,
                 selectedIDs: self.selectedIDsForFormField ?? self.$selectedIDs,
                 items: self.configurationWrapped.items.map { item in
                     CheckboxGroupItem(

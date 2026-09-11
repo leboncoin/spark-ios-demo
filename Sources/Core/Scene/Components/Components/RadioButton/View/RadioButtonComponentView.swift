@@ -26,11 +26,12 @@ struct RadioButtonImplementationView: ComponentImplementationViewable {
     var body: some View {
         VStack(alignment: .leading, spacing: .medium) {
             self.component()
-            .sparkRadioButtonIntent(self.configurationWrapped.intent)
-            .sparkRadioButtonIsAnimated(self.configurationWrapped.isAnimated)
-            .demoDisabled(self.configurationWrapped)
-            .demoFrame(self.configurationWrapped)
-            .demoAccessibilityLabel(self.configurationWrapped)
+                .sparkTheme(self.configurationWrapped.theme.value)
+                .sparkRadioButtonIntent(self.configurationWrapped.intent)
+                .sparkRadioButtonIsAnimated(self.configurationWrapped.isAnimated)
+                .demoDisabled(self.configurationWrapped)
+                .demoFrame(self.configurationWrapped)
+                .demoAccessibilityLabel(self.configurationWrapped)
 
             Divider()
 
@@ -45,7 +46,6 @@ struct RadioButtonImplementationView: ComponentImplementationViewable {
     private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkRadioButton(
-                theme: self.configurationWrapped.theme.value,
                 isSelected: self.$isSelected,
                 label: {
                     VStack(alignment: .leading) {
@@ -61,12 +61,10 @@ struct RadioButtonImplementationView: ComponentImplementationViewable {
         } else if let text = configurationWrapped.text.nilIfEmpty {
             SparkRadioButton(
                 text,
-                theme: self.configurationWrapped.theme.value,
                 isSelected: self.$isSelected
             )
         } else {
             SparkRadioButton(
-                theme: self.configurationWrapped.theme.value,
                 isSelected: self.$isSelected
             )
         }

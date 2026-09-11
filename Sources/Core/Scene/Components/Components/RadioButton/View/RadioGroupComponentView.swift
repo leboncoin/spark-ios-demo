@@ -57,6 +57,7 @@ struct RadioGroupImplementationView: ComponentImplementationViewable {
         VStack(alignment: .leading, spacing: .medium) {
 
             self.component()
+                .sparkTheme(self.configurationWrapped.theme.value)
                 .sparkRadioGroupAxis(self.configurationWrapped.axis)
                 .sparkRadioButtonIntent(self.configurationWrapped.intent)
                 .sparkRadioButtonIsAnimated(self.configurationWrapped.isAnimated)
@@ -75,7 +76,6 @@ struct RadioGroupImplementationView: ComponentImplementationViewable {
     private func component() -> some View {
         if self.configurationWrapped.swiftUIIsCustomContent {
             SparkRadioGroup(
-                theme: self.configurationWrapped.theme.value,
                 selectedID: self.selectedIDForFormField ?? self.$selectedID,
                 items: self.configurationWrapped.items.map { item in
                     RadioGroupItem(
@@ -96,7 +96,6 @@ struct RadioGroupImplementationView: ComponentImplementationViewable {
 
         } else {
             SparkRadioGroup(
-                theme: self.configurationWrapped.theme.value,
                 selectedID: self.selectedIDForFormField ?? self.$selectedID,
                 items: self.configurationWrapped.items.map { item in
                     RadioGroupItem(
